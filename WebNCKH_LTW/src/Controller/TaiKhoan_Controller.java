@@ -1,4 +1,4 @@
-package DAO;
+package Controller;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
 
+import Model.CTNghiemThu;
 import Model.TaiKhoan;
 import Packages.DBConnect;
 
 
-public class TaiKhoan_dao {
+public class TaiKhoan_Controller {
 	public ArrayList<TaiKhoan> getListTaiKhoan() {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT * FROM TaiKhoan";
@@ -38,9 +39,13 @@ public class TaiKhoan_dao {
         }
         return list;
     }
-//	public static void main(String[] args) {
-//	   TaiKhoan_dao tkdao =new TaiKhoan_dao();
-//	}
+	 public static void main(String[] args) {
+		 TaiKhoan_Controller ctrl= new TaiKhoan_Controller();
+	       for(TaiKhoan ct: ctrl.getListTaiKhoan()){
+	    	   System.out.print(ct.getHoTen());
+	    	   
+	       }
+	    }
 }
 
 
