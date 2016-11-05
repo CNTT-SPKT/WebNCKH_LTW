@@ -2,10 +2,11 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="Controller.*,Model.*" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+    <!--<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
     url="jdbc:mysql://localhost/DB_WebNCKH"
     user="root"  password="thaolac8996"/>
     
@@ -24,7 +25,7 @@ where DeTai.MaTT=TrangThai.MaTT and TaiKhoan.MaTK=DeTai.MaCN and MaTK='tk5';
 <sql:query dataSource="${snapshot}" var="bangtttk">
 SELECT * from TaiKhoan
 where MaTK='tk5';
-</sql:query>
+</sql:query>-->
     
 <!DOCTYPE html>
 <html lang="en"><head>
@@ -43,6 +44,8 @@ where MaTK='tk5';
 <script type="text/javascript" src="ng-table.js"></script>
 </head>
 <body >
+<% TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller(); %>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -151,14 +154,19 @@ where MaTK='tk5';
 													</thead>
 		
 													<tbody>
-														
-														<tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse | filter:searchFish">
+														<%
+				     										for (TB_TK c: cttb.getListTB_TKByMaTK("tk5")) {
+														%>
+														<tr >
 																<td><input type="checkbox" name=""  value=""></td>
-																<td>{{ roll.tb }}</td>
-																<td>{{ roll.ng }}</td>
-																<td>{{ roll.ngay }}</td>
+																<td><%=c.getTinTB() %></td>
+																<td><%=c.getMaTB()%></td>
+																<td><%=c.getNgayGui() %></td>
 																<td><a href="sinvien_XemThongBao.html">Xem</a></td>
 															</tr>
+															<%
+			    											}
+															%>
 														
 													</tbody>
 												</table>

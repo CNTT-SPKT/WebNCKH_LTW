@@ -32,25 +32,26 @@ public class DonGiaHan_Controller {
 	        }
 	        return list;
 	    }
-		public DonGiaHan getListDonGiaHan(String maDT) {
+		public ArrayList<DonGiaHan> getListDonGiaHanByMaDT(String maDT)  throws SQLException{
 	        Connection cons = DBConnect.getConnecttion();
 	        String sql = "SELECT * FROM DonGiaHan,DeTai where DonGiaHan.MaDT=DeTai.MaDT and DeTai.MaDT='"+maDT+"'";
-	        DonGiaHan gh = new DonGiaHan();
+	        ArrayList<DonGiaHan> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 	            ResultSet rs = (ResultSet) ps.executeQuery();
 	            while (rs.next()) {
-	            	
+	            	DonGiaHan gh = new DonGiaHan();
 	            	gh.setMaDonXin(rs.getString("MaDonXin"));
 	            	gh.setMaDT(rs.getString("MaDT"));
 	            	gh.setLyDo(rs.getString("LyDo"));
 	            	gh.setGHDen(rs.getString("GHDen"));
+	            	list.add(gh);
 	            
 	            }
 	            cons.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-	        return gh;
+	        return list;
 	    }
 }

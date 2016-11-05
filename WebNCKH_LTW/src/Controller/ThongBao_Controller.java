@@ -31,10 +31,10 @@ public class ThongBao_Controller {
         }
         return list;
     }
-	public ThongBao getListThongBao(String nguoiGui,String nguoiNhan) {
+	public ThongBao getListThongBao(String nguoiGui) {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT * FROM ThongBao, TaiKhoan" +
-        "Where ThongBao.NguoiGui=TaiKhoan.MaTK and ThongBao.NguoiNhan=TaiKhoan.MaTK and NguoiGui='"+nguoiGui+"' and NguoiNhan='"+nguoiNhan+"'";
+        "Where ThongBao.NguoiGui=TaiKhoan.MaTK and ThongBao.NguoiNhan=TaiKhoan.MaTK and NguoiGui='"+nguoiGui+"'";
         ThongBao tb = new ThongBao();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

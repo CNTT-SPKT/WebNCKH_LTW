@@ -33,7 +33,7 @@ public class TB_TK_Controller {
         }
         return list;
     }
-	public ArrayList<TB_TK> getListTB_TKByMaTK(String maTK) {
+	public ArrayList<TB_TK> getListTB_TKByMaTK(String maTK) throws SQLException {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT * FROM TB_TK,ThongBao,TaiKhoan where ThongBao.MaTB=TB_TK.MaTB and "+ 
         "ThongBao.NguoiNhan=TaiKhoan.MaTK and TaiKhoan.MaTK='"+maTK+"'";
