@@ -395,5 +395,8 @@ input[type="password"] {
     margin-right: 330px;
   }
 }
-
+input[type=submit]{
+	background-color:#3b5998;
+	color:white;
+}
 

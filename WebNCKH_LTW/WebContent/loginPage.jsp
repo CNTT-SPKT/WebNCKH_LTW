@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html lang="en"><head>
 <title> Example </title>
@@ -30,9 +36,9 @@
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
 								<ul class="nav navbar-nav">
-									<li><a href="#">Trang chủ</a></li>
-									<li><a href="#">Biểu Mẫu</a></li>
-									<li><a href="#">Liên Hệ</a></li>
+									<li><a href="#">Trang Chủ</a></li>
+									<li><a href="#">Biểu mẫu</a></li>
+									<li><a href="#">Liên hệ</a></li>
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
@@ -53,24 +59,25 @@
 						</div>
 						<div class="panel-body">
 							<form >
-								<div class="form-inline" style="margin-left:70px">
+									<div class="form-inline" style="margin-left:70px">
 									<label>
-										<input type="radio" id="input_sv" name="phanquyen" value="" >
+										<input type="radio" id="input_sv" name="phanquyen" value="Student" checked>
 										Sinh viên
 									</label>
 									<label>
-										<input type="radio"  id="input_gv" name="phanquyen" value="">
+										<input type="radio"  id="input_gv" name="phanquyen" value="Lecturers">
 										Giảng viên
 									</label>
 									<label>
-										<input type="radio" id="input_ql" name="phanquyen" value="">
+										<input type="radio" id="input_ql" name="phanquyen" value="Manager">
 										Quản lý
 									</label>
 									<label>
-										<input type="radio" id="input_ad" name="phanquyen" value="">
+										<input type="radio" id="input_ad" name="phanquyen" value="Admin">
 										Admin
 									</label>
 								</div>
+
 								<div class="form-group">
 									<input class="form-control" id="svLogin_Email" placeholder="E-mail" name="Email" type="text" >
 								</div>
@@ -82,68 +89,15 @@
 										<input name="remember" type="checkbox" value="Remember Me"> Remember Me
 									</label>
 								</div>
+								<input type="submit" value="Login" class="btn-lg col-lg-12" />
+								<font color="red"><c:if test="${not empty param.errMsg}">
+				            <c:out value="${param.errMsg}" />
+				            </c:if></font>
 							</form>
-							<button class="btn btn-lg btn-primary btn-block" type="submit">
-								Login
-							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<script>
-			$(function() {
-				$("button:submit").on("click", function() {
-					if($("#svLogin_Email").val()=="14110208@student.hcmute.edu.vn" && $("#svLogin_Pass").val()=="14110208" || $("#svLogin_Email").val()=="14110180@student.hcmute.edu.vn" && $("#svLogin_Pass").val()=="14110180" || $("#svLogin_Email").val()=="14110205@student.hcmute.edu.vn" && $("#svLogin_Pass").val()=="14110205" || $("#svLogin_Email").val()=="14110184@student.hcmute.edu.vn" && $("#svLogin_Pass").val()=="14110184")
-					{
-						var rowCount = $('input').length;
-						var i=0;
-						var temp=-1;
-						for(i;i<rowCount;i++)
-						{
-							if($('input').eq(i).is(":checked"))
-							{
-								temp=i;
-							}
-						}
-						if(temp===-1)
-						{
-							alert("Chọn phân quyền để đăng nhập !");
-						}
-						else
-						{
-							var url;
-							var x=$('input').eq(temp).attr("id");
-							if(x=="input_sv")
-								url="sinhvienPage.jsp";
-							else if(x=="input_gv")
-								url="giangvienPage.jsp";
-							else if(x=="input_ql")
-								url="quanlyPage.jsp";
-							else	
-								url="Admin.jsp";
-							window.location.replace(url);
-							alert("Đăng nhập thành công!");	
-						}
-					}
-					else
-					{
-						if($("#svLogin_Email").val()=="" || $("#svLogin_Pass").val()=="")
-							alert("Điền đầy đủ thông tin");
-						else
-						{
-							var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
-						    if (!filter.test($("#svLogin_Email").val()) )
-						    { 
-						             alert('Nhập địa chỉ email hợp lệ.\nExample@gmail.com');
-						             $("#svLogin_Email").focus();
-						    }
-						    else	
-							alert("Email hoặc mật khẩu không chính xác");
-						}
-					}
-				});
-			});
-			</script>
 		</div>	
 		<div id='bttop'>
 			<img src="images/backtotop.png" alt="backtotop" width="50px" height="50px">
