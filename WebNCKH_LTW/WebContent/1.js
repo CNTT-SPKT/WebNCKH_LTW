@@ -1,21 +1,4 @@
-﻿Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @Thao8996
- Watch 0
-  Star 0
- Fork 0 CNTT-SPKT/WeBNCKH_JSP
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathWeBNCKH_JSP/WebNCKH_JSP/WebContent/1.js
-9caef4b  a day ago
-@Thao8996 Thao8996 sua lai 1 so thu
-1 contributor
-RawBlameHistory     
-495 lines (451 sloc)  13.7 KB
-
+﻿
 $(window).load(function(){
 	$dropdown = $("#contextMenu");
 	$(".dsDeTai_actionButton").click(function() {
@@ -508,6 +491,3 @@ $("#tkiem").on("click", function () {
 	})
 });
 //hết tìm kiếm quản lý
-
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help

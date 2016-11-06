@@ -2,18 +2,11 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="Controller.*,Model.*" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://localhost/DB_WebNCKH"
-    user="root"  password="thaolac8996"/>
     
-<sql:query dataSource="${snapshot}" var="banggh">
-SELECT * from DeTai,TrangThai,TaiKhoan
-where DeTai.MaTT=TrangThai.MaTT and TaiKhoan.MaTK=DeTai.MaCN and TaiKhoan.MaTK='tk5' and TrangThai.tenTT='Đang tiến hành' ;
-</sql:query>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +25,19 @@ where DeTai.MaTT=TrangThai.MaTT and TaiKhoan.MaTK=DeTai.MaCN and TaiKhoan.MaTK='
 </head>
 
 <body>
+<% TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	DeTai detai=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		detai = dt.getListDeTaiByMaDT(maDT);
+	}
+%>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -109,29 +115,29 @@ where DeTai.MaTT=TrangThai.MaTT and TaiKhoan.MaTK=DeTai.MaCN and TaiKhoan.MaTK='
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="row" items="${banggh.rows}">
+												
 													<tr >
-														<td><c:out value="${row.MaDT}"/></td>
-														<td><c:out value="${row.TenDT}"/></td>
- 													  	<td><c:out value="${row.NgayThucHien}"/></td>
-														<td><c:out value="${row.NgayKetThuc}"/></td>
-														<td><c:out value="${row.TenTT}"/></td>
+														<td><%=detai.getMaDT() %></td>
+														<td><%=detai.getTenDT() %></td>
+ 													  	<td><%=detai.getNgayThucHien() %></td>
+														<td><%=detai.getNgayKetThuc() %></td>
+														<td><%=detai.getTenTT() %></td>
 													</tr>
-												</c:forEach>
+												
 											</tbody>
 										</table>
 									</div>
 									<form id="form_HuyGH" onsubmit="return validate(this);">
 										<div class="form-inline">
 											<div class="col-xs-6">
-											<label class="fieldinput" style="margin-left:10px;">Họ tên: </label>
-											<input type="text" name="name" class="form-control required name"  id=""minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự." placeholder="Lê Thị Thảo" required>
+											<label class="fieldinput" style="margin-left:10px;">Họ tên: <%=detai.getTenCN() %></label>
+											
 											</div>
 										</div>
 										<div class="form-inline">
 											<div class="col-xs-6">
-											<label>MSSV: </label>
-											<input type="text" name="mssv" class="form-control required mssv" placeholder="141101"  id="" required minlength="6" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
+											<label>MSSV: <%=detai.getMSSV() %></label>
+											
 											</div>
 										</div>
 										<div >

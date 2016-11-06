@@ -28,6 +28,8 @@ public class DeTai {
     private double KinhPhi;
     private String TenTT;
     private String NgayNT;
+    private String TenCN;
+    private String MSSV;
     
     private ArrayList<DonHuy> dsDonHuy= new ArrayList<DonHuy>();
     private ArrayList<DonGiaHan> dsDonGiaHan= new ArrayList<DonGiaHan>();
@@ -40,7 +42,7 @@ public class DeTai {
 			String gVHD, String tenDT, String moTa, String linhVuc, String loaiHinh, String ngayThucHien,
 			String ngayKetThuc, String coQuanChuTri, String tinhHinhTrong, String tinhHinhNgoai, String tinhCapThiet,
 			String mucTieu, String pPNC, String noiDungNC, String sPDuKien, String diaChiUD, double kinhPhi,
-			String tenTT,String ngayNT, ArrayList<DonHuy> dsDonHuy, ArrayList<DonGiaHan> dsDonGiaHan) {
+			String tenTT,String ngayNT,String tenCN,String mssv, ArrayList<DonHuy> dsDonHuy, ArrayList<DonGiaHan> dsDonGiaHan) {
 		super();
 		MaDT = maDT;
 		MaHienThi = maHienThi;
@@ -67,8 +69,26 @@ public class DeTai {
 		KinhPhi = kinhPhi;
 		TenTT = tenTT;
 		NgayNT= ngayNT;
+		MSSV= mssv;
 		this.dsDonHuy = dsDonHuy;
 		this.dsDonGiaHan = dsDonGiaHan;
+		TenCN= tenCN;
+	}
+
+	public String getMSSV() {
+		return MSSV;
+	}
+
+	public void setMSSV(String mSSV) {
+		MSSV = mSSV;
+	}
+
+	public String getTenCN() {
+		return TenCN;
+	}
+
+	public void setTenCN(String tenCN) {
+		TenCN = tenCN;
 	}
 
 	public String getNgayNT() {
