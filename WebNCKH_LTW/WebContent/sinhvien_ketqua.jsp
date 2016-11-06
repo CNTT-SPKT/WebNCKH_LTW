@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="Controller.*,Model.*" %>
+ 
 <!DOCTYPE html>
 <html lang="en"><head>
 <title> Example </title>
@@ -15,6 +17,16 @@
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
 <body >
+<% 
+CTNghiemThu_Controller ct=new CTNghiemThu_Controller();
+DeTai_Controller dt=new DeTai_Controller();
+CTNghiemThu ctnt = new CTNghiemThu();
+String maDT = "";
+if (request.getParameter("MaDT") != null) {
+	maDT = request.getParameter("MaDT");
+	ctnt = ct.getListCTNghiemThuByDeTai(maDT);
+}
+%>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -86,50 +98,52 @@
 											</tr>
 										</thead>
 										<tbody>
+										
 											<tr>
 												<td>Tổng quan tình hình và lý do chọn đề tài</td>
 												<td>10</td>
-												<td>10</td>
+												<td><%=ctnt.getTongQuan()%></td>
 											</tr>
 											<tr>
 												<td>Mục tiêu đề tài</td>
 												<td>15</td>
-												<td>10</td>
+												<td><%=ctnt.getMucTieu() %></td>
 
 											</tr>
 											<tr>
 												<td>Phương pháp nghiên cứu</td>
 												<td>15</td>
-												<td>10</td>
+												<td><%=ctnt.getPhuongPhap()%></td>
 											</tr>
 											<tr>
 												<td>Nội dung khoa học</td>
 												<td>35</td>
-												<td>25</td>
+												<td><%=ctnt.getNoiDung()%></td>
 
 											</tr>
 											<tr>
 												<td>Đóng góp cho KT-XH-GD</td>
 												<td>10</td>
-												<td>10</td>
+												<td><%=ctnt.getDongGop()%></td>
 											</tr>
 											<tr>
 												<td>Hình thức báo cáo tổng kết</td>
 												<td>10</td>
-												<td>10</td>
+												<td><%=ctnt.getHinhThuc()%></td>
 											</tr>
 											<tr>
 												<td>Điểm thưởng</td>
 												<td>10</td>
-												<td>10</td>
+												<td><%=ctnt.getDiemThuong()%></td>
 
 											</tr>
 											<tr>
 												<td></td>
 												<td>100</td>
-												<td>85</td>
+												<td><%=ctnt.getTongDiem()%></td>
 
 											</tr>
+											
 										</tbody>
 									</table>
 

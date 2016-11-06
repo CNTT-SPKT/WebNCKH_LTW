@@ -26,6 +26,8 @@ public class DeTai {
     private String SPDuKien;
     private String DiaChiUD;
     private double KinhPhi;
+    private String TenTT;
+    private String NgayNT;
     
     private ArrayList<DonHuy> dsDonHuy= new ArrayList<DonHuy>();
     private ArrayList<DonGiaHan> dsDonGiaHan= new ArrayList<DonGiaHan>();
@@ -37,7 +39,8 @@ public class DeTai {
 	public DeTai(String maDT, String maHienThi, String maTT, String maCN, String sinhVien1, String sinhVien2,
 			String gVHD, String tenDT, String moTa, String linhVuc, String loaiHinh, String ngayThucHien,
 			String ngayKetThuc, String coQuanChuTri, String tinhHinhTrong, String tinhHinhNgoai, String tinhCapThiet,
-			String mucTieu, String pPNC, String noiDungNC, String sPDuKien, String diaChiUD, double kinhPhi) {
+			String mucTieu, String pPNC, String noiDungNC, String sPDuKien, String diaChiUD, double kinhPhi,
+			String tenTT,String ngayNT, ArrayList<DonHuy> dsDonHuy, ArrayList<DonGiaHan> dsDonGiaHan) {
 		super();
 		MaDT = maDT;
 		MaHienThi = maHienThi;
@@ -62,27 +65,22 @@ public class DeTai {
 		SPDuKien = sPDuKien;
 		DiaChiUD = diaChiUD;
 		KinhPhi = kinhPhi;
+		TenTT = tenTT;
+		NgayNT= ngayNT;
+		this.dsDonHuy = dsDonHuy;
+		this.dsDonGiaHan = dsDonGiaHan;
+	}
+
+	public String getNgayNT() {
+		return NgayNT;
+	}
+
+	public void setNgayNT(String ngayNT) {
+		NgayNT = ngayNT;
 	}
 
 	public String getMaDT() {
 		return MaDT;
-	}
-	
-	
-	public ArrayList<DonHuy> getDsDonHuy() {
-		return dsDonHuy;
-	}
-
-	public void setDsDonHuy(ArrayList<DonHuy> dsDonHuy) {
-		this.dsDonHuy = dsDonHuy;
-	}
-
-	public ArrayList<DonGiaHan> getDsDonGiaHan() {
-		return dsDonGiaHan;
-	}
-
-	public void setDsDonGiaHan(ArrayList<DonGiaHan> dsDonGiaHan) {
-		this.dsDonGiaHan = dsDonGiaHan;
 	}
 
 	public void setMaDT(String maDT) {
@@ -264,7 +262,32 @@ public class DeTai {
 	public void setKinhPhi(double kinhPhi) {
 		KinhPhi = kinhPhi;
 	}
-    
+
+	public String getTenTT() {
+		return TenTT;
+	}
+
+	public void setTenTT(String tenTT) {
+		TenTT = tenTT;
+	}
+
+	public ArrayList<DonHuy> getDsDonHuy() {
+		return dsDonHuy;
+	}
+
+	public void setDsDonHuy(ArrayList<DonHuy> dsDonHuy) {
+		this.dsDonHuy = dsDonHuy;
+	}
+
+	public ArrayList<DonGiaHan> getDsDonGiaHan() {
+		return dsDonGiaHan;
+	}
+
+	public void setDsDonGiaHan(ArrayList<DonGiaHan> dsDonGiaHan) {
+		this.dsDonGiaHan = dsDonGiaHan;
+	}
+
+	
     
     
     

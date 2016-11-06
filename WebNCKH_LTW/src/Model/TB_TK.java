@@ -5,20 +5,29 @@ public class TB_TK {
     private String MaTB;
     private String TinTB;
     private String NgayGui;
+    private String TenNguoiGui;
     
     
 	public TB_TK() {
 		super();
 	}
-	public TB_TK(String maCTTB, String maTB, String tinTB, String ngayGui) {
+	public TB_TK(String maCTTB, String maTB, String tinTB, String ngayGui,String nguoiGui) {
 		super();
 		MaCTTB = maCTTB;
 		MaTB = maTB;
 		TinTB = tinTB;
 		NgayGui = ngayGui;
+		TenNguoiGui=nguoiGui;
 	}
 	public String getMaCTTB() {
 		return MaCTTB;
+	}
+	
+	public String getTenNguoiGui() {
+		return TenNguoiGui;
+	}
+	public void setTenNguoiGui(String tenNguoiGui) {
+		TenNguoiGui = tenNguoiGui;
 	}
 	public void setMaCTTB(String maCTTB) {
 		MaCTTB = maCTTB;

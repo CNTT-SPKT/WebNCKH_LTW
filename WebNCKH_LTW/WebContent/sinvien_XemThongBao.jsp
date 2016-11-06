@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ page import="Controller.*,Model.*" %>
 <!DOCTYPE html>
 <html lang="en"><head>
 <title> Example </title>
@@ -15,6 +16,18 @@
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
 <body >
+<% TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TB_TK tbtk=new TB_TK();
+	String maTB = "";
+	if (request.getParameter("MaTB") != null) {
+		maTB = request.getParameter("MaTB");
+		tbtk = cttb.getListTB_TKMaTB(maTB);
+	}
+%>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -78,7 +91,7 @@
 											<h2 class="tieude_theh">THÔNG BÁO</h2>
 											<div class="sv_table_thongbao">
 												
-												<textarea rows="5" cols="100" style="margin:30px 0px 0px 50px;width:90%" readonly>  Đề tài xây dựng web quản lý bán hàng sẽ hết hạn vào ngày 2/9/2013...</textarea><br>
+												<textarea rows="5" cols="100" style="margin:30px 0px 0px 50px;width:90%" readonly><%=tbtk.getTinTB() %></textarea><br>
 												
 											</div>
 										</div>

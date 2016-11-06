@@ -31,6 +31,26 @@ public class ThongBao_Controller {
         }
         return list;
     }
+	public ThongBao getListThongBaoNN(String maTB) {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM ThongBao where MaTB='"+maTB+"'";
+        ThongBao tb = new ThongBao();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	
+            	tb.setMaTB(rs.getString("MaTB"));
+            	tb.setNguoiGui(rs.getString("NguoiGui"));
+            	tb.setNguoiNhan(rs.getString("NguoiNhan"));
+            	
+            }
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tb;
+    }
 	public ThongBao getListThongBao(String nguoiGui) {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT * FROM ThongBao, TaiKhoan" +

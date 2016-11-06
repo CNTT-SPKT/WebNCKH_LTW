@@ -6,26 +6,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!--<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://localhost/DB_WebNCKH"
-    user="root"  password="thaolac8996"/>
-    
- 
-    
-<sql:query dataSource="${snapshot}" var="bangtb">
-SELECT * from TaiKhoan, ThongBao,TB_TK
-where TaiKhoan.MaTK=ThongBao.NguoiGui and ThongBao.MaTB=TB_TK.MaTB and ThongBao.NguoiNhan='tk5';
-</sql:query>
- 
-<sql:query dataSource="${snapshot}" var="bangdsdt">
-SELECT * from DeTai,TrangThai,TaiKhoan
-where DeTai.MaTT=TrangThai.MaTT and TaiKhoan.MaTK=DeTai.MaCN and MaTK='tk5';
-</sql:query>
-
-<sql:query dataSource="${snapshot}" var="bangtttk">
-SELECT * from TaiKhoan
-where MaTK='tk5';
-</sql:query>-->
+   
     
 <!DOCTYPE html>
 <html lang="en"><head>
@@ -45,7 +26,12 @@ where MaTK='tk5';
 </head>
 <body >
 <% TB_TK_Controller cttb= new TB_TK_Controller();
-	ThongBao_Controller tb= new ThongBao_Controller(); %>
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+%>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -155,14 +141,14 @@ where MaTK='tk5';
 		
 													<tbody>
 														<%
-				     										for (TB_TK c: cttb.getListTB_TKByMaTK("tk5")) {
+				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK("ltthao@gmail.com")) {
 														%>
 														<tr >
 																<td><input type="checkbox" name=""  value=""></td>
-																<td><%=c.getTinTB() %></td>
-																<td><%=c.getMaTB()%></td>
-																<td><%=c.getNgayGui() %></td>
-																<td><a href="sinvien_XemThongBao.html">Xem</a></td>
+																<td><%=tbtk.getTinTB() %></td>
+																<td><%=tbtk.getTenNguoiGui() %></td>
+																<td><%=tbtk.getNgayGui() %></td>
+																<td><a href="sinvien_XemThongBao.jsp?MaTB=<%=tbtk.getMaTB()%>">Xem</a></td>
 															</tr>
 															<%
 			    											}
@@ -209,18 +195,23 @@ where MaTK='tk5';
 															</tr>
 														</thead>
 														<tbody>
-														<c:forEach var="row" items="${bangdsdt.rows}">
+														<%
+				     										for (DeTai detai: dt.getListDeTaiByMaCN("ltthao@gmail.com")) {
+				     											
+														%>
 															<tr>
-																<td><c:out value="${row.MaDT}"/></td>
-																<td><c:out value="${row.TenDT}"/></td>
-																<td><c:out value="${row.NgayThucHien}"/></td>
-																<td><c:out value="${row.NgayKetThuc}"/></td>
-																<td><c:out value="${row.TenTT}"/></td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
+																<td><%=detai.getMaDT() %></td>
+																<td><%=detai.getTenDT() %></td>
+																<td><%=detai.getNgayThucHien() %></td>
+																<td><%=detai.getNgayKetThuc()%></td>
+																<td><%=detai.getTenTT()%></td>
+																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 																<td><a href="sinhvien_NopBaoCao.jsp">Nộp</a></td>
 																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
 															</tr>
-														</c:forEach>
+														<%
+			    											}
+															%>
 														</tbody>
 													</table>
 													<ul id="contextMenu" class="dropdown-menu" role="menu">
@@ -446,15 +437,19 @@ where MaTK='tk5';
 															</tr>
 														</thead>
 														<tbody>
-															<c:forEach var="row1" items="${bangdsdt.rows}">
+															<%
+				     										for (DeTai detai: dt.getListDeTaiNT("ltthao@gmail.com")) {
+															%>
 															<tr>
-																<td><c:out value="${row1.MaDT}"/></td>
-																<td><c:out value="${row1.TenDT}"/></td>
-																<td><c:out value="${row1.NgayThucHien}"/></td>
-																<td><c:out value="${row1.NgayKetThuc}"/></td>
-																<td><a href="sinhvien_ketqua.jsp">Xem</a></td>
+																<td><%=detai.getMaDT() %></td>
+																<td><%=detai.getTenDT() %></td>
+																<td><%=detai.getNgayThucHien() %></td>
+																<td><%=detai.getNgayNT() %></td>
+																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
-															</c:forEach>
+															<%
+			    											}
+															%>
 														</tbody>
 													</table>
 												</div>
@@ -476,30 +471,35 @@ where MaTK='tk5';
 													</div>
 													<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 														<div class="row">
+														<%
+				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK("ltthao@gmail.com");
+															%>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<c:forEach var="row1" items="${bangtttk.rows}">
+																
 																	<b>
-																		<p>Tên chủ nhiệm: <c:out value="${row1.HoTen}"/></p>
+																		<p>Tên chủ nhiệm: <%=taikhoan.getHoTen() %></p>
 																		<p>MSSV: 14110208</p>
-																		<p>Ngày sinh: <c:out value="${row1.NgaySinh}"/></p>
-																		<p>Thuộc khoa: <c:out value="${row1.Nganh}"/></p>
+																		<p>Ngày sinh: <%=taikhoan.getNgaySinh() %></p>
+																		<p>Thuộc khoa: <%=taikhoan.getNganh() %></p>
 																		<p>Quê quán: Quảng Ngãi</p>
 																	</b>
-																</c:forEach>
+																
 															</div>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<c:forEach var="row1" items="${bangtttk.rows}">
+																
 																	<b>
-																		<p>Mail: <c:out value="${row1.Email}"/></p>
+																		<p>Mail: <%=taikhoan.getEmail() %></p>
 																		<p>Số điện thoại: 0123456789</p>
-																		<p>Mã số ngân hàng: <c:out value="${row1.MSNH}"/></p>
-																		<p>Chi nhánh ngân hàng: <c:out value="${row1.CNNH}"/></p>
+																		<p>Mã số ngân hàng: <%=taikhoan.getMSNH() %></p>
+																		<p>Chi nhánh ngân hàng: <%=taikhoan.getCNNH() %></p>
 																		<p>Đơn vị công tác: ZXC</p>
 																	</b>
-																</c:forEach>
 															</div>
+															<%
+				     										
+																%>
 														</div>
 														<div class="row">
 															<div class="container">
