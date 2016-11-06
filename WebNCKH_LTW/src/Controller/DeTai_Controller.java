@@ -12,9 +12,11 @@ import Model.DeTai;
 import Packages.DBConnect;
 
 public class DeTai_Controller {
-	public DeTai getListDeTai(String maDT) {
+	public DeTai getDeTai(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DeTai where MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM DeTai,TaiKhoan,TaiKhoan as TK1,TaiKhoan as TK2,TaiKhoan asTK3"+
+        " where TaiKhoan.MaTK=DeTai.MaCN and TK1.MaTK=DeTai.GVHD"+
+        " and TK2.MaTK=DeTai.SinhVien1 and TK3.MaTK=DeTai.SinhVien2 and MaDT='"+maDT+"'";
         DeTai dt = new DeTai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -44,6 +46,12 @@ public class DeTai_Controller {
             	dt.setNoiDungNC(rs.getString("NoiDungNC"));
             	dt.setSPDuKien(rs.getString("SPDuKien"));
             	dt.setDiaChiUD(rs.getString("DiaChiUD"));
+            	dt.setTenCN(rs.getString("TenCN"));
+            	dt.setMSSV(rs.getString("MaSV"));
+            	dt.setTenSV1(rs.getString("TenSV1"));
+            	dt.setTenSV2(rs.getString("TenSV2"));
+            	dt.setTenSV1(rs.getString("TenGVHD"));
+            	
             	
             }
            
@@ -175,12 +183,14 @@ public class DeTai_Controller {
 	        }
 	        return list;
     }
+	
+	
 	public static void main(String[] args) throws SQLException {
-		DeTai_Controller ctrl= new DeTai_Controller();
-	       for(DeTai ct: ctrl.getListDeTaiByMaCN("ltthao@gmail.com")){
-	    	   System.out.println(ct.getTenDT()+"_______"+ct.getTenTT());
-	    	   
-	       }
+//		DeTai_Controller ctrl= new DeTai_Controller();
+//	       for(DeTai ct: ctrl.getListDeTaiTest("dt1")){
+//	    	   System.out.println(ct.getTenCN()+"_______"+ct.getTenGVHD());
+//	    	   
+//	       }
 		  
 	    }
 }

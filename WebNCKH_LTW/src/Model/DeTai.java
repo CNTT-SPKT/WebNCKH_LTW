@@ -29,7 +29,14 @@ public class DeTai {
     private String TenTT;
     private String NgayNT;
     private String TenCN;
-    private String MSSV;
+    private String MSSVCN;
+    private String TenGVHD;
+    private String TenSV1;
+    private String TenSV2;
+    private String EmailCN;
+    private String EmailGV;
+    private String MSSV1;
+    private String MSSV2;
     
     private ArrayList<DonHuy> dsDonHuy= new ArrayList<DonHuy>();
     private ArrayList<DonGiaHan> dsDonGiaHan= new ArrayList<DonGiaHan>();
@@ -42,7 +49,9 @@ public class DeTai {
 			String gVHD, String tenDT, String moTa, String linhVuc, String loaiHinh, String ngayThucHien,
 			String ngayKetThuc, String coQuanChuTri, String tinhHinhTrong, String tinhHinhNgoai, String tinhCapThiet,
 			String mucTieu, String pPNC, String noiDungNC, String sPDuKien, String diaChiUD, double kinhPhi,
-			String tenTT,String ngayNT,String tenCN,String mssv, ArrayList<DonHuy> dsDonHuy, ArrayList<DonGiaHan> dsDonGiaHan) {
+			String tenTT, String ngayNT, String tenCN, String mSSVCN, String tenGVHD, String tenSV1, String tenSV2,
+			String emailCN, String emailGV, String mSSV1, String mSSV2, ArrayList<DonHuy> dsDonHuy,
+			ArrayList<DonGiaHan> dsDonGiaHan) {
 		super();
 		MaDT = maDT;
 		MaHienThi = maHienThi;
@@ -68,35 +77,18 @@ public class DeTai {
 		DiaChiUD = diaChiUD;
 		KinhPhi = kinhPhi;
 		TenTT = tenTT;
-		NgayNT= ngayNT;
-		MSSV= mssv;
+		NgayNT = ngayNT;
+		TenCN = tenCN;
+		MSSVCN = mSSVCN;
+		TenGVHD = tenGVHD;
+		TenSV1 = tenSV1;
+		TenSV2 = tenSV2;
+		EmailCN = emailCN;
+		EmailGV = emailGV;
+		MSSV1 = mSSV1;
+		MSSV2 = mSSV2;
 		this.dsDonHuy = dsDonHuy;
 		this.dsDonGiaHan = dsDonGiaHan;
-		TenCN= tenCN;
-	}
-
-	public String getMSSV() {
-		return MSSV;
-	}
-
-	public void setMSSV(String mSSV) {
-		MSSV = mSSV;
-	}
-
-	public String getTenCN() {
-		return TenCN;
-	}
-
-	public void setTenCN(String tenCN) {
-		TenCN = tenCN;
-	}
-
-	public String getNgayNT() {
-		return NgayNT;
-	}
-
-	public void setNgayNT(String ngayNT) {
-		NgayNT = ngayNT;
 	}
 
 	public String getMaDT() {
@@ -291,6 +283,86 @@ public class DeTai {
 		TenTT = tenTT;
 	}
 
+	public String getNgayNT() {
+		return NgayNT;
+	}
+
+	public void setNgayNT(String ngayNT) {
+		NgayNT = ngayNT;
+	}
+
+	public String getTenCN() {
+		return TenCN;
+	}
+
+	public void setTenCN(String tenCN) {
+		TenCN = tenCN;
+	}
+
+	public String getMSSVCN() {
+		return MSSVCN;
+	}
+
+	public void setMSSVCN(String mSSVCN) {
+		MSSVCN = mSSVCN;
+	}
+
+	public String getTenGVHD() {
+		return TenGVHD;
+	}
+
+	public void setTenGVHD(String tenGVHD) {
+		TenGVHD = tenGVHD;
+	}
+
+	public String getTenSV1() {
+		return TenSV1;
+	}
+
+	public void setTenSV1(String tenSV1) {
+		TenSV1 = tenSV1;
+	}
+
+	public String getTenSV2() {
+		return TenSV2;
+	}
+
+	public void setTenSV2(String tenSV2) {
+		TenSV2 = tenSV2;
+	}
+
+	public String getEmailCN() {
+		return EmailCN;
+	}
+
+	public void setEmailCN(String emailCN) {
+		EmailCN = emailCN;
+	}
+
+	public String getEmailGV() {
+		return EmailGV;
+	}
+
+	public void setEmailGV(String emailGV) {
+		EmailGV = emailGV;
+	}
+
+	public String getMSSV1() {
+		return MSSV1;
+	}
+
+	public void setMSSV1(String mSSV1) {
+		MSSV1 = mSSV1;
+	}
+
+	public String getMSSV2() {
+		return MSSV2;
+	}
+
+	public void setMSSV2(String mSSV2) {
+		MSSV2 = mSSV2;
+	}
+
 	public ArrayList<DonHuy> getDsDonHuy() {
 		return dsDonHuy;
 	}
@@ -308,7 +380,4 @@ public class DeTai {
 	}
 
 	
-    
-    
-    
 }

@@ -5,17 +5,19 @@ public class DonGiaHan {
     private String MaDT;
     private String LyDo;
     private String GHDen;
+    private String TenDT;
     
 	public DonGiaHan() {
 		super();
 	}
 
-	public DonGiaHan(String maDonXin, String maDT, String lyDo, String gHDen) {
+	public DonGiaHan(String maDonXin, String maDT, String lyDo, String gHDen, String tenDT) {
 		super();
 		MaDonXin = maDonXin;
 		MaDT = maDT;
 		LyDo = lyDo;
 		GHDen = gHDen;
+		TenDT = tenDT;
 	}
 
 	public String getMaDonXin() {
@@ -49,6 +51,14 @@ public class DonGiaHan {
 	public void setGHDen(String gHDen) {
 		GHDen = gHDen;
 	}
-    
-    
+
+	public String getTenDT() {
+		return TenDT;
+	}
+
+	public void setTenDT(String tenDT) {
+		TenDT = tenDT;
+	}
+
+	
 }

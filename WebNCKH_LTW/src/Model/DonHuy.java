@@ -4,16 +4,18 @@ public class DonHuy {
 	private String MaDonXin;
     private String MaDT;
     private String LyDo;
+    private String TenDT;
     
 	public DonHuy() {
 		super();
 	}
 
-	public DonHuy(String maDonXin, String maDT, String lyDo) {
+	public DonHuy(String maDonXin, String maDT, String lyDo, String tenDT) {
 		super();
 		MaDonXin = maDonXin;
 		MaDT = maDT;
 		LyDo = lyDo;
+		TenDT = tenDT;
 	}
 
 	public String getMaDonXin() {
@@ -39,6 +41,14 @@ public class DonHuy {
 	public void setLyDo(String lyDo) {
 		LyDo = lyDo;
 	}
+
+	public String getTenDT() {
+		return TenDT;
+	}
+
+	public void setTenDT(String tenDT) {
+		TenDT = tenDT;
+	}
+
 	
-    
 }

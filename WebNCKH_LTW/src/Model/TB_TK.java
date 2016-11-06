@@ -7,7 +7,6 @@ public class TB_TK {
     private String NgayGui;
     private String TenNguoiGui;
     
-    
 	public TB_TK() {
 		super();
 	}

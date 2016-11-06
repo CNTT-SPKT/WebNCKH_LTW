@@ -130,13 +130,14 @@
 									<form id="form_HuyGH" onsubmit="return validate(this);">
 										<div class="form-inline">
 											<div class="col-xs-6">
-											<label class="fieldinput" style="margin-left:10px;">Họ tên: <%=detai.getTenCN() %></label>
-											
+											<label class="fieldinput" style="margin-left:10px;">Họ tên: </label>
+											<input class="form-control" id="" type="text" value=<%=detai.getTenCN() %> readonly>
 											</div>
 										</div>
 										<div class="form-inline">
 											<div class="col-xs-6">
-											<label>MSSV: <%=detai.getMSSV() %></label>
+											<label>MSSV: </label>
+											<input class="form-control" id="" type="text" value=<%=detai.getMSSV() %> readonly>
 											
 											</div>
 										</div>

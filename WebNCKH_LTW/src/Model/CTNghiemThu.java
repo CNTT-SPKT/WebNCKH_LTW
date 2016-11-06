@@ -13,13 +13,14 @@ public class CTNghiemThu {
     private int TongDiem;
     private String YKien;
     private String NgayNT;
+    private String TenDT;
     
 	public CTNghiemThu() {
 		super();
 	}
 
 	public CTNghiemThu(String maDT, String maHD, int tongQuan, int mucTieu, int phuongPhap, int noiDung, int dongGop,
-			int hinhThuc, int diemThuong, int tongDiem, String yKien, String ngayNT) {
+			int hinhThuc, int diemThuong, int tongDiem, String yKien, String ngayNT, String tenDT) {
 		super();
 		MaDT = maDT;
 		MaHD = maHD;
@@ -33,6 +34,7 @@ public class CTNghiemThu {
 		TongDiem = tongDiem;
 		YKien = yKien;
 		NgayNT = ngayNT;
+		TenDT = tenDT;
 	}
 
 	public String getMaDT() {
@@ -130,5 +132,14 @@ public class CTNghiemThu {
 	public void setNgayNT(String ngayNT) {
 		NgayNT = ngayNT;
 	}
-    
+
+	public String getTenDT() {
+		return TenDT;
+	}
+
+	public void setTenDT(String tenDT) {
+		TenDT = tenDT;
+	}
+
+	
 }

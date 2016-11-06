@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="Controller.*,Model.*" %>
 <!DOCTYPE html>
 <html lang="en"><head>
 <title> Example </title>
@@ -15,6 +16,19 @@
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
 <body >
+<% TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	DeTai detai=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		detai = dt.getListDeTai(maDT);
+	}
+%>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -85,11 +99,11 @@
 																<div class="form-group">
 																	<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<input class="form-control" id="tendetai" type="text" value="Nghiên cứu hệ thống nhúng" readonly>
+																		<input class="form-control" id="tendetai" type="text" value=<%=detai.getTenDT() %> readonly>
 																	</div>
 																	<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
 																	<div class="col-sm-10">
-																		<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly> Nghiên cứu hệ thống nhúng....</textarea>
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getMoTa() %></textarea>
 																	</div>
 																	<br>
 																	<br>
@@ -120,11 +134,11 @@
 																				<div class="row">
 																					<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																					<div class="col-sm-4" style="margin-bottom:5px;">
-																						<input type="date" name="" id="thoigianbatdau" class="form-control" value="1/2/2015" required="required" title="" style="padding:0px;" readonly>
+																						<input type="date" name="" id="thoigianbatdau" class="form-control" value=<%=detai.getNgayThucHien() %> required="required" title="" style="padding:0px;" readonly>
 																					</div>
 																					<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																					<div class="col-sm-4" style="margin-bottom:5px;">
-																						<input type="date" name="" id="thoigianketthuc" class="form-control" value="9/11/2015" required="required" title="" style="padding:0px;"readonly>
+																						<input type="date" name="" id="thoigianketthuc" class="form-control" value=<%=detai.getNgayKetThuc() %> required="required" title="" style="padding:0px;"readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -132,7 +146,7 @@
 																	</div>
 																	<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
 																	<div class="col-sm-10">
-																		<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value="Khoa CNTT"readonly>
+																		<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value=<%=detai.getCoQuanChuTri() %> readonly>
 																	</div>
 																	<br>
 																	<div class="container" style="margin-top:35px;width:800px">
@@ -142,19 +156,19 @@
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="hoten1" type="text" value="Lê Văn A"readonly>
+																						<input class="form-control" id="hoten1" type="text" value=<%=detai.getTenCN() %> readonly>
 																					</div>
 																				</div>
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="mss1" type="text"value="14110180"readonly>
+																						<input class="form-control" id="mss1" type="text"value=<%=detai.getMSSV() %> readonly>
 																					</div>
 																				</div>
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="mail1" type="text" value="lva@gmail.com"readonly>
+																						<input class="form-control" id="mail1" type="text" value= readonly>
 																					</div>
 																				</div>
 																				<br>

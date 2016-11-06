@@ -148,7 +148,7 @@
 																<td><%=tbtk.getTinTB() %></td>
 																<td><%=tbtk.getTenNguoiGui() %></td>
 																<td><%=tbtk.getNgayGui() %></td>
-																<td><a href="sinvien_XemThongBao.jsp?MaTB=<%=tbtk.getMaTB()%>">Xem</a></td>
+																<td><a href="sinvien_XemThongBao.jsp?MaCTTB=<%=tbtk.getMaCTTB() %>">Xem</a></td>
 															</tr>
 															<%
 			    											}
@@ -206,7 +206,7 @@
 																<td><%=detai.getNgayKetThuc()%></td>
 																<td><%=detai.getTenTT()%></td>
 																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp">Nộp</a></td>
+																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
 																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
 																<ul id="contextMenu" class="dropdown-menu" role="menu">
 																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
