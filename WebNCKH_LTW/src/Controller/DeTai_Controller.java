@@ -47,12 +47,14 @@ public class DeTai_Controller {
             	dt.setSPDuKien(rs.getString("SPDuKien"));
             	dt.setDiaChiUD(rs.getString("DiaChiUD"));
             	dt.setTenCN(rs.getString("TenCN"));
-            	dt.setMSSV(rs.getString("MaSV"));
+            	dt.setMSSVCN(rs.getString("MaSV"));
             	dt.setTenSV1(rs.getString("TenSV1"));
             	dt.setTenSV2(rs.getString("TenSV2"));
             	dt.setTenSV1(rs.getString("TenGVHD"));
-            	
-            	
+            	dt.setEmailCN(rs.getString("Email"));
+            	dt.setEmailGV(rs.getString("Email"));
+            	dt.setMSSV1(rs.getString("MSSV"));
+            	dt.setMSSV2(rs.getString("MSSV"));
             }
            
             cons.close();
@@ -106,7 +108,7 @@ public class DeTai_Controller {
             	dt.setNgayThucHien(rs.getString("NgayDK"));
             	dt.setNgayKetThuc(rs.getString("NgayNT"));
             	dt.setTenTT(rs.getString("TenTT"));
-            	dt.setMSSV(rs.getString("MSSV"));
+            	dt.setMSSVCN(rs.getString("MSSV"));
             	dt.setTenCN(rs.getString("TenCN"));
             	
             }
