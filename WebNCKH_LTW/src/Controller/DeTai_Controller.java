@@ -7,14 +7,13 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
 
-import Model.CTNghiemThu;
 import Model.DeTai;
 import Packages.DBConnect;
 
 public class DeTai_Controller {
 	public DeTai getDeTai(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DeTai,TaiKhoan,TaiKhoan as TK1,TaiKhoan as TK2,TaiKhoan asTK3"+
+        String sql = "SELECT * FROM DeTai,TaiKhoan,TaiKhoan as TK1,TaiKhoan as TK2,TaiKhoan as TK3"+
         " where TaiKhoan.MaTK=DeTai.MaCN and TK1.MaTK=DeTai.GVHD"+
         " and TK2.MaTK=DeTai.SinhVien1 and TK3.MaTK=DeTai.SinhVien2 and MaDT='"+maDT+"'";
         DeTai dt = new DeTai();
@@ -46,15 +45,15 @@ public class DeTai_Controller {
             	dt.setNoiDungNC(rs.getString("NoiDungNC"));
             	dt.setSPDuKien(rs.getString("SPDuKien"));
             	dt.setDiaChiUD(rs.getString("DiaChiUD"));
-            	dt.setTenCN(rs.getString("TenCN"));
-            	dt.setMSSVCN(rs.getString("MaSV"));
-            	dt.setTenSV1(rs.getString("TenSV1"));
-            	dt.setTenSV2(rs.getString("TenSV2"));
-            	dt.setTenSV1(rs.getString("TenGVHD"));
+            	dt.setTenCN(rs.getString("TaiKhoan.TenCN"));
+            	dt.setMSSVCN(rs.getString("MatKhau"));
+            	dt.setTenSV1(rs.getString("HoTen"));
+            	dt.setTenSV2(rs.getString("HoTen"));
+            	dt.setTenGVHD(rs.getString("HoTen"));
             	dt.setEmailCN(rs.getString("Email"));
             	dt.setEmailGV(rs.getString("Email"));
-            	dt.setMSSV1(rs.getString("MSSV"));
-            	dt.setMSSV2(rs.getString("MSSV"));
+            	dt.setMSSV1(rs.getString("MatKhau"));
+            	dt.setMSSV2(rs.getString("MatKhau"));
             }
            
             cons.close();
@@ -81,6 +80,31 @@ public class DeTai_Controller {
             	dt.setNgayThucHien(rs.getString("NgayDK"));
             	dt.setNgayKetThuc(rs.getString("NgayNT"));
             	dt.setTenTT(rs.getString("TenTT"));
+            	list.add(dt);
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+	public ArrayList<DeTai> getListDeTaiDeXuat()  throws SQLException{
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
+				" TaiKhoan.HoTen as TenGVHD "+
+				" from DeTai,TaiKhoan,TrangThai where DeTai.GVHD=TaiKhoan.MaTK "+
+				" and DeTai.MaTT=TrangThai.MaTT and TrangThai.MaTT='tt11' ";
+        ArrayList<DeTai> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	DeTai dt = new DeTai();
+            	dt.setMaDT(rs.getString("MaDT"));
+            	dt.setTenDT(rs.getString("TenDT"));
+            	dt.setNgayThucHien(rs.getString("NgayDK"));
+            	dt.setTenGVHD(rs.getString("TenGVHD"));
             	list.add(dt);
             }
            

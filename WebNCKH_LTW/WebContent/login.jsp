@@ -21,7 +21,7 @@
 <c:if test="${not empty param.Email and not empty param.password}">
       <sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver"
                        url="jdbc:mysql://localhost:3306/DB_WebNCKH"
-                       user="root" password="123456"/>
+                       user="root" password="thaolac8996"/>
  
       <sql:query dataSource="${ds}" var="loginTable">
         select count(*) as kount from TaiKhoan

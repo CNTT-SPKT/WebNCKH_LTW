@@ -21,11 +21,12 @@
 	DeTai_Controller dt= new DeTai_Controller();
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
 	TB_TK tbtk=new TB_TK();
-	String maTB = "";
-	if (request.getParameter("MaTB") != null) {
-		maTB = request.getParameter("MaTB");
-		tbtk = cttb.getListTB_TKMaTB(maTB);
+	String maCTTB = "";
+	if (request.getParameter("MaCTTB") != null) {
+		maCTTB = request.getParameter("MaCTTB");
+		tbtk = cttb.getListTB_TKMaTB(maCTTB);
 	}
 %>
 	<div class="page">
@@ -104,7 +105,7 @@
 											<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
 												<form>
 													<div class="form-group">
-														<div class="input-group col-xs-8" style="margin-left:150px;" >
+														<div class="input-group col-xs-8" style="margin-left:50px;" >
 															<div class="input-group-addon"><i class="fa fa-search"></i></div>
 															<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
 														</div>      
@@ -146,13 +147,20 @@
 													</thead>
 		
 													<tbody>
-														<tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse | filter:searchFish">
-															<td><input type="checkbox" name=""  value=""></td>
-															<td>{{ roll.tb }}</td>
-															<td>{{ roll.ng }}</td>
-															<td>{{ roll.ngay }}</td>
-															<td><a href="sinvien_XemThongBao.jsp">Xem</a></td>
-														</tr>
+														<%
+				     										for (TB_TK thongbaotk: cttb.getListTB_TKByMaTK("ltthao@gmail.com")) {
+														%>
+														<tr >
+																<td><input type="checkbox" name=""  value=""></td>
+																<td><%=thongbaotk.getTinTB() %></td>
+																<td><%=thongbaotk.getTenNguoiGui() %></td>
+																<td><%=thongbaotk.getNgayGui() %></td>
+																<td><a href="sinvien_XemThongBao.jsp?MaCTTB=<%=tbtk.getMaCTTB() %>">Xem</a></td>
+															</tr>
+															<%
+			    											}
+															%>
+														
 													</tbody>
 												</table>
 												<script>
@@ -175,8 +183,8 @@
 										</div>
 									</div>
 								</div>
-									<div class="tab-pane" id="dsDeTai">
-										<div class="row">
+									<div class="tab-pane" id="dsDeTai"  >
+										<div class="row" id="ttt">
 											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
 												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
 												<div class="sv_table_dsDeTai">
@@ -185,7 +193,7 @@
 															<tr class="success">
 																<th>Mã số</th>
 																<th>Tên đề tài</th>
-																<th>Ngày đăng ký</th>
+																<th>Ngày đăng ký</th>	
 																<th>Hạn nghiệm thu</th>
 																<th>Trạng thái</th>
 																<th>Chi tiết</th>
@@ -194,48 +202,38 @@
 															</tr>
 														</thead>
 														<tbody>
+														<%
+				     										for (DeTai detai: dt.getListDeTaiByMaCN("ltthao@gmail.com")) {
+				     											
+														%>
 															<tr>
-																<td>null</td>
-																<td>Nghiên cứu hệ thống rung</td>
-																<td>12/12/2012</td>
-																<td>null</td>
-																<td>Đang chờ duyệt</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-															</tr>
-															<tr>
-																<td>141</td>
-																<td>Nghiên cứu hệ thống nhúng</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td>Đang thực hiện</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp">Nộp</a></td>
+																<td><%=detai.getMaDT() %></td>
+																<td><%=detai.getTenDT() %></td>
+																<td><%=detai.getNgayThucHien() %></td>
+																<td><%=detai.getNgayKetThuc()%></td>
+																<td><%=detai.getTenTT()%></td>
+																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
 																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
+																<ul id="contextMenu" class="dropdown-menu" role="menu">
+																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
+																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jspMaDT=<%=detai.getMaDT() %>">Hủy</a></li>
+																</ul>
 															</tr>
-															<tr>
-																<td>140</td>
-																<td>Nghiên cứu hệ thống an ninh</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td>Đã nghiệm thu</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-															</tr>
+														<%
+			    											}
+															%>
+														
 														</tbody>
 													</table>
-													<ul id="contextMenu" class="dropdown-menu" role="menu">
-														<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp" >Gia Hạn</a></li>
-														<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jsp">Hủy</a></li>
-													</ul>
+													
+													
 												</div>
-
+												
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="tab-pane" id="dkDeTai">
 										<div class="row" style="margin-right:0px;">
 											<div class="svdkDeTai" style="background:white;border-radius:3px">
@@ -448,13 +446,19 @@
 															</tr>
 														</thead>
 														<tbody>
+															<%
+				     										for (DeTai detai: dt.getListDeTaiNT("ltthao@gmail.com")) {
+															%>
 															<tr>
-																<td>141</td>
-																<td>Nghiên cứu hệ thống rung</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td><a href="sinhvien_ketqua.jsp">Xem</a></td>
+																<td><%=detai.getMaDT() %></td>
+																<td><%=detai.getTenDT() %></td>
+																<td><%=detai.getNgayThucHien() %></td>
+																<td><%=detai.getNgayNT() %></td>
+																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
+															<%
+			    											}
+															%>
 														</tbody>
 													</table>
 												</div>
@@ -476,24 +480,35 @@
 													</div>
 													<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 														<div class="row">
+														<%
+				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK("ltthao@gmail.com");
+															%>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Tên chủ nhiệm: Sinh Viên A</p>
-																	<p>MSSV: 14110208</p>
-																	<p>Ngày sinh: 02/08/1996</p>
-																	<p>Thuộc khoa: CNTT</p>
-																	<p>Quê quán: Quảng Ngãi</p>
-																</b>
+																
+																	<b>
+																		<p>Tên chủ nhiệm: <%=taikhoan.getHoTen() %></p>
+																		<p>MSSV: <%=taikhoan.getMatKhau() %></p>
+																		<p>Ngày sinh: <%=taikhoan.getNgaySinh() %></p>
+																		<p>Thuộc khoa: <%=taikhoan.getNganh() %></p>
+																		<p>Quê quán: Quảng Ngãi</p>
+																	</b>
+																
 															</div>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Mail: zxc@gmail.com</p>
-																	<p>Số điện thoại: 0123456789</p>
-																	<p>Mã số ngân hàng: 123456789</p>
-																	<p>Chi nhánh ngân hàng: ABC</p>
-																	<p>Đơn vị công tác: ZXC</p>
-																</b>
+																
+																	<b>
+																		<p>Mail: <%=taikhoan.getEmail() %></p>
+																		<p>Số điện thoại: 0123456789</p>
+																		<p>Mã số ngân hàng: <%=taikhoan.getMSNH() %></p>
+																		<p>Chi nhánh ngân hàng: <%=taikhoan.getCNNH() %></p>
+																		<p>Đơn vị công tác: ZXC</p>
+																	</b>
 															</div>
+															<%
+				     										
+																%>
 														</div>
 														<div class="row">
 															<div class="container">
@@ -554,7 +569,7 @@
 																			<div class="modal-body">
 																				<div class="row">
 																					<div class="title " style=" text-align:center; margin-bottom:15px;">
-																						<h2> CẬP NHẬP THÔNG TIN </h2>
+																						<h2> CẬP NHẬT THÔNG TIN </h2>
 																					</div>
 																				</div>
 																				<div class="row">

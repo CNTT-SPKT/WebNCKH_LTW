@@ -137,7 +137,7 @@
 										<div class="form-inline">
 											<div class="col-xs-6">
 											<label>MSSV: </label>
-											<input class="form-control" id="" type="text" value=<%=detai.getMSSV() %> readonly>
+											<input class="form-control" id="" type="text" value=<%=detai.getMSSVCN() %> readonly>
 											
 											</div>
 										</div>

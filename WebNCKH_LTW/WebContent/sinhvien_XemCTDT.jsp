@@ -26,7 +26,7 @@
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		detai = dt.getListDeTai(maDT);
+		detai = dt.getDeTai(maDT);
 	}
 %>
 	<div class="page">
@@ -162,13 +162,13 @@
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="mss1" type="text"value=<%=detai.getMSSV() %> readonly>
+																						<input class="form-control" id="mss1" type="text"value=<%=detai.getMSSVCN() %> readonly>
 																					</div>
 																				</div>
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="mail1" type="text" value= readonly>
+																						<input class="form-control" id="" type="text" value=<%=detai.getEmailCN() %> readonly>
 																					</div>
 																				</div>
 																				<br>
@@ -176,13 +176,13 @@
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="hoten1" type="text" value="Lê Văn Thắng"readonly>
+																						<input class="form-control" id="hoten1" type="text" value=<%=detai.getTenSV1() %> readonly>
 																					</div>
 																				</div>
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="mss1" type="text" value="14110184"readonly>
+																						<input class="form-control" id="mss1" type="text" value=<%=detai.getMSSV1() %> readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -191,26 +191,26 @@
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="hoten1" type="text" value="Nguyễn Văn A"readonly>
+																						<input class="form-control" id="hoten1" type="text" value=<%=detai.getTenGVHD() %> readonly>
 																					</div>
 																				</div>
 																				<div class="row" style="margin-bottom:5px">
 																					<label class="col-sm-4 control-label" for="mssv1">Email:</label>
 																					<div class="col-sm-8">
-																						<input class="form-control" id="mss1" type="text" value="ngva@gmail.com"readonly>
+																						<input class="form-control" id="mss1" type="text" value=<%=detai.getEmailGV() %> readonly>
 																					</div>
 																					<br><br><br><br><br><br>
 																					<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text"readonly>
+																							<input class="form-control" id="hoten1" value=<%=detai.getTenSV2() %> type="text" readonly>
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mss1" type="text"readonly>
+																							<input class="form-control" id="mss1" value=<%=detai.getMSSV2() %> type="text"readonly>
 																						</div>
 																					</div>
 																				</div>
@@ -220,47 +220,47 @@
 																	<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
 																	<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly>Các hacker luôn ảo tưởng và nghi ngờ mọi thứ rất ít trong số họ sẵn sàng lên tiếng. Bí ẩn về thế giới ngầm của các hacker vì thế vẫn là tấm màn bí mật.</textarea>
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getTinhHinhTrong() %></textarea>
 																	</div>
 																	<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly>Các hacker luôn ảo tưởng và nghi ngờ mọi thứ rất ít trong số họ sẵn sàng lên tiếng. Bí ẩn về thế giới ngầm của các hacker vì thế vẫn là tấm màn bí mật.</textarea>
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getTinhHinhNgoai() %></textarea>
 																	</div>
 
 																	<label class="col-sm-2 control-label" for="mota">Tính cấp thiết của đề tài:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly>Các hacker luôn ảo tưởng và nghi ngờ mọi thứ rất ít trong số họ sẵn sàng lên tiếng. Bí ẩn về thế giới ngầm của các hacker vì thế vẫn là tấm màn bí mật.</textarea>
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getTinhCapThiet() %></textarea>
 																	</div>
 
 																	<label class="col-sm-2 control-label" for="mota">Mục tiêu của đề tài:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly>Các hacker luôn ảo tưởng và nghi ngờ mọi thứ rất ít trong số họ sẵn sàng lên tiếng. Bí ẩn về thế giới ngầm của các hacker vì thế vẫn là tấm màn bí mật.</textarea>
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getMucTieu() %></textarea>
 																	</div>
 
 																	<label class="col-sm-2 control-label" for="mota">Phương pháp và phạm vi nghiên cứu:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly>Các hacker luôn ảo tưởng và nghi ngờ mọi thứ rất ít trong số họ sẵn sàng lên tiếng. Bí ẩn về thế giới ngầm của các hacker vì thế vẫn là tấm màn bí mật.</textarea>
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getPPNC() %></textarea>
 																	</div>
 
 																	<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu và tiến độ thực hiện:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly>Các hacker luôn ảo tưởng và nghi ngờ mọi thứ rất ít trong số họ sẵn sàng lên tiếng. Bí ẩn về thế giới ngầm của các hacker vì thế vẫn là tấm màn bí mật.</textarea>
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getNoiDungNC() %></textarea>
 																	</div>
 
 																	<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<input class="form-control" id="sanphamdukiem" type="text" value="tran Web"readonly>
+																		<input class="form-control" id="sanphamdukiem" type="text" value=<%=detai.getSPDuKien() %> readonly>
 																	</div>
 
 
 																	<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<input class="form-control" id="diachiungdung" type="text"value="Các công ty" readonly>
+																		<input class="form-control" id="diachiungdung" type="text" value=<%=detai.getDiaChiUD() %> readonly>
 																	</div>
 
 																	<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
 																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<input class="form-control" id="dxuatkinhphi" type="text" value="2.000.000"readonly>
+																		<input class="form-control" id="dxuatkinhphi" type="text" value=<%=detai.getKinhPhi() %> readonly>
 																	</div>
 
 																	<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
@@ -276,86 +276,93 @@
 										</div>
 									</div>
 								</div>
-								<div class="tab-pane" id="thongbao">
-										<div class="row">
-											<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
-												<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
-												<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
-													<form>
-														<div class="form-group">
-															<div class="input-group col-xs-8" style="margin-left:150px;" >
-																<div class="input-group-addon"><i class="fa fa-search"></i></div>
-																<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
-															</div>      
-														</div>
-													</form>
-													<table class="table table-striped table-hover">
-														<thead>
-															<tr class="success">
-																<th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
-																<th>
-																	<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-																		Thông báo
-																		<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																		Người gửi
-																		<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																		Ngày gửi
-																		<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'tastiness'; sortReverse = !sortReverse">
-																		Chi tiết 
-																		<span ng-show="sortType == 'tastiness' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-															</tr>
-														</thead>
-			
-														<tbody>
-															<tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse | filter:searchFish">
+								<div class="tab-pane active" id="thongbao">
+									<div class="row">
+										<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
+											<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
+											<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
+												<form>
+													<div class="form-group">
+														<div class="input-group col-xs-8" style="margin-left:50px;" >
+															<div class="input-group-addon"><i class="fa fa-search"></i></div>
+															<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
+														</div>      
+													</div>
+												</form>
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr class="success">
+															<th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
+															<th>
+																<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+																	Thông báo
+																	<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
+																	Người gửi
+																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
+																	Ngày gửi
+																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'tastiness'; sortReverse = !sortReverse">
+																	Chi tiết 
+																	<span ng-show="sortType == 'tastiness' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+														</tr>
+													</thead>
+		
+													<tbody>
+														<%
+				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK("ltthao@gmail.com")) {
+														%>
+														<tr >
 																<td><input type="checkbox" name=""  value=""></td>
-																<td>{{ roll.tb }}</td>
-																<td>{{ roll.ng }}</td>
-																<td>{{ roll.ngay }}</td>
-																<td><a href="sinvien_XemThongBao.jsp">Xem</a></td>
+																<td><%=tbtk.getTinTB() %></td>
+																<td><%=tbtk.getTenNguoiGui() %></td>
+																<td><%=tbtk.getNgayGui() %></td>
+																<td><a href="sinvien_XemThongBao.jsp?MaCTTB=<%=tbtk.getMaCTTB() %>">Xem</a></td>
 															</tr>
-														</tbody>
-													</table>
-													<script>
-													$('#selectAll_ThongBao').change(function(){
-														if($(this).prop('checked')){
-															$('tbody tr td input[type="checkbox"]').each(function(){
-																$(this).prop('checked', true);
-															});
-														}else{
-															$('tbody tr td input[type="checkbox"]').each(function(){
-																$(this).prop('checked', false);
-															});
-														}
-													});
-													
-													</script>
-												</div>
-												<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
-													<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
+															<%
+			    											}
+															%>
+														
+													</tbody>
+												</table>
+												<script>
+												$('#selectAll_ThongBao').change(function(){
+													if($(this).prop('checked')){
+														$('tbody tr td input[type="checkbox"]').each(function(){
+															$(this).prop('checked', true);
+														});
+													}else{
+														$('tbody tr td input[type="checkbox"]').each(function(){
+															$(this).prop('checked', false);
+														});
+													}
+												});
+												
+												</script>
 											</div>
+											<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
+												<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
 										</div>
 									</div>
-									<div class="tab-pane" id="dsDeTai">
-										<div class="row">
+								</div>
+									<div class="tab-pane" id="dsDeTai"  >
+										<div class="row" id="ttt">
 											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
 												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
 												<div class="sv_table_dsDeTai">
@@ -364,7 +371,7 @@
 															<tr class="success">
 																<th>Mã số</th>
 																<th>Tên đề tài</th>
-																<th>Ngày đăng ký</th>
+																<th>Ngày đăng ký</th>	
 																<th>Hạn nghiệm thu</th>
 																<th>Trạng thái</th>
 																<th>Chi tiết</th>
@@ -373,47 +380,38 @@
 															</tr>
 														</thead>
 														<tbody>
+														<%
+				     										for (DeTai detai1: dt.getListDeTaiByMaCN("ltthao@gmail.com")) {
+				     											
+														%>
 															<tr>
-																<td>null</td>
-																<td>Nghiên cứu hệ thống rung</td>
-																<td>12/12/2012</td>
-																<td>null</td>
-																<td>Đang chờ duyệt</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-															</tr>
-															<tr>
-																<td>141</td>
-																<td>Nghiên cứu hệ thống nhúng</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td>Đang thực hiện</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp">Nộp</a></td>
+																<td><%=detai1.getMaDT() %></td>
+																<td><%=detai1.getTenDT() %></td>
+																<td><%=detai1.getNgayThucHien() %></td>
+																<td><%=detai1.getNgayKetThuc()%></td>
+																<td><%=detai1.getTenTT()%></td>
+																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
 																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
+																<ul id="contextMenu" class="dropdown-menu" role="menu">
+																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
+																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jspMaDT=<%=detai.getMaDT() %>">Hủy</a></li>
+																</ul>
 															</tr>
-															<tr>
-																<td>140</td>
-																<td>Nghiên cứu hệ thống an ninh</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td>Đã nghiệm thu</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-															</tr>
+														<%
+			    											}
+															%>
+														
 														</tbody>
 													</table>
-													<ul id="contextMenu" class="dropdown-menu" role="menu">
-														<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp" >Gia Hạn</a></li>
-														<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jsp">Hủy</a></li>
-													</ul>
+													
+													
 												</div>
-
+												
 											</div>
 										</div>
 									</div>
+
 									
 									<div class="tab-pane" id="dkDeTai">
 										<div class="row" style="margin-right:0px;">
@@ -627,13 +625,19 @@
 															</tr>
 														</thead>
 														<tbody>
+															<%
+				     										for (DeTai detai2: dt.getListDeTaiNT("ltthao@gmail.com")) {
+															%>
 															<tr>
-																<td>141</td>
-																<td>Nghiên cứu hệ thống rung</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td><a href="sinhvien_ketqua.jsp">Xem</a></td>
+																<td><%=detai2.getMaDT() %></td>
+																<td><%=detai2.getTenDT() %></td>
+																<td><%=detai2.getNgayThucHien() %></td>
+																<td><%=detai2.getNgayNT() %></td>
+																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
+															<%
+			    											}
+															%>
 														</tbody>
 													</table>
 												</div>
@@ -655,24 +659,35 @@
 													</div>
 													<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 														<div class="row">
+														<%
+				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK("ltthao@gmail.com");
+															%>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Tên chủ nhiệm: Sinh Viên A</p>
-																	<p>MSSV: 14110208</p>
-																	<p>Ngày sinh: 02/08/1996</p>
-																	<p>Thuộc khoa: CNTT</p>
-																	<p>Quê quán: Quảng Ngãi</p>
-																</b>
+																
+																	<b>
+																		<p>Tên chủ nhiệm: <%=taikhoan.getHoTen() %></p>
+																		<p>MSSV: <%=taikhoan.getMatKhau() %></p>
+																		<p>Ngày sinh: <%=taikhoan.getNgaySinh() %></p>
+																		<p>Thuộc khoa: <%=taikhoan.getNganh() %></p>
+																		<p>Quê quán: Quảng Ngãi</p>
+																	</b>
+																
 															</div>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Mail: zxc@gmail.com</p>
-																	<p>Số điện thoại: 0123456789</p>
-																	<p>Mã số ngân hàng: 123456789</p>
-																	<p>Chi nhánh ngân hàng: ABC</p>
-																	<p>Đơn vị công tác: ZXC</p>
-																</b>
+																
+																	<b>
+																		<p>Mail: <%=taikhoan.getEmail() %></p>
+																		<p>Số điện thoại: 0123456789</p>
+																		<p>Mã số ngân hàng: <%=taikhoan.getMSNH() %></p>
+																		<p>Chi nhánh ngân hàng: <%=taikhoan.getCNNH() %></p>
+																		<p>Đơn vị công tác: ZXC</p>
+																	</b>
 															</div>
+															<%
+				     										
+																%>
 														</div>
 														<div class="row">
 															<div class="container">
@@ -733,7 +748,7 @@
 																			<div class="modal-body">
 																				<div class="row">
 																					<div class="title " style=" text-align:center; margin-bottom:15px;">
-																						<h2> CẬP NHẬP THÔNG TIN </h2>
+																						<h2> CẬP NHẬT THÔNG TIN </h2>
 																					</div>
 																				</div>
 																				<div class="row">

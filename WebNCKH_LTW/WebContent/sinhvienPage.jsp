@@ -59,7 +59,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">Sinh Viên A</span></a></li>
+									<li><a href="#"><span  style="color:blue">session.getAttribute("Email").toString()</span></a></li>
 									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
@@ -141,7 +141,7 @@
 		
 													<tbody>
 														<%
-				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK("ltthao@gmail.com")) {
+				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK(session.getAttribute("Email").toString())) {
 														%>
 														<tr >
 																<td><input type="checkbox" name=""  value=""></td>
@@ -196,7 +196,7 @@
 														</thead>
 														<tbody>
 														<%
-				     										for (DeTai detai: dt.getListDeTaiByMaCN("ltthao@gmail.com")) {
+				     										for (DeTai detai: dt.getListDeTaiByMaCN(session.getAttribute("Email").toString())) {
 				     											
 														%>
 															<tr>
@@ -441,7 +441,7 @@
 														</thead>
 														<tbody>
 															<%
-				     										for (DeTai detai: dt.getListDeTaiNT("ltthao@gmail.com")) {
+				     										for (DeTai detai: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
 															%>
 															<tr>
 																<td><%=detai.getMaDT() %></td>
@@ -475,14 +475,14 @@
 													<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 														<div class="row">
 														<%
-				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK("ltthao@gmail.com");
+				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 															%>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
 																
 																	<b>
 																		<p>Tên chủ nhiệm: <%=taikhoan.getHoTen() %></p>
-																		<p>MSSV: 14110208</p>
+																		<p>MSSV: <%=taikhoan.getMatKhau() %></p>
 																		<p>Ngày sinh: <%=taikhoan.getNgaySinh() %></p>
 																		<p>Thuộc khoa: <%=taikhoan.getNganh() %></p>
 																		<p>Quê quán: Quảng Ngãi</p>

@@ -33,9 +33,9 @@ public class TB_TK_Controller {
         }
         return list;
     }
-	public TB_TK getListTB_TKMaTB(String maTB) {
+	public TB_TK getListTB_TKMaTB(String maCTTB) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM TB_TK where MaTB='"+maTB+"'";
+        String sql = "SELECT * FROM TB_TK where MaCTTB='"+maCTTB+"'";
         TB_TK cttb = new TB_TK();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

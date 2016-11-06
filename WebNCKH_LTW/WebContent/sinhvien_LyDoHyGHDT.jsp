@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	<%@ page import="Controller.*,Model.*" %>
 <!DOCTYPE html>
 <html lang="en"><head>
 <title> Example </title>
@@ -16,6 +17,19 @@
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
 <body >
+<% TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	DeTai detai=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		detai = dt.getListDeTaiByMaDT(maDT);
+	}
+%>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -91,13 +105,12 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr>
-															<td> 141</td>
-															<td>Nghiên cứu hệ thống nhúng</td>
-															<td>1/2/2015</td>
-															<td>1/11/2015</td>
-															<td>Đang tiến hành</td>
-
+														<tr >
+															<td><%=detai.getMaDT() %></td>
+															<td><%=detai.getTenDT() %></td>
+	 													  	<td><%=detai.getNgayThucHien() %></td>
+															<td><%=detai.getNgayKetThuc() %></td>
+															<td><%=detai.getTenTT() %></td>
 														</tr>
 													</tbody>
 												</table>
@@ -106,13 +119,14 @@
 										<div class="form-inline">
 											<div class="col-xs-6">
 											<label class="fieldinput" style="margin-left:10px;">Họ tên: </label>
-											<input type="text" name="name" class="form-control required name"  id="" required minlength="3" data-placement="right" data-trigger="manual" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự." placeholder="Lê Thị Thảo">
+											<input class="form-control" id="" type="text" value=<%=detai.getTenCN() %> readonly>
 											</div>
 										</div>
 										<div class="form-inline">
 											<div class="col-xs-6">
 											<label>MSSV: </label>
-											<input type="text" name="mssv" class="form-control required mssv" placeholder="141101"  id="" required minlength="6" data-placement="right" data-trigger="manual" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
+											<input class="form-control" id="" type="text" value=<%=detai.getMSSVCN() %> readonly>
+											
 											</div>
 										</div>
 										<div >
@@ -129,85 +143,92 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="thongbao">
-										<div class="row">
-											<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
-												<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
-												<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
-													<form>
-														<div class="form-group">
-															<div class="input-group col-xs-8" style="margin-left:150px;" >
-																<div class="input-group-addon"><i class="fa fa-search"></i></div>
-																<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
-															</div>      
-														</div>
-													</form>
-													<table class="table table-striped table-hover">
-														<thead>
-															<tr class="success">
-																<th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
-																<th>
-																	<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-																		Thông báo
-																		<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																		Người gửi
-																		<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																		Ngày gửi
-																		<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'tastiness'; sortReverse = !sortReverse">
-																		Chi tiết 
-																		<span ng-show="sortType == 'tastiness' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-															</tr>
-														</thead>
-			
-														<tbody>
-															<tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse | filter:searchFish">
+									<div class="row">
+										<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
+											<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
+											<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
+												<form>
+													<div class="form-group">
+														<div class="input-group col-xs-8" style="margin-left:50px;" >
+															<div class="input-group-addon"><i class="fa fa-search"></i></div>
+															<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
+														</div>      
+													</div>
+												</form>
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr class="success">
+															<th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
+															<th>
+																<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+																	Thông báo
+																	<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
+																	Người gửi
+																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
+																	Ngày gửi
+																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'tastiness'; sortReverse = !sortReverse">
+																	Chi tiết 
+																	<span ng-show="sortType == 'tastiness' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+														</tr>
+													</thead>
+		
+													<tbody>
+														<%
+				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK(session.getAttribute("Email").toString())) {
+														%>
+														<tr >
 																<td><input type="checkbox" name=""  value=""></td>
-																<td>{{ roll.tb }}</td>
-																<td>{{ roll.ng }}</td>
-																<td>{{ roll.ngay }}</td>
-																<td><a href="sinvien_XemThongBao.jsp">Xem</a></td>
+																<td><%=tbtk.getTinTB() %></td>
+																<td><%=tbtk.getTenNguoiGui() %></td>
+																<td><%=tbtk.getNgayGui() %></td>
+																<td><a href="sinvien_XemThongBao.jsp?MaCTTB=<%=tbtk.getMaCTTB() %>">Xem</a></td>
 															</tr>
-														</tbody>
-													</table>
-													<script>
-													$('#selectAll_ThongBao').change(function(){
-														if($(this).prop('checked')){
-															$('tbody tr td input[type="checkbox"]').each(function(){
-																$(this).prop('checked', true);
-															});
-														}else{
-															$('tbody tr td input[type="checkbox"]').each(function(){
-																$(this).prop('checked', false);
-															});
-														}
-													});
-													
-													</script>
-												</div>
-												<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
-													<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
+															<%
+			    											}
+															%>
+														
+													</tbody>
+												</table>
+												<script>
+												$('#selectAll_ThongBao').change(function(){
+													if($(this).prop('checked')){
+														$('tbody tr td input[type="checkbox"]').each(function(){
+															$(this).prop('checked', true);
+														});
+													}else{
+														$('tbody tr td input[type="checkbox"]').each(function(){
+															$(this).prop('checked', false);
+														});
+													}
+												});
+												
+												</script>
 											</div>
+											<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
+												<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
 										</div>
 									</div>
-									<div class="tab-pane" id="dsDeTai">
-										<div class="row">
+								</div>
+									<div class="tab-pane" id="dsDeTai"  >
+										<div class="row" id="ttt">
 											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
 												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
 												<div class="sv_table_dsDeTai">
@@ -216,7 +237,7 @@
 															<tr class="success">
 																<th>Mã số</th>
 																<th>Tên đề tài</th>
-																<th>Ngày đăng ký</th>
+																<th>Ngày đăng ký</th>	
 																<th>Hạn nghiệm thu</th>
 																<th>Trạng thái</th>
 																<th>Chi tiết</th>
@@ -225,47 +246,38 @@
 															</tr>
 														</thead>
 														<tbody>
+														<%
+				     										for (DeTai detai1: dt.getListDeTaiByMaCN(session.getAttribute("Email").toString())) {
+				     											
+														%>
 															<tr>
-																<td>null</td>
-																<td>Nghiên cứu hệ thống rung</td>
-																<td>12/12/2012</td>
-																<td>null</td>
-																<td>Đang chờ duyệt</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-															</tr>
-															<tr>
-																<td>141</td>
-																<td>Nghiên cứu hệ thống nhúng</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td>Đang thực hiện</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp">Nộp</a></td>
+																<td><%=detai1.getMaDT() %></td>
+																<td><%=detai1.getTenDT() %></td>
+																<td><%=detai1.getNgayThucHien() %></td>
+																<td><%=detai1.getNgayKetThuc()%></td>
+																<td><%=detai1.getTenTT()%></td>
+																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
 																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
+																<ul id="contextMenu" class="dropdown-menu" role="menu">
+																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
+																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jspMaDT=<%=detai.getMaDT() %>">Hủy</a></li>
+																</ul>
 															</tr>
-															<tr>
-																<td>140</td>
-																<td>Nghiên cứu hệ thống an ninh</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td>Đã nghiệm thu</td>
-																<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-															</tr>
+														<%
+			    											}
+															%>
+														
 														</tbody>
 													</table>
-													<ul id="contextMenu" class="dropdown-menu" role="menu">
-														<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp" >Gia Hạn</a></li>
-														<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jsp">Hủy</a></li>
-													</ul>
+													
+													
 												</div>
-
+												
 											</div>
 										</div>
 									</div>
+
 									
 									<div class="tab-pane" id="dkDeTai">
 										<div class="row" style="margin-right:0px;">
@@ -479,13 +491,19 @@
 															</tr>
 														</thead>
 														<tbody>
+															<%
+				     										for (DeTai dtnt: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
+															%>
 															<tr>
-																<td>141</td>
-																<td>Nghiên cứu hệ thống rung</td>
-																<td>12/12/2012</td>
-																<td>13/12/2012</td>
-																<td><a href="sinhvien_ketqua.jsp">Xem</a></td>
+																<td><%=dtnt.getMaDT() %></td>
+																<td><%=dtnt.getTenDT() %></td>
+																<td><%=dtnt.getNgayThucHien() %></td>
+																<td><%=dtnt.getNgayNT() %></td>
+																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
+															<%
+			    											}
+															%>
 														</tbody>
 													</table>
 												</div>
@@ -507,24 +525,35 @@
 													</div>
 													<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 														<div class="row">
+														<%
+				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
+															%>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Tên chủ nhiệm: Sinh Viên A</p>
-																	<p>MSSV: 14110208</p>
-																	<p>Ngày sinh: 02/08/1996</p>
-																	<p>Thuộc khoa: CNTT</p>
-																	<p>Quê quán: Quảng Ngãi</p>
-																</b>
+																
+																	<b>
+																		<p>Tên chủ nhiệm: <%=taikhoan.getHoTen() %></p>
+																		<p>MSSV: <%=taikhoan.getMatKhau() %></p>
+																		<p>Ngày sinh: <%=taikhoan.getNgaySinh() %></p>
+																		<p>Thuộc khoa: <%=taikhoan.getNganh() %></p>
+																		<p>Quê quán: Quảng Ngãi</p>
+																	</b>
+																
 															</div>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Mail: zxc@gmail.com</p>
-																	<p>Số điện thoại: 0123456789</p>
-																	<p>Mã số ngân hàng: 123456789</p>
-																	<p>Chi nhánh ngân hàng: ABC</p>
-																	<p>Đơn vị công tác: ZXC</p>
-																</b>
+																
+																	<b>
+																		<p>Mail: <%=taikhoan.getEmail() %></p>
+																		<p>Số điện thoại: 0123456789</p>
+																		<p>Mã số ngân hàng: <%=taikhoan.getMSNH() %></p>
+																		<p>Chi nhánh ngân hàng: <%=taikhoan.getCNNH() %></p>
+																		<p>Đơn vị công tác: ZXC</p>
+																	</b>
 															</div>
+															<%
+				     										
+																%>
 														</div>
 														<div class="row">
 															<div class="container">
@@ -585,7 +614,7 @@
 																			<div class="modal-body">
 																				<div class="row">
 																					<div class="title " style=" text-align:center; margin-bottom:15px;">
-																						<h2> CẬP NHẬP THÔNG TIN </h2>
+																						<h2> CẬP NHẬT THÔNG TIN </h2>
 																					</div>
 																				</div>
 																				<div class="row">
@@ -602,7 +631,7 @@
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
 																									<label for="email">Mail<span>:</span></label> 
-																									<input class="form-control" name="email" id="email" type="text" required/>
+																									<input class="form-control" name="email" id="email" type="email" required/>
 																									<span class="glyphicon form-control-feedback" id="email1"></span>
 																								</div>
 																							</div>
