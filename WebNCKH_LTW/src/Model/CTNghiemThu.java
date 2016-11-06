@@ -14,13 +14,17 @@ public class CTNghiemThu {
     private String YKien;
     private String NgayNT;
     private String TenDT;
+    private String MaPhanBien;
+    private String TenPhanBien;
+    private String TenChuTich;
     
 	public CTNghiemThu() {
 		super();
 	}
 
 	public CTNghiemThu(String maDT, String maHD, int tongQuan, int mucTieu, int phuongPhap, int noiDung, int dongGop,
-			int hinhThuc, int diemThuong, int tongDiem, String yKien, String ngayNT, String tenDT) {
+			int hinhThuc, int diemThuong, int tongDiem, String yKien, String ngayNT, String tenDT, String maPhanBien,
+			String tenPB, String tenChuTich) {
 		super();
 		MaDT = maDT;
 		MaHD = maHD;
@@ -35,6 +39,33 @@ public class CTNghiemThu {
 		YKien = yKien;
 		NgayNT = ngayNT;
 		TenDT = tenDT;
+		MaPhanBien = maPhanBien;
+		TenPhanBien = tenPB;
+		TenChuTich = tenChuTich;
+	}
+
+	public String getMaPhanBien() {
+		return MaPhanBien;
+	}
+
+	public void setMaPhanBien(String maPhanBien) {
+		MaPhanBien = maPhanBien;
+	}
+
+	public String getTenPhanBien() {
+		return TenPhanBien;
+	}
+
+	public void setTenPhanBien(String tenPhanBien) {
+		TenPhanBien = tenPhanBien;
+	}
+
+	public String getTenChuTich() {
+		return TenChuTich;
+	}
+
+	public void setTenChuTich(String tenChuTich) {
+		TenChuTich = tenChuTich;
 	}
 
 	public String getMaDT() {

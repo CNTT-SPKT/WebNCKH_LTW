@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 public class TaiKhoan {
@@ -10,6 +11,7 @@ public class TaiKhoan {
 	    private String NgaySinh;
 	    private String Nganh;
 	    private String Email;
+	    private Image HinhAnh;
 	    private String MSNH;
 	    private String CNNH;
 	    
@@ -21,7 +23,7 @@ public class TaiKhoan {
 			super();
 		}
 		public TaiKhoan(String maTK, String matKhau, String quyen, String hoTen, String ngaySinh, String nganh,
-				String email, String mSNH, String cNNH) {
+				String email, String mSNH, String cNNH, Image hinhAnh) {
 			super();
 			MaTK = maTK;
 			MatKhau = matKhau;
@@ -32,8 +34,15 @@ public class TaiKhoan {
 			Email = email;
 			MSNH = mSNH;
 			CNNH = cNNH;
+			HinhAnh = hinhAnh;
 		}
 		
+		public Image getHinhAnh() {
+			return HinhAnh;
+		}
+		public void setHinhAnh(Image hinhAnh) {
+			HinhAnh = hinhAnh;
+		}
 		public ArrayList<ThongBao> getDsThongBao() {
 			return dsThongBao;
 		}

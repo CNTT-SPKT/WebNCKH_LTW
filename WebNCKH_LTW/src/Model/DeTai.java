@@ -29,7 +29,15 @@ public class DeTai {
     private String TenTT;
     private String NgayNT;
     private String TenCN;
-    private String MSSVCN;
+    public ArrayList<BaoCaoDT> getDsBaoCaoDT() {
+		return dsBaoCaoDT;
+	}
+
+	public void setDsBaoCaoDT(ArrayList<BaoCaoDT> dsBaoCaoDT) {
+		this.dsBaoCaoDT = dsBaoCaoDT;
+	}
+
+	private String MSSVCN;
     private String TenGVHD;
     private String TenSV1;
     private String TenSV2;
@@ -40,6 +48,7 @@ public class DeTai {
     
     private ArrayList<DonHuy> dsDonHuy= new ArrayList<DonHuy>();
     private ArrayList<DonGiaHan> dsDonGiaHan= new ArrayList<DonGiaHan>();
+    private ArrayList<BaoCaoDT> dsBaoCaoDT= new ArrayList<BaoCaoDT>();
     
 	public DeTai() {
 		super();
@@ -51,7 +60,7 @@ public class DeTai {
 			String mucTieu, String pPNC, String noiDungNC, String sPDuKien, String diaChiUD, double kinhPhi,
 			String tenTT, String ngayNT, String tenCN, String mSSVCN, String tenGVHD, String tenSV1, String tenSV2,
 			String emailCN, String emailGV, String mSSV1, String mSSV2, ArrayList<DonHuy> dsDonHuy,
-			ArrayList<DonGiaHan> dsDonGiaHan) {
+			ArrayList<DonGiaHan> dsDonGiaHan, ArrayList<BaoCaoDT> dsBaoCaoDT) {
 		super();
 		MaDT = maDT;
 		MaHienThi = maHienThi;
@@ -89,6 +98,7 @@ public class DeTai {
 		MSSV2 = mSSV2;
 		this.dsDonHuy = dsDonHuy;
 		this.dsDonGiaHan = dsDonGiaHan;
+		this.dsBaoCaoDT = dsBaoCaoDT;
 	}
 
 	public String getMaDT() {
