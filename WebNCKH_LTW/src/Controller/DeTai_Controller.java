@@ -391,7 +391,7 @@ public class DeTai_Controller {
 	
 	public static void main(String[] args) throws SQLException {
 		DeTai_Controller ctrl= new DeTai_Controller();
-	       DeTai ct=ctrl.getDeTaiGV("dt12");
+	       DeTai ct=ctrl.getListDeTaiDeXuat("dt12");
 	    	   System.out.println(ct.getTenDT()+"______"+ct.getTenGVHD()+"_______"+ct.getKinhPhi());
 	    	   
 		  
