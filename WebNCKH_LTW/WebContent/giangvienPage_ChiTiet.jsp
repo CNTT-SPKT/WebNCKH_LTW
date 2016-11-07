@@ -1,3 +1,8 @@
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="Controller.*,Model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +18,19 @@
 	<link rel="stylesheet" href="1.css">
 	<link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
-
+<%  TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	DeTai detai=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		detai = dt.getDeTai(maDT);
+	}
+%>
 <body>
 	<div class="page">
 		<div class="menu">
@@ -42,7 +59,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">Giảng Viên A</span></a></li>
+									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
 									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div>
@@ -102,24 +119,21 @@
 												</tr>
 											</thead>
 											<tbody>
+											   <%
+				     							for (DeTai ct: dt.getListDeTaiPhanCongPhanBien(session.getAttribute("Email").toString())) {
+												%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp">Đánh giá</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenGVHD() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
+													<th><a href="giangvienPage_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp">Đánh giá</a></th>
-												</tr>
+												<%
+			    											}
+												%>		
 											</tbody>
 										</table>
 									</div>
@@ -136,26 +150,25 @@
 												<tr class="success">
 													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
+													<th>Lĩnh vực</th>
 													<th>Chủ nghiệm đề tài</th>
-													<th>Giảng viên hướng dẫn</th>
 													<th>Phê duyệt</th>
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiPhanCongPheDuyet(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên B</th>
-													<th><a href="giangvien_PheDuyet.jsp">Phê duyệt</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getLinhVuc() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="giangvien_PheDuyet.jsp?MaDT=<%=ct.getMaDT() %>">Phê duyệt</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th><a href="giangvien_PheDuyet.jsp">Phê duyệt</a></th>
-												</tr>
+											<%
+			    							}
+											%>
 											</tbody>
 										</table>
 									</div>
@@ -178,20 +191,19 @@
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiHuongDan(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-												</tr>
+												<%
+			    							}
+											%>
 											</tbody>
 										</table>
 									</div>
@@ -410,20 +422,19 @@
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Giảng Viên A</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th>Chờ phê duyệt</th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getLinhVuc() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th>Đăng ký thành công</th>
-												</tr>
+											<%
+			    							}
+											%>							
 											</tbody>
 										</table>
 									</div>
@@ -441,28 +452,24 @@
 													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
 													<th>Chủ nhiệm đề tài</th>
-													<th>Giảng viên hướng dẫn</th>
 													<th>Yêu cầu</th>
 													<th>Xử lý</th>
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên A</th>
-													<th>Hủy đề tài</th>
-													<th><a href="giangvien_DuyetDon.jsp">Xử lý</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th>Gia hạn đề tài</th>
-													<th><a href="giangvien_DuyetDon.jsp">Xử lý</a></th>
-												</tr>
+												<%
+			    							}
+											%>	
 											</tbody>
 										</table>
 									</div>
@@ -477,16 +484,15 @@
 										<div class="row">
 											<div class="mota">
 												<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-													<form action=" " method="POST" role="form" class="form-horizontal">
+													<form action=" " onsubmit="" method="POST" role="form" class="form-horizontal">
 														<div class="form-group">
 															<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
-															<div class="col-sm-10">
-																<input class="form-control" id="tendetai" type="text" value="Nghiên cứu hệ thống nhúng" style="margin-bottom:5px;">
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<input class="form-control" id="tendetai" type="text" required value=<%=detai.getTenDT() %> readonly>
 															</div>
-
 															<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
 															<div class="col-sm-10">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required" Nghiên cứu hệ thống nhúng> Nghiên cứu hệ thống nhúng....</textarea>
+																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly> <%=detai.getMoTa()%> </textarea>
 															</div>
 															<br>
 															<br>
@@ -510,108 +516,151 @@
 															</div>
 															<br>
 															<br><br>
-															<div class="container" style="margin-top:100px; margin-bottom:10px;width:800px">
+															<div class="container" style="margin-top:35px; margin-left:20px;width:800px">
 																<div class="row">
 																	<label class="col-sm-2 control-label" for="thoigianthuchien">Thời gian thực hiện:</label>
 																	<div class="col-sm-10" id="thoigianthuchien">
+																		<div class="row">
 																			<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input type="date" name="" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
+																				<input type="date" name="" id="thoigianbatdau" class="form-control" value=<%=detai.getNgayThucHien()%> readonly required="required" title="" style="padding:0px;">
 																			</div>
 																			<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input type="date" name="" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
+																				<input type="date" name="" id="thoigianketthuc" class="form-control" value=<%=detai.getNgayKetThuc()%> readonly required="required" title="" style="padding:0px;">
+																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
 															<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
 															<div class="col-sm-10">
-																<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value="Khoa CNTT">
+																<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value=<%=detai.getCoQuanChuTri()%> readonly>
 															</div>
 															<br>
 															<div class="container" style="margin-top:35px;width:800px">
 																<div class="row">
-
+																	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+																		<label style="margin-left:60px">Chủ nhiệm đề tài:</label><br>
+																		<div class="row" style="margin-bottom:5px">
+																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
+																			<div class="col-sm-8">
+																				<input class="form-control" id="hoten1" type="text" required value=<%=detai.getTenCN()%> readonly>
+																			</div>
+																		</div>
+																		<div class="row" style="margin-bottom:5px">
+																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
+																			<div class="col-sm-8">
+																				<input class="form-control" id="mss1" type="text" required value=<%=detai.getMSSVCN()%> readonly>
+																			</div>
+																		</div>
+																		<div class="row" style="margin-bottom:5px">
+																			<label class="col-sm-4 control-label" for="mail1">Email:</label>
+																			<div class="col-sm-8">
+																				<input class="form-control" id="mail1" type="text" required value=<%=detai.getEmailCN()%> readonly>
+																			</div>
+																		</div>
+																		<br>
+																		<label style="margin-left:60px">Sinh viên cùng thực hiện:</label><br>
+																		<div class="row" style="margin-bottom:5px">
+																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
+																			<div class="col-sm-8">
+																				<input class="form-control" id="hoten1" type="text" value=<%=detai.getTenSV1()%> readonly>
+																			</div>
+																		</div>
+																		<div class="row" style="margin-bottom:5px">
+																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
+																			<div class="col-sm-8">
+																				<input class="form-control" id="mss1" type="text" value=<%=detai.getMSSV1()%> readonly>
+																			</div>
+																		</div>
+																	</div>
 																	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																		<label style="margin-left:60px">Giảng viên hướng dẫn:</label><br>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text" value="Lê Văn A">
+																				<input class="form-control" id="hoten1" type="text" required value=<%=detai.getTenGVHD()%> readonly>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">Email:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" value="A96@gmail.com">
+																				<input class="form-control" id="mss1" type="text" required value=<%=detai.getEmailGV()%> readonly>
+																			</div>
+																			<br><br><br><br><br><br>
+																			<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
+																			<div class="row" style="margin-bottom:5px">
+																				<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
+																				<div class="col-sm-8">
+																					<input class="form-control" id="hoten1" type="text" value=<%=detai.getTenSV2()%> readonly>
+																				</div>
+																			</div>
+																			<div class="row" style="margin-bottom:5px">
+																				<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
+																				<div class="col-sm-8">
+																					<input class="form-control" id="mss1" type="text" value=<%=detai.getMSSV2()%> readonly>
+																				</div>
 																			</div>
 																		</div>
 																	</div>
 																</div>
-																<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
-																<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
-																<div class="col-sm-10" style="margin-bottom:5px">
-																	<textarea name="" id="mota" class="form-control" rows="3" required="required">Nhằm điều tra khách quan vụ đoàn xe nhân đạo ở Syria, cần đưa ra loại đạn đã bắn trúng xe.</textarea>
-																</div>
-																<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
-																<div class="col-sm-10" style="margin-bottom:5px">
-																	<textarea name="" id="mota" class="form-control" rows="3" required="required">Nhằm điều tra khách quan vụ đoàn xe nhân đạo ở Syria, cần đưa ra loại đạn đã bắn trúng xe.</textarea>
-																</div>
-
-																<label class="col-sm-2 control-label" for="mota">Tính cấp thiết của đề tài:</label>
-																<div class="col-sm-10" style="margin-bottom:5px">
-																	<textarea name="" id="mota" class="form-control" rows="3" required="required">Nhằm điều tra khách quan vụ đoàn xe nhân đạo ở Syria, cần đưa ra loại đạn đã bắn trúng xe.</textarea>
-																</div>
-
-																<label class="col-sm-2 control-label" for="mota">Mục tiêu của đề tài:</label>
-																<div class="col-sm-10" style="margin-bottom:5px">
-																	<textarea name="" id="mota" class="form-control" rows="3" required="required">Nhằm điều tra khách quan vụ đoàn xe nhân đạo ở Syria, cần đưa ra loại đạn đã bắn trúng xe.</textarea>
-																</div>
-
-																<label class="col-sm-2 control-label" for="mota">Phương pháp và phạm vi nghiên cứu:</label>
-																<div class="col-sm-10" style="margin-bottom:5px">
-																	<textarea name="" id="mota" class="form-control" rows="3" required="required">Nhằm điều tra khách quan vụ đoàn xe nhân đạo ở Syria, cần đưa ra loại đạn đã bắn trúng xe.</textarea>
-																</div>
-
-																<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu và tiến độ thực hiện:</label>
-																<div class="col-sm-10" style="margin-bottom:5px">
-																	<textarea name="" id="mota" class="form-control" rows="3" required="required">Nhằm điều tra khách quan vụ đoàn xe nhân đạo ở Syria, cần đưa ra loại đạn đã bắn trúng xe.</textarea>
-																</div>
-
-																<div class="col-sm-12" style="width:800px">
-																	<label class="col-sm-2 control-label" for="thoigianthuchien">Sản phẩm dự kiến:</label>
-																	<div class="col-sm-10" style="margin-bottom:5px">
-																		<input class="form-control" id="thoigianthuchien" type="text" style="width:640px" value="Website trực tuyến">
-																	</div>
-																</div>
-
-																<div class="container" style="width:800px">
-																	<div class="row">
-																		<label class="col-sm-2 control-label" for="thoigianthuchien">Địa chỉ ứng dụng:</label>
-																		<div class="col-sm-10" id="thoigianthuchien">
-																			<input class="form-control" id="spdukien" type="text" style="width:650px" value="Doanh nghiệp tư nhân">
-																		</div>
-																	</div>
-																</div>
-
-																<div class="container" style="width:800px">
-																	<div class="row">
-																		<label class="col-sm-2 control-label" for="thoigianthuchien">Đề xuất kinh phí:</label>
-																		<div class="col-sm-10" id="thoigianthuchien">
-																			<input class="form-control" id="spdukien" type="text" style="width:650px" value="5000000">
-																		</div>
-																	</div>
-																</div>
-
-
-																<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
-																<div class="col-sm-10" style="margin-bottom:10px">
-																	<input class="form-control" id="tendetai" type="file">
-																</div>
 															</div>
+															<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
+															<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<textarea name="" id="mota" class="form-control" rows="2" required="required"  readonly><%=detai.getTinhHinhTrong()%></textarea>
+															</div>
+															<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getTinhHinhNgoai()%></textarea>
+															</div>
+
+															<label class="col-sm-2 control-label" for="mota">Tính cấp thiết của đề tài:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<textarea name="" id="mota" class="form-control" rows="2" required="required"  readonly><%=detai.getTinhHinhNgoai()%></textarea>
+															</div>
+
+															<label class="col-sm-2 control-label" for="mota">Mục tiêu của đề tài:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<textarea name="" id="mota" class="form-control" rows="2" required="required"  readonly><%=detai.getMucTieu()%></textarea>
+															</div>
+
+															<label class="col-sm-2 control-label" for="mota">Phương pháp và phạm vi nghiên cứu:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getPPNC()%></textarea>
+															</div>
+
+															<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu và tiến độ thực hiện:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getNoiDungNC()%></textarea>
+															</div>
+
+															<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<input class="form-control" id="sanphamdukiem" type="text" required value=<%=detai.getSPDuKien()%> readonly>
+															</div>
+
+
+															<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<input class="form-control" id="diachiungdung" type="text" required value=<%=detai.getDiaChiUD()%> readonly>
+															</div>
+
+															<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<input class="form-control" id="dxuatkinhphi" type="text" required value=<%=detai.getKinhPhi()%> readonly>
+															</div>
+
+															<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
+															<div class="col-sm-10" style="margin-bottom:10px">
+																<input class="form-control" id="tendetai" type="file">
+															</div>
+
+															
 														</div>
-													</form>
+													</div>
+												</form>
 												</div>
 											</div>
 										</div>

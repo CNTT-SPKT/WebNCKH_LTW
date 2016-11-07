@@ -1,3 +1,8 @@
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="Controller.*,Model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +16,20 @@
 <link rel="stylesheet" href="1.css">
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
+<%  TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	BaoCaoDT_Controller bc= new BaoCaoDT_Controller();
+	DeTai ctdt=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		ctdt = dt.getDeTai(maDT);
+	}
+%>
 <body >
 	<div class="page">
 		<div class="menu">
@@ -39,7 +58,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">Giảng Viên A</span></a></li>
+									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
 										<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
@@ -90,24 +109,21 @@
 												</tr>
 											</thead>
 											<tbody>
+											   <%
+				     							for (DeTai ct: dt.getListDeTaiPhanCongPhanBien(session.getAttribute("Email").toString())) {
+												%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp">Đánh giá</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenGVHD() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
+													<th><a href="giangvienPage_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp">Đánh giá</a></th>
-												</tr>
+												<%
+			    											}
+												%>		
 											</tbody>
 										</table>
 									</div>
@@ -124,26 +140,25 @@
 												<tr class="success">
 													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
+													<th>Lĩnh vực</th>
 													<th>Chủ nghiệm đề tài</th>
-													<th>Giảng viên hướng dẫn</th>
 													<th>Phê duyệt</th>
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiPhanCongPheDuyet(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên B</th>
-													<th><a href="giangvien_PheDuyet.jsp">Phê duyệt</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getLinhVuc() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="giangvien_PheDuyet.jsp?MaDT=<%=ct.getMaDT() %>">Phê duyệt</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th><a href="giangvien_PheDuyet.jsp">Phê duyệt</a></th>
-												</tr>
+											<%
+			    							}
+											%>
 											</tbody>
 										</table>
 									</div>
@@ -166,20 +181,19 @@
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiHuongDan(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-												</tr>
+												<%
+			    							}
+											%>
 											</tbody>
 										</table>
 									</div>
@@ -398,20 +412,19 @@
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Giảng Viên A</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th>Chờ phê duyệt</th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getLinhVuc() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th>Đăng ký thành công</th>
-												</tr>
+											<%
+			    							}
+											%>							
 											</tbody>
 										</table>
 									</div>
@@ -429,28 +442,24 @@
 													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
 													<th>Chủ nhiệm đề tài</th>
-													<th>Giảng viên hướng dẫn</th>
 													<th>Yêu cầu</th>
 													<th>Xử lý</th>
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên A</th>
-													<th>Hủy đề tài</th>
-													<th><a href="giangvien_DuyetDon.jsp">Xử lý</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th>Gia hạn đề tài</th>
-													<th><a href="giangvien_DuyetDon.jsp">Xử lý</a></th>
-												</tr>
+												<%
+			    							}
+											%>	
 											</tbody>
 										</table>
 									</div>
@@ -462,8 +471,8 @@
 							<div class="gv_BaoCao" style="background:white;height:390px;margin-right:15px;border-radius:3px;overflow:auto;;overflow:auto;">
 								<h2 class="tieude_theh">BÁO CÁO ĐỀ TÀI</h2><hr>
 								<div class="gv_bcdt" style="margin:15px 0px 10px 15px;">
-									<label>Mã số đề tài: 141</label><br>
-									<label>Đề tài nghiên cứu hệ thống nhúng</label>
+									<label>Mã số đề tài: <%=ctdt.getMaDT() %></label><br>
+									<label>Tên đề tài: <%=ctdt.getTenDT()%></label>
 								</div>
 								<div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
 									<table class="table table-striped table-hover">
@@ -475,24 +484,20 @@
 											</tr>
 										</thead>
 										<tbody>
+										<%
+				     						for (BaoCaoDT nbc: bc.getListBaoCaoDT(maDT)) {
+											%>
 											<tr>
-												<td>1/2/2014</td>
-												<td><a href="#">Báo cáo tiến độ 1</a></td>
-												<td>Nghiên cứu tình hình</td>
+												<td><%=nbc.getNgayBC() %></td>
+												<td><a href="#?MaBC=<%=nbc.getMaBC()%>"><%=nbc.getTenBC() %></a></td>
+												<td><%=nbc.getTenBC() %></td>
 
 											</tr>
-											<tr>
-												<td>1/2/2014</td>
-												<td><a href="#">Báo cáo tiến độ 1</a></td>
-												<td>Nghiên cứu tình hình</td>
-
-											</tr>
-											<tr>
-												<td>1/2/2014</td>
-												<td><a href="#">Báo cáo tiến độ 1</a></td>
-												<td>Nghiên cứu tình hình</td>
-
-											</tr>
+											
+											<%
+			    								}
+											%>
+										</tbody>
 										</tbody>
 									</table>
 								</div>

@@ -1,3 +1,8 @@
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="Controller.*,Model.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +18,32 @@
 	<link rel="stylesheet" href="1.css">
 	<link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
-
+<%  TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	DonHuy_Controller dh= new DonHuy_Controller();
+	DonGiaHan_Controller gh=new DonGiaHan_Controller();
+	DeTai detai=new DeTai();
+	String maDT = "";
+	String maTT = "";
+	String lydo="";
+	if (request.getParameter("MaTT") != null){
+		maTT = request.getParameter("MaTT");
+		maDT = request.getParameter("MaDT");
+		DonHuy dhdt=new DonHuy();
+		DonGiaHan dgh=new DonGiaHan();
+		dhdt=dh.getDonHuy(maDT);
+		dgh=gh.getDGH(maDT);
+		if(dgh.getLyDo()==null)
+			lydo=dhdt.getLyDo();
+		else
+			lydo=dgh.getLyDo();
+		detai=dt.getDeTai(maDT);
+	}
+%>
 <body>
 	<div class="page">
 		<div class="menu">
@@ -42,7 +72,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">Giảng Viên A</span></a></li>
+									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
 									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div>
@@ -102,24 +132,21 @@
 												</tr>
 											</thead>
 											<tbody>
+											   <%
+				     							for (DeTai ct: dt.getListDeTaiPhanCongPhanBien(session.getAttribute("Email").toString())) {
+												%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp">Đánh giá</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenGVHD() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
+													<th><a href="giangvienPage_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp">Đánh giá</a></th>
-												</tr>
+												<%
+			    											}
+												%>		
 											</tbody>
 										</table>
 									</div>
@@ -136,26 +163,25 @@
 												<tr class="success">
 													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
+													<th>Lĩnh vực</th>
 													<th>Chủ nghiệm đề tài</th>
-													<th>Giảng viên hướng dẫn</th>
 													<th>Phê duyệt</th>
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiPhanCongPheDuyet(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên B</th>
-													<th><a href="giangvien_PheDuyet.jsp">Phê duyệt</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getLinhVuc() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="giangvien_PheDuyet.jsp?MaDT=<%=ct.getMaDT() %>">Phê duyệt</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th><a href="giangvien_PheDuyet.jsp">Phê duyệt</a></th>
-												</tr>
+											<%
+			    							}
+											%>
 											</tbody>
 										</table>
 									</div>
@@ -178,20 +204,19 @@
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiHuongDan(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp">Xem báo cáo</a></th>
-												</tr>
+												<%
+			    							}
+											%>
 											</tbody>
 										</table>
 									</div>
@@ -401,6 +426,7 @@
 									<div class="gv_tb_dsDeTaiDK">
 										<table class="table table-striped table-hover">
 											<thead class="thead-default">
+											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
@@ -410,20 +436,19 @@
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Giảng Viên A</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th>Chờ phê duyệt</th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getLinhVuc() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th><a href="giangvienPage_ChiTiet.jsp">Chi tiết</a></th>
-													<th>Đăng ký thành công</th>
-												</tr>
+											<%
+			    							}
+											%>							
 											</tbody>
 										</table>
 									</div>
@@ -441,28 +466,24 @@
 													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
 													<th>Chủ nhiệm đề tài</th>
-													<th>Giảng viên hướng dẫn</th>
 													<th>Yêu cầu</th>
 													<th>Xử lý</th>
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											%>
 												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống nhúng. .</th>
-													<th>Sinh Viên A</th>
-													<th>Giảng Viên A</th>
-													<th>Hủy đề tài</th>
-													<th><a href="giangvien_DuyetDon.jsp">Xử lý</a></th>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
-												<tr>
-													<th>141</th>
-													<th>Nghiên cứu hệ thống rung. .</th>
-													<th>Sinh Viên B</th>
-													<th>Giảng Viên C</th>
-													<th>Gia hạn đề tài</th>
-													<th><a href="giangvien_DuyetDon.jsp">Xử lý</a></th>
-												</tr>
+												<%
+			    							}
+											%>	
 											</tbody>
 										</table>
 									</div>
@@ -487,12 +508,12 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td> 141</td>
-													<td>Nghiên cứu hệ thống nhúng</td>
-													<td>1/2/2015</td>
-													<td>1/11/2015</td>
-													<td>Đang tiến hành</td>
-
+													<td> <%=detai.getMaDT() %></td>
+													<td> <%=detai.getTenDT() %></td>
+													<td> <%=detai.getNgayThucHien() %></td>
+													<td> <%=detai.getNgayKetThuc() %></td>
+													<td> <%=detai.getTenTT() %></td>
+													
 												</tr>
 
 											</tbody>
@@ -500,13 +521,13 @@
 									</div>
 									<form>
 										<label style="margin-left:15px;margin-right:5px;">Tên chủ nhiệm đề tài:</label>
-										<input type="text" name="firstname" style="margin-right:50px;" value="Lê Văn A" readonly>
+										<input type="text" name="firstname" style="margin-right:50px;" value=<%=detai.getTenCN() %> readonly>
 										<label style="margin-left:10px;margin-right:5px;">MSSV:</label>
 										<input type="text" name="lastname" value="14110180" readonly>
 									</form><br>
 									<label class="col-sm-4 control-label" for="mota">Lý do hủy/gia hạn đề tài</label><br>
 									<div class="col-sm-12">
-										<textarea name="" id="mota" class="form-control" rows="3" required="required" readonly>Lý do gia đình</textarea>
+										<textarea name="" id="mota" class="form-control" rows="3" required="required" readonly><%=lydo%></textarea>
 									</div>
 									<div class="row">
 									<button style="margin-top:340px;margin-right:150px;" type="button" class="btn  btn-info"><b>Phê duyệt</b></button>

@@ -31,7 +31,7 @@ public class DonHuy_Controller {
         }
         return list;
     }
-	public DonHuy getListThongBao(String maDT) {
+	public DonHuy getDonHuy(String maDT) {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT * FROM DonHuy,DeTai where DoHuy.MaDT=DeTai.MaDT and DeTai.MaDT='"+maDT+"'";
         DonHuy dh = new DonHuy();
