@@ -59,7 +59,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">session.getAttribute("Email").toString()</span></a></li>
+									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
 									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->

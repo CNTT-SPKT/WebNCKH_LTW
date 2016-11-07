@@ -45,15 +45,15 @@ public class DeTai_Controller {
             	dt.setNoiDungNC(rs.getString("NoiDungNC"));
             	dt.setSPDuKien(rs.getString("SPDuKien"));
             	dt.setDiaChiUD(rs.getString("DiaChiUD"));
-            	dt.setTenCN(rs.getString("TaiKhoan.TenCN"));
-            	dt.setMSSVCN(rs.getString("MatKhau"));
-            	dt.setTenSV1(rs.getString("HoTen"));
-            	dt.setTenSV2(rs.getString("HoTen"));
-            	dt.setTenGVHD(rs.getString("HoTen"));
-            	dt.setEmailCN(rs.getString("Email"));
-            	dt.setEmailGV(rs.getString("Email"));
-            	dt.setMSSV1(rs.getString("MatKhau"));
-            	dt.setMSSV2(rs.getString("MatKhau"));
+            	dt.setTenCN(rs.getString("TaiKhoan.HoTen"));
+            	dt.setMSSVCN(rs.getString("TaiKhoan.MatKhau"));
+            	dt.setTenSV1(rs.getString("TK2.HoTen"));
+            	dt.setTenSV2(rs.getString("TK3.HoTen"));
+            	dt.setTenGVHD(rs.getString("TK1.HoTen"));
+            	dt.setEmailCN(rs.getString("TaiKhoan.Email"));
+            	dt.setEmailGV(rs.getString("TK1.Email"));
+            	dt.setMSSV1(rs.getString("TK2.MatKhau"));
+            	dt.setMSSV2(rs.getString("TK3.MatKhau"));
             }
            
             cons.close();
@@ -212,11 +212,11 @@ public class DeTai_Controller {
 	
 	
 	public static void main(String[] args) throws SQLException {
-//		DeTai_Controller ctrl= new DeTai_Controller();
-//	       for(DeTai ct: ctrl.getListDeTaiTest("dt1")){
-//	    	   System.out.println(ct.getTenCN()+"_______"+ct.getTenGVHD());
-//	    	   
-//	       }
+		DeTai_Controller ctrl= new DeTai_Controller();
+	       DeTai ct=ctrl.getDeTai("dt1");
+	    	   System.out.println(ct.getTenDT()+"______"+ct.getTenCN()+"_______"+ct.getTenGVHD());
+	    	   
+	       }
 		  
-	    }
+	    
 }

@@ -23,6 +23,14 @@
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	BaoCaoDT_Controller bc= new BaoCaoDT_Controller();
+	DeTai ctdt=new DeTai();
+	BaoCaoDT bcdt=new BaoCaoDT();
+	String maBC = "";
+	if (request.getParameter("MaBC") != null) {
+		maBC = request.getParameter("MaBC");
+		bcdt = bc.getBaoCaoDTByMaBC(maBC);
+	}
 %>
 	<div class="page">
 		<div class="menu">
@@ -51,7 +59,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">Sinh Viên A</span></a></li>
+									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
 										<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
@@ -87,7 +95,7 @@
 									<div  style="background:white;height:390px;border-radius:3px" class="box_shadow" >
 										<h1 class="tieude_theh">Hướng dẫn</h1>
 										<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-lg-offset-4">
-											<span><b>Xem chi tiết trong file Word: </b></span><a target="_blank" href="https://drive.google.com/file/d/0B-p-YEFg7n9hN3FGSjNnUWJJSTg/view?usp=sharing" style="text-align:center">Báo cáo tiến độ</a>
+											<span><b>Xem chi tiết trong file Word: </b></span><a target="_blank" href=<%=bcdt.getFileBC() %> style="text-align:center">Tải về</a>
 										</div>
 									</div>
 								</div>

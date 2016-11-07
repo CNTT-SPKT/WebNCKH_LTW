@@ -8,7 +8,7 @@ public class BaoCaoDT {
     private String MaBC;
     private String TenBC;
     private String NgayBC;
-    private File FileBC;
+    private String FileBC;
     private String TenDT;
    
     
@@ -16,7 +16,7 @@ public class BaoCaoDT {
 		super();
 	}
 
-	public BaoCaoDT(String MaDT, String MaBC, String TenBC, File FileBC, String NgayBC,
+	public BaoCaoDT(String MaDT, String MaBC, String TenBC,String FileBC, String NgayBC,
 			 String TenDT) {
 		super();
 		this.MaDT = MaDT;
@@ -59,11 +59,11 @@ public class BaoCaoDT {
 		NgayBC = ngayBC;
 	}
 
-	public File getFileBC() {
+	public String getFileBC() {
 		return FileBC;
 	}
 
-	public void setFileBC(File fileBC) {
+	public void setFileBC(String fileBC) {
 		FileBC = fileBC;
 	}
 

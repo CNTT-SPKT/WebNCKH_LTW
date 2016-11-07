@@ -23,6 +23,12 @@
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
 	BaoCaoDT_Controller bc= new BaoCaoDT_Controller();
+	DeTai ctdt=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		ctdt = dt.getDeTai(maDT);
+	}
 %>
 	<div class="page">
 		<div class="menu">
@@ -51,7 +57,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">Sinh Viên A</span></a></li>
+									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
 										<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
@@ -86,8 +92,8 @@
 								<h2 class="tieude_theh" >NỘP BÁO CÁO ĐỀ TÀI</h2><hr>
 								<div class="gv_bcdt" style="margin:15px 0px 10px 15px;">
 								
-									<label>Mã số đề tài: 141</label><br>
-									<label>Đề tài nghiên cứu hệ thống nhúng</label>
+									<label>Mã số đề tài: <%=ctdt.getMaDT() %></label><br>
+									<label>Tên đề tài: <%=ctdt.getTenDT()%></label>
 								</div>
 								
 								<div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
@@ -101,11 +107,11 @@
 										</thead>
 										<tbody>
 										<%
-				     						for (BaoCaoDT nbc: bc.getListBaoCaoDT(session.getAttribute("Email").toString())) {
+				     						for (BaoCaoDT nbc: bc.getListBaoCaoDT(maDT)) {
 											%>
 											<tr>
 												<td><%=nbc.getNgayBC() %></td>
-												<td><a href="sinhvien_BaoCaoTienDo.jsp"><%=nbc.getTenBC() %></a></td>
+												<td><a href="sinhvien_BaoCaoTienDo.jsp?MaBC=<%=nbc.getMaBC()%>"><%=nbc.getTenBC() %></a></td>
 												<td><%=nbc.getTenBC() %></td>
 
 											</tr>
@@ -125,8 +131,8 @@
 									    </span>
 																		</div>
 									</div>
-									<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-										<button type="submit" class="btn btn-primary" style="margin-top:-10px;width:100%; margin-top:80px;margin-left:600px;]">Nộp file</button>
+									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+										<button type="submit" class="btn btn-primary btn-md">Nộp file</button>
 									</div>
 								</div>
 								<script type="text/javascript">

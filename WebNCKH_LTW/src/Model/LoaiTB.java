@@ -30,16 +30,6 @@ public class LoaiTB {
 
 	public void setTenLTB(String tenLTB) {
 		TenLTB = tenLTB;
-	}
-
-	public ArrayList<TB_TK> getCTTB() {
-		return CTTB;
-	}
-
-	public void setCTTB(ArrayList<TB_TK> cTTB) {
-		CTTB = cTTB;
-	}
-
-	
+	}	
 	
 }
