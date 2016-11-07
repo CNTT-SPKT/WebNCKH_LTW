@@ -1,3 +1,10 @@
+<%@ page import="Controller.*,Model.*" %>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,6 +23,19 @@
 </head>
 
 <body>
+<%
+	DeTai_Controller detaiDAO = new DeTai_Controller();
+	TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
+	ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
+	HoiDong_Controller hoidongDao =new HoiDong_Controller();
+	TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+%>
+
+
     <div class="page">
         <div class="menu">
             <div class="row">
@@ -43,7 +63,7 @@
                                     <li><a href="#">Hướng dẫn</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="#"><span  style="color:blue">Quản lý 1</span></a></li>
+                                    <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"> <%=session.getAttribute("Email") %></span></a></li>
                                     <li><a href="mainPage.jsp">Đăng xuất</a></li>
                                 </ul>
                             </div>
@@ -117,99 +137,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                             <%
+                                         	     	for(ThongBao c: thongbaoDAO.getListThongBaoQL()){                      			
+                                              %>
                                                 <tr>
                                                     <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đăng ký đề tài mới...</td>
-                                                    <td>Giảng viên 1</td>
-                                                    <td>12/12/2014</td>
+                                                    <td><%=c.getTenLoaiTB() %></td>
+                                                    <td><%=c.getTenNguoiGui() %></td>
+                                                    <td><%=c.getNgayGui() %></td>
                                                     <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
                                                 </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đăng ký đề tài mới...</td>
-                                                    <td>Giảng viên 1</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đăng ký đề tài mới...</td>
-                                                    <td>Giảng viên 1</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đăng ký đề tài mới...</td>
-                                                    <td>Giảng viên 1</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đăng ký đề tài mới...</td>
-                                                    <td>Giảng viên 1</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr id="select6">
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đăng ký đề tài mới...</td>
-                                                    <td>Giảng viên 1</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đăng ký đề tài mới...</td>
-                                                    <td>Giảng viên 1</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
-                                                </tr>
-
-                                                <tr >
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đơn xin hủy đề tài</td>
-                                                    <td>Sinh viên 1</td>
-                                                    <td>12/12/2012</td>
-                                                    <td><a href="quanly_DuyetDonHuy.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đơn xin gia hạn đề tài</td>
-                                                    <td>Sinh viên 2</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_DuyetDonHuy.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr >
-                                                    <td><input type="checkbox" name=""  value=""></td>
-                                                    <td>Đơn xin gia hạn đề tài</td>
-                                                    <td>Sinh viên 2</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_DuyetDonHuy.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr > 
-                                                    <td><input type="checkbox" name=""  value=""></td>
-                                                    <td>Đơn xin gia hạn đề tài</td>
-                                                    <td>Sinh viên 2</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_DuyetDonHuy.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr >
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td>Đơn xin gia hạn đề tài</td>
-                                                    <td>Sinh viên 2</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_DuyetDonHuy.jsp">Xem</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" name=""  value=""></td>
-                                                    <td>Đơn xin gia hạn đề tài</td>
-                                                    <td>Sinh viên 2</td>
-                                                    <td>12/12/2013</td>
-                                                    <td><a href="quanly_DuyetDonHuy.jsp">Xem</a></td>
-                                                </tr>
-
+                                         <%} %>
                                             </tbody>
                                         </table>
                                         <script>
@@ -249,34 +187,21 @@
                                                     <th>Phản biện</th>
                                                     <th>Ủy viên</th>
                                                     <th>Ngày thành lập</th>
-                                                    <th>Mã đề tài</th>
-                                                    <th>Chi tiết</th>
                                                     <th style="">Xóa</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                               <% for (HoiDong hd:hoidongDao.getListHoiDongQL()){ %>
                                                 <tr>
-                                                    <td>HD1</td>
-                                                    <td>Trương Văn A</td>
-                                                     <td>Trương Văn A</td>
-                                                      <td>Trương Văn A</td>
-                                                    <td>12/12/2016</td>
-                                                    <td>456</td>
-                                                    <td><a href="quanly_ChiTiet.jsp">Xem</a></td>
+                                                    <td><%=hd.getMaHD() %></td>
+                                                   <td><%=hd.getTenChuTich() %></td>
+                                                    <td><%=hd.getTenPhanBien() %></td>
+                                                    <td><%=hd.getTenUyVien() %></td>
+                                                    <td><%=hd.getNgayThanhLap() %></td>
                                                     <td class="dropdown">
                                                         <a style="margin-top: -5px;" class="btn btn-danger dsDeTai_actionButton" data-toggle="dropdown" href="#"> Xóa hội đồng </a></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>HD3</td>
-                                                   <td>Trương Văn A</td>
-                                                    <td>Trương Văn A</td>
-                                                    <td>Trương Văn A</td>
-                                                    <td>12/11/2016</td>
-                                                    <td>123</td>
-                                                    <td><a href="quanly_ChiTiet.jsp">Xem</a></td>
-                                                    <td class="dropdown">
-                                                        <a style="margin-top: -5px;" class="btn btn-danger dsDeTai_actionButton" data-toggle="dropdown" href="#"> Xóa hội đồng </a></td>
-                                                </tr>
+                                                <%} %>
                                             </tbody>
                                         </table>
                                          <a class="btn btn-info" style="float:right; margin-right: 10px;" href="quanlyPage_LTHDNT.jsp" role="button">Thành lập hội đồng nghiệm thu</a>
@@ -306,15 +231,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <%for(DeTai c:detaiDAO.getListPCPBQL()){ %>
                                                     <tr>
-                                                        <td>DT1</td>
-                                                        <td>Nghiên cứu hệ thống rung</td>
-                                                        <td>Nguyên Văn CN</td>
-                                                        <td>Trần Văn GVHD</td>
-                                                        <td>HD1</td>
+                                                        <td><%=c.getMaDT() %></td>
+                                                        <td><%=c.getTenDT() %></td>
+                                                        <td><%=c.getHoTen() %></td>
+                                                        <td><%=c.getTenGVHD() %></td>
+                                                        <td><%=c.getMaHD() %></td>
                                                         <td><a href="quanly_ChiTiet.jsp">Xem</a></td>
                                                         <td><a href="quanly_XemBaoCao.jsp"><span style="color:gray">Chi tiết</span></a></td>
                                                     </tr>
+                                                    <%} %>
                                                 </tbody>
                                             </table>
                                             <a class="btn btn-info" style="float:right; margin-right: 10px;" href="quanlyPage_PCPB.jsp" role="button">Phân công phản biện</a>
@@ -328,39 +255,36 @@
                                 <div class="ql_dsDeTaiPhanBien" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="ql_tb_dsDeTaiPhanBien">
-                                        <table class="table table-striped table-hover">
-                                            <thead class="thead-default">
-                                                <tr class="success">
-                                                    <th>Mã đề tài</th>
-                                                    <th>Tên đề tài</th>
-                                                    <th>Chủ nghiệm đề tài</th>
-                                                    <th>Giảng viên hướng dẫn</th>
-                                                    <th>Chi tiết</th>
-                                                    <th>Báo cáo</th>
-                                                    <th>Đánh giá</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống nhúng. .</th>
-                                                    <th>Sinh Viên A</th>
-                                                    <th>Giảng Viên B</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th><a href="quanly_XemBaoCao.jsp">Xem báo cáo</a></th>
-                                                            <th><a href="quanly_DanhGia.jsp" disabled>Đánh giá</a></th>
-                                                </tr>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống rung. .</th>
-                                                    <th>Sinh Viên B</th>
-                                                    <th>Giảng Viên C</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th><a href="quanly_XemBaoCao.jsp">Xem báo cáo</a></th>
-                                                    <th><a href="quanly_DanhGia.jsp" disabled>Đánh giá</a></th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                       <table class="table table-striped table-hover">
+											<thead class="thead-default">
+												<tr class="success">
+													<th>Mã đề tài</th>
+													<th>Tên đề tài</th>
+													<th>Chủ nghiệm đề tài</th>
+													<th>Giảng viên hướng dẫn</th>
+													<th>Chi tiết</th>
+													<th>Báo cáo</th>
+													<th>Đánh giá</th>
+												</tr>
+											</thead>
+											<tbody>
+											   <%
+				     							for (DeTai ct: detaiDAO.getListDeTaiPhanCongPhanBien(session.getAttribute("Email").toString())) {
+												%>
+												<tr>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenGVHD() %></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=">Xem báo cáo</a></th>
+													<th><a href="giangvienPage_DanhGia.jsp?MaDT=">Đánh giá</a></th>
+												</tr>
+												<%
+			    											}
+												%>		
+											</tbody>
+										</table>
                                     </div>
                                 </div>
                             </div>
@@ -409,83 +333,57 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                         	   <%
+                                         	  		
+                                                	for(DeTai c: detaiDAO.getListDeTaiQL()){                      			
+                                                %>
                                                 <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống nhúng. .</th>
-                                                    <th>Sinh Viên A</th>
-                                                    <th>Giảng Viên B</th>
+                                                
+                                                    <th><%=c.getMaHienThi()%></th>
+                                                    <th><%=c.getTenDT()%> </th>
+                                                    <th><%=c.getHoTen()%></th>
+                                               		<th><%=c.getTenGVHD() %></th>                                      
                                                     <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
                                                     <th>
                                                         <div class="form-group ">
+                                                      
                                                             <select class="ql_TrangThai ">
-                                                                        <option value=" " >Đang tiến hành</option>
-                                                                        <option value=" ">Chờ xét duyệt</option>
-                                                                        <option value=" ">Đã nghiệm thu</option>
-                                                                        <option value=" " selected>Chờ nghiệm thu</option>
-                                                                    </select>
-                                                        </div>
+                                                       			 <option value="<%=c.getMaTT() %> "><%=c.getTenTT() %></option>   
+                                                       			      <%   for(TrangThai ct:trangthaiDAO.getListTrangThai() ){ %>
+                                                                  <option value="<%=ct.getMaTT() %> "><%=ct.getTenTT() %></option>       
+		                                                                <%
+		                                                				}
+		                                                  		     %>  
+                                                           </select>
+                                                             
+                                                         </div>
                                                     </th>
+                                              
                                                     <th><a href="quanly_XemBaoCao.jsp">Xem </a></th>
-                                                </tr>
-
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu phần cứng</th>
-                                                    <th>Sinh Viên A</th>
-                                                    <th>Giảng Viên B</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th>
-                                                        <div class="form-group ">
-                                                            <select class="ql_TrangThai ">
-                                                                        <option value=" " selected>Đang tiến hành</option>
-                                                                        <option value=" ">Chờ xét duyệt</option>
-                                                                        <option value=" ">Đã nghiệm thu</option>
-                                                                        <option value=" " >Chờ nghiệm thu</option>
-                                                                    </select>
-                                                        </div>
-                                                    </th>
-                                                    <th><a href="quanly_XemBaoCao.jsp ">Xem</a></th>
-                                                </tr>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu thị trường. .</th>
-                                                    <th>Sinh Viên A</th>
-                                                    <th>Giảng Viên B</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th>
-                                                        <div class="form-group ">
-                                                            <select class="ql_TrangThai ">
-                                                                        <option value=" " > Đang tiến hành</option>
-                                                                        <option value=" ">Chờ xét duyệt</option>
-                                                                        <option value=" " selected>Đã nghiệm thu</option>
-                                                                        <option value=" " >Chờ nghiệm thu</option>
-                                                                    </select>
-                                                        </div>
-                                                    </th>
-                                                    <th><a href="quanly_XemBaoCao.jsp ">Xem</a></th>
-                                                </tr>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Nghiên cứu hệ thống trộm. .</th>
-                                                    <th>Sinh Viên C</th>
-                                                    <th>Giảng Viên D</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th>
-                                                        <div class="form-group ">
-                                                            <select class="ql_TrangThai ">
-                                                                        <option value=" ">Đang tiến hành</option>
-                                                                        <option value=" " >Chờ xét duyệt</option>
-                                                                        <option value=" ">Đã nghiệm thu</option>
-                                                                        <option value=" " >Chờ nghiệm thu</option>
-                                                                    </select>
-                                                        </div>
-                                                    </th>
-                                                    <th><a href="quanly_XemBaoCao.jsp">Xem</a></th>
-                                                </tr>
-
-
+                                                     
+                                                </tr>    
+                                                   <%
+                                                   }
+                                                    %>                       
                                             </tbody>
                                         </table>
+                                        <button style="margin-left:20px;margin-bottom:20px" class="btn btn-primary btn-lg" id="CapNhat">Cập nhật trạng thái</button>
+                                        <script>
+                                         $(function() {
+                                        	 $('#CapNhat').on('click', function(){
+                                        			 var rowCount = $('#myTable tbody tr').length;
+                                        			 var i=0;
+                                        			 var madt;
+                                   				 	 var matt="";
+                                   				 	 for(i;i<rowCount;i++)
+                                   				 	{
+                                   				 		var x=$('#myTable tbody').find('tr:eq('+i+')').find('th:eq(0)').text();
+                                       				 	var y=$('#myTable tbody').find('tr:eq('+i+')').find('option').val();
+                                       				 	// Ham cap nhat trang thai
+                                   				 	}
+                                        	 });
+                                         });
+                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -496,37 +394,32 @@
                                 <div class="ql_dsDeTaiPheDuyet " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHÊ DUYỆT</h2><hr>
                                     <div class="ql_tb_dsDeTaiPheDuyet ">
-                                        <table class="table table-striped table-hover ">
-                                            <thead class="thead-default ">
-                                                <tr class="success ">
-                                                    <th>Cấp mã đề tài</th>
-                                                    <th>Tên đề tài</th>
-                                                    <th>Chủ nghiệm đề tài</th>
-                                                    <th>Giảng viên hướng dẫn</th>
-                                                    <th>Phê duyệt</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>
-                                                        <input style="width: 100px; " type="text " name="capmdt
-                                                                " placeholder="Cấp mã đề tài "><br>
-                                                    </th>
-                                                    <th>Nghiên cứu hệ thống nhúng. .</th>
-                                                    <th>Sinh Viên A</th>
-                                                    <th>Giảng Viên B</th>
-                                                    <th><a href="quanly_PheDuyetDT.jsp">Phê duyệt</a></th>
-                                                </tr>
-                                                <tr>
-                                                    <th><input style="width: 100px; " type="text " name="capmdt
-                                                                " placeholder="Cấp mã đề tài "><br></th>
-                                                    <th>Nghiên cứu hệ thống rung. .</th>
-                                                    <th>Sinh Viên B</th>
-                                                    <th>Giảng Viên C</th>
-                                                    <th><a href="quanly_PheDuyetDT.jsp">Phê duyệt</a></th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <table class="table table-striped table-hover">
+											<thead class="thead-default">
+												<tr class="success">
+													<th>Cấp đề tài</th>
+													<th>Tên đề tài</th>
+													<th>Lĩnh vực</th>
+													<th>Chủ nghiệm đề tài</th>
+													<th>Phê duyệt</th>
+												</tr>
+											</thead>
+											<tbody>
+											<%
+											for (DeTai ct: detaiDAO.getListDeTaiPheDuyetQL()) {
+											%>
+												<tr>
+													<th><input style="width:100px"type="text" name="fname"  placeholder="Cấp mã đề tài" value=""/></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getLinhVuc() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="">Phê duyệt</a></th>
+												</tr>
+											<%
+			    							}
+											%>
+											</tbody>
+										</table>
                                     </div>
                                 </div>
                             </div>
@@ -536,33 +429,32 @@
                                 <div class="ql_dsDeTaiHuongDan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI HƯỚNG DẪN</h2><hr>
                                     <div class="ql_tb_dsDeTaiHuongDan ">
-                                        <table class="table table-striped table-hover ">
-                                            <thead class="thead-default ">
-                                                <tr class="success ">
-                                                    <th>Mã đề tài</th>
-                                                    <th>Tên đề tài</th>
-                                                    <th>Chủ nghiệm đề tài</th>
-                                                    <th>Chi tiết</th>
-                                                    <th>Báo cáo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống nhúng. .</th>
-                                                    <th>Sinh Viên A</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th><a href="quanly_XemBaoCao.jsp ">Xem báo cáo</a></th>
-                                                </tr>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống rung. .</th>
-                                                    <th>Sinh Viên B</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th><a href="quanly_XemBaoCao.jsp ">Xem báo cáo</a></th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                      <table class="table table-striped table-hover">
+											<thead class="thead-default">
+												<tr class="success">
+													<th>Mã đề tài</th>
+													<th>Tên đề tài</th>
+													<th>Chủ nghiệm đề tài</th>
+													<th>Chi tiết</th>
+													<th>Báo cáo</th>
+												</tr>
+											</thead>
+											<tbody>
+											<%
+											for (DeTai ct: detaiDAO.getListDeTaiHuongDan(session.getAttribute("Email").toString())) {
+											%>
+												<tr>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><a href="">Chi tiết</a></th>
+													<th><a href="">Xem báo cáo</a></th>
+												</tr>
+												<%
+			    							}
+											%>
+											</tbody>
+										</table>
                                     </div>
                                 </div>
                             </div>
@@ -768,33 +660,32 @@
                                 <div class="ql_dsDeTaiDK " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐÃ ĐĂNG KÝ</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                        <table class="table table-striped table-hover ">
-                                            <thead class="thead-default ">
-                                                <tr class="success ">
-                                                    <th>Mã đề tài</th>
-                                                    <th>Tên đề tài</th>
-                                                    <th>Giảng viên hướng dẫn</th>
-                                                    <th>Chi tiết</th>
-                                                    <th>Trạng thái</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống nhúng. .</th>
-                                                    <th>Giảng Viên A</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th>Chờ phê duyệt</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống rung. .</th>
-                                                    <th>Sinh Viên B</th>
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
-                                                    <th>Đăng ký thành công</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <table class="table table-striped table-hover">
+											<thead class="thead-default">
+												<tr class="success">
+													<th>Mã đề tài</th>
+													<th>Tên đề tài</th>
+													<th>Giảng viên hướng dẫn</th>
+													<th>Chi tiết</th>
+													<th>Trạng thái</th>
+												</tr>
+											</thead>
+											<tbody>
+											<%
+											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											%>
+												<tr>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenGVHD() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="">Chi tiết</a></th>
+												</tr>
+											<%
+			    							}
+											%>							
+											</tbody>
+										</table>
                                     </div>
                                 </div>
                             </div>
@@ -804,36 +695,32 @@
                                 <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                        <table class="table table-striped table-hover ">
-                                            <thead class="thead-default ">
-                                                <tr class="success ">
-                                                    <th>Mã đề tài</th>
-                                                    <th>Tên đề tài</th>
-                                                    <th>Chủ nhiệm đề tài</th>
-                                                    <th>Giảng viên hướng dẫn</th>
-                                                    <th>Yêu cầu</th>
-                                                    <th>Xử lý</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống nhúng. .</th>
-                                                    <th>Sinh Viên A</th>
-                                                    <th>Giảng Viên A</th>
-                                                    <th>Hủy đề tài</th>
-                                                    <th><a href="quanly_DuyetDonHuy.jsp ">Xử lý</a></th>
-                                                </tr>
-                                                <tr>
-                                                    <th>141</th>
-                                                    <th>Nghiên cứu hệ thống rung. .</th>
-                                                    <th>Sinh Viên B</th>
-                                                    <th>Giảng Viên C</th>
-                                                    <th>Gia hạn đề tài</th>
-                                                    <th><a href="quanly_DuyetDonHuy.jsp ">Xử lý</a></th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                       	<table class="table table-striped table-hover">
+											<thead class="thead-default">
+												<tr class="success">
+													<th>Mã đề tài</th>
+													<th>Tên đề tài</th>
+													<th>Chủ nhiệm đề tài</th>
+													<th>Yêu cầu</th>
+													<th>Xử lý</th>
+												</tr>
+											</thead>
+											<tbody>
+											<%
+											for (DeTai ct: detaiDAO.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											%>
+												<tr>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="">Xử lý</a></th>
+												</tr>
+												<%
+			    							}
+											%>	
+											</tbody>
+										</table>
                                     </div>
                                 </div>
                             </div>
@@ -852,5 +739,4 @@
         </footer>
     </div>
 </body>
-
 </html>

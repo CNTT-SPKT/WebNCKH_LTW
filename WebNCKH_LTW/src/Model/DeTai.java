@@ -29,6 +29,34 @@ public class DeTai {
     private String TenTT;
     private String NgayNT;
     private String TenCN;
+    
+  //BAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
+    private String MSSV;
+    private String HoTen;
+    private String MaHD;
+	public String getMaHD() {
+		return MaHD;
+	}
+
+	public void setMaHD(String maHD) {
+		MaHD = maHD;
+	}
+    public String getMSSV() {
+		return MSSV;
+	}
+
+	public void setMSSV(String mSSV) {
+		MSSV = mSSV;
+	}
+	public String getHoTen() {
+		return HoTen;
+	}
+
+	public void setHoTen(String hoTen) {
+		HoTen = hoTen;
+	}
+
+	//Káº¾T THÃšC TÃ�NBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
     public ArrayList<BaoCaoDT> getDsBaoCaoDT() {
 		return dsBaoCaoDT;
 	}

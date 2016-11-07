@@ -7,7 +7,34 @@ public class HoiDong {
     private String PhanBien;
     private String TenChuTich;
     private String TenPhanBien;
-    
+  //TÍNBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
+    private String TenUyVien;
+    private String NgayThanhLap;
+    private String MaDT;
+	public String getMaDT() {
+		return MaDT;
+	}
+
+	public void setMaDT(String maDT) {
+		MaDT = maDT;
+	}
+
+	public String getNgayThanhLap() {
+		return NgayThanhLap;
+	}
+
+	public void setNgayThanhLap(String ngayThanhLap) {
+		NgayThanhLap = ngayThanhLap;
+	}
+    public String getTenUyVien() {
+		return TenUyVien;
+	}
+
+	public void setTenUyVien(String tenUyVien) {
+		TenUyVien = tenUyVien;
+	}
+	
+    //HẾT TÍNBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
     private ArrayList<CTNghiemThu> dsCTNghiemThu= new ArrayList<CTNghiemThu>();
     
 	public HoiDong() {

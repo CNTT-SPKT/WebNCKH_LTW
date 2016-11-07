@@ -8,7 +8,25 @@ public class ThongBao {
     private String NguoiNhan;
     private String TenNguoiGui;
     private String TenNguoiNhan;
-   
+    //TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
+    private String TenLoaiTB;
+    private String NgayGui;
+	public String getTenLoaiTB() {
+		return TenLoaiTB;
+	}
+
+	public void setTenLoaiTB(String tenLoaiTB) {
+		TenLoaiTB = tenLoaiTB;
+	}
+	public String getNgayGui() {
+		return NgayGui;
+	}
+
+	public void setNgayGui(String ngayGui) {
+		NgayGui = ngayGui;
+	}
+	
+    //HET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TINHET TIN
     private ArrayList<TB_TK> CTTB = new ArrayList<TB_TK>();
     
 	public ThongBao() {

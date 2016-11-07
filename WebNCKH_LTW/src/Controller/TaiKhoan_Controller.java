@@ -12,6 +12,29 @@ import Model.TaiKhoan;
 import Packages.DBConnect;
 
 public class TaiKhoan_Controller {
+	
+	//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
+		public ArrayList<TaiKhoan> getListTenThanhVienHDQL() {
+	        Connection cons = DBConnect.getConnecttion();
+	        String sql = "select HoTen "
+	        		+ "from TaiKhoan "
+	        		+ "where Quyen='Lecturers' or Quyen='Manager'";
+	        ArrayList<TaiKhoan> list = new ArrayList<>();
+	        try {
+	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+	            ResultSet rs = ps.executeQuery();
+	            while (rs.next()) {
+	            	TaiKhoan hd = new TaiKhoan();
+	            	hd.setHoTen(rs.getString("HoTen"));
+	               	list.add(hd);
+	            }
+	            cons.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return list;
+	    }
+		//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
 	public ArrayList<TaiKhoan> getListTaiKhoan() {
 		Connection cons = DBConnect.getConnecttion();
 		String sql = "SELECT * FROM TaiKhoan";
