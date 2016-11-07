@@ -1,5 +1,20 @@
+<%@page import="Model.TaiKhoan"%>
+<%@page import="Controller.TaiKhoan_Controller"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+	url="jdbc:mysql://localhost/db_webnckh" user="root"
+	password="14111996a" />
+
+<sql:query dataSource="${snapshot}" var="result">
+SELECT * from TaiKhoan;
+</sql:query>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +30,9 @@
 </head>
 
 <body>
+<%
+TaiKhoan_Controller tk=new TaiKhoan_Controller();
+%>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -80,45 +98,36 @@
 													<th>Quyền truy cập</th>
 													<th>Ngành</th>
 													<th>Chỉnh sửa</th>
-													<th>Xóa </th>
+													
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<th><input type="checkbox" name="" id="input" value=""></th>
-													<td> Lâm Xuân Triết</td>
-													<td>123</td>
-													<td>Admin</td>
-													<td>Admin</td>
-													<td>CNTT</td>
-													<td><a href="Admin_XemCTTK.jsp">Cập nhập</a></td>
-													<td><a href="">Xóa</a></td>
-												</tr>
-												<tr>
-													<th><input type="checkbox" name="" id="input" value=""></th>
-													<td>Lê Thị Thảo</td>
-														<td>124</td>
-														<td>SinhVien1</td>
-														<td>SinhVien</td>
-														<td>CKM</td>
-														<td><a href="Admin_XemCTTK.jsp">Cập nhập</a></td>
-														<td><a href="">Xóa</a></td>
-												</tr>
-												<tr>
-													<th><input type="checkbox" name="" id="input" value=""></th>
-													<td>Tín Trương</td>
-													<td>141 </td>
-													<td>SinhVien2</td>
-													<td>SinhVien</td>
-													<td>CNTT</td>
-													<td><a href="Admin_XemCTTK.jsp">Cập nhập</a></td>
-													<td><a href="">Xóa</a></td>
-												</tr>
+												<%
+												for(TaiKhoan a:tk.getListTaiKhoan()){
+											%>
+													<tr>
+														<th><input type="checkbox" name="" id="input"
+															value=""></th>
+														<td><%=a.getHoTen()%></td>
+														<td><%=a.getMaTK()%></td>
+														<td><%=a.getMaTK()%></td>
+														<td><%=a.getQuyen()%></td>
+														<td><%=a.getNganh()%></td>
+														<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập nhập</a></td>
+
+													</tr>
+												<%
+												}
+												%>
 											</tbody>
 										</table>
 									</div>
 
 								</div>
+								<button type="button" class="btn btn-danger" id="btn_Xoa"
+									style="float: right; margin-right: 10px; margin-bottom: 10px;">
+									<span class="glyphicon glyphicon-trash"></span> Xóa tài khoản
+								</button>
 							</div>
 
 						</div>
@@ -141,24 +150,19 @@
 												</tr>
 											</thead>
 											<tbody>
+											<%
+											for (TaiKhoan c:tk.getListTaiKhoan()){
+											%>
 												<tr>
-													<td> Lâm Xuân Triết</td>
-													<td>123</td>
-													<td>lxt@gmail.com</td>
+													<td><%=c.getHoTen() %></td>
+													<td><%=c.getMatKhau() %></td>
+													<td><%=c.getEmail() %></td>
 
 												</tr>
-												<tr>
-													<td> Lâm Xuân Triết</td>
-													<td>123</td>
-													<td>lxt@gmail.com</td>
+												<%
+											}
+												%>
 
-												</tr>
-												<tr>
-													<td> Lâm Xuân Triết</td>
-													<td>123</td>
-													<td>lxt@gmail.com</td>
-
-												</tr>
 											</tbody>
 										</table>
 									</div>
