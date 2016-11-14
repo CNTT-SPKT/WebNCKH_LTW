@@ -3,11 +3,15 @@ package Controller;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import com.mysql.jdbc.PreparedStatement;
+import com.sun.istack.internal.logging.Logger;
 
 import Model.DeTai;
+import Model.TaiKhoan;
 import Packages.DBConnect;
 
 public class DeTai_Controller {
@@ -370,7 +374,7 @@ public class DeTai_Controller {
         String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD"+
 			" from DeTai,CTNghiemThu,HoiDong,TaiKhoan,TaiKhoan as TK1, TaiKhoan as TK2"+
 			" where DeTai.MaDT=CTNghiemThu.MaDT and CTNghiemThu.MaHD=HoiDong.MaHD and HoiDong.PhanBien=TaiKhoan.MaTK"+
-			" and TaiKhoan.Email='"+Email+"' and DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK";
+			" and TaiKhoan.Email='"+Email+"' and DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and MaTT='tt8' ";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -543,5 +547,27 @@ public class DeTai_Controller {
         return dt;
     }
 	
+	public boolean updateTrangThai_DeTai(DeTai dt) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "update DeTai set MaTT=? where MaDT=?";
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1,dt.getMaTT());
+			ps.setString(2, dt.getMaDT());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(TaiKhoan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
 	
+	public static void main(String[] args) throws SQLException, Exception {
+		DeTai_Controller ctrl = new DeTai_Controller();
+		DeTai dt=new DeTai();
+		dt = ctrl.getDeTai("dt9");  //tt8
+		dt.setMaTT("tt8");
+		if(ctrl.updateTrangThai_DeTai(dt))
+			System.out.println("TC");
+	}
 }

@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="1.css">
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
+<%
+String maDT="";
+if (request.getParameter("MaDT") != null) {
+	maDT = request.getParameter("MaDT");
+}
+%>
 <body >
 	<div class="page">
 		<div class="menu">
@@ -461,7 +467,9 @@
 							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
 								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
-										<form id="formNghiemThu">
+										<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
+										<input type="hidden" name="command" value="update">
+										<input type="hidden" name="MaDT" value=<%=maDT%>>
 											<table class="table table-striped table-hover">
 												<thead class="thead-default">
 													<tr class="success">
@@ -474,66 +482,53 @@
 													<tr  >
 														<td>Tổng quan tình hình và lý do chọn đề tài</td>
 														<td>10</td>
-														<td><input type="text" name="diem1" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+														<td><input type="text" name="diemtongquan" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
 													</tr>
 													<tr>
 														<td>Mục tiêu đề tài</td>
 														<td>15</td>
-														<td><input type="text" name="diem2" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
+														<td><input type="text" name="diemmuctieu" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
 
 													</tr>
 													<tr>
 														<td>Phương pháp nghiên cứu</td>
 														<td>15</td>
-														<td><input type="text" name="diem2" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
+														<td><input type="text" name="diemphuongphap" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
 
 													</tr>
 													<tr>
 														<td>Nội dung khoa học</td>
 														<td>35</td>
-														<td><input type="text" name="diem3" class="form-control required diem3" id="" required min="0" max="35" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-35."></td>
+														<td><input type="text" name="diemnoidung" class="form-control required diem3" id="" required min="0" max="35" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-35."></td>
 													</tr>
 													<tr>
 														<td>Đóng góp cho KT-XH-GD</td>
 														<td>10</td>
-														<td><input type="text" name="diem1" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+														<td><input type="text" name="diemdonggop" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
 
 													</tr>
 													<tr>
 														<td>Hình thức báo cáo tổng kết</td>
 														<td>10</td>
-														<td><input type="text" name="diem1" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+														<td><input type="text" name="diemhinhthuc" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
 													</tr>
 													<tr>
 														<td>Điểm thưởng</td>
 														<td>10</td>
-														<td><input type="text" name="diem1" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+														<td><input type="text" name="diemthuong" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
 													</tr>
 													<tr>
 														<td>Tổng điểm</td>
 														<td>100</td>
-														<td><input type="text" name="diem4" id="input" class="form-control required diem4" value="" required="required" min="0" max="100" pattern="" title="" data-content="Vui lòng nhập vào ký tự số từ 0-100." data-placement="left" data-trigger="hover"></td>
+														<td><input type="text" name="tongdiem" id="input" class="form-control required diem4" value="" required="required" min="0" max="100" pattern="" title="" data-content="Vui lòng nhập vào ký tự số từ 0-100." data-placement="left" data-trigger="hover"></td>
 													</tr>
 												</tbody>
 											</table>
 											<label class="col-sm-2 control-label" for="mota">Ý kiến đánh giá</label><br>
 											<div class="col-sm-12">
-												<textarea type="text" name="mota" class="form-control required mota" placeholder="tạo 1 website bán hàng"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required></textarea>
+												<textarea type="text" name="ykien" class="form-control required mota" placeholder=""  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required></textarea>
 											</div>
-											<button type="submit" class="btn-info" value="Submit" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">Đánh giá</button>
-											<script>
-												$(function() {
-													$('#formNghiemThu button:submit').on('click', function(e) {
-														var emptyTextBoxes = $('#formNghiemThu input').filter(function() { return this.value == ""; });
-													if(emptyTextBoxes.length == 0)
-													{
-														alert("Đánh giá thành công!");
-														e.preventDefault(); 
-														window.location.href = "giangvienPage.jsp";
-													}
-													});
-												});
-											</script>
+											<input type="submit" value="Đánh giá" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">
 										</form>
 									</div>
 								</div>
