@@ -107,7 +107,7 @@
 												<table class="table table-striped table-hover">
 													<thead>
 														<tr class="success">
-															<th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
+
 															<th>
 																<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
 																	Thông báo
@@ -136,6 +136,7 @@
 																	<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
 																</a>
 															</th>
+															<th><a href="">Xóa TB</a></th>
 														</tr>
 													</thead>
 		
@@ -144,11 +145,11 @@
 				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK(session.getAttribute("Email").toString())) {
 														%>
 														<tr >
-																<td><input type="checkbox" name=""  value=""></td>
 																<td><%=tbtk.getTinTB() %></td>
 																<td><%=tbtk.getTenNguoiGui() %></td>
 																<td><%=tbtk.getNgayGui() %></td>
 																<td><a href="sinvien_XemThongBao.jsp?MaCTTB=<%=tbtk.getMaCTTB() %>">Xem</a></td>
+																<td><a href="TB_TK_Servlet?command=delete&MaCTTB=<%=tbtk.getMaCTTB() %>">Xóa</a></td>
 															</tr>
 															<%
 			    											}
@@ -156,20 +157,6 @@
 														
 													</tbody>
 												</table>
-												<script>
-												$('#selectAll_ThongBao').change(function(){
-													if($(this).prop('checked')){
-														$('tbody tr td input[type="checkbox"]').each(function(){
-															$(this).prop('checked', true);
-														});
-													}else{
-														$('tbody tr td input[type="checkbox"]').each(function(){
-															$(this).prop('checked', false);
-														});
-													}
-												});
-												
-												</script>
 											</div>
 											<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
 												<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
@@ -494,7 +481,7 @@
 																
 																	<b>
 																		<p>Mail: <%=taikhoan.getEmail() %></p>
-																		<p>Số điện thoại: 0123456789</p>
+																		<p>Số điện thoại:<%=taikhoan.getSoDT() %></p>
 																		<p>Mã số ngân hàng: <%=taikhoan.getMSNH() %></p>
 																		<p>Chi nhánh ngân hàng: <%=taikhoan.getCNNH() %></p>
 																		<p>Đơn vị công tác: ZXC</p>
@@ -520,7 +507,8 @@
 																					
 																				</div>
 																				<div class="doi panel-body">
-																					<form action="" id="register-form" name="doipass" method="POST" class="form-horizontal" role="form">
+																					<form action="TaiKhoan_Servlet" id="register-form" name="doipass" method="POST" class="form-horizontal" role="form">
+																						<input type="hidden" name="command" value="update">
 																						<div class="form-group has-feedback" style="margin-left:65px;">
 																							<div class="col-xs-10">
 																								<label for="pass">Mật khẩu cũ<span>:</span></label> 
@@ -544,8 +532,9 @@
 																						</div>
 																						<div class="modal-footer">
 																							<button type="button" class="btn btn-danger"  data-dismiss="modal">Hủy</button>
-																							<button type="submit" id="btnsm" class="btn btn-primary">Lưu</button>
+																							
 																						</div>
+																						<input type="submit" value="Lưu" />
 																					</form>
 																				</div>
 																			</div>
@@ -576,7 +565,9 @@
 																						</div>
 																					</div>
 																					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-																						<form action="" id="formcntt" method="POST" class="form-horizontal" role="form">
+																						<form action="TaiKhoan_Servlet" id="formcntt" method="post" class="form-horizontal">
+																							<input type="hidden" name="command" value="update">
+																							<input type="hidden" name="MaTK" value=<%=session.getAttribute("Email").toString()%>>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
 																									<label for="email">Mail<span>:</span></label> 
@@ -600,16 +591,17 @@
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
-																									<label for="donvi">Đơn vị công tác<span>:</span></label> 
-																									<input class="form-control" name="donvi" id="donvi" type="text" required/>
+																									<label for="donvi">Mã số ngân hàng<span>:</span></label> 
+																									<input class="form-control" name="masoNH" id="donvi" type="text" required/>
 																									<span class="glyphicon form-control-feedback" id="donvi1"></span>
 																								</div>
 																							</div>
 																							</div>
 																							<div class="modal-footer">
 																								<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
-																								<button type="submit" class="btn btn-primary">Lưu</button>
+																								
 																							</div>
+																							<input type="submit" value="Lưu" class="btn-lg col-lg-3" />
 																						</form>
 																					</div>
 																				</div>

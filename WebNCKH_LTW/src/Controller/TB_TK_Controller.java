@@ -78,12 +78,25 @@ public class TB_TK_Controller {
         }
         return list;
     }
+	
+	public boolean deleteTB_TK(String maCTTB) throws SQLException {
+		 Connection connection = DBConnect.getConnecttion();
+	     String sql = "DELETE FROM TB_TK WHERE MaCTTB = ?";
+	    try {
+	       
+	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+	       ps.setString(1,maCTTB );
+	       return ps.executeUpdate()==1;
+	    } catch (Exception e) {
+	    	return false;
+	    }
+	    
+	}
+	
 	public static void main(String[] args) throws SQLException {
 		TB_TK_Controller ctrl= new TB_TK_Controller();
-	       for(TB_TK ct: ctrl.getListTB_TKByMaTK("ltthao@gmail.com")){
-	    	   System.out.println(ct.getMaTB()+"_______"+ct.getTenNguoiGui());
-	    	   
-	       }
-		 
-	    }
+		
+	     if(ctrl.deleteTB_TK("cttb12"))
+	    	 System.out.println("Thanh cong");
+	}
 }
