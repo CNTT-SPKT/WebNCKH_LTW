@@ -10,13 +10,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost/db_webnckh" user="root"
-	password="14111996a" />
-
-<sql:query dataSource="${snapshot}" var="result">
-SELECT * from TaiKhoan;
-</sql:query>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +23,9 @@ SELECT * from TaiKhoan;
 <link rel="stylesheet" href="vendor/bootstrap.css">
 <link rel="stylesheet" href="1.css">
 <link rel="stylesheet" href="vendor/font-awesome.css">
+<script>
+
+</script>
 </head>
 <body>
 	<%
@@ -120,7 +116,7 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 													<th><input type="checkbox" name="" id="input" value=""></th>
 													<td><%=a.getHoTen()%></td>
 													<td><%=a.getMaTK()%></td>
-													<td><%=a.getMaTK()%></td>
+													<td><%=a.getEmail()%></td>
 													<td><%=a.getQuyen()%></td>
 													<td><%=a.getNganh()%></td>
 													<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập

@@ -7,13 +7,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost/db_webnckh" user="root"
-	password="14111996a" />
 
-<sql:query dataSource="${snapshot}" var="result">
-SELECT * from TaiKhoan;
-</sql:query>
 <%
 	TaiKhoan_Controller tk = new TaiKhoan_Controller();
 %>
@@ -31,7 +25,15 @@ SELECT * from TaiKhoan;
 <link rel="stylesheet" href="vendor/font-awesome.css">
 
 </head>
+<%
+TaiKhoan c= new TaiKhoan();
+String MaTK;
+if (request.getParameter("MaTK") != null) {
+	MaTK = request.getParameter("MaTK");
+    c =tk.gettk(MaTK);
+}
 
+%>
 <body>
 	<div class="page">
 		<div class="menu">
@@ -157,9 +159,7 @@ SELECT * from TaiKhoan;
 										<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 											<div class="row">
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-													<%
-													for(TaiKhoan c:tk.getListTaiKhoantheoMaTK("tk1")){
-													%>
+													<h2><%=request.getAttribute("error")%></h2>
 													<br> <br> <b>
 														<p>Tên chủ nhiệm:<%=c.getHoTen() %> </p>
 														<p>MSSV: <%=c.getMatKhau() %></p>
@@ -167,22 +167,16 @@ SELECT * from TaiKhoan;
 														<p>Thuộc khoa: <%=c.getNganh() %></p>
 														<p>Quê quán: Quảng Ngãi</p>
 													</b>
-													<%
-													}
-													%>
+													
 												</div>
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-												<%
-													for(TaiKhoan c:tk.getListTaiKhoantheoMaTK("tk1")){
-													%>
+												
 													<br> <br> <b><p>Mail:<%=c.getEmail() %> </p>
-														<p>Số điện thoại: 0123456789</p>
+														<p>Số điện thoại:<%=c.getSoDT() %></p>
 														<p>Mã số ngân hàng: <%=c.getMSNH() %></p>
 														<p>Chi nhánh ngân hàng:<%=c.getCNNH() %></p>
 														<p>Đơn vị công tác: ZXC</p> </b>
-													<%
-													}
-													%>
+													
 												</div>
 											</div>
 											<div class="row">
@@ -208,32 +202,35 @@ SELECT * from TaiKhoan;
 																		</div>
 																	</div>
 																	<div class="row">
-																		<form action="" onsubmit="" method="POST"
+																		<form action="TaiKhoan_Servlet"  method="POST"
 																			class="form-horizontal" role="form">
+																			<input type="hidden" name="command" value="update">
+																			<input type="hidden" name="MaTK" value=<%=c.getMaTK() %>>
+																			<input type="hidden" name="Quyen" value="Admin">
 																			<div class="form-group"
 																				style="margin-left: 5px; margin-left: 65px;">
 
 																				<div class="col-xs-10">
 																					<label for="mail">Mail<span>:</span></label> <input
-																						class="form-control" id="mail" type="text"
+																						class="form-control" name="email" id="mail" type="text"
 																						required="required">
 																				</div>
 																				<br>
 																				<div class="col-xs-10">
 																					<label for="sdt">Số điện thoại<span>:</span></label>
-																					<input class="form-control" id="sdt" type="text"
+																					<input class="form-control" name="sodt" id="sdt" type="text"
 																						required="required">
 																				</div>
 																				<br>
 																				<div class="col-xs-10">
 																					<label for="cnnh">Chi nhánh ngân hàng<span>:</span></label>
-																					<input class="form-control" id="cnnh" type="text"
+																					<input class="form-control" name="cnnganhang" id="cnnh" type="text"
 																						required="required">
 																				</div>
 																				<br>
 																				<div class="col-xs-10">
-																					<label for="dvct">Đơn vị công tác<span>:</span></label>
-																					<input class="form-control" id="dvct" type="text"
+																					<label for="dvct">Mã số ngân hàng<span>:</span></label>
+																					<input class="form-control" name="masoNH" id="dvct" type="text"
 																						required="required">
 																				</div>
 																				<br>
@@ -241,7 +238,7 @@ SELECT * from TaiKhoan;
 																			<div class="modal-footer">
 																				<button type="button" class="btn btn-danger"
 																					data-dismiss="modal">Hủy</button>
-																				<button type="submit" class="btn btn-primary">Lưu</button>
+																				<input type="submit" value="Lưu"/>
 																			</div>
 																		</form>
 																	</div>

@@ -11,11 +11,18 @@ public class TaiKhoan {
 	    private String NgaySinh;
 	    private String Nganh;
 	    private String Email;
-	    private Image HinhAnh;
+	    private String HinhAnh;
 	    private String MSNH;
 	    private String CNNH;
+	    private String SoDT;
 	    
-	    private ArrayList<ThongBao> dsThongBao= new ArrayList<ThongBao>();
+	    public String getSoDT() {
+			return SoDT;
+		}
+		public void setSoDT(String soDT) {
+			SoDT = soDT;
+		}
+		private ArrayList<ThongBao> dsThongBao= new ArrayList<ThongBao>();
 	    private ArrayList<DeTai> dsDeTai= new ArrayList<DeTai>();
 	    private ArrayList<HoiDong> dsHoiDong= new ArrayList<HoiDong>();
 	    
@@ -23,7 +30,7 @@ public class TaiKhoan {
 			super();
 		}
 		public TaiKhoan(String maTK, String matKhau, String quyen, String hoTen, String ngaySinh, String nganh,
-				String email, String mSNH, String cNNH, Image hinhAnh) {
+				String email, String mSNH, String cNNH, String hinhAnh, String soDT) {
 			super();
 			MaTK = maTK;
 			MatKhau = matKhau;
@@ -35,12 +42,13 @@ public class TaiKhoan {
 			MSNH = mSNH;
 			CNNH = cNNH;
 			HinhAnh = hinhAnh;
+			SoDT = soDT;
 		}
 		
-		public Image getHinhAnh() {
+		public String getHinhAnh() {
 			return HinhAnh;
 		}
-		public void setHinhAnh(Image hinhAnh) {
+		public void setHinhAnh(String hinhAnh) {
 			HinhAnh = hinhAnh;
 		}
 		public ArrayList<ThongBao> getDsThongBao() {

@@ -58,14 +58,16 @@ $(function(){
 		$('body,html').animate({scrollTop:0},600);});});
 
 /*end back to top*/
-$(document).ready(function(){
-	$("input, select,textarea").mouseenter(function(){
-		$(this).css("background-color","#ECECEC" );
-	});
-	$("input, select,textarea").mouseleave(function(){
-		$(this).css("background-color", "#FFFFFF");
-	});
-});
+//$(document).ready(function(){
+//	$("input, select,textarea").mouseenter(function(){
+//		$(this).css("background-color","#ECECEC" );
+//	});
+//	$("input, select,textarea").mouseleave(function(){
+//		$(this).css("background-color", "#FFFFFF");
+//	});
+//});
+
+
 // $(document).ready(function(){
 // 	$("#main_dtkt1").click(function(){
 //         $("#dt1").slideToggle("slow");
@@ -394,22 +396,24 @@ $(function() {
 // 	};
 
 // });
-$(function() {
-	$('form').submit(function() {
-		var res = true;
-		$("input[type='text'],select,input[type='password']",this).each(function() {
-			if($(this).val().trim() == "") {
-				res = false; 
-			}
-			else
-			{
-				alert('Thành công!');
-				res=true;
-			}
-		})
-		return res; 
-	});
-});
+
+//$(function() {
+//	$('form').submit(function() {
+//		var res = true;
+//		$("input[type='text'],select,input[type='password']",this).each(function() {
+//			if($(this).val().trim() == "") {
+//				res = false; 
+//			}
+//			else
+//			{
+//				alert('Thành công!');
+//				res=true;
+//			}
+//		})
+//		return res; 
+//	});
+//});
+
 //tìm kiếm theo GVHD,MDETAI,KEYWWORD của thèn quản lý
 $(function() {
 $("#tkiem").on("click", function () {
