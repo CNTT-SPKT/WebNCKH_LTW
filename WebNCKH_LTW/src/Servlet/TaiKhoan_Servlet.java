@@ -67,19 +67,21 @@ public class TaiKhoan_Servlet extends HttpServlet {
 				boolean ktra=crt.updateTaiKhoan(tk);
 				if(ktra)
 				{
-					if(quyen=="Admin")
+
+					error="Thành công";
+					if(quyen.equals("Admin"))
 						url="Admin.jsp";
-					else if(quyen=="Student")
+					else
 						url="SinhVienPage.jsp";
-					error="Cập nhật thành công!";
 				}
 				else
 				{
-					if(quyen=="Admin")
+					error="Thất bại";
+					if(quyen.equals("Admin"))
 						url="Admin.jsp";
-					else if(quyen=="Student")
+					else 
 						url="SinhVienPage.jsp";
-					error="Cập nhật thất bại!";
+					
 				}
 				break;
 			}
@@ -89,10 +91,7 @@ public class TaiKhoan_Servlet extends HttpServlet {
 			error="Xảy ra lỗi ngẫu nhiên!";
 		}
 		request.setAttribute("error", error);
-//		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
-//		rd.forward(request, response);
-		response.sendRedirect("Admin_XemCTTK.jsp");
-		
+		response.sendRedirect(url);
 	}
 
 }

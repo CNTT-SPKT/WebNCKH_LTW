@@ -23,8 +23,25 @@
 <link rel="stylesheet" href="vendor/bootstrap.css">
 <link rel="stylesheet" href="1.css">
 <link rel="stylesheet" href="vendor/font-awesome.css">
-<script>
-
+<script type="text/javascript" src="jquery.validate.min.js"></script>
+<script>	
+$(document).ready(function() {
+	if($('.message_Error').text() != null)
+		 $('.message_Error').hide();
+     else	 
+    	{
+    	 if($('.message_Error').text()== 'Thành công')
+			{
+				$('.message_Error b').css({"color": "green", "font-size": "100%"});
+				$('.message_Error').fadeIn(300).delay(5000).hide(400);
+			}
+			else
+			{
+				$('.message_Error b').css({"color": "red", "font-size": "100%"});
+				$('.message_Error').fadeIn(300).delay(5000).hide(400);
+			}
+    	}
+})
 </script>
 </head>
 <body>
@@ -86,10 +103,11 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 						<div class="tab-pane active" id="QLTK">
 							<div class="row" style="margin-bottom: 7px;">
 								<div class="QLyTK"
-									style="background: white; height: 380px; margin-right: 15px; border-radius: 3px; overflow: auto;">
+									style="background: white; height: 480px; margin-right: 15px; border-radius: 3px; overflow: auto;">
 									<h2
 										style="margin-top: 0px; padding: 5px; text-align: center; font-family: sans-serif;">QUẢN
 										LÝ TÀI KHOẢN</h2>
+									<h5 style="float:left;margin-left:30px" class="message_Error"><b><%=request.getAttribute("error") %></b></h5>
 									<a class="btn btn-default" href="Admin_ThemTK.jsp"
 										role="button" style="float: right; margin: 0px 5px 5px 0px;">Thêm
 										tài khoản</a>
@@ -105,7 +123,6 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 													<th>Quyền truy cập</th>
 													<th>Ngành</th>
 													<th>Chỉnh sửa</th>
-
 												</tr>
 											</thead>
 											<tbody>
@@ -129,11 +146,12 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 											</tbody>
 										</table>
 									</div>
-								</div>
-								<button type="button" class="btn btn-danger" id="btn_Xoa"
+									<button type="button" class="btn btn-danger" id="btn_Xoa"
 									style="float: right; margin-right: 10px; margin-bottom: 10px;">
 									<span class="glyphicon glyphicon-trash"></span> Xóa tài khoản
 								</button>
+								</div>
+								
 							</div>
 
 						</div>

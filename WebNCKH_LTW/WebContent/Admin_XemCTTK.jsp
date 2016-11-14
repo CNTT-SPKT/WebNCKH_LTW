@@ -120,7 +120,7 @@ if (request.getParameter("MaTK") != null) {
 															value=""></th>
 														<td><%=a.getHoTen()%></td>
 														<td><%=a.getMaTK()%></td>
-														<td><%=a.getMaTK()%></td>
+														<td><%=a.getEmail()%></td>
 														<td><%=a.getQuyen()%></td>
 														<td><%=a.getNganh()%></td>
 														<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập nhập</a></td>
@@ -159,7 +159,6 @@ if (request.getParameter("MaTK") != null) {
 										<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 											<div class="row">
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-													<h2><%=request.getAttribute("error")%></h2>
 													<br> <br> <b>
 														<p>Tên chủ nhiệm:<%=c.getHoTen() %> </p>
 														<p>MSSV: <%=c.getMatKhau() %></p>

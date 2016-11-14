@@ -9,14 +9,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost/db_webnckh" user="root"
-	password="14111996a" />
 
 
-<sql:query dataSource="${snapshot}" var="result">
-SELECT * from TaiKhoan;
-</sql:query>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,7 +118,7 @@ SELECT * from TaiKhoan;
 													<th><input type="checkbox" name="" id="input" value=""></th>
 													<td><%=a.getHoTen()%></td>
 													<td><%=a.getMaTK()%></td>
-													<td><%=a.getMaTK()%></td>
+													<td><%=a.getEmail()%></td>
 													<td><%=a.getQuyen()%></td>
 													<td><%=a.getNganh()%></td>
 													<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập
@@ -160,7 +154,7 @@ SELECT * from TaiKhoan;
 													<div action="" style="margin: 15px 10px 30px 50px;">
 														<div class="col-xs-10">
 															<label for="name">Họ tên<span>:</span></label> <input
-																type="text" name="name"
+																type="text" name="hoten"
 																class="form-control required name"
 																placeholder="Lâm Xuân Triết" id="name" required
 																minlength="6" data-placement="right"
