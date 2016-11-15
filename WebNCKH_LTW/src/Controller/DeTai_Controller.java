@@ -512,7 +512,6 @@ public class DeTai_Controller {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             	
-            	
             	dt.setMaDT(rs.getString("MaDT"));
             	dt.setMaHienThi(rs.getString("MaHienThi"));
             	dt.setMaTT(rs.getString("MaTT"));
@@ -565,9 +564,8 @@ public class DeTai_Controller {
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
 		DeTai dt=new DeTai();
-		dt = ctrl.getDeTai("dt9");  //tt8
-		dt.setMaTT("tt8");
-		if(ctrl.updateTrangThai_DeTai(dt))
-			System.out.println("TC");
+		for(DeTai c : ctrl.getListDeTaiPhanCongPheDuyet("lxtriet@gmail.com")){  
+			System.out.println(c.getTenCN());
+		}
 	}
 }

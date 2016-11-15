@@ -29,7 +29,7 @@
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		detai = dt.getDeTaiGV(maDT);
+		detai = dt.getDeTai(maDT);
 	}
 %>
 <body>
@@ -537,19 +537,19 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text" required  readonly>
+																				<input class="form-control" id="hoten1" type="text" required  readonly value=<%=detai.getTenCN()%>>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" required readonly>
+																				<input class="form-control" id="mss1" type="text" required readonly value=<%=detai.getMSSVCN()%>>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mail1" type="text" required  readonly>
+																				<input class="form-control" id="mail1" type="text" required  readonly value=<%=detai.getEmailCN()%>>
 																			</div>
 																		</div>
 																		<br>
@@ -557,13 +557,13 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text"  readonly>
+																				<input class="form-control" id="hoten1" type="text"  readonly value=<%=detai.getTenSV1()%>>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text"  readonly>
+																				<input class="form-control" id="mss1" type="text"  readonly value=<%=detai.getMSSV1()%>>
 																			</div>
 																		</div>
 																	</div>
@@ -585,13 +585,13 @@
 																			<div class="row" style="margin-bottom:5px">
 																				<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																				<div class="col-sm-8">
-																					<input class="form-control" id="hoten1" type="text" readonly>
+																					<input class="form-control" id="hoten1" type="text" readonly value=<%=detai.getTenSV2()%>>
 																				</div>
 																			</div>
 																			<div class="row" style="margin-bottom:5px">
 																				<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																				<div class="col-sm-8">
-																					<input class="form-control" id="mss1" type="text" readonly>
+																					<input class="form-control" id="mss1" type="text" readonly value=<%=detai.getMSSV2()%>>
 																				</div>
 																			</div>
 																		</div>
@@ -656,8 +656,8 @@
 											</div>
 										</div>
 									</div>
-									<button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button>
-								<button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button>
+									<a href="DeTai_Servlet?command=pheduyet&xuly=dongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
+								<a href="DeTai_Servlet?command=pheduyet&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
 								</div>
 							</div>
 						</div>
