@@ -3,7 +3,9 @@ package Controller;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -93,10 +95,33 @@ public class TB_TK_Controller {
 	    
 	}
 	
+	public boolean insertTB_TK(TB_TK tbtk) throws SQLException {
+		 Connection connection = DBConnect.getConnecttion();
+	     String sql = "insert into TB_TK values(?,?,?,?,?)";
+	    try { 
+			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+	       ps.setString(1,tbtk.getMaCTTB());
+	       ps.setString(2,tbtk.getMaTB());
+	       ps.setString(3,tbtk.getMaLTB());
+	       ps.setString(4,tbtk.getTinTB());
+	       ps.setDate(5,date);
+	       return ps.executeUpdate()==1;
+	    } catch (Exception e) {
+	    	return false;
+	    }
+	    
+	}
+	
 	public static void main(String[] args) throws SQLException {
 		TB_TK_Controller ctrl= new TB_TK_Controller();
-		
-	     if(ctrl.deleteTB_TK("cttb12"))
+		TB_TK tbtk = new TB_TK();
+		tbtk.setMaCTTB("cttb20");
+		tbtk.setMaTB("tb1");
+		tbtk.setMaLTB("ltt1");
+		tbtk.setTinTB("zxczxcz");
+		tbtk.setNgayGui("1/1/2011");
+	     if(ctrl.insertTB_TK(tbtk))
 	    	 System.out.println("Thanh cong");
 	}
 }

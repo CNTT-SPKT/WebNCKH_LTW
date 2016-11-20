@@ -81,16 +81,17 @@ public class ThongBao_Controller {
     }
 	public ThongBao getListThongBao(String nguoiGui) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM ThongBao, TaiKhoan" +
-        "Where ThongBao.NguoiGui=TaiKhoan.MaTK and ThongBao.NguoiNhan=TaiKhoan.MaTK and NguoiGui='"+nguoiGui+"'";
+        String sql = "SELECT * FROM ThongBao inner join TaiKhoan on ThongBao.NguoiGui=TaiKhoan.MaTK" +
+        " Where ThongBao.NguoiGui='"+nguoiGui+"'";
         ThongBao tb = new ThongBao();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-            	tb.setMaTB(rs.getString("MaTB"));
-            	tb.setNguoiGui(rs.getString("NguoiGui"));
-            	tb.setNguoiNhan(rs.getString("NguoiNhan"));
+            	tb.setMaTB(rs.getString("ThongBao.MaTB"));
+            	tb.setNguoiGui(rs.getString("ThongBao.NguoiGui"));
+            	tb.setNguoiNhan(rs.getString("ThongBao.NguoiNhan"));
             	
             }
             cons.close();
@@ -99,4 +100,11 @@ public class ThongBao_Controller {
         }
         return tb;
     }
+	
+	public static void main(String[] args) throws SQLException {
+		TB_TK_Controller ctrl= new TB_TK_Controller();
+		ThongBao_Controller thongbaoctrl = new ThongBao_Controller();
+		ThongBao tb = thongbaoctrl.getListThongBao("tk4");
+	    System.out.println(tb.getMaTB());
+	}
 }

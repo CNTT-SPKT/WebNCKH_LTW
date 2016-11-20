@@ -158,8 +158,6 @@
 													</tbody>
 												</table>
 											</div>
-											<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
-												<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
 										</div>
 									</div>
 								</div>
@@ -194,11 +192,12 @@
 																<td><%=detai.getTenTT()%></td>
 																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
+																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a>
 																<ul id="contextMenu" class="dropdown-menu" role="menu">
 																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
 																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jspMaDT=<%=detai.getMaDT() %>">Hủy</a></li>
 																</ul>
+																</td>
 															</tr>
 														<%
 			    											}
@@ -224,11 +223,14 @@
 													<div class="row">
 														<div class="mota">
 															<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-																<form action=" " onsubmit="" method="POST" role="form" class="form-horizontal">
+																<form action="DeTai_Servlet" method="POST" class="form-horizontal">
+																<input type="hidden" name="command" value="dkDT" />
+																<input type="hidden" name="nguoidk" value="Student" />
+																
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input type="text" name="mota" class="form-control required mota" placeholder="Đề tài 1"  id="" required minlength="6" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
+																			<input type="text" name="tenDT" class="form-control required mota" placeholder="Đề tài 1"  id="" required minlength="6" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
 																		</div>
 																		<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
 																		<div class="col-sm-10">
@@ -263,11 +265,11 @@
 																					<div class="row">
 																						<label class="col-sm-1 control-label" for="thoigianbatdau">Từ:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="text" type="text" name="ngay" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-top:10px;"required>
+																							<input type="text" type="text" name="ngaybatdau" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-top:10px;"required>
 																						</div>
 																						<label class="col-sm-1 control-label" for="thoigianketthuc">Đến:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="text" type="text" name="ngay" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-left:10px; margin-top:10px;"required>
+																							<input type="text" type="text" name="ngayketthuc" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-left:10px; margin-top:10px;"required>
 																						</div>
 																					</div>
 																				</div>
@@ -275,7 +277,7 @@
 																		</div>
 																		<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
 																		<div class="col-sm-10">
-																			<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc">
+																			<input class="form-control" id="" name="coquanchutri" type="text" placeholder="Khoa/Bộ môn trực thuộc">
 																		</div>
 																		<br>
 																		<div class="container" style="margin-top:35px;width:800px">
@@ -285,7 +287,7 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input type="text" name="name" class="form-control required name" placeholder="Lê Văn A"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
+																							<input type="text" name="tenCN" class="form-control required name" placeholder="Lê Văn A"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -305,7 +307,7 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text">
+																							<input class="form-control" id="tenSV1" type="text">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -320,7 +322,7 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input type="text" name="name" class="form-control required name" placeholder="Lê B"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
+																							<input type="text" name="tenGVHD" class="form-control required name" placeholder="Lê B"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -333,7 +335,7 @@
 																						<div class="row" style="margin-bottom:5px">
 																							<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																							<div class="col-sm-8">
-																								<input class="form-control" id="hoten1" type="text">
+																								<input class="form-control" id="hoten1" name="tenSV2" type="text">
 																							</div>
 																						</div>
 																						<div class="row" style="margin-bottom:5px">
@@ -349,47 +351,47 @@
 																		<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
 																		<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Tình hình nghiên cứu trong nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="tinhhinhTrong" class="form-control required mota" placeholder="Tình hình nghiên cứu trong nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 																		<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Tình hình nghiên cứu ngoài nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="tinhhinhNgoai" class="form-control required mota" placeholder="Tình hình nghiên cứu ngoài nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Tính cấp thiết:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Tính cấp thiết"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="tinhcapThiet" class="form-control required mota" placeholder="Tính cấp thiết"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Mục tiêu:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Mục tiêu của đề tài"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="muctieu" class="form-control required mota" placeholder="Mục tiêu của đề tài"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Phương pháp nghiên cứu:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Phương pháp và phạm vi nghiên cứu"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="PPNC" class="form-control required mota" placeholder="Phương pháp và phạm vi nghiên cứu"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Nội dung nghiên cứu và tiến độ thực hiện"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="NoiDungNC" class="form-control required mota" placeholder="Nội dung nghiên cứu và tiến độ thực hiện"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Sản phẩm dự kiến"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="SPDuKien" class="form-control required mota" placeholder="Sản phẩm dự kiến"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 
 																		<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input class="form-control" id="diachiungdung" type="text" required>
+																			<input class="form-control" id="diachiungdung" name="DiaChiUD" type="text" required>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input type="text" name="dxuatkinhphi" class="form-control required dxuatkinhphi" placeholder="2000000" minlength="0" maxlength="6" id="" required data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này">
+																			<input type="text" name="kinhphi" class="form-control required dxuatkinhphi" placeholder="2000000" minlength="0" maxlength="6" id="" required data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này">
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
@@ -400,7 +402,6 @@
 																		<div id="guidon" style="">
 																			<button type="submit" id="btn_GuiDon" style="color: #fff;background-color: #5bc0de;border-color: #46b8da; height:35px;width:150px;background-image: none;border: 1px solid transparent;border-radius: 4px; margin-right:15px;float:right;">Gửi đơn đăng ký</button>
 																			<a class="btn btn-warning" href="sinhvien_DeTaiDeXuat.jsp" role="button" style="margin-left:10px">Đăng ký đề tài được đề xuất</a>
-
 																		</div>
 																	</div>
 																</div>

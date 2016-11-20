@@ -127,7 +127,7 @@
 											</tbody>
 										</table>
 									</div>
-									<form id="form_HuyGH" onsubmit="return validate(this);">
+									<form id="form_HuyGH" action="TaiKhoan_Servlet" method="post">
 										<div class="form-inline">
 											<div class="col-xs-6">
 											<label class="fieldinput" style="margin-left:10px;">Họ tên: </label>
@@ -154,8 +154,9 @@
 												</div>
 											</div>
 											<div>
-											<button type="submit" id="btn_GuiDon" type="button" class="btn btn-info" style="float:right; margin-right:10px; margin-top:380px;">Gửi đơn</button>
+											
 											</div>
+											<input type="submit" id="btn_GuiDon" type="button" class="btn btn-info" style="float:right; margin-right:10px; margin-top:380px;" value="Gui don">
 									</form>
 								</div>
 							</div>

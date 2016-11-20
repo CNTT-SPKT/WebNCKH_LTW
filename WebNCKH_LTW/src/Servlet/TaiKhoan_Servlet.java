@@ -42,56 +42,58 @@ public class TaiKhoan_Servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String command = request.getParameter("command");
-		String quyen = request.getParameter("Quyen");
-		TaiKhoan tk=new TaiKhoan();
-		try {
-			tk = crt.gettk(request.getParameter("MaTK"));
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		tk.setEmail(request.getParameter("email"));
-		tk.setSoDT(request.getParameter("sodt"));
-		tk.setCNNH(request.getParameter("cnnganhang"));
-		tk.setMSNH(request.getParameter("masoNH"));
+		System.out.println("vao");
 		
-		String url="", error="";
-		
-		try{
-			switch(command){
-			case "insert":
-				url="";
-				break;
-			case "update":
-				boolean ktra=crt.updateTaiKhoan(tk);
-				if(ktra)
-				{
-
-					error="Thành công";
-					if(quyen.equals("Admin"))
-						url="Admin.jsp";
-					else
-						url="SinhVienPage.jsp";
-				}
-				else
-				{
-					error="Thất bại";
-					if(quyen.equals("Admin"))
-						url="Admin.jsp";
-					else 
-						url="SinhVienPage.jsp";
-					
-				}
-				break;
-			}
-		}
-		catch(Exception e)
-		{
-			error="Xảy ra lỗi ngẫu nhiên!";
-		}
-		request.setAttribute("error", error);
-		response.sendRedirect(url);
+//		String command = request.getParameter("command");
+//		String quyen = request.getParameter("Quyen");
+//		TaiKhoan tk=new TaiKhoan();
+//		try {
+//			tk = crt.gettk(request.getParameter("MaTK"));
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		tk.setEmail(request.getParameter("email"));
+//		tk.setSoDT(request.getParameter("sodt"));
+//		tk.setCNNH(request.getParameter("cnnganhang"));
+//		tk.setMSNH(request.getParameter("masoNH"));
+//		
+//		String url="", error="";
+//		
+//		try{
+//			switch(command){
+//			case "insert":
+//				url="";
+//				break;
+//			case "update":
+//				boolean ktra=crt.updateTaiKhoan(tk);
+//				if(ktra)
+//				{
+//
+//					error="Thành công";
+//					if(quyen.equals("Admin"))
+//						url="Admin.jsp";
+//					else
+//						url="SinhVienPage.jsp";
+//				}
+//				else
+//				{
+//					error="Thất bại";
+//					if(quyen.equals("Admin"))
+//						url="Admin.jsp";
+//					else 
+//						url="SinhVienPage.jsp";
+//					
+//				}
+//				break;
+//			}
+//		}
+//		catch(Exception e)
+//		{
+//			error="Xảy ra lỗi ngẫu nhiên!";
+//		}
+//		request.setAttribute("error", error);
+//		response.sendRedirect(url);
 	}
 
 }

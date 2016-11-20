@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.sql.Date;
 
 import com.mysql.jdbc.PreparedStatement;
 import com.sun.istack.internal.logging.Logger;
@@ -561,11 +565,120 @@ public class DeTai_Controller {
 		return false;
 	}
 	
+	public boolean insert_DeTaiSVDK(DeTai dt) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "insert into DeTai values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		try {
+			SimpleDateFormat format = new SimpleDateFormat( "MM/dd/yyyy" );  
+			java.util.Date myDate = format.parse(dt.getNgayThucHien());
+			java.sql.Date ngaythuchien = new java.sql.Date( myDate.getTime() );
+			java.util.Date myDate2 = format.parse(dt.getNgayKetThuc());
+			java.sql.Date ngayketthuc = new java.sql.Date( myDate2.getTime() );
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1,dt.getMaDT());
+			ps.setString(2, dt.getMaHienThi());
+			ps.setString(3, dt.getMaTT());
+			ps.setString(4, dt.getMaCN());
+			ps.setString(5, dt.getSinhVien1());
+			ps.setString(6, dt.getSinhVien2());
+			ps.setString(7, dt.getGVHD());
+			ps.setString(8, dt.getTenDT());
+			ps.setString(9, dt.getMoTa());
+			ps.setString(10, dt.getLinhVuc());
+			ps.setString(11, dt.getLoaiHinh());
+			ps.setDate(12, ngaythuchien);
+			ps.setDate(13, ngayketthuc);
+			ps.setString(14, dt.getCoQuanChuTri());
+			ps.setString(15, dt.getTinhHinhTrong());
+			ps.setString(16, dt.getTinhHinhNgoai());
+			ps.setString(17, dt.getTinhCapThiet());
+			ps.setString(18, dt.getMucTieu());
+			ps.setString(19, dt.getPPNC());
+			ps.setString(20, dt.getNoiDungNC());
+			ps.setString(21, dt.getSPDuKien());
+			ps.setString(22, dt.getDiaChiUD());
+			ps.setDouble(23, dt.getKinhPhi());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
+	
+	public ArrayList<DeTai> getListDeTai()  throws SQLException{
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "select * from DeTai";
+        ArrayList<DeTai> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	DeTai dt = new DeTai();
+            	dt.setMaDT(rs.getString("MaDT"));
+            	dt.setMaHienThi(rs.getString("MaHienThi"));
+            	dt.setMaTT(rs.getString("MaTT"));
+            	dt.setMaCN(rs.getString("MaCN"));
+            	dt.setSinhVien1(rs.getString("SinhVien1"));
+            	dt.setSinhVien2(rs.getString("SinhVien2"));
+            	dt.setGVHD(rs.getString("GVHD"));
+            	dt.setTenDT(rs.getString("TenDT"));
+            	dt.setMoTa(rs.getString("MoTa"));
+            	dt.setLinhVuc(rs.getString("LinhVuc"));
+            	dt.setLoaiHinh(rs.getString("LoaiHinh"));
+            	dt.setNgayThucHien(rs.getString("NgayThucHien"));
+            	dt.setNgayKetThuc(rs.getString("NgayKetThuc"));
+            	dt.setCoQuanChuTri(rs.getString("CoQuanChuTri"));
+            	dt.setTinhHinhTrong(rs.getString("TinhHinhTrong"));
+            	dt.setTinhHinhNgoai(rs.getString("TinhHinhNgoai"));
+            	dt.setTinhCapThiet(rs.getString("TinhCapThiet"));
+            	dt.setMucTieu(rs.getString("MucTieu"));
+            	dt.setPPNC(rs.getString("PPNC"));
+            	dt.setNoiDungNC(rs.getString("NoiDungNC"));
+            	dt.setSPDuKien(rs.getString("SPDuKien"));
+            	dt.setDiaChiUD(rs.getString("DiaChiUD"));
+            	dt.setKinhPhi(rs.getDouble("KinhPhi"));
+            	list.add(dt);
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+	
+	
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
 		DeTai dt=new DeTai();
-		for(DeTai c : ctrl.getListDeTaiPhanCongPheDuyet("lxtriet@gmail.com")){  
-			System.out.println(c.getTenCN());
-		}
+		int sodt=ctrl.getListDeTai().size()+1;
+		String MaDT2="dt"+Integer.toString(sodt);
+		dt.setMaDT(MaDT2);
+		dt.setMaHienThi(null);
+		dt.setMaTT("tt1");
+		dt.setMaCN("tk4");
+		dt.setSinhVien1("tk5");
+		dt.setSinhVien2("tk6");
+		dt.setGVHD("tk3");
+		dt.setTenDT("de tai moi");
+		dt.setMoTa("nhu c");
+		dt.setLinhVuc("Tu nhien");
+		dt.setLoaiHinh("co ban");
+		dt.setNgayThucHien("1/1/2011");
+		dt.setNgayKetThuc("2/2/2011");
+		dt.setCoQuanChuTri("Kho CNT");
+		dt.setTinhHinhTrong(null);
+		dt.setTinhHinhNgoai(null);
+		dt.setTinhCapThiet(null);
+		dt.setMucTieu(null);
+		dt.setPPNC(null);
+		dt.setNoiDungNC(null);
+		dt.setSPDuKien(null);
+		dt.setDiaChiUD(null);
+		dt.setKinhPhi(200000);
+		boolean t=ctrl.insert_DeTaiSVDK(dt);
+		if(t)
+			System.out.println("zolo");
 	}
 }

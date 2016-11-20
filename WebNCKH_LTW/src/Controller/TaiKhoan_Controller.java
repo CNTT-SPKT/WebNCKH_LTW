@@ -209,16 +209,39 @@ public class TaiKhoan_Controller {
 		}
 		return list;
 	}
+	
+	public TaiKhoan getTaiKhoanByTen(String hoten) {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "SELECT * FROM TaiKhoan where HoTen='" + hoten + "'";
+		TaiKhoan tk = new TaiKhoan();
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+
+				tk.setMaTK(rs.getString("MaTK"));
+				tk.setMatKhau(rs.getString("MatKhau"));
+				tk.setQuyen(rs.getString("Quyen"));
+				tk.setHoTen(rs.getString("HoTen"));
+				tk.setNgaySinh(rs.getString("NgaySinh"));
+				tk.setNganh(rs.getString("Nganh"));
+				tk.setEmail(rs.getString("Email"));
+				tk.setMSNH(rs.getString("MSNH"));
+				tk.setCNNH(rs.getString("CNNH"));
+
+			}
+			cons.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tk;
+	}
 
 	public static void main(String[] args) throws SQLException, Exception {
 		TaiKhoan_Controller ctrl = new TaiKhoan_Controller();
 		TaiKhoan tk=new TaiKhoan();
-		tk = ctrl.gettk("tk7");
-		tk.setEmail("xuantriet3@gmail.com");
-		tk.setMSNH("123456");
-		tk.setSoDT("01645059996");
-		tk.setCNNH("ABCXCZ");
-		ctrl.updateTaiKhoan(tk);
+		tk = ctrl.getTaiKhoanByTen("Lâm Xuân Triết");
+		System.out.println(tk.getQuyen());
 	}
 
 }

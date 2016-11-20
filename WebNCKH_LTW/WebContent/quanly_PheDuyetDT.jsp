@@ -285,7 +285,7 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="tab-pane active" id="postThongBao">
+                         <div class="tab-pane" id="postThongBao">
                             <div class="row">
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">THÔNG BÁO</h2><hr>
