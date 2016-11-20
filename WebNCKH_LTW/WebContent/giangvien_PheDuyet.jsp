@@ -656,8 +656,8 @@
 											</div>
 										</div>
 									</div>
-									<a href="DeTai_Servlet?command=pheduyet&xuly=dongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
-								<a href="DeTai_Servlet?command=pheduyet&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
+									<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=dongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
+								<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
 								</div>
 							</div>
 						</div>

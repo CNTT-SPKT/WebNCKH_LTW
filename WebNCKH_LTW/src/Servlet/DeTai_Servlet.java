@@ -49,16 +49,18 @@ public class DeTai_Servlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		System.out.println("Vào đề tài servlet thành công!");
-		
+		String MaDT="";
+		String xuly="";
 		String command = request.getParameter("command");
+		
 		
 		String url="", error="";
 		try{
 			switch(command){
-				case "pheduyet":
+				case "GV_pheduyetDT":
 					System.out.println("Vào phê duyệt");
-					String xuly = request.getParameter("xuly");
-					String MaDT = request.getParameter("MaDT");
+					xuly = request.getParameter("xuly");
+					MaDT = request.getParameter("MaDT");
 					DeTai dt = detaictrl.getDeTai(MaDT);
 					
 					if(xuly.equals("dongy"))
@@ -77,8 +79,8 @@ public class DeTai_Servlet extends HttpServlet {
 					System.out.println("Vào đăng ký đề tài");
 					DeTai dkDT=new DeTai();
 					int sodt=detaictrl.getListDeTai().size()+1;
-					String MaDT2="dt"+Integer.toString(sodt);
-					dkDT.setMaDT(MaDT2);
+					MaDT="dt"+Integer.toString(sodt);
+					dkDT.setMaDT(MaDT);
 					dkDT.setMaHienThi(null);
 					dkDT.setMaTT("tt1");
 					
@@ -142,6 +144,59 @@ public class DeTai_Servlet extends HttpServlet {
 						else
 							url="quanlyPage.jsp";
 					}
+					
+					break;
+				case "GV_pheduyeHuy_GiaHan":
+					String yeucau = request.getParameter("yeucau");
+					xuly = request.getParameter("xuly");
+					MaDT = request.getParameter("MaDT");
+					String MaGV = request.getParameter("MaGV");
+					DeTai dt2 = detaictrl.getDeTai(MaDT);
+					TB_TK tbtk = new TB_TK();
+					ThongBao tb = thongbaoctrl.getThongBao(MaGV,dt2.getMaCN());
+					if(thongbaoctrl.getThongBao(MaGV,dt2.getMaCN()).getMaTB()==null)
+				    {
+						System.out.println("chua co hop thoai");
+				    	int n =thongbaoctrl.getListThongBao().size();
+					    tb.setMaTB("tb"+(n+1));
+					    tb.setNguoiGui(MaGV);
+					    tb.setNguoiNhan(dt2.getMaCN());
+					    if(thongbaoctrl.createThongBao(tb))
+					    	System.out.println("Tạo hộp thoại thành công");
+				    }
+					tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+					tbtk.setMaLTB("ltt1");
+					tbtk.setMaTB(tb.getMaTB());
+					System.out.println(MaGV+"_______"+tb.getMaTB()+"______"+dt2.getMaCN());
+					if(xuly.equals("khongdongy"))
+					{
+						dt2.setMaTT("tt3"); System.out.println("Yêu cầu không được đồng ý, đề tài vẫn được tiến hành");
+						if(yeucau.equals("tt6"))
+							tbtk.setTinTB("Thông báo: yêu cầu gia hạn đề tài "+MaDT+" không được đồng ý");
+						else if(yeucau.equals("tt4"))
+							tbtk.setTinTB("Thông báo: yêu cầu hủy đề tài "+MaDT+" không được đồng ý");
+					}
+					else if(xuly.equals("dongy"))
+					{
+						if(yeucau.equals("tt6"))
+						{
+							dt2.setMaTT("tt7"); System.out.println("Gia hạn đề tài thành công");
+							tbtk.setTinTB("Thông báo: gia hạn đề tài "+MaDT+" thành công");
+						}
+						else if(yeucau.equals("tt4"))
+						{
+							dt2.setMaTT("tt5"); System.out.println("Hủy đề tài thành công");
+							tbtk.setTinTB("Thông báo: hủy đề tài "+MaDT+" thành công");
+						}
+					}
+					if(tb_tkctrl.insertTB_TK(tbtk))
+						System.out.println(tbtk.getTinTB());
+					if(detaictrl.updateTrangThai_DeTai(dt2))
+						error="Thành công";
+					else
+						error="Thất bại";
+					System.out.println(error);
+					url="giangvienPage.jsp";
 					
 					break;
 			}

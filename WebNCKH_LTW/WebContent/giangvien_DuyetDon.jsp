@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="vendor/bootstrap.css">
 	<link rel="stylesheet" href="1.css">
 	<link rel="stylesheet" href="vendor/font-awesome.css">
+	<script type="text/javascript" src="jquery.validate.min.js"></script>
 </head>
 <%  TB_TK_Controller cttb= new TB_TK_Controller();
 	ThongBao_Controller tb= new ThongBao_Controller();
@@ -30,6 +31,8 @@
 	String maDT = "";
 	String maTT = "";
 	String lydo="";
+	String yeucauXuly="";
+	String giahanDen="";
 	if (request.getParameter("MaTT") != null){
 		maTT = request.getParameter("MaTT");
 		maDT = request.getParameter("MaDT");
@@ -37,13 +40,25 @@
 		DonGiaHan dgh=new DonGiaHan();
 		dhdt=dh.getDonHuy(maDT);
 		dgh=gh.getDGH(maDT);
+		giahanDen=dgh.getGHDen();
 		if(dgh.getLyDo()==null)
 			lydo=dhdt.getLyDo();
 		else
 			lydo=dgh.getLyDo();
 		detai=dt.getDeTai(maDT);
+		if(maTT.equals("tt6"))
+			yeucauXuly="ĐƠN GIA HẠN ĐỀ TÀI";
+		else
+			yeucauXuly="ĐƠN HỦY ĐỀ TÀI";
 	}
 %>
+<script type="text/javascript">
+$( document ).ready(function() {
+	var tt=$('#trangthaiDT').val();
+	  if(tt == "tt4")
+		  $('#thoigianGiahan').addClass('hidden');
+	});
+</script>
 <body>
 	<div class="page">
 		<div class="menu">
@@ -493,7 +508,7 @@
 			<div class="tab-pane active" id="DDHGH">
 							<div class="row">
 								<div class="QLyTK" style="background:white;height:500px; margin-right:15px;border-radius:3px;">
-									<h2 class="tieude_theh">DUYỆT ĐƠN HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
+									<h2 class="tieude_theh"><%=yeucauXuly %></h2><hr>
 
 									<div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
 										<table class="table table-striped table-hover">
@@ -512,7 +527,7 @@
 													<td> <%=detai.getTenDT() %></td>
 													<td> <%=detai.getNgayThucHien() %></td>
 													<td> <%=detai.getNgayKetThuc() %></td>
-													<td> <%=detai.getTenTT() %></td>
+													<td> <%=detai.getMaTT() %></td>
 													
 												</tr>
 
@@ -524,21 +539,20 @@
 										<input type="text" name="firstname" style="margin-right:50px;" value=<%=detai.getTenCN() %> readonly>
 										<label style="margin-left:10px;margin-right:5px;">MSSV:</label>
 										<input type="text" name="lastname" value="14110180" readonly>
+										<input type="hidden" id="trangthaiDT" value=<%=maTT%>>
 									</form><br>
-									<label class="col-sm-4 control-label" for="mota">Lý do hủy/gia hạn đề tài</label><br>
+									<div id="thoigianGiahan">
+									<label style="margin-left:15px;margin-right:5px;">Gia hạn đến ngày:</label>
+									<input type="text" name="lastname" value=<%=giahanDen%> readonly>
+									</div>
+									<label class="col-sm-4 control-label" for="mota">Lý do:</label><br>
 									<div class="col-sm-12">
 										<textarea name="" id="mota" class="form-control" rows="3" required="required" readonly><%=lydo%></textarea>
 									</div>
 									<div class="row">
-									<button style="margin-top:340px;margin-right:150px;" type="button" class="btn  btn-info"><b>Phê duyệt</b></button>
-									<button style="margin-top:15px;margin-left:150px;" type="button" class="btn btn-danger"><b>Không đồng ý</b></button>
+									<a href="DeTai_Servlet?command=GV_pheduyeHuy_GiaHan&xuly=dongy&MaDT=<%=detai.getMaDT()%>&yeucau=<%=detai.getMaTT()%>&MaGV=<%=detai.getGVHD()%>"><button style="margin-top:340px;margin-right:150px;" type="button" class="btn  btn-info">Phê duyệt</button></a>
+									<a href="DeTai_Servlet?command=GV_pheduyeHuy_GiaHan&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>&yeucau=<%=detai.getMaTT()%>&MaGV=<%=detai.getGVHD()%>"><button style="margin-top:15px;margin-left:150px;" type="button" class="btn btn-danger">Không đồng ý</button></a>
 									</div>
-									<script>
-										$("#DDHGH button").on('click', function() {
-											alert("Xử lý thành công");
-											window.location.href = "giangvienPage.jsp";
-										});
-									</script>
 								</div>
 							</div>
 						</div>
