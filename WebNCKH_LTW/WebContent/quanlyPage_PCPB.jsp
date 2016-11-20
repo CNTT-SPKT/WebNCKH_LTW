@@ -24,15 +24,16 @@
 
 <body>
 <%
-	DeTai_Controller detaiDAO = new DeTai_Controller();
-	TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
-	ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
-	HoiDong_Controller hoidongDao =new HoiDong_Controller();
-	TB_TK_Controller cttb= new TB_TK_Controller();
-	ThongBao_Controller tb= new ThongBao_Controller();
-	TrangThai_Controller tt=  new TrangThai_Controller();
-	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
-	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+DeTai_Controller detaiDAO = new DeTai_Controller();
+TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
+ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
+HoiDong_Controller hoidongDao =new HoiDong_Controller();
+TB_TK_Controller cttb= new TB_TK_Controller();
+ThongBao_Controller tb= new ThongBao_Controller();
+TrangThai_Controller tt=  new TrangThai_Controller();
+CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+
 %>
     <div class="page">
         <div class="menu">
@@ -140,7 +141,7 @@
                                                     <td><%=c.getMaDT() %></td>
                                                     <td><%=c.getTenDT() %></td>
                                                     <td><%=c.getHoTen() %></td>
-                                                    <td><a href="quanly_ChiTiet.jsp">Xem</a></td>
+                                                    <th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Xem báo cáo</a></th>
                                                     <td id="pcgv">
                                                         <div class="form-group">
                                                             <select>
@@ -165,12 +166,12 @@
 
                             </div>
                         </div>
-                          <div class="tab-pane active" id="postThongBao">
+                          <div class="tab-pane" id="postThongBao">
                             <div class="row">
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">THÔNG BÁO</h2><hr>
                                     <div class="ql_table_thongbao">
-                                        <table class="table table-striped table-hover">
+                                       <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
                                                     <th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
@@ -182,14 +183,27 @@
                                             </thead>
                                             <tbody>
                                              <%
-                                         	     	for(ThongBao c: thongbaoDAO.getListThongBaoQL()){                      			
+                                         	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLDK()){                      			
                                               %>
                                                 <tr>
                                                     <td><input type="checkbox" name="" value=""></td>
                                                     <td><%=c.getTenLoaiTB() %></td>
                                                     <td><%=c.getTenNguoiGui() %></td>
                                                     <td><%=c.getNgayGui() %></td>
-                                                    <td><a href="quanly_PheDuyetDT.jsp">Xem</a></td>
+                                                    <th><a href="quanly_PheDuyetDT.jsp?MaDT=<%%>">Phê duyệt</a></th>
+                                                  
+                                                </tr>
+                                         <%} %>
+                                         
+                                         		  <%
+                                         	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLHuyGH()){                      			
+                                              %>
+                                                <tr>
+                                                    <td><input type="checkbox" name="" value=""></td>
+                                                    <td><%=c.getTenLoaiTB() %></td>
+                                                    <td><%=c.getTenNguoiGui() %></td>
+                                                    <td><%=c.getNgayGui() %></td>
+                                                    <th><a href="quanly_DuyetDon.jsp?MaDT=<%%>">Duyệt đơn</a></th>
                                                 </tr>
                                          <%} %>
                                             </tbody>
@@ -257,7 +271,7 @@
                             <!--danh sách đề tài phản biện-->
                             <div class="row">
                                 <div class="cldsDTPB" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
-                                    <h2 class="tieude_theh">PHÂN CÔNG PHẢN BIỆN</h2><hr>
+                                    <h2 class="tieude_theh"> DANH SÁCH ĐỀ TÀI ĐÃ PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="quanly_dsHDPB">
 
                                         <div class="ql_table_dsDTPB">
@@ -281,8 +295,9 @@
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><a href="quanly_ChiTiet.jsp">Xem</a></td>
-                                                        <td><a href="quanly_XemBaoCao.jsp"><span style="color:gray">Chi tiết</span></a></td>
+                                                       	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
+                                                        
+                                                       	<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=c.getMaDT() %>">Xem báo cáo</a></th>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>
@@ -363,7 +378,7 @@
                                             </div>
 
                                         </div>
-                                        <table class="table table-striped table-hover" id="myTable">
+                                          <table class="table table-striped table-hover" id="myTable">
                                             <thead class="thead-default ">
                                                 <tr class="success ">
                                                     <th>Mã đề tài</th>
@@ -386,7 +401,7 @@
                                                     <th><%=c.getTenDT()%> </th>
                                                     <th><%=c.getHoTen()%></th>
                                                		<th><%=c.getTenGVHD() %></th>                                      
-                                                    <th><a href="quanly_ChiTiet.jsp">Chi tiết</a></th>
+                                                    	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
                                                     <th>
                                                         <div class="form-group ">
                                                       
@@ -402,8 +417,7 @@
                                                          </div>
                                                     </th>
                                               
-                                                    <th><a href="quanly_XemBaoCao.jsp">Xem </a></th>
-                                                     
+                                                    	<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=c.getMaDT() %>">Xem báo cáo</a></th>
                                                 </tr>    
                                                    <%
                                                    }
@@ -437,10 +451,10 @@
                                 <div class="ql_dsDeTaiPheDuyet " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHÊ DUYỆT</h2><hr>
                                     <div class="ql_tb_dsDeTaiPheDuyet ">
-                                        <table class="table table-striped table-hover">
+                                         <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
-													<th>Cấp đề tài</th>
+													<th>Mã đề tài</th>
 													<th>Tên đề tài</th>
 													<th>Lĩnh vực</th>
 													<th>Chủ nghiệm đề tài</th>
@@ -452,11 +466,11 @@
 											for (DeTai ct: detaiDAO.getListDeTaiPheDuyetQL()) {
 											%>
 												<tr>
-													<th><input style="width:100px"type="text" name="fname"  placeholder="Cấp mã đề tài" value=""/></th>
-													<th><%=ct.getTenDT() %></th>
+													<th>null</th>
+													<th><%=ct.getTenDT()%></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenCN() %></th>
-													<th><a href="">Phê duyệt</a></th>
+													<th><a href="quanly_PheDuyetDT.jsp?MaDT=<%=ct.getMaDT() %>">Phê duyệt</a></th>
 												</tr>
 											<%
 			    							}
@@ -472,7 +486,7 @@
                                 <div class="ql_dsDeTaiHuongDan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI HƯỚNG DẪN</h2><hr>
                                     <div class="ql_tb_dsDeTaiHuongDan ">
-                                      <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -490,8 +504,8 @@
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
-													<th><a href="">Chi tiết</a></th>
-													<th><a href="">Xem báo cáo</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
 												</tr>
 												<%
 			    							}
@@ -738,7 +752,7 @@
                                 <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                       <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -757,7 +771,7 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="">Xử lý</a></th>
+													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
 												<%
 			    							}

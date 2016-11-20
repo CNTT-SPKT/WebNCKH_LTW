@@ -12,13 +12,39 @@ import Packages.DBConnect;
 
 public class ThongBao_Controller {
 	//BAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
-	public ArrayList<ThongBao> getListThongBaoQL() {
+	public ArrayList<ThongBao> getListThongBaoQLDK() {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
         		+ "FROM ThongBao,LoaiTb,tb_tk,taikhoan, taikhoan as TenNguoiGui "
         		+ "where loaitb.MaLTB=tb_tk.MaLTB and thongbao.matb=tb_tk.Matb and thongbao.nguoinhan=taikhoan.matk"
         		+ " and TenNguoiGui.MaTK=thongbao.NguoiGui "
-        		+ "and TaiKhoan.Quyen='Manager'"
+        		+ "and TaiKhoan.Quyen='Manager' and loaitb.MaLTB='ltt2'"
+			;
+        		
+        ArrayList<ThongBao> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	ThongBao tb = new ThongBao();
+            	tb.setTenLoaiTB(rs.getString("TenLoaiTB"));
+            	tb.setTenNguoiGui(rs.getString("TenNG"));
+            	tb.setNgayGui(rs.getString("NgayGui"));
+            	list.add(tb);
+            }
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+	public ArrayList<ThongBao> getListThongBaoQLHuyGH() {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
+        		+ "FROM ThongBao,LoaiTb,tb_tk,taikhoan, taikhoan as TenNguoiGui "
+        		+ "where loaitb.MaLTB=tb_tk.MaLTB and thongbao.matb=tb_tk.Matb and thongbao.nguoinhan=taikhoan.matk"
+        		+ " and TenNguoiGui.MaTK=thongbao.NguoiGui "
+        		+ "and TaiKhoan.Quyen='Manager' and (loaitb.MaLTB='ltt3' or loaitb.MaLTB='ltt4')";
 			;
         		
         ArrayList<ThongBao> list = new ArrayList<>();
