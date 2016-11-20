@@ -23,6 +23,17 @@
 <script type="text/javascript" src="jquery.validate.min.js"></script>
 <script type="text/javascript" src="angular.min.js"></script>
 <script type="text/javascript" src="ng-table.js"></script>
+<script>
+$( document ).ready(function() {
+	$('#DSDeTai_SV tr').each(function() {
+	    var customerId = $(this).find(".trangthaiDT").text();
+	    if(customerId != "Đang tiến hành")
+	    {
+    		$(this).find(".dsDeTai_actionButton").attr("disabled",true);
+    	}
+	 });
+});
+</script>
 </head>
 <body >
 <% TB_TK_Controller cttb= new TB_TK_Controller();
@@ -166,7 +177,7 @@
 											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
 												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
 												<div class="sv_table_dsDeTai">
-													<table class="table table-striped table-hover">
+													<table class="table table-striped table-hover" id="DSDeTai_SV">
 														<thead class="thead-default">
 															<tr class="success">
 																<th>Mã số</th>
@@ -189,7 +200,7 @@
 																<td><%=detai.getTenDT() %></td>
 																<td><%=detai.getNgayThucHien() %></td>
 																<td><%=detai.getNgayKetThuc()%></td>
-																<td><%=detai.getTenTT()%></td>
+																<td class="trangthaiDT"><%=detai.getTenTT()%></td>
 																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
 																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a>
