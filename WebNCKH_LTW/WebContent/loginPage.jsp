@@ -58,7 +58,7 @@
 							<h3 class="panel-title" style="text-align:center"><b>Sign In</b></h3>
 						</div>
 						<div class="panel-body">
-							<form >
+							<form action="login.jsp">
 									<div class="form-inline" style="margin-left:70px">
 									<label>
 										<input type="radio" id="input_sv" name="phanquyen" value="Student" checked>
