@@ -147,7 +147,7 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiQL()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql ="select TKGV.HoTen as TenGV, TKSV.HoTen as TenSV, MaHienThi, TenDT, GVHD,TenTT"
+        String sql ="select DeTai.MaDT as MaDT, TKGV.HoTen as TenGV, TKSV.HoTen as TenSV, MaHienThi, TenDT, GVHD,TenTT"
         		+ " from DeTai,TaiKhoan as TKSV, TaiKhoan as TKGV,TrangThai "
         		+ "where DeTai.MaCN=TKSV.MaTk and TrangThai.MaTT=DeTai.MaTT and DeTai.GVHD=TKGV.MaTk";
         ArrayList<DeTai> list = new ArrayList<>();
@@ -156,6 +156,7 @@ public class DeTai_Controller {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             	DeTai dt = new DeTai();
+            	dt.setMaDT(rs.getString("MaDT"));
             	dt.setMaHienThi(rs.getString("MaHienThi"));
             	dt.setTenDT(rs.getString("TenDT"));
             	dt.setHoTen(rs.getString("TenSV"));
@@ -651,34 +652,8 @@ public class DeTai_Controller {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
-		DeTai dt=new DeTai();
-		int sodt=ctrl.getListDeTai().size()+1;
-		String MaDT2="dt"+Integer.toString(sodt);
-		dt.setMaDT(MaDT2);
-		dt.setMaHienThi(null);
-		dt.setMaTT("tt1");
-		dt.setMaCN("tk4");
-		dt.setSinhVien1("tk5");
-		dt.setSinhVien2("tk6");
-		dt.setGVHD("tk3");
-		dt.setTenDT("de tai moi");
-		dt.setMoTa("nhu c");
-		dt.setLinhVuc("Tu nhien");
-		dt.setLoaiHinh("co ban");
-		dt.setNgayThucHien("1/1/2011");
-		dt.setNgayKetThuc("2/2/2011");
-		dt.setCoQuanChuTri("Kho CNT");
-		dt.setTinhHinhTrong(null);
-		dt.setTinhHinhNgoai(null);
-		dt.setTinhCapThiet(null);
-		dt.setMucTieu(null);
-		dt.setPPNC(null);
-		dt.setNoiDungNC(null);
-		dt.setSPDuKien(null);
-		dt.setDiaChiUD(null);
-		dt.setKinhPhi(200000);
-		boolean t=ctrl.insert_DeTaiSVDK(dt);
-		if(t)
-			System.out.println("zolo");
-	}
-}
+		for(DeTai c: ctrl.getListDeTaiQL())
+		{           
+		System.out.println(c.getMaDT());
+		}
+}}

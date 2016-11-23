@@ -3,15 +3,58 @@ package Controller;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import com.mysql.jdbc.PreparedStatement;
+import com.sun.istack.internal.logging.Logger;
 
+import Model.DeTai;
 import Model.HoiDong;
 import Packages.DBConnect;
 
 public class HoiDong_Controller {
+	public Boolean kiemTra(String MaHD)
+	{
+		Connection connection = DBConnect.getConnecttion();
+		String sql ="SELECT * FROM HoiDong WHERE HoiDong.MaHD='"+MaHD+"'";
+		try {
+			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
+		public void insert(String MaHD,String PhanBien,String ChuTich,String UyVien,String NgayThanhLap) {
+		Connection cons = DBConnect.getConnecttion();
+		 String sql = "INSERT INTO hoidong(MaHD,PhanBien,ChuTich,UyVien,NganhThanhLap)"
+	        		+ " values (?,?,?,?,?)";
+		try {
+			 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+	           
+	            ps.setString(1, MaHD);
+	            ps.setString(2, PhanBien);
+	            ps.setString(3, ChuTich);
+	            ps.setString(4, UyVien);
+	            ps.setString(5, NgayThanhLap);
+	            
+	            
+	          ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+	}
 	
 	
 		public ArrayList<HoiDong> getListHoiDongQL() {
