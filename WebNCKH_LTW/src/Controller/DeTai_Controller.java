@@ -15,6 +15,7 @@ import com.mysql.jdbc.PreparedStatement;
 import com.sun.istack.internal.logging.Logger;
 
 import Model.DeTai;
+import Model.DonGiaHan;
 import Model.TaiKhoan;
 import Packages.DBConnect;
 
@@ -652,8 +653,7 @@ public class DeTai_Controller {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
-		for(DeTai c: ctrl.getListDeTaiQL())
-		{           
-		System.out.println(c.getMaDT());
-		}
+		DeTai ct=ctrl.getDeTai("dt1");
+		System.out.println(ct.getTenDT());
+		
 }}
