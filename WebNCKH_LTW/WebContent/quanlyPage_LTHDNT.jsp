@@ -121,13 +121,13 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="HDNT">
                             <div class="row">
-                            <form action="HoiDong_Servlet" method="post">
+                         
                                 <div class="cldsHDNT" style="background:white;height:620px;margin-right:15px;border-radius:3px;margin-top:0px;">
                                     <h2 class="tieude_theh"> THÀNH LẬP HỘI ĐỒNG NGHIỆM THU</h2><hr>
-                                      
+                                            
                                     <div class="tlhd">
                                         <!--Thành lập hội đồng nghiệm thu   -->
-                                 
+                                      <form action="HoiDong_Servlet" method="post">   
                                             <table class="table table-striped table-hover">
                                                 <thead class="thead-default">
                                                     <tr class="success">    
@@ -143,14 +143,14 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                         	 <input type="text" name="MaHD" value="" style="height:30px;width:42px">
+                                                         	 <input type="text" name="MaHD" style="height:30px;width:42px">
                                                         </td>
 
                                                         <td>
                                                             <select style="height:30px" name="ChuTich">
                                                             <option value="" select>Chọn Chủ Tịch</option>
                                                             <%for(TaiKhoan tk:taikhoanDAO.getListTenThanhVienHDQL()){ %>
-                                                            <option value=<%=tk.getMaTK() %> name="selectCT"><%=tk.getHoTen() %></option>
+                                                            <option value='<%=tk.getMaTK() %>'name="selectCT"><%=tk.getHoTen() %></option>
                                                             <%} %>
                                                             </select>
                                                         </td>
@@ -158,7 +158,7 @@
                                                             <select style="height:30px" name="PhanBien">
                                                              <option value="" select>Chọn Phản Biện</option>
                                                                <%for(TaiKhoan tk:taikhoanDAO.getListTenThanhVienHDQL()){ %>
-                                                            <option name="selectPB" value=<%=tk.getMaTK() %>><%=tk.getHoTen() %></option>
+                                                            <option name="selectPB" value='<%=tk.getMaTK() %>'><%=tk.getHoTen() %></option>
                                                             <%} %>
                                                             </select>
                                                      </td>
@@ -166,7 +166,7 @@
                                                             <select style="height:30px" name="UyVien">
                                                              <option value="" select>Chọn Ủy Viên</option>
                                                                <%for(TaiKhoan tk:taikhoanDAO.getListTenThanhVienHDQL()){ %>
-                                                            <option  name="selectUV" value=<%=tk.getMaTK() %>><%=tk.getHoTen() %></option>
+                                                            <option  name="selectUV" value='<%=tk.getMaTK() %>'><%=tk.getHoTen() %></option>
                                                             <%} %>
                                                             </select>
                                                         </td>
@@ -187,11 +187,20 @@
                                                     </tr>     
                                                 </tbody>
                                             </table>
-                                           <span class="input-group-btn" style="float:right;margin-right:200px;">
-                                                      <input type="submit" class="btn-info btn" value="Xác nhận">
+                                        <div>
+		                                    
+                                          <span class="input-group-btn" style="float:right;margin-right:200px;">   
+                                                      <input name="submit" type="submit" class="btn-info btn" value="Xác nhận">
                                                   </span>
+                                                  <p style="color:red;float:right"> <b>xx
+											   	${statusMsg}</b>
+											  </p>
+                                                 
+                               			 </form> 
+                               			 </div>	
                                             </div>
-                                       </form> 
+                                        
+                                           
                                 </div>
                             </div>
                         </div>

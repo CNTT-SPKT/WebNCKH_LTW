@@ -15,6 +15,7 @@ import com.mysql.jdbc.PreparedStatement;
 import com.sun.istack.internal.logging.Logger;
 
 import Model.CTNghiemThu;
+import Model.DeTai;
 import Model.TaiKhoan;
 import Packages.DBConnect;
 
@@ -23,7 +24,7 @@ public class TaiKhoan_Controller {
 	//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
 		public ArrayList<TaiKhoan> getListTenThanhVienHDQL() {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "select HoTen "
+	        String sql = "select MaTk,HoTen "
 	        		+ "from TaiKhoan "
 	        		+ "where Quyen='Lecturers' or Quyen='Manager'";
 	        ArrayList<TaiKhoan> list = new ArrayList<>();
@@ -33,6 +34,7 @@ public class TaiKhoan_Controller {
 	            while (rs.next()) {
 	            	TaiKhoan hd = new TaiKhoan();
 	            	hd.setHoTen(rs.getString("HoTen"));
+	            	hd.setMaTK(rs.getString("MaTk"));
 	               	list.add(hd);
 	            }
 	            cons.close();
@@ -239,9 +241,8 @@ public class TaiKhoan_Controller {
 
 	public static void main(String[] args) throws SQLException, Exception {
 		TaiKhoan_Controller ctrl = new TaiKhoan_Controller();
-		TaiKhoan tk=new TaiKhoan();
-		tk = ctrl.getTaiKhoanByTen("Lâm Xuân Triết");
-		System.out.println(tk.getQuyen());
+		
+		for(TaiKhoan tk:ctrl.getListTenThanhVienHDQL())
+		System.out.println(tk.getMaTK());
 	}
-
 }

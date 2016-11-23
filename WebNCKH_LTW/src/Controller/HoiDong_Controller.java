@@ -36,7 +36,7 @@ public class HoiDong_Controller {
 	//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
 		public void insert(String MaHD,String PhanBien,String ChuTich,String UyVien,String NgayThanhLap) {
 		Connection cons = DBConnect.getConnecttion();
-		 String sql = "INSERT INTO hoidong(MaHD,PhanBien,ChuTich,UyVien,NganhThanhLap)"
+		 String sql = "INSERT INTO hoidong"
 	        		+ " values (?,?,?,?,?)";
 		try {
 			 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -85,7 +85,23 @@ public class HoiDong_Controller {
 	        return list;
 	    }
 		
-		
+		public Boolean kiemtra(String MaHD)
+		{
+			Connection connection = DBConnect.getConnecttion();
+			String sql ="SELECT * FROM hoidong WHERE hoidong.MaHD='"+MaHD+"'";
+			try {
+				PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+				ResultSet rs = ps.executeQuery();
+				if(rs.next())
+				{
+					return true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
 		//ENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTIN
 	public ArrayList<HoiDong> getListThongBao() {
         Connection cons = DBConnect.getConnecttion();
