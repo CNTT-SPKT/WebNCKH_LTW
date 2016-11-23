@@ -311,7 +311,7 @@
                                 <div class="ql_dsDeTaiPhanBien" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="ql_tb_dsDeTaiPhanBien">
-                                       <table class="table table-striped table-hover">
+                                      <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -332,12 +332,12 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp?MaDT=">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp?MaDT=">Đánh giá</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
+													<th><a href="quanly_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
 												</tr>
 												<%
-			    											}
+			    								}
 												%>		
 											</tbody>
 										</table>
