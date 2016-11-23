@@ -49,7 +49,7 @@
 		DonGiaHan dgh=new DonGiaHan();
 		dhdt=dh.getDonHuy(maDT);
 		dgh=gh.getDGH(maDT);
-		if(dgh.getLyDo()==null)
+		if(dgh.getLyDo()== null)
 			lydo=dhdt.getLyDo();
 		else
 			lydo=dgh.getLyDo();
@@ -173,9 +173,9 @@
                                     </div>
                                    <form>
 										<label style="margin-left:15px;margin-right:5px;">Tên chủ nhiệm đề tài:</label>
-										<input type="text" name="firstname" style="margin-right:50px;" value=<%=detai.getTenCN() %> readonly>
+										<input type="text" name="firstname" style="margin-right:50px;" value='<%=detai.getTenCN() %>' readonly>
 										<label style="margin-left:10px;margin-right:5px;">MSSV:</label>
-										<input type="text" name="lastname" value="14110180" readonly>
+										<input type="text" name="lastname" value='<%=detai.getMSSVCN() %>' readonly>
 									</form><br>
 									<label class="col-sm-4 control-label" for="mota">Lý do hủy/gia hạn đề tài</label><br>
 									<div class="col-sm-12">
@@ -357,9 +357,9 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp?MaDT=">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp?MaDT=">Đánh giá</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
+													<th><a href="quanly_XemBaoCao.jsp?MaDT=">Xem báo cáo</a></th>
+													<th><a href="quanly_DanhGia.jsp?MaDT=">Đánh giá</a></th>
 												</tr>
 												<%
 			    											}
@@ -741,7 +741,7 @@
                                 <div class="ql_dsDeTaiDK " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐÃ ĐĂNG KÝ</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                        <table class="table table-striped table-hover">
+                                      <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -753,14 +753,14 @@
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
-													<th><%=ct.getTenGVHD() %></th>
+													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="">Chi tiết</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
 											<%
 			    							}

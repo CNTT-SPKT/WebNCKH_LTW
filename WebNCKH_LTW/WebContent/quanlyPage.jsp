@@ -673,7 +673,7 @@
                                 <div class="ql_dsDeTaiDK " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐÃ ĐĂNG KÝ</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                        <table class="table table-striped table-hover">
+                                       <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -685,14 +685,14 @@
 											</thead>
 											<tbody>
 											<%
-												for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
-													<th><%=ct.getTenGVHD() %></th>
+													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT()%>">Chi tiết</a></th>
+													 <th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
 											<%
 			    							}

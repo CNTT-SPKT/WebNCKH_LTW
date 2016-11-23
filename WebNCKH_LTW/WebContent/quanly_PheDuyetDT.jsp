@@ -495,9 +495,9 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp?MaDT=">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp?MaDT=">Đánh giá</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
+													<th><a href="quanly_XemBaoCao.jsp?MaDT=">Xem báo cáo</a></th>
+													<th><a href="quanly_DanhGia.jsp?MaDT=">Đánh giá</a></th>
 												</tr>
 												<%
 			    											}
@@ -892,14 +892,14 @@
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
-													<th><%=ct.getTenGVHD() %></th>
+													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="">Chi tiết</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
 											<%
 			    							}

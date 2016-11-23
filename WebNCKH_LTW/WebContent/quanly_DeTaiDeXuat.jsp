@@ -467,9 +467,9 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
-													<th><a href="giangvienPage_XemBC.jsp?MaDT=">Xem báo cáo</a></th>
-													<th><a href="giangvienPage_DanhGia.jsp?MaDT=">Đánh giá</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
+													<th><a href="quanly_XemBaoCao.jsp?MaDT=">Xem báo cáo</a></th>
+													<th><a href="quanly_DanhGia.jsp?MaDT=">Đánh giá</a></th>
 												</tr>
 												<%
 			    											}
@@ -851,7 +851,7 @@
                                 <div class="ql_dsDeTaiDK " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐÃ ĐĂNG KÝ</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                        <table class="table table-striped table-hover">
+                                       <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -868,9 +868,9 @@
 												<tr>
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
-													<th><%=ct.getTenGVHD() %></th>
+													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="">Chi tiết</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
 											<%
 			    							}

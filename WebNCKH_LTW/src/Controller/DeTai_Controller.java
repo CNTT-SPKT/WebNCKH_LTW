@@ -653,7 +653,7 @@ public class DeTai_Controller {
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
-		DeTai ct=ctrl.getDeTai("dt1");
-		System.out.println(ct.getTenDT());
+		for(DeTai ct:ctrl.getListDeTaiGV_DK("tin@gmail.com"))
+		System.out.println(ct.getMaDT());
 		
 }}
