@@ -127,7 +127,10 @@
 											</tbody>
 										</table>
 									</div>
-									<form id="form_HuyGH" action="TaiKhoan_Servlet" method="post">
+									<form  action="GiaHanDT_Servlet" method="POST">
+									<input type="hidden" name="command" value="update" />
+									<input type="hidden" name="xuly" value="guidongiahan" />
+									<input type="hidden" name="MaDT" value=<%=detai.getMaDT() %>/>
 										<div class="form-inline">
 											<div class="col-xs-6">
 											<label class="fieldinput" style="margin-left:10px;">Họ tên: </label>
@@ -153,10 +156,7 @@
 													<input type="text" type="text" name="ngay" class="form-control required ngay"  id="" required data-placement="right" data-trigger="manual" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-left:10px; margin-top:10px;"required>
 												</div>
 											</div>
-											<div>
-											
-											</div>
-											<input type="submit" id="btn_GuiDon" type="button" class="btn btn-info" style="float:right; margin-right:10px; margin-top:380px;" value="Gui don">
+											<button type="submit" id="btn_GuiDon"  class="btn btn-info" style="float:right; margin-right:10px; margin-top:380px;">Gửi đơn</button>
 									</form>
 								</div>
 							</div>

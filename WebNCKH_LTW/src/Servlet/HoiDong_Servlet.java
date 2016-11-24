@@ -101,12 +101,13 @@ public class HoiDong_Servlet extends HttpServlet {
 	}
 		catch (Exception e ) {
 		
-			out.println("Lỗi rồi!:" );
+//			out.println("Lỗi rồi!:" );
 //			out.println("Chủ tịch: "+ChuTich);
 //			out.println("pb: "+PhanBien);
 //			out.println("uv:"+UyVien);
 //			out.println("mahd:" +MaHD);
 //			out.println("ngaythanhlap:" +NgayThanhLap);
+			//Why?
 		
 		}
 		}
