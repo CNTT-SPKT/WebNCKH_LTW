@@ -33,15 +33,15 @@
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+	DonHuy_Controller dh= new DonHuy_Controller();
+	DonGiaHan_Controller gh=new DonGiaHan_Controller();
+	TaiKhoan tk=taikhoanDAO.getQL();
 	DeTai detai=new DeTai();
 	String maDT = "";
 	String maTT = "";
 	String lydo="";
-	
-	DeTai_Controller dt= new DeTai_Controller();
-	TaiKhoan_Controller tk=new TaiKhoan_Controller();
-	DonHuy_Controller dh= new DonHuy_Controller();
-	DonGiaHan_Controller gh=new DonGiaHan_Controller();
+	String yeucauXuly="";
+	String giahanDen="";
 	if (request.getParameter("MaTT") != null){
 		maTT = request.getParameter("MaTT");
 		maDT = request.getParameter("MaDT");
@@ -49,11 +49,16 @@
 		DonGiaHan dgh=new DonGiaHan();
 		dhdt=dh.getDonHuy(maDT);
 		dgh=gh.getDGH(maDT);
-		if(dgh.getLyDo()== null)
+		giahanDen=dgh.getGHDen();
+		if(dgh.getLyDo()==null)
 			lydo=dhdt.getLyDo();
 		else
 			lydo=dgh.getLyDo();
-		detai=dt.getDeTai(maDT);
+		detai=detaiDAO.getDeTai(maDT);
+		if(maTT.equals("tt6"))
+			yeucauXuly="ĐƠN GIA HẠN ĐỀ TÀI";
+		else
+			yeucauXuly="ĐƠN HỦY ĐỀ TÀI";
 	}
 %>
 
@@ -145,7 +150,7 @@
                         <div class="tab-pane active" id="DDHGH">
                             <div class="row">
                                 <div class="QLyTK" style="background:white;height:600px; margin-right:15px;border-radius:3px">
-                                    <h2 class="tieude_theh">DUYỆT ĐƠN HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
+                                    <h2 class="tieude_theh"><%=yeucauXuly %></h2><hr>
 
                                     <div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
                                        	<table class="table table-striped table-hover">
@@ -173,17 +178,22 @@
                                     </div>
                                    <form>
 										<label style="margin-left:15px;margin-right:5px;">Tên chủ nhiệm đề tài:</label>
-										<input type="text" name="firstname" style="margin-right:50px;" value='<%=detai.getTenCN() %>' readonly>
+										<input type="text" name="firstname" style="margin-right:50px;" value=<%=detai.getTenCN() %> readonly>
 										<label style="margin-left:10px;margin-right:5px;">MSSV:</label>
-										<input type="text" name="lastname" value='<%=detai.getMSSVCN() %>' readonly>
+										<input type="text" name="lastname" value=<%=detai.getMSSV() %> readonly>
+										<input type="hidden" id="trangthaiDT" value=<%=maTT%>>
 									</form><br>
-									<label class="col-sm-4 control-label" for="mota">Lý do hủy/gia hạn đề tài</label><br>
+									<div id="thoigianGiahan">
+									<label style="margin-left:15px;margin-right:5px;">Gia hạn đến ngày:</label>
+									<input type="text" name="lastname" value=<%=giahanDen%> readonly>
+									</div>
+									<label class="col-sm-4 control-label" for="mota">Lý do:</label><br>
 									<div class="col-sm-12">
 										<textarea name="" id="mota" class="form-control" rows="3" required="required" readonly><%=lydo%></textarea>
 									</div>
 									<div class="row">
-									<button style="margin-top:340px;margin-right:150px;" type="button" class="btn  btn-info"><b>Phê duyệt</b></button>
-									<button style="margin-top:15px;margin-left:150px;" type="button" class="btn btn-danger"><b>Không đồng ý</b></button>
+									<a href="DeTai_Servlet?command=QL_pheduyeHuy_GiaHan&xuly=dongy&MaDT=<%=detai.getMaDT()%>&yeucau2=<%=detai.getMaTT()%>&MaQL=<%=tk.getMaTK() %>"><button style="margin-top:340px;margin-right:150px;" type="button" class="btn  btn-info">Phê duyệt</button></a>
+									<a href="DeTai_Servlet?command=QL_pheduyeHuy_GiaHan&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>&yeucau2=<%=detai.getMaTT()%>&MaQL=<%=tk.getMaTK() %>"><button style="margin-top:15px;margin-left:150px;" type="button" class="btn btn-danger">Không đồng ý</button></a>
 									</div>
                                 </div>
                             </div>
@@ -753,7 +763,7 @@
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>

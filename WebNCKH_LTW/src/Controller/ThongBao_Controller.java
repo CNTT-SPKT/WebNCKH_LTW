@@ -130,6 +130,27 @@ public class ThongBao_Controller {
         }
         return tb;
     }
+	public ThongBao getTBNguoiNhan(String nguoiNhan) {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM ThongBao inner join TaiKhoan on ThongBao.NguoiGui=TaiKhoan.MaTK" +
+        " Where ThongBao.NguoiNhan='"+nguoiNhan+"'";
+        ThongBao tb = new ThongBao();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	tb.setMaTB(rs.getString("ThongBao.MaTB"));
+            	tb.setNguoiGui(rs.getString("ThongBao.NguoiGui"));
+            	tb.setNguoiNhan(rs.getString("ThongBao.NguoiNhan"));
+            	
+            }
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tb;
+    }
 	
 	public ThongBao getThongBao(String nguoiGui,String nguoiNhan) {
         Connection cons = DBConnect.getConnecttion();

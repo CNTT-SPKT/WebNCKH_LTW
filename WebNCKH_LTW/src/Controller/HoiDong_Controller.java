@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import com.mysql.jdbc.PreparedStatement;
 import com.sun.istack.internal.logging.Logger;
 
+import Model.CTNghiemThu;
 import Model.DeTai;
 import Model.HoiDong;
 import Packages.DBConnect;
@@ -57,14 +58,41 @@ public class HoiDong_Controller {
 	}
 	
 	
+//		public ArrayList<HoiDong> getListHoiDongQL() {
+//	        Connection cons = DBConnect.getConnecttion();
+//	        String sql = "SELECT distinct hoidong.MaHD as MHD, TKChuTich.HoTen as TenCT, TKPhanBien.HoTen as TenPB, "
+//	        		+ "TKUyVien.HoTen as TenUV,HoiDong.NgayThanhLap as NTL "
+//	        		+ "FROM HoiDong,taikhoan as TKChuTich,"
+//	        		+ "taikhoan as TKPhanBien,taikhoan as TKUyVien "
+//	        		+ "where  TKChuTich.MaTK=hoidong.ChuTich "
+//	        		+ "and TKPhanBien.MaTK=hoidong.PhanBien and TKUyVien.MaTK=hoidong.UyVien ";
+//	        ArrayList<HoiDong> list = new ArrayList<>();
+//	        try {
+//	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+//	            ResultSet rs = ps.executeQuery();
+//	            while (rs.next()) {
+//	            	HoiDong hd = new HoiDong();
+//	            	hd.setMaHD(rs.getString("MHD"));
+//	               	hd.setTenChuTich(rs.getString("TenCT"));
+//	            	hd.setTenPhanBien(rs.getString("TenPB"));
+//	            	hd.setTenUyVien(rs.getString("TenUV"));
+//	            	hd.setNgayThanhLap(rs.getString("NTL"));
+//	            	list.add(hd);
+//	            }
+//	            cons.close();
+//	        } catch (SQLException e) {
+//	            e.printStackTrace();
+//	        }
+//	        return list;
+//	    }
 		public ArrayList<HoiDong> getListHoiDongQL() {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT distinct hoidong.MaHD as MHD, TKChuTich.HoTen as TenCT, TKPhanBien.HoTen as TenPB, "
-	        		+ "TKUyVien.HoTen as TenUV,HoiDong.NgayThanhLap as NTL "
-	        		+ "FROM HoiDong,taikhoan as TKChuTich,"
-	        		+ "taikhoan as TKPhanBien,taikhoan as TKUyVien "
-	        		+ "where  TKChuTich.MaTK=hoidong.ChuTich "
-	        		+ "and TKPhanBien.MaTK=hoidong.PhanBien and TKUyVien.MaTK=hoidong.UyVien ";
+	        String sql = "SELECT distinct hoidong.MaHD as MHD, TKChuTich.HoTen as TenCT, TKPhanBien.HoTen as TenPB "
+						+",HoiDong.NgayThanhLap as NTL " 
+		        		+"FROM HoiDong,taikhoan as TKChuTich, "
+		        		+"taikhoan as TKPhanBien "
+		        	+"where  TKChuTich.MaTK=hoidong.ChuTich "
+		        		+"and TKPhanBien.MaTK=hoidong.PhanBien ;";
 	        ArrayList<HoiDong> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -74,7 +102,6 @@ public class HoiDong_Controller {
 	            	hd.setMaHD(rs.getString("MHD"));
 	               	hd.setTenChuTich(rs.getString("TenCT"));
 	            	hd.setTenPhanBien(rs.getString("TenPB"));
-	            	hd.setTenUyVien(rs.getString("TenUV"));
 	            	hd.setNgayThanhLap(rs.getString("NTL"));
 	            	list.add(hd);
 	            }
@@ -102,6 +129,19 @@ public class HoiDong_Controller {
 			}
 			return false;
 		}
+		public boolean deleteHoiDong(String maHD) throws SQLException {
+			 Connection connection = DBConnect.getConnecttion();
+		     String sql = "DELETE FROM HoiDong WHERE MaHD = ?";
+		    try {
+		       
+		       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+		       ps.setString(1,maHD );
+		       return ps.executeUpdate()==1;
+		    } catch (Exception e) {
+		    	return false;
+		    }
+		    
+		}
 		//ENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTIN
 	public ArrayList<HoiDong> getListThongBao() {
         Connection cons = DBConnect.getConnecttion();
@@ -123,4 +163,12 @@ public class HoiDong_Controller {
         }
         return list;
     }
+	public static void main(String[] args) throws SQLException, Exception{
+	      HoiDong_Controller ctrl= new HoiDong_Controller();
+	       for(HoiDong ct : ctrl.getListHoiDongQL())
+	       {
+	    	   System.out.println(ct.getTenChuTich());
+	       }
+	      
+	    }
 }

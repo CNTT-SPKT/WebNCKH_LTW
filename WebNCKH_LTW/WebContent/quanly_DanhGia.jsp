@@ -33,6 +33,11 @@
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+	String maDT="";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+	}
+	DeTai detai=detaiDAO.getDeTai(maDT);
 %>
 
     <div class="page">
@@ -125,7 +130,11 @@
 							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
 								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
-										<form id="formNghiemThu">
+										<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
+										<input type="hidden" name="command" value="update">
+										<input type="hidden" name="Quyen" value="Manager">
+										<input type="hidden" name="MaDT" value=<%=maDT%>>
+										<input type="hidden" name="nguoigui" value=<%=detai.getGVHD() %>>
 											<table class="table table-striped table-hover">
 												<thead class="thead-default">
 													<tr class="success">
@@ -182,22 +191,9 @@
 											</table>
 											<label class="col-sm-2 control-label" for="mota">Ý kiến đánh giá</label><br>
 											<div class="col-sm-12">
-												<textarea type="text" name="mota" class="form-control required mota" placeholder="tạo 1 website bán hàng"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required></textarea>
+												<textarea type="text" name="ykien" class="form-control required mota" placeholder=""  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required></textarea>
 											</div>
-											<button type="submit" class="btn-info" value="Submit" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">Đánh giá</button>
-											<script>
-												$(function() {
-													$('#formNghiemThu button:submit').on('click', function(e) {
-														var emptyTextBoxes = $('#formNghiemThu input').filter(function() { return this.value == ""; });
-													if(emptyTextBoxes.length == 0)
-													{
-														alert("Đánh giá thành công!");
-														e.preventDefault(); 
-														window.location.href = "giangvienPage.jsp";
-													}
-													});
-												});
-											</script>
+											<input type="submit" value="Đánh giá" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">
 										</form>
 									</div>
 							</div>
@@ -787,12 +783,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane " id="duyetHuy_GianHan">
-                            <div class="row ">
-                                <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
-                                    <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
-                                    <div class="ql_tb_dsDeTaiDK ">
-                                          <table class="table table-striped table-hover">
+                        <div class="tab-pane" id="duyetHuy_GianHan">
+							<div class="row">
+								<div class="gv_duyetHuy_GianHan" style="background:white;height:390px;margin-right:15px;border-radius:3px">
+									<h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
+									<div class="gv_tb_dsDeTaiDK">
+										<table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -811,17 +807,17 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
+													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
 												<%
 			    							}
 											%>	
 											</tbody>
 										</table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
                 </div>
             </div>
         </div>

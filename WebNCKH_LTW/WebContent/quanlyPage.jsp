@@ -33,6 +33,7 @@
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+	
 %>
 
 
@@ -211,8 +212,7 @@
                                                     <td><%=hd.getTenPhanBien() %></td>
                                                     <td><%=hd.getTenUyVien() %></td>
                                                     <td><%=hd.getNgayThanhLap() %></td>
-                                                    <td class="dropdown">
-                                                        <a style="margin-top: -5px;" class="btn btn-danger dsDeTai_actionButton" data-toggle="dropdown" href="#"> Xóa hội đồng </a></td>
+                                                   <td><a href="XoaHoiDong_Servlet?command=delete&MaHD=<%=hd.getMaHD() %>"> Xóa</a></td>
                                                 </tr>
                                                 <%} %>
                                             </tbody>
@@ -264,12 +264,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="dsDeTaiPhanBien">
-                            <div class="row">
-                                <div class="ql_dsDeTaiPhanBien" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
-                                    <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
-                                    <div class="ql_tb_dsDeTaiPhanBien">
-                                       <table class="table table-striped table-hover">
+                       <div class="tab-pane active" id="dsDeTaiPhanBien">
+							<div class="row">
+								<div class="gv_dsDeTaiPhanBien" style="background:white;height:390px;margin-right:15px;border-radius:3px;overflow:auto;">
+									<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
+									<div class="gv_tb_dsDeTaiPhanBien">
+										<table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -290,19 +290,19 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
-													<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
-													<th><a href="quanly_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_XemBC.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
+													<th><a href="giangvienPage_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
 												</tr>
 												<%
-			    								}
+			    											}
 												%>		
 											</tbody>
 										</table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
                         <div class="tab-pane " id="quanLyDeTai">
                             <div class="row">
                                 <div class="form-group" style="margin-bottom:0px;">
@@ -727,7 +727,7 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
+													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
 												<%
 			    							}

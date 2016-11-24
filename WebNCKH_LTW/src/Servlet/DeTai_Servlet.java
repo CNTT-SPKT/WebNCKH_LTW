@@ -1,4 +1,4 @@
-﻿package Servlet;
+﻿ package Servlet;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -197,6 +197,59 @@ public class DeTai_Servlet extends HttpServlet {
 						error="Thất bại";
 					System.out.println(error);
 					url="giangvienPage.jsp";
+					
+					break;
+				case "QL_pheduyeHuy_GiaHan":
+					String yeucau2 = request.getParameter("yeucau2");
+					xuly = request.getParameter("xuly");
+					MaDT = request.getParameter("MaDT");
+					String MaQL = request.getParameter("MaQL");
+					DeTai dt3 = detaictrl.getDeTai(MaDT);
+					TB_TK tbtk2 = new TB_TK();
+					ThongBao tb2 = thongbaoctrl.getThongBao(MaQL,dt3.getMaCN());
+					if(thongbaoctrl.getThongBao(MaQL,dt3.getMaCN()).getMaTB()==null)
+				    {
+						System.out.println("chua co hop thoai");
+				    	int n =thongbaoctrl.getListThongBao().size();
+				    	tb2.setMaTB("tb"+(n+1));
+				    	tb2.setNguoiGui(MaQL);
+				    	tb2.setNguoiNhan(dt3.getMaCN());
+					    if(thongbaoctrl.createThongBao(tb2))
+					    	System.out.println("Tạo hộp thoại thành công");
+				    }
+					tbtk2.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+					tbtk2.setMaLTB("ltt1");
+					tbtk2.setMaTB(tb2.getMaTB());
+					System.out.println(MaQL+"_______"+tb2.getMaTB()+"______"+dt3.getMaCN());
+					if(xuly.equals("khongdongy"))
+					{
+						dt3.setMaTT("tt3"); System.out.println("Yêu cầu không được đồng ý, đề tài vẫn được tiến hành");
+						if(yeucau2.equals("tt6"))
+							tbtk2.setTinTB("Thông báo: yêu cầu gia hạn đề tài "+MaDT+" không được đồng ý");
+						else if(yeucau2.equals("tt4"))
+							tbtk2.setTinTB("Thông báo: yêu cầu hủy đề tài "+MaDT+" không được đồng ý");
+					}
+					else if(xuly.equals("dongy"))
+					{
+						if(yeucau2.equals("tt6"))
+						{
+							dt3.setMaTT("tt7"); System.out.println("Gia hạn đề tài thành công");
+							tbtk2.setTinTB("Thông báo: gia hạn đề tài "+MaDT+" thành công");
+						}
+						else if(yeucau2.equals("tt4"))
+						{
+							dt3.setMaTT("tt5"); System.out.println("Hủy đề tài thành công");
+							tbtk2.setTinTB("Thông báo: hủy đề tài "+MaDT+" thành công");
+						}
+					}
+					if(tb_tkctrl.insertTB_TK(tbtk2))
+						System.out.println(tbtk2.getTinTB());
+					if(detaictrl.updateTrangThai_DeTai(dt3))
+						error="Thành công";
+					else
+						error="Thất bại";
+					System.out.println(error);
+					url="quanlyPage.jsp";
 					
 					break;
 			}

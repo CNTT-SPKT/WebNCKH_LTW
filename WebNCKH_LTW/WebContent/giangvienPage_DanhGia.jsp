@@ -469,6 +469,7 @@ if (request.getParameter("MaDT") != null) {
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
 										<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
 										<input type="hidden" name="command" value="update">
+										<input type="hidden" name="Quyen" value="Lecturers">
 										<input type="hidden" name="MaDT" value=<%=maDT%>>
 											<table class="table table-striped table-hover">
 												<thead class="thead-default">

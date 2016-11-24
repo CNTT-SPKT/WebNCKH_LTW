@@ -125,7 +125,32 @@ public class TaiKhoan_Controller {
 		}
 		return tkh;
 	}
-	
+	public TaiKhoan getQL() throws SQLException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "SELECT * FROM TaiKhoan where MaTK='tk1'";
+		TaiKhoan tkh = new TaiKhoan();
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+
+				tkh.setMaTK(rs.getString("MaTK"));
+				tkh.setMatKhau(rs.getString("MatKhau"));
+				tkh.setQuyen(rs.getString("Quyen"));
+				tkh.setHoTen(rs.getString("HoTen"));
+				tkh.setNgaySinh(rs.getString("NgaySinh"));
+				tkh.setNganh(rs.getString("Nganh"));
+				tkh.setEmail(rs.getString("Email"));
+				tkh.setMSNH(rs.getString("MSNH"));
+				tkh.setCNNH(rs.getString("CNNH"));
+
+			}
+			cons.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tkh;
+	}
 	public boolean insertTaiKhoan(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
 		String sql = "insert into TaiKhoan values (?,?,?,?,?,?,?,?,?,?,?)";
@@ -242,7 +267,9 @@ public class TaiKhoan_Controller {
 	public static void main(String[] args) throws SQLException, Exception {
 		TaiKhoan_Controller ctrl = new TaiKhoan_Controller();
 		
-		for(TaiKhoan tk:ctrl.getListTenThanhVienHDQL())
-		System.out.println(tk.getMaTK());
+//		for(TaiKhoan tk:ctrl.getListTenThanhVienHDQL())
+//		System.out.println(tk.getMaTK());
+			TaiKhoan tk=ctrl.getQL();
+			System.out.println(tk.getMaTK());
 	}
 }

@@ -130,6 +130,20 @@ public class CTNghiemThu_Controller {
 			}
 			return false;
 		}
+		public boolean deleteCTNT(String maHD) throws SQLException {
+			 Connection connection = DBConnect.getConnecttion();
+		     String sql = "DELETE FROM CTNghiemThu WHERE MaHD = ?";
+		    try {
+		       
+		       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+		       ps.setString(1,maHD );
+		       return ps.executeUpdate()==1;
+		    } catch (Exception e) {
+		    	return false;
+		    }
+		    
+		}
+		
 		
 		 public static void main(String[] args) throws SQLException, ParseException {
 		       CTNghiemThu_Controller ctrl= new CTNghiemThu_Controller();

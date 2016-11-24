@@ -201,27 +201,20 @@
 												</tr>
 											</thead>
 											<tbody>
+												<%
+				     							for (DeTai dtdx: detaiDAO.getListDeTaiDeXuat()){
+												%>
 												<tr>
-													<td>141</td>
-													<td>Nghiên cứu hệ thống nhúng</td>
-													<td>12/12/2012</td>
-													<td>Lê Thị B</td>
-													<td><a href="quanly_CTDTDeXuat.jsp" >Đăng ký</a></td>
+													<td><%=dtdx.getMaDT() %></td>
+													<td><%=dtdx.getTenDT() %></td>
+													<td><%=dtdx.getNgayThucHien() %></td>
+													<td><%=dtdx.getTenGVHD() %></td>
+													<td><a href="quanly_DeTaiDeXuat.jsp?MaDT=<%=dtdx.getMaDT()%>" >Đăng ký</a></td>
 												</tr>
-												<tr>
-													<td>142</td>
-													<td>Xây dựng web bán điện thoại</td>
-													<td>12/12/2012</td>
-													<td>Lê C</td>
-													<td><a href="quanly_CTDTDeXuat.jsp" >Đăng ký</a></td>
-												</tr>
-												<tr>
-													<td>143</td>
-													<td>Xây dựng web laptop</td>
-													<td>12/12/2012</td>
-													<td>Lê C</td>
-													<td><a href="quanly_CTDTDeXuat.jsp" >Đăng ký</a></td>
-												</tr>
+												
+												<%
+			    											}
+															%>
 											</tbody>
 										</table>
 									</div>

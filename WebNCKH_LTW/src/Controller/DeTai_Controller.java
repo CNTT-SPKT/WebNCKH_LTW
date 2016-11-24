@@ -227,6 +227,7 @@ public class DeTai_Controller {
         }
         return dt;
     }
+	
 	public ArrayList<DeTai> getListDeTaiByMaCN(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
