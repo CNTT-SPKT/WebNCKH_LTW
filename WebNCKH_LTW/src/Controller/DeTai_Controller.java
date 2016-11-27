@@ -280,6 +280,48 @@ public class DeTai_Controller {
         }
         return list;
     }
+	public DeTai getDeTaiDX(String maDT) {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM DeTai,TaiKhoan as TK1 "+
+        " where TK1.MaTK=DeTai.GVHD"+
+        "  and MaDT='"+maDT+"'";
+        DeTai dt = new DeTai();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	
+            	
+            	dt.setMaDT(rs.getString("MaDT"));
+            	dt.setMaHienThi(rs.getString("MaHienThi"));
+            	dt.setMaTT(rs.getString("MaTT"));
+            	dt.setGVHD(rs.getString("GVHD"));
+            	dt.setTenDT(rs.getString("TenDT"));
+            	dt.setMoTa(rs.getString("MoTa"));
+            	dt.setLinhVuc(rs.getString("LinhVuc"));
+            	dt.setLoaiHinh(rs.getString("LoaiHinh"));
+            	dt.setNgayThucHien(rs.getString("NgayThucHien"));
+            	dt.setNgayKetThuc(rs.getString("NgayKetThuc"));
+            	dt.setCoQuanChuTri(rs.getString("CoQuanChuTri"));
+            	dt.setTinhHinhTrong(rs.getString("TinhHinhTrong"));
+            	dt.setTinhHinhNgoai(rs.getString("TinhHinhNgoai"));
+            	dt.setTinhCapThiet(rs.getString("TinhCapThiet"));
+            	dt.setMucTieu(rs.getString("MucTieu"));
+            	dt.setPPNC(rs.getString("PPNC"));
+            	dt.setNoiDungNC(rs.getString("NoiDungNC"));
+            	dt.setSPDuKien(rs.getString("SPDuKien"));
+            	dt.setDiaChiUD(rs.getString("DiaChiUD"));
+            	dt.setTenGVHD(rs.getString("HoTen"));
+            	dt.setEmailGV(rs.getString("Email"));
+            	dt.setKinhPhi(rs.getDouble("KinhPhi"));
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dt;
+    }
 	public DeTai getListDeTaiByMaDT(String maDT)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
@@ -650,11 +692,55 @@ public class DeTai_Controller {
         }
         return list;
     }
+	public ArrayList<DeTai> getListLinhVuc(String Email)  throws SQLException{
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK2.HoTen as TenCN,TaiKhoan.HoTen as GVHD,TrangThai.tenTT as TenTT,DeTai.MaTT"+
+			" from DeTai,TaiKhoan,TrangThai,TaiKhoan as TK2 "+
+			" where DeTai.MaCN=TK2.MaTK and DeTai.GVHD=TaiKhoan.MaTK and DeTai.MaTT=TrangThai.MaTT and TaiKhoan.Email='"+Email+"' " + 
+			" and (DeTai.MaTT='tt4' or DeTai.MaTT='tt6')";
+        ArrayList<DeTai> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	DeTai dt = new DeTai();
+            	dt.setMaDT(rs.getString("MaDT"));
+            	dt.setTenDT(rs.getString("TenDT"));
+            	dt.setTenCN(rs.getString("TenCN"));
+            	dt.setTenTT(rs.getString("TenTT"));
+            	dt.setMaTT(rs.getString("DeTai.MaTT"));
+            	list.add(dt);
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+	public boolean updateDeTaiDX(DeTai dt) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "update DeTai set MaCN=? ,SinhVien1=? ,SinhVien1=? where MaDT=? ";
+		
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1,dt.getMaCN());
+			ps.setString(2, dt.getSinhVien1());
+			ps.setString(2, dt.getSinhVien2());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(TaiKhoan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
 	
 	
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
-		for(DeTai ct:ctrl.getListDeTaiGV_DK("tin@gmail.com"))
-		System.out.println(ct.getMaDT());
+//		for(DeTai ct:ctrl.getListDeTaiGV_DK("tin@gmail.com"))
+//		System.out.println(ct.getMaDT());
+		DeTai dt=ctrl.getDeTai("dt15");
+		System.out.println(dt.getMaDT()+"________"+dt.getGVHD()+"______"+dt.getTenGVHD());
 		
 }}

@@ -318,7 +318,7 @@ $( document ).ready(function() {
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="tenSV1" type="text">
+																							<input class="form-control" id="tenSV1" name="tenSV1" type="text">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">

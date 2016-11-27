@@ -175,11 +175,13 @@
 															<label for="sl_menu">Quyền<span>:</span>
 															</label> <select id="sl_menu" class="form-control"
 																required="required">
-																<option value="0" selected>(please select:)</option>
-																<option value="1">Admin</option>
-																<option value="2">Giảng viên</option>
-																<option value="3">Sinh viên</option>
-																<option value="3">Quản lý</option>
+																<%
+																	for (TaiKhoan b : tk.getListTKQuyen()) {
+																%>
+																<option value="<%=b.getQuyen() %>"><%=b.getQuyen() %></option>
+																<%
+																	}
+																%>
 															</select>
 														</div>
 														<br>

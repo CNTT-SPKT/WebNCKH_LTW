@@ -471,7 +471,7 @@
 						<div class="tab-pane active" id="PheDuyet">
 							<div class="row">
 							<div class="gv_PheDuyetDT" style="background:white;height:1600px;margin-right:15px;border-radius:3px">
-								<h2 style="margin-top:0px;padding:10px;font-family:sans-serif">CHI TIẾT ĐỀ TÀI</h2>
+								<h2 class="tieude_theh">CHI TIẾT ĐỀ TÀI</h2>
 								<div class="container" style="width:800px">
 									<div class="row">
 										<div class="mota">
@@ -656,8 +656,8 @@
 											</div>
 										</div>
 									</div>
-									<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=dongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
-								<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
+									<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=dongy&MaDT=<%=detai.getMaDT()%>&Quyen="Lecturers""><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
+								<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>&Quyen="Lecturers""><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
 								</div>
 							</div>
 						</div>

@@ -71,6 +71,26 @@ public class TaiKhoan_Controller {
 		}
 		return list;
 	}
+	public ArrayList<TaiKhoan> getListTKQuyen() throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "SELECT distinct Quyen FROM TaiKhoan";
+		ArrayList<TaiKhoan> list = new ArrayList<>();
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				
+				TaiKhoan tk = new TaiKhoan();
+				tk.setQuyen(rs.getString("Quyen"));	
+				list.add(tk);
+			}
+			cons.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 
 	public TaiKhoan getTaiKhoanByMaTK(String email) {
 		Connection cons = DBConnect.getConnecttion();
@@ -267,9 +287,9 @@ public class TaiKhoan_Controller {
 	public static void main(String[] args) throws SQLException, Exception {
 		TaiKhoan_Controller ctrl = new TaiKhoan_Controller();
 		
-//		for(TaiKhoan tk:ctrl.getListTenThanhVienHDQL())
-//		System.out.println(tk.getMaTK());
-			TaiKhoan tk=ctrl.getQL();
-			System.out.println(tk.getMaTK());
+		for(TaiKhoan tk:ctrl.getListTKQuyen())
+			System.out.println(tk.getQuyen());
+//			TaiKhoan tk=ctrl.getQL();
+//			System.out.println(tk.getMaTK());
 	}
 }

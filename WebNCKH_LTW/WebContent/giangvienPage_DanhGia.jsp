@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="Controller.*,Model.*" %>
 <!DOCTYPE html>
 <html lang="en"><head>
 <title> Example </title>
@@ -12,9 +13,12 @@
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
 <%
-String maDT="";
+DeTai_Controller detaiDAO = new DeTai_Controller();
+DeTai detai=new DeTai();
+String maDT = "";
 if (request.getParameter("MaDT") != null) {
 	maDT = request.getParameter("MaDT");
+	detai = detaiDAO.getDeTai(maDT);
 }
 %>
 <body >
@@ -471,6 +475,7 @@ if (request.getParameter("MaDT") != null) {
 										<input type="hidden" name="command" value="update">
 										<input type="hidden" name="Quyen" value="Lecturers">
 										<input type="hidden" name="MaDT" value=<%=maDT%>>
+										<input type="hidden" name="nguoigui" value="<%=detai.getGVHD() %>">
 											<table class="table table-striped table-hover">
 												<thead class="thead-default">
 													<tr class="success">

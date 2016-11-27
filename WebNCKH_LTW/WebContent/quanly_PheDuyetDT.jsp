@@ -131,8 +131,8 @@
                     <div class="tab-content">
                        	<div class="tab-pane active" id="PheDuyet">
 							<div class="row">
-							<div class="gv_PheDuyetDT" style="background:white;height:1650px;margin-right:15px;border-radius:3px">
-								<h2 style="margin-top:0px;padding:10px;font-family:sans-serif; text-align: center;">PHÊ DUYỆT ĐỀ TÀI</h2>
+							<div class="gv_PheDuyetDT" style="background:white;height:1500px;margin-right:15px;border-radius:3px">
+								<h2 class="tieude_theh">PHÊ DUYỆT ĐỀ TÀI</h2><hr>
 								<div class="container" style="width:800px">
 									<div class="row">
 										<div class="mota">
@@ -141,7 +141,7 @@
 														<div class="form-group">
 															<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
 															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="tendetai" type="text" required value='<%=detai.getTenDT() %>' readonly>
+																<input class="form-control" id="tendetai" type="text" required value="<%=detai.getTenDT() %>" readonly>
 															</div>
 															<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
 															<div class="col-sm-10">
@@ -174,13 +174,13 @@
 																	<label class="col-sm-2 control-label" for="thoigianthuchien">Thời gian thực hiện:</label>
 																	<div class="col-sm-10" id="thoigianthuchien">
 																		<div class="row">
-																			<label class="col-sm-2 control-label" for="thoigianbatdau">Từ: </label>
+																			<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input value='<%=detai.getNgayThucHien()%>' type="date" name="" id="thoigianbatdau" class="form-control" readonly required="required" title="" style="padding:0px;">
+																				<input type="date" name="" id="thoigianbatdau" class="form-control" readonly required="required" title="" style="padding:0px;">
 																			</div>
 																			<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input value='<%=detai.getNgayKetThuc()%>' type="date" name="" id="thoigianketthuc" class="form-control" readonly required="required" title="" style="padding:0px;">
+																				<input type="date" name="" id="thoigianketthuc" class="form-control" readonly required="required" title="" style="padding:0px;">
 																			</div>
 																		</div>
 																	</div>
@@ -188,7 +188,7 @@
 															</div>
 															<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
 															<div class="col-sm-10">
-																<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value='<%=detai.getCoQuanChuTri()%>' readonly>
+																<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value="<%=detai.getCoQuanChuTri()%>" readonly>
 															</div>
 															<br>
 															<div class="container" style="margin-top:35px;width:800px">
@@ -198,19 +198,19 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text" required  readonly value='<%=detai.getTenCN()%>'>
+																				<input class="form-control" id="hoten1" type="text" required  readonly value="<%=detai.getTenCN()%>">
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" required readonly value='<%=detai.getMSSVCN()%>'>
+																				<input class="form-control" id="mss1" type="text" required readonly value=<%=detai.getMSSVCN()%>>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mail1" type="text" required  readonly value='<%=detai.getEmailCN()%>'>
+																				<input class="form-control" id="mail1" type="text" required  readonly value=<%=detai.getEmailCN()%>>
 																			</div>
 																		</div>
 																		<br>
@@ -218,13 +218,13 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text"  readonly value='<%=detai.getTenSV1()%>'>
+																				<input class="form-control" id="hoten1" type="text"  readonly value="<%=detai.getTenSV1()%>">
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text"  readonly value='<%=detai.getMSSV1()%>'>
+																				<input class="form-control" id="mss1" type="text"  readonly value=<%=detai.getMSSV1()%>>
 																			</div>
 																		</div>
 																	</div>
@@ -233,26 +233,26 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text" required value='<%=detai.getTenGVHD()%>' readonly>
+																				<input class="form-control" id="hoten1" type="text" required value="<%=detai.getTenGVHD()%>" readonly>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">Email:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" required value='<%=detai.getEmailGV()%>' readonly>
+																				<input class="form-control" id="mss1" type="text" required value=<%=detai.getEmailGV()%> readonly>
 																			</div>
 																			<br><br><br><br><br><br>
 																			<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
 																			<div class="row" style="margin-bottom:5px">
 																				<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																				<div class="col-sm-8">
-																					<input class="form-control" id="hoten1" type="text" readonly value='<%=detai.getTenSV2()%>'>
+																					<input class="form-control" id="hoten1" type="text" readonly value="<%=detai.getTenSV2()%>">
 																				</div>
 																			</div>
 																			<div class="row" style="margin-bottom:5px">
 																				<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																				<div class="col-sm-8">
-																					<input class="form-control" id="mss1" type="text" readonly value='<%=detai.getMSSV2()%>'>
+																					<input class="form-control" id="mss1" type="text" readonly value="<%=detai.getMSSV2()%>">
 																				</div>
 																			</div>
 																		</div>
@@ -291,28 +291,25 @@
 
 															<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
 															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="sanphamdukiem" type="text" required value='<%=detai.getSPDuKien()%>' readonly>
+																<input class="form-control" id="sanphamdukiem" type="text" required value="<%=detai.getSPDuKien()%>" readonly>
 															</div>
 
 
 															<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
 															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="diachiungdung" type="text" required value='<%=detai.getDiaChiUD()%>' readonly>
+																<input class="form-control" id="diachiungdung" type="text" required value="<%=detai.getDiaChiUD()%>"readonly>
 															</div>
 
 															<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
 															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="dxuatkinhphi" type="text" required value='<%=detai.getKinhPhi()%>' readonly>
+																<input class="form-control" id="dxuatkinhphi" type="text" required value=<%=detai.getKinhPhi()%> readonly>
 															</div>
 
-															<label class="col-sm-2 control-label" style="" for="tendetai">Tải file chi tiết:</label>
+															<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
 															<div class="col-sm-10" style="margin-bottom:10px">
 																<input class="form-control" id="tendetai" type="file">
 															</div>
-															<label class="col-sm-2 control-label" style=""  for="tendetai">Cấp mã đề tài: </label>
-															<div class="col-sm-10" style="margin-bottom:10px">
-																<input placeholder="Cấp mã tại đây" class="form-control" id="capmadt" name="capma" value="" type="text">
-															</div>
+
 															
 														</div>
 													</div>
@@ -320,8 +317,8 @@
 											</div>
 										</div>
 									</div>
-									<a href=""><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
-								<a href=""><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
+									<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=dongy&MaDT=<%=detai.getMaDT()%>&nguoigui=<%=detai.getGVHD() %>&Quyen="Manager""><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
+								<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>&nguoigui=<%=detai.getGVHD() %>&Quyen="Manager""><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
 								</div>
 							</div>
 						</div>

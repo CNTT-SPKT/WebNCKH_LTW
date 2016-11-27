@@ -130,17 +130,17 @@
 									<form  action="GiaHanDT_Servlet" method="POST">
 									<input type="hidden" name="command" value="update" />
 									<input type="hidden" name="xuly" value="guidongiahan" />
-									<input type="hidden" name="MaDT" value=<%=detai.getMaDT() %>/>
+									<input type="hidden" name="MaDT" value="<%=detai.getMaDT() %>"/>
 										<div class="form-inline">
 											<div class="col-xs-6">
 											<label class="fieldinput" style="margin-left:10px;">Họ tên: </label>
-											<input class="form-control" id="" type="text" value=<%=detai.getTenCN() %> readonly>
+											<input class="form-control" id="" type="text" value="<%=detai.getTenCN() %>" readonly>
 											</div>
 										</div>
 										<div class="form-inline">
 											<div class="col-xs-6">
 											<label>MSSV: </label>
-											<input class="form-control" id="" type="text" value=<%=detai.getMSSVCN() %> readonly>
+											<input class="form-control" id="" type="text" value="<%=detai.getMSSVCN() %>" readonly>
 											
 											</div>
 										</div>
@@ -177,7 +177,6 @@
 													<table class="table table-striped table-hover">
 														<thead>
 															<tr class="success">
-																<th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
 																<th>
 																	<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
 																		Thông báo
@@ -206,33 +205,27 @@
 																		<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
 																	</a>
 																</th>
+																<th><a href="">Xóa TB</a></th>
 															</tr>
 														</thead>
 			
 														<tbody>
-															<tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse | filter:searchFish">
-																<td><input type="checkbox" name=""  value=""></td>
-																<td>{{ roll.tb }}</td>
-																<td>{{ roll.ng }}</td>
-																<td>{{ roll.ngay }}</td>
-																<td><a href="sinvien_XemThongBao.jsp">Xem</a></td>
+															<%
+				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK(session.getAttribute("Email").toString())) {
+														%>
+														<tr >
+																<td><%=tbtk.getTinTB() %></td>
+																<td><%=tbtk.getTenNguoiGui() %></td>
+																<td><%=tbtk.getNgayGui() %></td>
+																<td><a href="sinvien_XemThongBao.jsp?MaCTTB=<%=tbtk.getMaCTTB() %>">Xem</a></td>
+																<td><a href="TB_TK_Servlet?command=delete&MaCTTB=<%=tbtk.getMaCTTB() %>">Xóa</a></td>
 															</tr>
+															<%
+			    											}
+															%>
 														</tbody>
 													</table>
-													<script>
-													$('#selectAll_ThongBao').change(function(){
-														if($(this).prop('checked')){
-															$('tbody tr td input[type="checkbox"]').each(function(){
-																$(this).prop('checked', true);
-															});
-														}else{
-															$('tbody tr td input[type="checkbox"]').each(function(){
-																$(this).prop('checked', false);
-															});
-														}
-													});
 													
-													</script>
 												</div>
 												<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
 													<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
@@ -258,36 +251,28 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>null</td>
-													<td>Nghiên cứu hệ thống rung</td>
-													<td>12/12/2012</td>
-													<td>null</td>
-													<td>Đang chờ duyệt</td>
-													<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-													<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-													<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-												</tr>
-												<tr>
-													<td>141</td>
-													<td>Nghiên cứu hệ thống nhúng</td>
-													<td>12/12/2012</td>
-													<td>13/12/2012</td>
-													<td>Đang thực hiện</td>
-													<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-													<td><a href="sinhvien_NopBaoCao.jsp">Nộp</a></td>
-													<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
-												</tr>
-												<tr>
-													<td>140</td>
-													<td>Nghiên cứu hệ thống an ninh</td>
-													<td>12/12/2012</td>
-													<td>13/12/2012</td>
-													<td>Đã nghiệm thu</td>
-													<td><a href="sinhvien_XemCTDT.jsp">Xem</a></td>
-													<td><a href="sinhvien_NopBaoCao.jsp"><span style="color:gray">Nộp</span></a></td>
-													<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#" disabled> Action </a></td>
-												</tr>
+												<%
+				     										for (DeTai detai2: dt.getListDeTaiByMaCN(session.getAttribute("Email").toString())) {
+				     											
+														%>
+															<tr>
+																<td><%=detai2.getMaDT() %></td>
+																<td><%=detai2.getTenDT() %></td>
+																<td><%=detai2.getNgayThucHien() %></td>
+																<td><%=detai2.getNgayKetThuc()%></td>
+																<td class="trangthaiDT"><%=detai.getTenTT()%></td>
+																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
+																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a>
+																<ul id="contextMenu" class="dropdown-menu" role="menu">
+																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
+																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jspMaDT=<%=detai.getMaDT() %>">Hủy</a></li>
+																</ul>
+																</td>
+															</tr>
+														<%
+			    											}
+															%>
 											</tbody>
 										</table>
 										<ul id="contextMenu" class="dropdown-menu" role="menu">
@@ -512,13 +497,19 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>141</td>
-													<td>Nghiên cứu hệ thống rung</td>
-													<td>12/12/2012</td>
-													<td>13/12/2012</td>
-													<td><a href="sinhvien_ketqua.jsp">Xem</a></td>
-												</tr>
+												<%
+				     										for (DeTai detai3: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
+															%>
+															<tr>
+																<td><%=detai3.getMaDT() %></td>
+																<td><%=detai3.getTenDT() %></td>
+																<td><%=detai3.getNgayThucHien() %></td>
+																<td><%=detai3.getNgayNT() %></td>
+																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+															</tr>
+															<%
+			    											}
+															%>
 											</tbody>
 										</table>
 									</div>
@@ -540,24 +531,35 @@
 													</div>
 													<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 														<div class="row">
+															<%
+				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
+															%>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Tên chủ nhiệm: Sinh Viên A</p>
-																	<p>MSSV: 14110208</p>
-																	<p>Ngày sinh: 02/08/1996</p>
-																	<p>Thuộc khoa: CNTT</p>
-																	<p>Quê quán: Quảng Ngãi</p>
-																</b>
+																
+																	<b>
+																		<p>Tên chủ nhiệm: <%=taikhoan.getHoTen() %></p>
+																		<p>MSSV: <%=taikhoan.getMatKhau() %></p>
+																		<p>Ngày sinh: <%=taikhoan.getNgaySinh() %></p>
+																		<p>Thuộc khoa: <%=taikhoan.getNganh() %></p>
+																		<p>Quê quán: Quảng Ngãi</p>
+																	</b>
+																
 															</div>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																<br>
-																<b><p>Mail: zxc@gmail.com</p>
-																	<p>Số điện thoại: 0123456789</p>
-																	<p>Mã số ngân hàng: 123456789</p>
-																	<p>Chi nhánh ngân hàng: ABC</p>
-																	<p>Đơn vị công tác: ZXC</p>
-																</b>
+																
+																	<b>
+																		<p>Mail: <%=taikhoan.getEmail() %></p>
+																		<p>Số điện thoại:<%=taikhoan.getSoDT() %></p>
+																		<p>Mã số ngân hàng: <%=taikhoan.getMSNH() %></p>
+																		<p>Chi nhánh ngân hàng: <%=taikhoan.getCNNH() %></p>
+																		<p>Đơn vị công tác: ZXC</p>
+																	</b>
 															</div>
+															<%
+				     										
+																%>
 														</div>
 														<div class="row">
 															<div class="container">

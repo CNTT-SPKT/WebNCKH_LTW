@@ -33,11 +33,12 @@
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
-	String maDT="";
+	DeTai detai=new DeTai();
+	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
+		detai = detaiDAO.getDeTai(maDT);
 	}
-	DeTai detai=detaiDAO.getDeTai(maDT);
 %>
 
     <div class="page">
@@ -129,12 +130,14 @@
 							<div class="row">
 							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
 								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
+								
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
 										<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
 										<input type="hidden" name="command" value="update">
+										<input type="hidden" name="MaDT" value="<%=maDT%>">
+										<input type="hidden" name="nguoigui" value="<%=detai.getGVHD() %>">
 										<input type="hidden" name="Quyen" value="Manager">
-										<input type="hidden" name="MaDT" value=<%=maDT%>>
-										<input type="hidden" name="nguoigui" value=<%=detai.getGVHD() %>>
+										
 											<table class="table table-striped table-hover">
 												<thead class="thead-default">
 													<tr class="success">
@@ -194,6 +197,7 @@
 												<textarea type="text" name="ykien" class="form-control required mota" placeholder=""  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required></textarea>
 											</div>
 											<input type="submit" value="Đánh giá" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">
+											
 										</form>
 									</div>
 							</div>
