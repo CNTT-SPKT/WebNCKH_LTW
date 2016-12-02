@@ -1,20 +1,29 @@
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="Controller.*,Model.*" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="Controller.*,Model.*" %>
- 
+   
+    
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <title> Example </title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">  
-<script type="text/javascript" src="vendor/bootstrap.js"></script>
-<script type="text/javascript" src="1.js"></script>
+
 <link rel="stylesheet" href="vendor/bootstrap.css">
 <link rel="stylesheet" href="1.css">
+<link rel="stylesheet" href="vendor/font-awesome.css">
+<script type="text/javascript" src="vendor/bootstrap.js"></script>
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="1.js"></script>
 <script type="text/javascript" src="jquery.validate.min.js"></script>
 <script type="text/javascript" src="angular.min.js"></script>
-	<script type="text/javascript" src="ng-table.js"></script>
-<link rel="stylesheet" href="vendor/font-awesome.css">
+<script type="text/javascript" src="ng-table.js"></script>
 <script>
 $( document ).ready(function() {
 	$('#DSDeTai_SV tr').each(function() {
@@ -28,19 +37,12 @@ $( document ).ready(function() {
 </script>
 </head>
 <body >
-<% 
-TB_TK_Controller cttb= new TB_TK_Controller();
+<% TB_TK_Controller cttb= new TB_TK_Controller();
 	ThongBao_Controller tb= new ThongBao_Controller();
 	DeTai_Controller dt= new DeTai_Controller();
 	TrangThai_Controller tt=  new TrangThai_Controller();
-	CTNghiemThu_Controller ct= new CTNghiemThu_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
-	CTNghiemThu ctnt = new CTNghiemThu();
-	String maDT = "";
-	if (request.getParameter("MaDT") != null) {
-	maDT = request.getParameter("MaDT");
-	ctnt = ct.getListCTNghiemThuByDeTai(maDT);
-}
 %>
 	<div class="page">
 		<div class="menu">
@@ -49,7 +51,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 					<img src="images/skpt_banner_2.jpg" class="img-responsive" alt="Image">
 				</div>
 				<div class="menuBar">
-					<nav class="navbar navbar-default " role="navigation">
+					<nav class="navbar navbar-default  " role="navigation">
 						<div class="container" id="container_menuBar">
 							<div class="navbar-header">
 								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -70,7 +72,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
 									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
-										<li><a href="mainPage.jsp">Đăng xuất</a></li>
+									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
 						</div>
@@ -82,95 +84,26 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 			<div class="row">
 				<div class="col-md-2">
 					<ul class="nav nav-pills nav-stacked">
-						<li ><a class="list-group-item" href="#thongbao" data-toggle="pill">
+						<li class="active"><a class="list-group-item" href="#thongbao" data-toggle="pill">
 							<span class="glyphicon glyphicon-home"></span> Thông báo</a>
 						</li>
 						<li style="margin-top:0px;"><a href="#dsDeTai" class="list-group-item" data-toggle="pill">
 							<span class="glyphicon glyphicon-list-alt"></span> Danh sách đề tài</a>
 						</li>
 						<li style="margin-top:0px;"><a href="#dkDeTai" class="list-group-item" data-toggle="pill" style="border-radius:0px;">
-							<span class="glyphicon glyphicon-inbox"></span> Đăng ký đề tài NCKH</a></li>
+							<span class="glyphicon glyphicon-inbox"></span> Đăng ký đề tài NCKH</a>
+						</li>
 						<li style="margin-top:0px;"><a href="#kqNghiemThu" class="list-group-item" data-toggle="pill">
-							<span class="glyphicon glyphicon-check"></span> Kết quả nghiệm thu</a></li>
+							<span class="glyphicon glyphicon-check"></span> Kết quả nghiệm thu</a>
+						</li>
 						<li style="margin-top:0px;"><a href="#ttTaiKhoan" class="list-group-item" data-toggle="pill">
 							<span class="glyphicon glyphicon-user"></span> Thông tin tài khoản</a>
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-10">
-					<div class="tab-content">
-						<div class="tab-pane active" id="KetQua">
-							<div class="sv_KetQua" style="background:white;height:600px;border-radius:3px">
-								<h2 class="tieude_theh">NGHIỆM THU</h2>
-								<hr>
-								<div class="ad_table_qltk table-responsive" style="margin:15px 5px 0px 5px;">
-									<table class="table table-striped table-hover">
-										<thead class="thead-default">
-											<tr class="success">
-												<th>Nội dung đánh giá</th>
-												<th>Điểm tối đa</th>
-												<th>Điểm đánh giá</th>	
-											</tr>
-										</thead>
-										<tbody>
-										
-											<tr>
-												<td>Tổng quan tình hình và lý do chọn đề tài</td>
-												<td>10</td>
-												<td><%=ctnt.getTongQuan()%></td>
-											</tr>
-											<tr>
-												<td>Mục tiêu đề tài</td>
-												<td>15</td>
-												<td><%=ctnt.getMucTieu() %></td>
-
-											</tr>
-											<tr>
-												<td>Phương pháp nghiên cứu</td>
-												<td>15</td>
-												<td><%=ctnt.getPhuongPhap()%></td>
-											</tr>
-											<tr>
-												<td>Nội dung khoa học</td>
-												<td>35</td>
-												<td><%=ctnt.getNoiDung()%></td>
-
-											</tr>
-											<tr>
-												<td>Đóng góp cho KT-XH-GD</td>
-												<td>10</td>
-												<td><%=ctnt.getDongGop()%></td>
-											</tr>
-											<tr>
-												<td>Hình thức báo cáo tổng kết</td>
-												<td>10</td>
-												<td><%=ctnt.getHinhThuc()%></td>
-											</tr>
-											<tr>
-												<td>Điểm thưởng</td>
-												<td>10</td>
-												<td><%=ctnt.getDiemThuong()%></td>
-
-											</tr>
-											<tr>
-												<td></td>
-												<td>100</td>
-												<td><%=ctnt.getTongDiem()%></td>
-
-											</tr>
-											
-										</tbody>
-									</table>
-
-								</div>
-								<label class="col-sm-4 control-label" for="mota">Ý kiến đánh giá</label><br>
-								<div class="col-sm-12">
-									<textarea name="" id="mota" class="form-control" rows="3" readonly>Bài làm khá tốt!</textarea>
-								</div>
-								
-							</div>
-						</div>
-						<div class="tab-pane" id="thongbao">
+						<div class="col-md-10">
+							<div class="tab-content">
+								<div class="tab-pane active" id="thongbao">
 									<div class="row">
 										<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
 											<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
@@ -186,7 +119,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 												<table class="table table-striped table-hover">
 													<thead>
 														<tr class="success">
-															<th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
+
 															<th>
 																<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
 																	Thông báo
@@ -215,6 +148,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																	<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
 																</a>
 															</th>
+															<th><a href="">Xóa TB</a></th>
 														</tr>
 													</thead>
 		
@@ -223,11 +157,11 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK(session.getAttribute("Email").toString())) {
 														%>
 														<tr >
-																<td><input type="checkbox" name=""  value=""></td>
 																<td><%=tbtk.getTinTB() %></td>
 																<td><%=tbtk.getTenNguoiGui() %></td>
 																<td><%=tbtk.getNgayGui() %></td>
 																<td><a href="sinvien_XemThongBao.jsp?MaCTTB=<%=tbtk.getMaCTTB() %>">Xem</a></td>
+																<td><a href="TB_TK_Servlet?command=delete&MaCTTB=<%=tbtk.getMaCTTB() %>">Xóa</a></td>
 															</tr>
 															<%
 			    											}
@@ -235,23 +169,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 														
 													</tbody>
 												</table>
-												<script>
-												$('#selectAll_ThongBao').change(function(){
-													if($(this).prop('checked')){
-														$('tbody tr td input[type="checkbox"]').each(function(){
-															$(this).prop('checked', true);
-														});
-													}else{
-														$('tbody tr td input[type="checkbox"]').each(function(){
-															$(this).prop('checked', false);
-														});
-													}
-												});
-												
-												</script>
 											</div>
-											<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
-												<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
 										</div>
 									</div>
 								</div>
@@ -260,7 +178,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
 												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
 												<div class="sv_table_dsDeTai">
-													<table class="table table-striped table-hover">
+													<table class="table table-striped table-hover" id="DSDeTai_SV">
 														<thead class="thead-default">
 															<tr class="success">
 																<th>Mã số</th>
@@ -283,14 +201,15 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																<td><%=detai.getTenDT() %></td>
 																<td><%=detai.getNgayThucHien() %></td>
 																<td><%=detai.getNgayKetThuc()%></td>
-																<td><%=detai.getTenTT()%></td>
+																<td class="trangthaiDT"><%=detai.getTenTT()%></td>
 																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
-																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a></td>
+																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a>
 																<ul id="contextMenu" class="dropdown-menu" role="menu">
 																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
-																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jspMaDT=<%=detai.getMaDT() %>">Hủy</a></li>
+																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jsp?MaDT=<%=detai.getMaDT() %>">Hủy</a></li>
 																</ul>
+																</td>
 															</tr>
 														<%
 			    											}
@@ -316,11 +235,14 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 													<div class="row">
 														<div class="mota">
 															<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-																<form action=" " onsubmit="" method="POST" role="form" class="form-horizontal">
+																<form action="DeTai_Servlet" method="POST" class="form-horizontal">
+																<input type="hidden" name="command" value="dkDT" />
+																<input type="hidden" name="nguoidk" value="Student" />
+																
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input type="text" name="mota" class="form-control required mota" placeholder="Đề tài 1"  id="" required minlength="6" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
+																			<input type="text" name="tenDT" class="form-control required mota" placeholder="Đề tài 1"  id="" required minlength="6" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
 																		</div>
 																		<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
 																		<div class="col-sm-10">
@@ -355,11 +277,11 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																					<div class="row">
 																						<label class="col-sm-1 control-label" for="thoigianbatdau">Từ:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="text" type="text" name="ngay" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-top:10px;"required>
+																							<input type="text" type="text" name="ngaybatdau" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-top:10px;"required>
 																						</div>
 																						<label class="col-sm-1 control-label" for="thoigianketthuc">Đến:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="text" type="text" name="ngay" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-left:10px; margin-top:10px;"required>
+																							<input type="text" type="text" name="ngayketthuc" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-left:10px; margin-top:10px;"required>
 																						</div>
 																					</div>
 																				</div>
@@ -367,7 +289,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																		</div>
 																		<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
 																		<div class="col-sm-10">
-																			<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc">
+																			<input class="form-control" id="" name="coquanchutri" type="text" placeholder="Khoa/Bộ môn trực thuộc">
 																		</div>
 																		<br>
 																		<div class="container" style="margin-top:35px;width:800px">
@@ -377,7 +299,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input type="text" name="name" class="form-control required name" placeholder="Lê Văn A"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
+																							<input type="text" name="tenCN" class="form-control required name" placeholder="Lê Văn A"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -397,7 +319,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text">
+																							<input class="form-control" id="tenSV1" name="tenSV1" type="text">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -412,7 +334,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input type="text" name="name" class="form-control required name" placeholder="Lê B"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
+																							<input type="text" name="tenGVHD" class="form-control required name" placeholder="Lê B"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -425,7 +347,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																						<div class="row" style="margin-bottom:5px">
 																							<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																							<div class="col-sm-8">
-																								<input class="form-control" id="hoten1" type="text">
+																								<input class="form-control" id="hoten1" name="tenSV2" type="text">
 																							</div>
 																						</div>
 																						<div class="row" style="margin-bottom:5px">
@@ -441,47 +363,47 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																		<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
 																		<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Tình hình nghiên cứu trong nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="tinhhinhTrong" class="form-control required mota" placeholder="Tình hình nghiên cứu trong nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 																		<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Tình hình nghiên cứu ngoài nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="tinhhinhNgoai" class="form-control required mota" placeholder="Tình hình nghiên cứu ngoài nước"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Tính cấp thiết:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Tính cấp thiết"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="tinhcapThiet" class="form-control required mota" placeholder="Tính cấp thiết"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Mục tiêu:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Mục tiêu của đề tài"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="muctieu" class="form-control required mota" placeholder="Mục tiêu của đề tài"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Phương pháp nghiên cứu:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Phương pháp và phạm vi nghiên cứu"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="PPNC" class="form-control required mota" placeholder="Phương pháp và phạm vi nghiên cứu"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Nội dung nghiên cứu và tiến độ thực hiện"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="NoiDungNC" class="form-control required mota" placeholder="Nội dung nghiên cứu và tiến độ thực hiện"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea type="text" name="mota" class="form-control required mota" placeholder="Sản phẩm dự kiến"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+																			<textarea type="text" name="SPDuKien" class="form-control required mota" placeholder="Sản phẩm dự kiến"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
 																		</div>
 
 
 																		<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input class="form-control" id="diachiungdung" type="text" required>
+																			<input class="form-control" id="diachiungdung" name="DiaChiUD" type="text" required>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input type="text" name="dxuatkinhphi" class="form-control required dxuatkinhphi" placeholder="2000000" minlength="0" maxlength="6" id="" required data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này">
+																			<input type="text" name="kinhphi" class="form-control required dxuatkinhphi" placeholder="2000000" minlength="0" maxlength="6" id="" required data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này">
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
@@ -492,7 +414,6 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																		<div id="guidon" style="">
 																			<button type="submit" id="btn_GuiDon" style="color: #fff;background-color: #5bc0de;border-color: #46b8da; height:35px;width:150px;background-image: none;border: 1px solid transparent;border-radius: 4px; margin-right:15px;float:right;">Gửi đơn đăng ký</button>
 																			<a class="btn btn-warning" href="sinhvien_DeTaiDeXuat.jsp" role="button" style="margin-left:10px">Đăng ký đề tài được đề xuất</a>
-
 																		</div>
 																	</div>
 																</div>
@@ -599,7 +520,8 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																					
 																				</div>
 																				<div class="doi panel-body">
-																					<form action="" id="register-form" name="doipass" method="POST" class="form-horizontal" role="form">
+																					<form action="TaiKhoan_Servlet" id="register-form" name="doipass" method="POST" class="form-horizontal" role="form">
+																						<input type="hidden" name="command" value="doimk">
 																						<div class="form-group has-feedback" style="margin-left:65px;">
 																							<div class="col-xs-10">
 																								<label for="pass">Mật khẩu cũ<span>:</span></label> 
@@ -623,8 +545,9 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																						</div>
 																						<div class="modal-footer">
 																							<button type="button" class="btn btn-danger"  data-dismiss="modal">Hủy</button>
-																							<button type="submit" id="btnsm" class="btn btn-primary">Lưu</button>
+																							
 																						</div>
+																						<input type="submit" value="Lưu" />
 																					</form>
 																				</div>
 																			</div>
@@ -658,7 +581,6 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																						<form action="TaiKhoan_Servlet" id="formcntt" method="post" class="form-horizontal">
 																							<input type="hidden" name="command" value="update">
 																							<input type="hidden" name="MaTK" value=<%=session.getAttribute("Email").toString()%>>
-																							<input type="hidden" name="Quyen" value="Student">
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
 																									<label for="email">Mail<span>:</span></label> 
@@ -668,9 +590,9 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
-																									<label for="sodt">Ngành<span>:</span></label>
-																									<input class="form-control" name="nganh" id="nganh" type="text"  required/>
-																									<span class="glyphicon form-control-feedback" id="nganh1"></span>
+																									<label for="sodt">Số điện thoại<span>:</span></label>
+																									<input class="form-control" name="sodt" id="sodt" type="number" number required/>
+																									<span class="glyphicon form-control-feedback" id="sodt1"></span>
 																								</div>
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
@@ -690,8 +612,9 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 																							</div>
 																							<div class="modal-footer">
 																								<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
-																								<button type="submit" class="btn btn-primary" >Lưu</button>
+																								
 																							</div>
+																							<input type="submit" value="Lưu" class="btn-lg col-lg-3" />
 																						</form>
 																					</div>
 																				</div>
@@ -706,19 +629,17 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 											</div>
 										</div>
 									</div>
-					</div>
-					</div>
-				</div>
-				 <div id='bttop'>
+								</div>
+							</div>	
+						</div>
+							 <div id='bttop'>
             <img src="images/backtotop.png" alt="backtotop" width="50px" height="50px">
         </div>
         <footer style="margin-bottom:0px;margin-top:10px;">
             <pre style="margin-bottom:0px;">
                 Copyright@ Phòng nghiên cứu khoa học và quan hệ quốc tế
             </pre>
-				</div>
-			</div>
-
-
-</body>
-</html>
+        </footer>
+					</div>			
+			</body>
+			</html>

@@ -260,7 +260,7 @@ public class DeTai_Controller {
         String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
 				" TaiKhoan.HoTen as TenGVHD "+
 				" from DeTai,TaiKhoan,TrangThai where DeTai.GVHD=TaiKhoan.MaTK "+
-				" and DeTai.MaTT=TrangThai.MaTT and TrangThai.MaTT='tt11' ";
+				" and DeTai.MaTT=TrangThai.MaTT and TrangThai.MaTT='tt11'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -605,7 +605,7 @@ public class DeTai_Controller {
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger(TaiKhoan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
 		}
 		return false;
 	}
@@ -718,29 +718,31 @@ public class DeTai_Controller {
         }
         return list;
     }
-	public boolean updateDeTaiDX(DeTai dt) throws ParseException {
+	public boolean DangKyDTDX(DeTai dt) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "update DeTai set MaCN=? ,SinhVien1=? ,SinhVien1=? where MaDT=? ";
+		String sql = "update DeTai set MaCN=? ,SinhVien1=? ,SinhVien2=? where MaDT=? ";
 		
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1,dt.getMaCN());
 			ps.setString(2, dt.getSinhVien1());
-			ps.setString(2, dt.getSinhVien2());
+			ps.setString(3, dt.getSinhVien2());
+			ps.setString(4, dt.getMaDT());
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger(TaiKhoan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
 		}
 		return false;
 	}
-	
-	
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
 //		for(DeTai ct:ctrl.getListDeTaiGV_DK("tin@gmail.com"))
 //		System.out.println(ct.getMaDT());
-		DeTai dt=ctrl.getDeTai("dt15");
-		System.out.println(dt.getMaDT()+"________"+dt.getGVHD()+"______"+dt.getTenGVHD());
+		DeTai dt= new DeTai();
+		dt=ctrl.getDeTai("dt12");
+		dt.setMaTT("tt1");
+		if(ctrl.updateTrangThai_DeTai(dt))
+			System.out.println(dt.getMaTT());
 		
 }}

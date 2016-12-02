@@ -158,12 +158,7 @@ $("#formcntt").validate({
 			required: true,
 			email: true
 		},
-		sodt: {
-			required: true,
-			minlength: 10,
-			maxlength:11,
-			number:true
-		},
+		nganh: "required",
 		cnnganhang: "required",
 		donvi: "required",
 	},
@@ -194,12 +189,7 @@ $("#formcntt").validate({
 			equalTo: "Please enter the same password as above"
 		},
 		email: "Email phải có dạng 'a@b.c'",
-		sodt: {
-			required: "Vui lòng nhập số điện thoại",
-			minlength: "Số máy quý khách vừa nhập là số không có thực",
-			maxlength: "Số máy quý khách vừa nhập là số không có thực",
-			number:"Vui lòng nhập ký tự số"
-		},
+		nganh: "Vui lòng nhập chi nhánh ngân hàng",
 		cnnganhang: "Vui lòng nhập chi nhánh ngân hàng",
 		donvi: "Vui lòng nhập đơn vị công tác",
 	}

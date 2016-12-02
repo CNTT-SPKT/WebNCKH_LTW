@@ -34,7 +34,67 @@ public class TaiKhoan_Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String command = request.getParameter("command");
 		
+		
+		String url="", error="";
+		
+		try{
+			switch(command){
+			case "insert":
+				url="";
+				break;
+			case "update":
+				System.out.println("Vào update TT");
+				String quyen = request.getParameter("Quyen");
+				TaiKhoan tk=new TaiKhoan();
+				String maTK = request.getParameter("MaTK");
+				tk=crt.getTaiKhoanByMaTK(maTK);
+				tk.setEmail(request.getParameter("email"));
+				tk.setNganh(request.getParameter("nganh"));
+				tk.setCNNH(request.getParameter("cnnganhang"));
+				tk.setMSNH(request.getParameter("masoNH"));
+				System.out.println(tk.getMaTK()+"______"+tk.getEmail()+"_________"+tk.getNganh()+"________"+tk.getCNNH()+"_____"+tk.getMSNH());
+				boolean ktra=crt.updateTaiKhoan(tk);
+				if(ktra)
+				{
+
+					error="Thành công";
+					if(quyen.equals("Admin"))
+						url="Admin.jsp";
+					if(quyen.equals("Student"))
+						url="sinhvienPage.jsp";
+				}
+				else
+				{
+					error="Thất bại";
+					if(quyen.equals("Admin"))
+						url="Admin.jsp";
+					if(quyen.equals("Student"))
+						url="sinhvienPage.jsp";
+					
+				}
+				break;
+			case "doimk":
+				System.out.println("Vào đổi mk");
+				TaiKhoan tk1= new TaiKhoan();
+				tk1 = crt.gettk(request.getParameter("MaTK"));
+				tk1.setMatKhau(request.getParameter("matkhau"));
+				if(crt.updateTKDoiMK(tk1))
+					error="Thành công";
+				else
+					error="Thất bại";
+				url="sinhvienPage.jsp";
+				System.out.println(error+"__________"+url);
+				break;
+			}
+		}
+		catch(Exception e)
+		{
+			error="Xảy ra lỗi ngẫu nhiên!";
+		}
+		request.setAttribute("error", error);
+		response.sendRedirect(url);
 	}
 
 	/**
@@ -42,58 +102,9 @@ public class TaiKhoan_Servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("vao");
+		doGet(request, response);
 		
-//		String command = request.getParameter("command");
-//		String quyen = request.getParameter("Quyen");
-//		TaiKhoan tk=new TaiKhoan();
-//		try {
-//			tk = crt.gettk(request.getParameter("MaTK"));
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		tk.setEmail(request.getParameter("email"));
-//		tk.setSoDT(request.getParameter("sodt"));
-//		tk.setCNNH(request.getParameter("cnnganhang"));
-//		tk.setMSNH(request.getParameter("masoNH"));
-//		
-//		String url="", error="";
-//		
-//		try{
-//			switch(command){
-//			case "insert":
-//				url="";
-//				break;
-//			case "update":
-//				boolean ktra=crt.updateTaiKhoan(tk);
-//				if(ktra)
-//				{
-//
-//					error="Thành công";
-//					if(quyen.equals("Admin"))
-//						url="Admin.jsp";
-//					else
-//						url="SinhVienPage.jsp";
-//				}
-//				else
-//				{
-//					error="Thất bại";
-//					if(quyen.equals("Admin"))
-//						url="Admin.jsp";
-//					else 
-//						url="SinhVienPage.jsp";
-//					
-//				}
-//				break;
-//			}
-//		}
-//		catch(Exception e)
-//		{
-//			error="Xảy ra lỗi ngẫu nhiên!";
-//		}
-//		request.setAttribute("error", error);
-//		response.sendRedirect(url);
+	
 	}
 
 }

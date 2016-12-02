@@ -1,4 +1,9 @@
 eclipse.preferences.version=1
+encoding//WebContent/login.jsp=UTF-8
+encoding//WebContent/quanlyPage_DanhGia.jsp=UTF-8
+encoding//WebContent/quanly_DangKyDTDX.jsp=UTF-8
+encoding//WebContent/sinhvienPage.jsp=UTF-8
+encoding//WebContent/sinhvien_DangKyDTDX.jsp=UTF-8
 encoding//src/Controller/DeTai_Controller.java=UTF-8
 encoding//src/Model/DeTai.java=UTF-8
 encoding//src/Model/HoiDong.java=UTF-8

@@ -171,7 +171,7 @@ if (request.getParameter("MaTK") != null) {
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 												
 													<br> <br> <b><p>Mail:<%=c.getEmail() %> </p>
-														<p>Số điện thoại:<%=c.getSoDT() %></p>
+														<p>Nganh:<%=c.getNganh() %></p>
 														<p>Mã số ngân hàng: <%=c.getMSNH() %></p>
 														<p>Chi nhánh ngân hàng:<%=c.getCNNH() %></p>
 														<p>Đơn vị công tác: ZXC</p> </b>
@@ -204,7 +204,7 @@ if (request.getParameter("MaTK") != null) {
 																		<form action="TaiKhoan_Servlet"  method="POST"
 																			class="form-horizontal" role="form">
 																			<input type="hidden" name="command" value="update">
-																			<input type="hidden" name="MaTK" value=<%=c.getMaTK() %>>
+																			<input type="hidden" name="MaTK" value=<%=c.getEmail() %>>
 																			<input type="hidden" name="Quyen" value="Admin">
 																			<div class="form-group"
 																				style="margin-left: 5px; margin-left: 65px;">
@@ -216,8 +216,8 @@ if (request.getParameter("MaTK") != null) {
 																				</div>
 																				<br>
 																				<div class="col-xs-10">
-																					<label for="sdt">Số điện thoại<span>:</span></label>
-																					<input class="form-control" name="sodt" id="sdt" type="text"
+																					<label for="sdt">Ngành<span>:</span></label>
+																					<input class="form-control" name="nganh" id="nganh" type="text"
 																						required="required">
 																				</div>
 																				<br>
@@ -237,7 +237,7 @@ if (request.getParameter("MaTK") != null) {
 																			<div class="modal-footer">
 																				<button type="button" class="btn btn-danger"
 																					data-dismiss="modal">Hủy</button>
-																				<input type="submit" value="Lưu"/>
+																				<button type="submit" class="btn btn-primary" >Lưu</button>
 																			</div>
 																		</form>
 																	</div>

@@ -30,19 +30,17 @@ $( document ).ready(function() {
 });
 </script>
 </head>
-<%  TB_TK_Controller cttb= new TB_TK_Controller();
+<% TB_TK_Controller cttb= new TB_TK_Controller();
 	ThongBao_Controller tb= new ThongBao_Controller();
 	DeTai_Controller dt= new DeTai_Controller();
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
-	DonHuy_Controller dh= new DonHuy_Controller();
-	DonGiaHan_Controller gh=new DonGiaHan_Controller();
 	DeTai detai=new DeTai();
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		detai = dt.getListDeTaiByMaDT(maDT);
+		detai = dt.getDeTaiDX(maDT);
 	}
 %>
 <script type="text/javascript">
@@ -94,18 +92,16 @@ $( document ).ready(function() {
 			<div class="row">
 				<div class="col-md-2">
 					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a class="list-group-item" href="#thongbao" data-toggle="pill">
+						<li ><a class="list-group-item" href="#thongbao" data-toggle="pill">
 							<span class="glyphicon glyphicon-home"></span> Thông báo</a>
 						</li>
 						<li style="margin-top:0px;"><a href="#dsDeTai" class="list-group-item" data-toggle="pill">
 							<span class="glyphicon glyphicon-list-alt"></span> Danh sách đề tài</a>
 						</li>
 						<li style="margin-top:0px;"><a href="#dkDeTai" class="list-group-item" data-toggle="pill" style="border-radius:0px;">
-							<span class="glyphicon glyphicon-inbox"></span> Đăng ký đề tài NCKH</a>
-						</li>
+							<span class="glyphicon glyphicon-inbox"></span> Đăng ký đề tài NCKH</a></li>
 						<li style="margin-top:0px;"><a href="#kqNghiemThu" class="list-group-item" data-toggle="pill">
-							<span class="glyphicon glyphicon-check"></span> Kết quả nghiệm thu</a>
-						</li>
+							<span class="glyphicon glyphicon-check"></span> Kết quả nghiệm thu</a></li>
 						<li style="margin-top:0px;"><a href="#ttTaiKhoan" class="list-group-item" data-toggle="pill">
 							<span class="glyphicon glyphicon-user"></span> Thông tin tài khoản</a>
 						</li>
@@ -114,55 +110,55 @@ $( document ).ready(function() {
 				<div class="col-md-10">
 					<div class="tab-content">
 						<div class="tab-pane" id="thongbao">
-										<div class="row">
-											<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
-												<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
-												<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
-													<form>
-														<div class="form-group">
-															<div class="input-group col-xs-8" style="margin-left:150px;" >
-																<div class="input-group-addon"><i class="fa fa-search"></i></div>
-																<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
-															</div>      
-														</div>
-													</form>
-													<table class="table table-striped table-hover">
-														<thead>
-															<tr class="success">
-																<th>
-																	<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-																		Thông báo
-																		<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																		Người gửi
-																		<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																		Ngày gửi
-																		<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th>
-																	<a href="#" ng-click="sortType = 'tastiness'; sortReverse = !sortReverse">
-																		Chi tiết 
-																		<span ng-show="sortType == 'tastiness' && !sortReverse" class="fa fa-caret-down"></span>
-																		<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
-																	</a>
-																</th>
-																<th><a href="">Xóa TB</a></th>
-															</tr>
-														</thead>
-			
-														<tbody>
-															<%
+									<div class="row">
+										<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
+											<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
+											<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
+												<form>
+													<div class="form-group">
+														<div class="input-group col-xs-8" style="margin-left:50px;" >
+															<div class="input-group-addon"><i class="fa fa-search"></i></div>
+															<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
+														</div>      
+													</div>
+												</form>
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr class="success">
+															<th>
+																<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+																	Thông báo
+																	<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
+																	Người gửi
+																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
+																	Ngày gửi
+																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th>
+																<a href="#" ng-click="sortType = 'tastiness'; sortReverse = !sortReverse">
+																	Chi tiết 
+																	<span ng-show="sortType == 'tastiness' && !sortReverse" class="fa fa-caret-down"></span>
+																	<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
+																</a>
+															</th>
+															<th><a href="">Xóa TB</a></th>
+														</tr>
+													</thead>
+		
+													<tbody>
+														<%
 				     										for (TB_TK tbtk: cttb.getListTB_TKByMaTK(session.getAttribute("Email").toString())) {
 														%>
 														<tr >
@@ -175,102 +171,102 @@ $( document ).ready(function() {
 															<%
 			    											}
 															%>
-														</tbody>
-													</table>
-													
-												</div>
-												<button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px">
-													<span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
+														
+													</tbody>
+												</table>
+												
 											</div>
+											
 										</div>
 									</div>
-						<div class="tab-pane" id="dsDeTai">
-							<div class="row">
-								<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
-									<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
-									<div class="sv_table_dsDeTai">
-										<table class="table table-striped table-hover">
-											<thead class="thead-default">
-												<tr class="success">
-													<th>Mã số</th>
-													<th>Tên đề tài</th>
-													<th>Ngày đăng ký</th>
-													<th>Hạn nghiệm thu</th>
-													<th>Trạng thái</th>
-													<th>Chi tiết</th>
-													<th>Nộp báo cáo</th>
-													<th>Chức năng</th>
-												</tr>
-											</thead>
-											<tbody>
-												<%
-				     										for (DeTai detai2: dt.getListDeTaiByMaCN(session.getAttribute("Email").toString())) {
+								</div>
+						<div class="tab-pane" id="dsDeTai"  >
+										<div class="row" id="ttt">
+											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
+												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
+												<div class="sv_table_dsDeTai">
+													<table class="table table-striped table-hover">
+														<thead class="thead-default">
+															<tr class="success">
+																<th>Mã số</th>
+																<th>Tên đề tài</th>
+																<th>Ngày đăng ký</th>	
+																<th>Hạn nghiệm thu</th>
+																<th>Trạng thái</th>
+																<th>Chi tiết</th>
+																<th>Nộp báo cáo</th>
+																<th>Chức năng</th>
+															</tr>
+														</thead>
+														<tbody>
+														<%
+				     										for (DeTai detai1: dt.getListDeTaiByMaCN(session.getAttribute("Email").toString())) {
 				     											
 														%>
 															<tr>
-																<td><%=detai2.getMaDT() %></td>
-																<td><%=detai2.getTenDT() %></td>
-																<td><%=detai2.getNgayThucHien() %></td>
-																<td><%=detai2.getNgayKetThuc()%></td>
-																<td class="trangthaiDT"><%=detai.getTenTT()%></td>
-																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
-																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai.getMaDT()%>">Nộp</a></td>
+																<td><%=detai1.getMaDT() %></td>
+																<td><%=detai1.getTenDT() %></td>
+																<td><%=detai1.getNgayThucHien() %></td>
+																<td><%=detai1.getNgayKetThuc()%></td>
+																<td class="trangthaiDT"><%=detai1.getTenTT()%></td>
+																<td><a href="sinhvien_XemCTDT.jsp?MaDT=<%=detai1.getMaDT()%>">Xem</a></td>
+																<td><a href="sinhvien_NopBaoCao.jsp?MaDT=<%=detai1.getMaDT()%>">Nộp</a></td>
 																<td class="dropdown"><a class="btn btn-default dsDeTai_actionButton" data-toggle="dropdown" href="#"> Action </a>
 																<ul id="contextMenu" class="dropdown-menu" role="menu">
-																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai.getMaDT() %>" >Gia Hạn</a></li>
-																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jspMaDT=<%=detai.getMaDT() %>">Hủy</a></li>
+																<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp?MaDT=<%=detai1.getMaDT() %>" >Gia Hạn</a></li>
+																<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jsp?MaDT=<%=detai1.getMaDT() %>">Hủy</a></li>
 																</ul>
 																</td>
 															</tr>
 														<%
 			    											}
 															%>
-											</tbody>
-										</table>
-										<ul id="contextMenu" class="dropdown-menu" role="menu">
-											<li><a tabindex="-1" href="sinhvien_GiaHanDT.jsp" >Gia Hạn</a></li>
-											<li><a tabindex="-1" href="sinhvien_LyDoHyGHDT.jsp">Hủy</a></li>
-										</ul>
+														
+														</tbody>
+													</table>
+													
+													
+												</div>
+												
+											</div>
+										</div>
 									</div>
 
-								</div>
-							</div>
-						</div>
 						<div class="tab-pane" id="kqNghiemThu">
-							<div class="row">
-								<div class="svkqNghiemThu" style="background:white;height:500px;margin-right:15px;border-radius:3px">
-									<h2 class="tieude_theh">KẾT QUẢ NGHIỆM THU</h2><hr>
-									<div class="sv_table_kqNghiemThu">
-										<table class="table table-striped table-hover">
-											<thead class="thead-default">
-												<tr class="success">
-													<th>Mã số đề tài</th>
-													<th>Tên đề tài</th>
-													<th>Ngày đăng ký</th>
-													<th>Ngày nghiệm thu</th>
-													<th>Kết quả chi tiết</th>
-												</tr>
-											</thead>
-											<tbody>
-												<%
-				     										for (DeTai detai3: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
+										<div class="row">
+											<div class="svkqNghiemThu" style="background:white;height:500px;margin-right:15px;border-radius:3px">
+												<h2 class="tieude_theh">KẾT QUẢ NGHIỆM THU</h2><hr>
+												<div class="sv_table_kqNghiemThu">
+													<table class="table table-striped table-hover">
+														<thead class="thead-default">
+															<tr class="success">
+																<th>Mã số đề tài</th>
+																<th>Tên đề tài</th>
+																<th>Ngày đăng ký</th>
+																<th>Ngày nghiệm thu</th>
+																<th>Kết quả chi tiết</th>
+															</tr>
+														</thead>
+														<tbody>
+															<%
+				     										for (DeTai dtnt: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
 															%>
 															<tr>
-																<td><%=detai3.getMaDT() %></td>
-																<td><%=detai3.getTenDT() %></td>
-																<td><%=detai3.getNgayThucHien() %></td>
-																<td><%=detai3.getNgayNT() %></td>
+																<td><%=dtnt.getMaDT() %></td>
+																<td><%=dtnt.getTenDT() %></td>
+																<td><%=dtnt.getNgayThucHien() %></td>
+																<td><%=dtnt.getNgayNT() %></td>
 																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
 															<%
 			    											}
 															%>
-											</tbody>
-										</table>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</div>
 						<div class="tab-pane" id="dkDeTai">
 							<div class="row" style="margin-right:0px;">
 								<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
@@ -482,7 +478,7 @@ $( document ).ready(function() {
 													</div>
 													<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 														<div class="row">
-															<%
+														<%
 				     										TaiKhoan taikhoan= tk.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 															%>
 															<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -560,7 +556,7 @@ $( document ).ready(function() {
 																		</div>
 																	</div>
 																</div>
-																<a class="btn btn-primary" data-toggle="modal" href="#modaltt" style="margin-top:40px; margin-left:30px;">Cập nhật thông tin</a>
+																	<a class="btn btn-primary" data-toggle="modal" href="#modaltt" style="margin-top:40px; margin-left:30px;">Cập nhật thông tin</a>
 																<div class="modal fade" id="modaltt">
 																	<div class="modal-dialog">
 																		<div class="modal-content">
@@ -571,7 +567,7 @@ $( document ).ready(function() {
 																			<div class="modal-body">
 																				<div class="row">
 																					<div class="title " style=" text-align:center; margin-bottom:15px;">
-																						<h2> CẬP NHẬP THÔNG TIN </h2>
+																						<h2> CẬP NHẬT THÔNG TIN </h2>
 																					</div>
 																				</div>
 																				<div class="row">
@@ -587,7 +583,7 @@ $( document ).ready(function() {
 																						<form action="TaiKhoan_Servlet" id="formcntt" method="post" class="form-horizontal">
 																							<input type="hidden" name="command" value="update">
 																							<input type="hidden" name="MaTK" value=<%=session.getAttribute("Email").toString()%>>
-																							<input type="hidden" name="Quyen" value="Student">
+																								<input type="hidden" name="Quyen" value="Student">
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
 																									<label for="email">Mail<span>:</span></label> 
@@ -597,9 +593,9 @@ $( document ).ready(function() {
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
-																									<label for="sodt">Ngành<span>:</span></label>
-																									<input class="form-control" name="nganh" id="nganh" type="text"  required/>
-																									<span class="glyphicon form-control-feedback" id="nganh1"></span>
+																									<label for="sodt">Số điện thoại<span>:</span></label>
+																									<input class="form-control" name="sodt" id="sodt" type="number" number required/>
+																									<span class="glyphicon form-control-feedback" id="sodt1"></span>
 																								</div>
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
@@ -619,8 +615,9 @@ $( document ).ready(function() {
 																							</div>
 																							<div class="modal-footer">
 																								<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
-																								<button type="submit" class="btn btn-primary" >Lưu</button>
+																								
 																							</div>
+																							<input type="submit" value="Lưu" class="btn-lg col-lg-3" />
 																						</form>
 																					</div>
 																				</div>
@@ -635,64 +632,203 @@ $( document ).ready(function() {
 											</div>
 										</div>
 									</div>
-				<div class="tab-pane active" id="GHDT">
-							<div class="row">
-								<div class="QLyTK" style="background:white;height:550px;margin-right:15px;border-radius:3px">
-									<h2 class="tieude_theh">HỦY ĐỀ TÀI</h2>
-									<hr>
-									<div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
-										<table class="table table-striped table-hover">
-											<thead class="thead-default">
-												<tr class="success">
-													<th>Mã đề tài</th>
-													<th>Tên đề tài</th>
-													<th>Ngày đăng ký</th>
-													<th>Hạn nghiệm thu</th>
-													<th>Trạng thái</th>
+								<div class="tab-pane active" id="CTDT">
+									<div class="row" style="margin-right:0px;">
+										<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
+											<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI ĐỀ XUẤT</h2>
+											<hr>
+											<div class="container" style="width:800px">
+												<div class="row">
+													<div class="mota">
+														<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+															<form action="DeTai_Servlet" method="POST" class="form-horizontal">
+															<input type="hidden" name="command" value="dkdtdexuat" />
+															<input type="hidden" name="nguoidk" value="Student" />
+															<input type="hidden" name="MaDT" value="<%=maDT%>" />
+																<input type="hidden" name="nguoidk2" value="Student" />
+																<div class="form-group">
+																	<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<input class="form-control" id="tendetai" type="text" value="<%=detai.getTenDT() %>" readonly>
+																	</div>
+																	<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
+																	<div class="col-sm-10">
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getMoTa() %></textarea>
+																	</div>
+																	<br>
+																	<br>
+																	<label class="col-sm-2 control-label" for="linhvucnghiencuu">Lĩnh vực nghiên cứu:</label>
+																	<div class="col-sm-10" id="linhvucnghiencuu">
+																		<label class="radio-inline"><input type="radio" value="tunhien" name="linhvucnghiencuu" checked="checked" readonly> Tự nhiên</label>
+																		<label class="radio-inline"><input type="radio" value="xhnv" name="linhvucnghiencuu" readonly>Xã hội nhân văn</label>
+																		<label class="radio-inline"><input type="radio" value="giaoduc" name="linhvucnghiencuu"readonly>Giáo dục</label>
+																		<label class="radio-inline"><input type="radio" value="kythuat" name="linhvucnghiencuu"readonly>Kỹ thuật</label>
+																		<label class="radio-inline"><input type="radio" value="nong_ngulam" name="linhvucnghiencuu"readonly>Nông-ngư lâm</label>
+																		<label class="radio-inline"><input type="radio" value="yduoc" name="linhvucnghiencuu"readonly>Y dược</label>
+																		<label class="radio-inline"><input type="radio" value="moitruong" name="linhvucnghiencuu"readonly>Môi trường</label>
+																	</div>
+																	<br>
+																	<br>
+																	<label class="col-sm-2 control-label" for="loaihinhnghiencuu">Loại hình nghiên cứu:</label>
+																	<div class="col-sm-10" id="loaihinhnghiencuu">
+																		<label class="radio-inline"><input type="radio" value="coban" name="loaihinhnghiencuu" checked="checked"readonly> Cơ bản:</label>
+																		<label class="radio-inline"><input type="radio" value="ungdung" name="loaihinhnghiencuu"readonly>Ứng dụng:</label>
+																		<label class="radio-inline"><input type="radio" value="trienkhai" name="loaihinhnghiencuu"readonly>Triển khai:</label>
+																	</div>
+																	<br>
+																	<br><br>
+																	<div class="container" style="margin-top:35px; margin-left:20px;width:800px">
+																		<div class="row">
+																			<label class="col-sm-2 control-label" for="thoigianthuchien">Thời gian thực hiện:</label>
+																			<div class="col-sm-10" id="thoigianthuchien">
+																				<div class="row">
+																					<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
+																					<div class="col-sm-4" style="margin-bottom:5px;">
+																						<input type="date" name="" id="thoigianbatdau" class="form-control" value="<%=detai.getNgayThucHien() %>" required="required" title="" style="padding:0px;" readonly>
+																					</div>
+																					<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
+																					<div class="col-sm-4" style="margin-bottom:5px;">
+																						<input type="date" name="" id="thoigianketthuc" class="form-control" value="<%=detai.getNgayKetThuc() %>" required="required" title="" style="padding:0px;"readonly>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
+																	<div class="col-sm-10">
+																		<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value="<%=detai.getCoQuanChuTri() %>" readonly>
+																	</div>
+																	<br>
+																	<div class="container" style="margin-top:35px;width:800px">
+																		<div class="row">
+																			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+																				<label style="margin-left:60px">Chủ nhiệm đề tài:</label><br>
+																				<div class="row" style="margin-bottom:5px">
+																					<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
+																					<div class="col-sm-8">
+																						<input class="form-control" id="hoten1" name="tenCN" type="text" >
+																					</div>
+																				</div>
+																				<div class="row" style="margin-bottom:5px">
+																					<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
+																					<div class="col-sm-8">
+																						<input class="form-control" id="mss1" name="mssv" type="text">
+																					</div>
+																				</div>
+																				<div class="row" style="margin-bottom:5px">
+																					<label class="col-sm-4 control-label" for="mail1">Email:</label>
+																					<div class="col-sm-8">
+																						<input class="form-control" id="" type="text" name="email">
+																					</div>
+																				</div>
+																				<br>
+																				<label style="margin-left:60px">Sinh viên cùng thực hiện:</label><br>
+																				<div class="row" style="margin-bottom:5px">
+																					<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
+																					<div class="col-sm-8">
+																						<input class="form-control" id="tenSV1" name="tenSV1" type="text" value="" >
+																					</div>
+																				</div>
+																				<div class="row" style="margin-bottom:5px">
+																					<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
+																					<div class="col-sm-8">
+																						<input class="form-control" id="mss1" type="text" value="" >
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+																				<label style="margin-left:60px">Giảng viên hướng dẫn:</label><br>
+																				<div class="row" style="margin-bottom:5px">
+																					<label class="col-sm-4 control-label" for="hoten1" >Họ và tên:</label>
+																					<div class="col-sm-8">
+																						<input class="form-control" id="hoten1" type="text" value="<%=detai.getTenGVHD() %>" readonly>
+																					</div>
+																				</div>
+																				<div class="row" style="margin-bottom:5px">
+																					<label class="col-sm-4 control-label" for="mssv1">Email:</label>
+																					<div class="col-sm-8">
+																						<input class="form-control" id="mss1" type="text" value=<%=detai.getEmailGV() %> readonly>
+																					</div>
+																					<br><br><br><br><br><br>
+																					<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
+																					<div class="row" style="margin-bottom:5px">
+																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
+																						<div class="col-sm-8">
+																							<input class="form-control" id="hoten1" name="tenSV2" value="" type="text">
+																						</div>
+																					</div>
+																					<div class="row" style="margin-bottom:5px">
+																						<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
+																						<div class="col-sm-8">
+																							<input class="form-control" id="mss1" value="" type="text">
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
+																	<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getTinhHinhTrong() %></textarea>
+																	</div>
+																	<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getTinhHinhNgoai() %></textarea>
+																	</div>
 
-												</tr>
-											</thead>
-											<tbody>
-												
-													<tr >
-														<td><%=detai.getMaDT() %></td>
-														<td><%=detai.getTenDT() %></td>
- 													  	<td><%=detai.getNgayThucHien() %></td>
-														<td><%=detai.getNgayKetThuc() %></td>
-														<td><%=detai.getTenTT() %></td>
-													</tr>
-												
-											</tbody>
-										</table>
+																	<label class="col-sm-2 control-label" for="mota">Tính cấp thiết của đề tài:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getTinhCapThiet() %></textarea>
+																	</div>
+
+																	<label class="col-sm-2 control-label" for="mota">Mục tiêu của đề tài:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getMucTieu() %></textarea>
+																	</div>
+
+																	<label class="col-sm-2 control-label" for="mota">Phương pháp và phạm vi nghiên cứu:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getPPNC() %></textarea>
+																	</div>
+
+																	<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu và tiến độ thực hiện:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<textarea name="" id="mota" class="form-control" rows="2" required="required"readonly><%=detai.getNoiDungNC() %></textarea>
+																	</div>
+
+																	<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<input class="form-control" id="sanphamdukiem" type="text" value="<%=detai.getSPDuKien() %>" readonly>
+																	</div>
+
+
+																	<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<input class="form-control" id="diachiungdung" type="text" value="<%=detai.getDiaChiUD() %>" readonly>
+																	</div>
+
+																	<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
+																	<div class="col-sm-10" style="margin-bottom:5px">
+																		<input class="form-control" id="dxuatkinhphi" type="text" value=<%=detai.getKinhPhi() %> readonly>
+																	</div>
+
+																	<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
+																	<div class="col-sm-10" style="margin-bottom:10px">
+																		<input class="form-control" id="tendetai" type="file"readonly>
+																	</div>
+																	<div id="guidon" style="">
+																			<button type="submit" id="btn_GuiDon" style="color: #fff;background-color: #5bc0de;border-color: #46b8da; height:35px;width:150px;background-image: none;border: 1px solid transparent;border-radius: 4px; margin-right:15px;float:right;">Gửi đơn đăng ký</button>
+																		</div>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-									<form  action="GiaHanDT_Servlet" method="POST">
-									<input type="hidden" name="command" value="insert" />
-									<input type="hidden" name="xuly" value="guidonhuy" />
-									<input type="hidden" name="MaDT" value="<%=detai.getMaDT() %>"/>
-										<div class="form-inline">
-											<div class="col-xs-6">
-											<label class="fieldinput" style="margin-left:10px;">Họ tên: </label>
-											<input class="form-control" id="" type="text" name="" value="<%=detai.getTenCN() %>" readonly>
-											</div>
-										</div>
-										<div class="form-inline">
-											<div class="col-xs-6">
-											<label>MSSV: </label>
-											<input class="form-control" id="" type="text" value="<%=detai.getMSSVCN() %>" readonly>
-											
-											</div>
-										</div>
-										<div >
-											<label class="col-sm-3" for="mota" style="margin-top:10px; margin-left:10px;">Lý do gia hạn đề tài </label><br>
-											<div class="col-sm-12">
-												<textarea type="text" name="lydo" class="form-control required mota" placeholder="Lý do cá nhân"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="3" required style="margin-left:10px;"></textarea>
-											</div>
-										</div>
-										<button type="submit" id="btn_GuiDon"  class="btn btn-info" style="float:right; margin-right:10px; margin-top:380px;">Gửi đơn</button>
-									</form>
 								</div>
-							</div>
-						</div>
 				</div>
 			</div>
 		</div>

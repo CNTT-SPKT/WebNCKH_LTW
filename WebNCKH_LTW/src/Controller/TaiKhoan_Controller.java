@@ -189,7 +189,6 @@ public class TaiKhoan_Controller {
 			ps.setString(8, tk.getHinhAnh());
 			ps.setString(9, tk.getMSNH());
 			ps.setString(10, tk.getCNNH());
-			ps.setString(11, tk.getSoDT());
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -200,14 +199,29 @@ public class TaiKhoan_Controller {
 	
 	public boolean updateTaiKhoan(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "update TaiKhoan set Email=?, SoDT=?, MSNH=?,CNNH=? where MaTK=?";
+		String sql = "update TaiKhoan set Email=?, Nganh=?, MSNH=?,CNNH=? where MaTK=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1, tk.getEmail());
-			ps.setString(2, tk.getSoDT());
+			ps.setString(2, tk.getNganh());
 			ps.setString(3, tk.getMSNH());
 			ps.setString(4, tk.getCNNH());
 			ps.setString(5,tk.getMaTK());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(TaiKhoan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
+	public boolean updateTKDoiMK(TaiKhoan tk) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "update TaiKhoan set MatKhau=? where MaTK=?";
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1, tk.getMatKhau());
+			ps.setString(2, tk.getMaTK());
+			
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			e.printStackTrace();

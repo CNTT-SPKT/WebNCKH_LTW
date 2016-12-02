@@ -504,7 +504,7 @@
 																
 																	<b>
 																		<p>Mail: <%=taikhoan.getEmail() %></p>
-																		<p>Số điện thoại: 0123456789</p>
+																		<p>Ngành:<%=taikhoan.getNganh() %></p>
 																		<p>Mã số ngân hàng: <%=taikhoan.getMSNH() %></p>
 																		<p>Chi nhánh ngân hàng: <%=taikhoan.getCNNH() %></p>
 																		<p>Đơn vị công tác: ZXC</p>
@@ -586,7 +586,10 @@
 																						</div>
 																					</div>
 																					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-																						<form action="" id="formcntt" method="POST" class="form-horizontal" role="form">
+																						<form action="TaiKhoan_Servlet" id="formcntt" method="post" class="form-horizontal">
+																							<input type="hidden" name="command" value="update">
+																							<input type="hidden" name="MaTK" value=<%=session.getAttribute("Email").toString()%>>
+																							<input type="hidden" name="Quyen" value="Student">
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
 																									<label for="email">Mail<span>:</span></label> 
@@ -596,9 +599,9 @@
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
-																									<label for="sodt">Số điện thoại<span>:</span></label>
-																									<input class="form-control" name="sodt" id="sodt" type="number" number required/>
-																									<span class="glyphicon form-control-feedback" id="sodt1"></span>
+																									<label for="sodt">Ngành<span>:</span></label>
+																									<input class="form-control" name="nganh" id="nganh" type="text"  required/>
+																									<span class="glyphicon form-control-feedback" id="nganh1"></span>
 																								</div>
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
@@ -610,15 +613,15 @@
 																							</div>
 																							<div class="form-group has-feedback" style="margin-left:20px;">
 																								<div class="col-xs-11">
-																									<label for="donvi">Đơn vị công tác<span>:</span></label> 
-																									<input class="form-control" name="donvi" id="donvi" type="text" required/>
+																									<label for="donvi">Mã số ngân hàng<span>:</span></label> 
+																									<input class="form-control" name="masoNH" id="donvi" type="text" required/>
 																									<span class="glyphicon form-control-feedback" id="donvi1"></span>
 																								</div>
 																							</div>
 																							</div>
 																							<div class="modal-footer">
 																								<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
-																								<button type="submit" class="btn btn-primary">Lưu</button>
+																								<button type="submit" class="btn btn-primary" >Lưu</button>
 																							</div>
 																						</form>
 																					</div>

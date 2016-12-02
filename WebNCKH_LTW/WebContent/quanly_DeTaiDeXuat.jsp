@@ -209,7 +209,7 @@
 													<td><%=dtdx.getTenDT() %></td>
 													<td><%=dtdx.getNgayThucHien() %></td>
 													<td><%=dtdx.getTenGVHD() %></td>
-													<td><a href="quanly_CTDTDeXuat.jsp?MaDT=<%=dtdx.getMaDT()%>" >Đăng ký</a></td>
+													<td><a href="quanly_DangKyDTDX.jsp?MaDT=<%=dtdx.getMaDT()%>" >Đăng ký</a></td>
 												</tr>
 												
 												<%

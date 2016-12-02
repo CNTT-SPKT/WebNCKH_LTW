@@ -98,6 +98,7 @@
 														<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 															<form action="DeTai_Servlet" method="POST" class="form-horizontal">
 															<input type="hidden" name="command" value="dkdtdexuat" />
+															<input type="hidden" name="MaDT" value="<%=maDT%>" />
 																<input type="hidden" name="nguoidk" value="Student" />
 																<div class="form-group">
 																	<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>

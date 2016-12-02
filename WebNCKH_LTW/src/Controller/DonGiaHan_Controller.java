@@ -2,9 +2,14 @@ package Controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import com.mysql.jdbc.PreparedStatement;
+import com.sun.istack.internal.logging.Logger;
+
 import java.sql.ResultSet;
 
 import Model.DeTai;
@@ -76,6 +81,26 @@ public class DonGiaHan_Controller {
 	        }
 	        return gh;
 	    }
+		public boolean insertDonGiaHan(DonGiaHan gh) throws ParseException {
+			Connection cons = DBConnect.getConnecttion();
+			String sql = "insert into DonGiaHan values(?,?,?,?)";
+			try {
+				SimpleDateFormat format = new SimpleDateFormat( "MM/dd/yyyy" );  
+				java.util.Date myDate = format.parse(gh.getGHDen());
+				java.sql.Date GHDen = new java.sql.Date( myDate.getTime() );
+				PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+				ps.setString(1,gh.getMaDonXin());
+				ps.setString(2, gh.getMaDT());
+				ps.setDate(3,GHDen );
+				ps.setString(4, gh.getLyDo());
+				
+				return ps.executeUpdate()==1;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				Logger.getLogger(DonGiaHan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+			}
+			return false;
+		}
 		
 		public static void main(String[] args) throws SQLException {
 			DonGiaHan_Controller ctrl= new DonGiaHan_Controller();

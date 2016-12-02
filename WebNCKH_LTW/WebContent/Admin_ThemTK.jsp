@@ -173,7 +173,7 @@
 														<br>
 														<div class="col-xs-10">
 															<label for="sl_menu">Quyền<span>:</span>
-															</label> <select id="sl_menu" class="form-control"
+															</label> <select id="sl_menu" name="quyen" class="form-control"
 																required="required">
 																<%
 																	for (TaiKhoan b : tk.getListTKQuyen()) {
