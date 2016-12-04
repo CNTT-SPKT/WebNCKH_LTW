@@ -54,7 +54,7 @@ public class DeTai_Servlet extends HttpServlet {
 		String command = request.getParameter("command");
 		
 		
-		String url="", error="";
+		String url="", error="", type="";
 		try{
 			switch(command){
 				case "GV_pheduyetDT":
@@ -71,6 +71,7 @@ public class DeTai_Servlet extends HttpServlet {
  					
 					if(detaictrl.updateTrangThai_DeTai(dt))
 					{
+						type = "pddt_1";
 						String nguoigui = request.getParameter("nguoigui");
 						TB_TK tbtk = new TB_TK();
 						ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
@@ -96,19 +97,20 @@ public class DeTai_Servlet extends HttpServlet {
 							System.out.println(tbtk.getTinTB());
 						System.out.println("Gửi thông báo thành công!");
 						if(quyen.equals("Lecturers"))
-							url="giangvienPage.jsp";  
+							url="giangvienPage.jsp?type="+type;  
 						if(quyen.equals("Manager"))
-							url="quanlyPage.jsp";
+							url="quanlyPage.jsp?type="+type;
 						
 					}
 					
 					else
 					{
 						error="Thất bại";
+						type="pddt_0";
 						if(quyen.equals("Lecturers"))
-							url="giangvienPage.jsp";
+							url="giangvienPage.jsp?type="+type;
 						if(quyen.equals("Manager"))
-							url="quanlyPage.jsp";
+							url="quanlyPage.jsp?type="+type;
 					
 					}
 					break;
@@ -183,6 +185,76 @@ public class DeTai_Servlet extends HttpServlet {
 					}
 					
 					break;
+				case "GV_DKDT":		
+					System.out.println("Vào gv đăng ký đề tài");
+					DeTai gv_dkDT=new DeTai();
+					int sodt1=detaictrl.getListDeTai().size()+1;
+					MaDT="dt"+Integer.toString(sodt1);
+					gv_dkDT.setMaDT(MaDT);
+					gv_dkDT.setMaHienThi(null);
+					gv_dkDT.setMaTT("tt10");
+					
+					
+					TaiKhoan tk1=new TaiKhoan();
+					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenCN"));
+					gv_dkDT.setMaCN(tk1.getMaTK());
+					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV1"));
+					gv_dkDT.setSinhVien1(tk1.getMaTK());
+					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV2"));
+					gv_dkDT.setSinhVien2(tk1.getMaTK());
+					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenGVHD"));
+					gv_dkDT.setGVHD(tk1.getMaTK());
+					gv_dkDT.setTenDT(request.getParameter("tenDT"));
+					gv_dkDT.setMoTa(request.getParameter("mota"));
+					gv_dkDT.setLinhVuc("Tự nhiên");
+					gv_dkDT.setLoaiHinh("Cơ bản");
+					gv_dkDT.setNgayThucHien(request.getParameter("ngaybatdau"));
+					gv_dkDT.setNgayKetThuc(request.getParameter("ngayketthuc"));
+					gv_dkDT.setCoQuanChuTri(request.getParameter("coquanchutri"));
+					gv_dkDT.setTinhHinhTrong(request.getParameter("tinhhinhTrong"));
+					gv_dkDT.setTinhHinhNgoai(request.getParameter("tinhhinhNgoai"));
+					gv_dkDT.setTinhCapThiet(request.getParameter("tinhcapThiet"));
+					gv_dkDT.setMucTieu(request.getParameter("muctieu"));
+					gv_dkDT.setPPNC(request.getParameter("PPNC"));
+					gv_dkDT.setNoiDungNC(request.getParameter("NoiDungNC"));
+					gv_dkDT.setSPDuKien(request.getParameter("SPDuKien"));
+					gv_dkDT.setDiaChiUD(request.getParameter("DiaChiUD"));
+					gv_dkDT.setKinhPhi(Double.parseDouble(request.getParameter("kinhphi")));
+					
+					if(detaictrl.insert_DeTaiSVDK(gv_dkDT))
+					{
+						error="Thành công!";
+						type = "dkdt_1";
+						System.out.println("Đăng ký đề tài thành công!");
+						String nguoidk = request.getParameter("nguoidk");
+						if(nguoidk.equals("Lecturers"))
+						{
+							url="giangvienPage.jsp?type="+type;
+							// đăng ký thành công thì gởi thông báo có đề tài mới cho quản lý
+							TB_TK tbtk = new TB_TK();
+							ThongBao tb = thongbaoctrl.getListThongBao(gv_dkDT.getGVHD());
+							tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+							tbtk.setMaLTB("ltt2");
+							tbtk.setTinTB("Thông báo đăng ký đề tài mới từ tài khoản "+gv_dkDT.getGVHD());
+							tbtk.setMaTB(tb.getMaTB());
+							if(tb_tkctrl.insertTB_TK(tbtk))
+							System.out.println("Gửi thông báo thành công!");
+						}		
+						
+					}
+					else{
+						System.out.println("Đăng ký thất bại");
+						error="Thất bại!";
+						String nguoidk = request.getParameter("nguoidk");
+						if(nguoidk.equals("Student"))
+							url="sinhvienPage.jsp";
+						if(nguoidk.equals("Lecturers"))
+							url="giangvienPage.jsp?type="+type;
+						else
+							url="quanlyPage.jsp";
+					}
+					System.out.println(url);
+					break;
 				case "GV_pheduyeHuy_GiaHan":
 					String yeucau = request.getParameter("yeucau");
 					xuly = request.getParameter("xuly");
@@ -209,9 +281,15 @@ public class DeTai_Servlet extends HttpServlet {
 					{
 						dt2.setMaTT("tt3"); System.out.println("Yêu cầu không được đồng ý, đề tài vẫn được tiến hành");
 						if(yeucau.equals("tt6"))
+						{
 							tbtk.setTinTB("Thông báo: yêu cầu gia hạn đề tài "+MaDT+" không được đồng ý");
+							type="ghdt_0";
+						}
 						else if(yeucau.equals("tt4"))
+						{
 							tbtk.setTinTB("Thông báo: yêu cầu hủy đề tài "+MaDT+" không được đồng ý");
+							type="huydt_0";
+						}
 					}
 					else if(xuly.equals("dongy"))
 					{
@@ -219,11 +297,13 @@ public class DeTai_Servlet extends HttpServlet {
 						{
 							dt2.setMaTT("tt7"); System.out.println("Gia hạn đề tài thành công");
 							tbtk.setTinTB("Thông báo: gia hạn đề tài "+MaDT+" thành công");
+							type="ghdt_1";
 						}
 						else if(yeucau.equals("tt4"))
 						{
 							dt2.setMaTT("tt5"); System.out.println("Hủy đề tài thành công");
 							tbtk.setTinTB("Thông báo: hủy đề tài "+MaDT+" thành công");
+							type="huydt_1";
 						}
 					}
 					if(tb_tkctrl.insertTB_TK(tbtk))
@@ -233,7 +313,7 @@ public class DeTai_Servlet extends HttpServlet {
 					else
 						error="Thất bại";
 					System.out.println(error);
-					url="giangvienPage.jsp";
+					url="giangvienPage.jsp?type="+type;
 					
 					break;
 				case "QL_pheduyeHuy_GiaHan":

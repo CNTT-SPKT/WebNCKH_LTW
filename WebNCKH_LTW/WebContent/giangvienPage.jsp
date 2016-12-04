@@ -276,15 +276,17 @@
 													<div class="row">
 														<div class="mota">
 															<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-																<form action=" " onsubmit="" method="POST" role="form" class="form-horizontal">
+																<form action="DeTai_Servlet" method="POST" role="form" class="form-horizontal">
+																<input type="hidden" name="command" value="GV_DKDT">
+																<input type="hidden" name="nguoidk" value="Lecturers">
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input class="form-control" id="tendetai" type="text" required>
+																			<input class="form-control" id="tendetai" type="text" required  name="tenDT">
 																		</div>
 																		<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
 																		<div class="col-sm-10">
-																			<textarea name="" id="mota" class="form-control" rows="2" required="required"></textarea>
+																			<textarea id="mota" class="form-control" rows="2" required="required" name="mota"></textarea>
 																		</div>
 																		<br>
 																		<br>
@@ -315,11 +317,11 @@
 																					<div class="row">
 																						<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input type="date" name="ngaybatdau" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																						<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input type="date" name="ngayketthuc" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																					</div>
 																				</div>
@@ -327,7 +329,7 @@
 																		</div>
 																		<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
 																		<div class="col-sm-10">
-																			<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc">
+																			<input class="form-control" id="tendetai" type="text" name="coquanchutri" placeholder="Khoa/Bộ môn trực thuộc">
 																		</div>
 																		<br>
 																		<div class="container" style="margin-top:35px;width:800px">
@@ -337,7 +339,7 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text" required>
+																							<input class="form-control" id="hoten1" type="text" required name="tenCN">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -357,7 +359,7 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text">
+																							<input class="form-control" id="hoten1" type="text" name="tenSV1">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -372,7 +374,7 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text" required>
+																							<input class="form-control" id="hoten1" type="text" required name="tenGVHD">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
@@ -385,7 +387,7 @@
 																						<div class="row" style="margin-bottom:5px">
 																							<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																							<div class="col-sm-8">
-																								<input class="form-control" id="hoten1" type="text">
+																								<input class="form-control" id="hoten1" type="text" name="tenSV2">
 																							</div>
 																						</div>
 																						<div class="row" style="margin-bottom:5px">
@@ -401,47 +403,47 @@
 																		<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
 																		<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea name="" id="mota" class="form-control" rows="2" required="required"></textarea>
+																			<textarea name="tinhhinhTrong" id="mota" class="form-control" rows="2" required="required"></textarea>
 																		</div>
 																		<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea name="" id="mota" class="form-control" rows="2" required="required"></textarea>
+																			<textarea name="tinhhinhNgoai" id="mota" class="form-control" rows="2" required="required"></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Tính cấp thiết của đề tài:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea name="" id="mota" class="form-control" rows="2" required="required"></textarea>
+																			<textarea name="tinhcapThiet" id="mota" class="form-control" rows="2" required="required"></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Mục tiêu của đề tài:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea name="" id="mota" class="form-control" rows="2" required="required"></textarea>
+																			<textarea name="muctieu" id="mota" class="form-control" rows="2" required="required"></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Phương pháp và phạm vi nghiên cứu:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea name="" id="mota" class="form-control" rows="2" required="required"></textarea>
+																			<textarea name="PPNC" id="mota" class="form-control" rows="2" required="required"></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu và tiến độ thực hiện:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<textarea name="" id="mota" class="form-control" rows="2" required="required"></textarea>
+																			<textarea name="NoiDungNC" id="mota" class="form-control" rows="2" required="required"></textarea>
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input class="form-control" id="sanphamdukiem" type="text" required>
+																			<input class="form-control" id="sanphamdukiem" type="text" required name="SPDuKien">
 																		</div>
 
 
 																		<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input class="form-control" id="diachiungdung" type="text" required>
+																			<input class="form-control" id="diachiungdung" type="text" required name="DiaChiUD">
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
 																		<div class="col-sm-10" style="margin-bottom:5px">
-																			<input class="form-control" id="dxuatkinhphi" type="text" required>
+																			<input class="form-control" id="dxuatkinhphi" type="text" required name="kinhphi">
 																		</div>
 
 																		<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
@@ -455,8 +457,9 @@
 
 																		</div>
 																	</div>
+																	</form>
 																</div>
-															</form>
+															
 														</div>
 													</div>
 												</div>
