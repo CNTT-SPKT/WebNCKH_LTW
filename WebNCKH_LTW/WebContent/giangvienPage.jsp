@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="vendor/bootstrap.css">
 	<link rel="stylesheet" href="1.css">
 	<link rel="stylesheet" href="vendor/font-awesome.css">
+	<script type="text/javascript" src="jquery.validate.min.js"></script>
 </head>
 <%  TB_TK_Controller cttb= new TB_TK_Controller();
 	ThongBao_Controller tb= new ThongBao_Controller();
@@ -24,8 +25,70 @@
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	String type = request.getParameter("type");
+	String error ="";
+	if (request.getParameter("type") != null)
+	{
+		if(type.equals("ntdt_1"))
+			error = "Nghiệm thu thành công!";
+		if(type.equals("ntdt_0"))
+			error = "Nghiệm thu thất bại!";
+		if(type.equals("pddt_1"))
+			error = "Phê duyệt thành công!";
+		if(type.equals("pddt_0"))
+			error = "Phê duyệt thất bại!";
+		if(type.equals("ghdt_1"))
+			error = "Duyệt đơn gia hạn thành công!";
+		if(type.equals("ghdt_0"))
+			error = "Duyệt đơn gia hạn thất bại!";
+		if(type.equals("huydt_1"))
+			error = "Duyệt đơn hủy thành công!";
+		if(type.equals("huydt_0"))
+			error = "Duyệt đơn hủy thất bại!";
+		if(type.equals("dkdt_1"))
+			error = "Đăng ký đề tài thành công!";
+		if(type.equals("dkdt_0"))
+			error = "Đăng ký đề tài thất bại!";
+	}
 %>
 <body>
+<script type="text/javascript">
+   $(document).ready(function() {
+       var x = $('.Mssg').text();
+       var y = $('.TypeMssg').text();
+    	if(x != "null" && x != "")
+    	{
+    		if( y == "ntdt_1" || y == "pddt_1" || y == "huydt_1" || y == "ghdt_1" || y == "dkdt_1")
+    			$("#ModalSuccess").modal('show');
+    		if( y == "ntdt_0" || y == "pddt_0" || y == "huydt_0" || y == "ghdt_0" || y == "dkdt_0")
+    			$("#ModalFail").modal('show');
+    	}
+    });
+</script>
+<div class="modal fade" id="ModalSuccess">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-success">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<div class="modal fade" id="ModalFail">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-danger">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<h4 class="Mssg hidden" style="text-align:center"><%=error%></h4>
+<h4 class="TypeMssg hidden" style="text-align:center"><%=type%></h4>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -47,7 +110,7 @@
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
 								<ul class="nav navbar-nav">
-									<li><a href="#">Trang chủ</a></li>
+									<li><a href="giangvienPage.jsp">Trang chủ</a></li>
 									<li><a href="#">Biểu Mẫu</a></li>
 									<li><a href="#">Liên Hệ</a></li>
 									<li><a href="#">Hướng dẫn</a></li>
@@ -424,11 +487,9 @@
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT()%>">Chi tiết</a></th>
 												</tr>
-											<%
-			    							}
-											%>							
+											<%} %>							
 											</tbody>
 										</table>
 									</div>
@@ -461,9 +522,7 @@
 													<th><%=ct.getTenTT() %></th>
 													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
-												<%
-			    							}
-											%>	
+												<%} %>
 											</tbody>
 										</table>
 									</div>

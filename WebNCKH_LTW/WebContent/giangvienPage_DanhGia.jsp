@@ -43,7 +43,7 @@ if (request.getParameter("MaDT") != null) {
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
 								<ul class="nav navbar-nav">
-									<li><a href="#">Trang chủ</a></li>
+									<li><a href="giangvienPage.jsp">Trang chủ</a></li>
 									<li><a href="#">Biểu Mẫu</a></li>
 									<li><a href="#">Liên Hệ</a></li>
 									<li><a href="#">Hướng dẫn</a></li>
@@ -526,7 +526,7 @@ if (request.getParameter("MaDT") != null) {
 													<tr>
 														<td>Tổng điểm</td>
 														<td>100</td>
-														<td><input type="text" name="tongdiem" id="input" class="form-control required diem4" value="" required="required" min="0" max="100" pattern="" title="" data-content="Vui lòng nhập vào ký tự số từ 0-100." data-placement="left" data-trigger="hover"></td>
+														<td><input type="text" name="tongdiem" class="form-control " value=""></td>
 													</tr>
 												</tbody>
 											</table>

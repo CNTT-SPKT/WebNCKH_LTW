@@ -81,7 +81,7 @@ $( document ).ready(function() {
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
 								<ul class="nav navbar-nav">
-									<li><a href="#">Trang chủ</a></li>
+									<li><a href="giangvienPage.jsp">Trang chủ</a></li>
 									<li><a href="#">Biểu Mẫu</a></li>
 									<li><a href="#">Liên Hệ</a></li>
 									<li><a href="#">Hướng dẫn</a></li>
@@ -550,8 +550,8 @@ $( document ).ready(function() {
 										<textarea name="" id="mota" class="form-control" rows="3" required="required" readonly><%=lydo%></textarea>
 									</div>
 									<div class="row">
-									<a href="DeTai_Servlet?command=GV_pheduyeHuy_GiaHan&xuly=dongy&MaDT=<%=detai.getMaDT()%>&yeucau=<%=detai.getMaTT()%>&MaGV=<%=detai.getGVHD()%>"><button style="margin-top:340px;margin-right:150px;" type="button" class="btn  btn-info">Phê duyệt</button></a>
-									<a href="DeTai_Servlet?command=GV_pheduyeHuy_GiaHan&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>&yeucau=<%=detai.getMaTT()%>&MaGV=<%=detai.getGVHD()%>"><button style="margin-top:15px;margin-left:150px;" type="button" class="btn btn-danger">Không đồng ý</button></a>
+									<a href="DeTai_Servlet?command=GV_pheduyeHuy_GiaHan&xuly=dongy&MaDT=<%=detai.getMaDT()%>&yeucau=<%=detai.getMaTT()%>&MaGV=<%=detai.getGVHD()%>"><button style="margin-top:380px;margin-right:150px;" type="button" class="btn btn-lg btn-info">Phê duyệt</button></a>
+									<a href="DeTai_Servlet?command=GV_pheduyeHuy_GiaHan&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>&yeucau=<%=detai.getMaTT()%>&MaGV=<%=detai.getGVHD()%>"><button style="margin-top:15px;margin-left:150px;" type="button" class="btn btn-lg btn-danger">Không đồng ý</button></a>
 									</div>
 								</div>
 							</div>

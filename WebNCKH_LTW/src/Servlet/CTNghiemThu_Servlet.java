@@ -42,6 +42,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		request.setCharacterEncoding("UTF-8");
 		String command = request.getParameter("command");
 		String quyen = request.getParameter("Quyen");
 		String maDT= request.getParameter("MaDT");
@@ -61,7 +62,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		dt=ctrl.getDeTai(maDT);
 		dt.setMaTT("tt9");
 		
-		String url="", error="";
+		String url="", error="", type="";
 		try{
 			switch(command){
 				case "update":
@@ -69,7 +70,8 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 					
 					if(crt.updateCTNT(ctnt) && ctrl.updateTrangThai_DeTai(dt))
 					{
-						error="Thành công";
+						error = "thành công";
+						type ="ntdt_1";
 						// Đánh giá thành công thì gửi thông báo về cho sinh viên
 						String nguoigui = request.getParameter("nguoigui");
 						TB_TK tbtk = new TB_TK();
@@ -97,19 +99,20 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 						System.out.println("Gửi thông báo thành công!");
 						
 						if(quyen.equals("Lecturers"))
-							url="giangvienPage.jsp";
+							url="giangvienPage.jsp?type="+type;
 						if(quyen.equals("Manager"))
-							url="quanlyPage.jsp";
+							url="quanlyPage.jsp?&type="+type;
 						
 					}
 					
 					else
 					{
-						error="Thất bại";
+						error="Nghiệm thu thất bại";
+						type = "ntdt_0";
 						if(quyen.equals("Lecturers"))
-							url="giangvienPage.jsp";
+							url="giangvienPage.jsp?type="+type;
 						if(quyen.equals("Manager"))
-							url="quanlyPage.jsp";
+							url="quanlyPage.jsp?type="+type;
 					
 					}
 					break;
@@ -120,6 +123,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		}
 		System.out.println(url);
 		request.setAttribute("error", error);
+		request.setAttribute("type", type);
 		response.sendRedirect(url);
 	}
 
