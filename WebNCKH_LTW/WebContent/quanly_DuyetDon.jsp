@@ -61,7 +61,13 @@
 			yeucauXuly="ĐƠN HỦY ĐỀ TÀI";
 	}
 %>
-
+<script type="text/javascript">
+$( document ).ready(function() {
+	var tt=$('#trangthaiDT').val();
+	  if(tt == "tt4")
+		  $('#thoigianGiahan').addClass('hidden');
+	});
+</script>
     <div class="page">
         <div class="menu">
             <div class="row">
@@ -120,7 +126,7 @@
                                 <span class="glyphicon glyphicon-list-alt"></span> DSĐT được phân công phê duyệt</a>
                         </li>
                         <li style="margin-top:0px;">
-                            <a href="#dsDeTaiHuongDan" class="list-group-item" data-toggle="pill">
+                            <a href="#dsDeTaiHuongDan" class="list-group-item" data-toggle="pill">	
                                 <span class="glyphicon glyphicon-th-list"></span> DS đề tài hướng dẫn</a>
                         </li>
                         <li style="margin-top:0px;">

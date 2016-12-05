@@ -127,8 +127,9 @@
                                             
                                     <div class="tlhd">
                                         <!--Thành lập hội đồng nghiệm thu   -->
-                                      <form action="HoiDong_Servlet" method="post">   
-                                            <table class="table table-striped table-hover">
+                                      	<form action="HoiDong_Servlet" method="post">   
+                                       <input type="hidden" name="command" value="insertDT" />
+                                          <table class="table table-striped table-hover">
                                                 <thead class="thead-default">
                                                     <tr class="success">    
                                                          <th>Mã HD</th>  
@@ -148,31 +149,31 @@
 
                                                         <td>
                                                             <select style="height:30px" name="ChuTich">
-                                                            <option value="" select>Chọn Chủ Tịch</option>
-                                                            <%for(TaiKhoan tk:taikhoanDAO.getListTenThanhVienHDQL()){ %>
-                                                            <option value='<%=tk.getMaTK() %>'name="selectCT"><%=tk.getHoTen() %></option>
+                                                            <option value="" selected>Chọn Chủ Tịch</option>
+                                                            <%for(TaiKhoan tk1:taikhoanDAO.getListTenThanhVienHDQL()){ %>
+                                                            <option value='<%=tk1.getMaTK() %>'><%=tk1.getHoTen() %></option>
                                                             <%} %>
                                                             </select>
                                                         </td>
                                                         <td>
                                                             <select style="height:30px" name="PhanBien">
-                                                             <option value="" select>Chọn Phản Biện</option>
-                                                               <%for(TaiKhoan tk:taikhoanDAO.getListTenThanhVienHDQL()){ %>
-                                                            <option name="selectPB" value='<%=tk.getMaTK() %>'><%=tk.getHoTen() %></option>
+                                                             <option value="" selected>Chọn Phản Biện</option>
+                                                               <%for(TaiKhoan tk2:taikhoanDAO.getListTenThanhVienHDQL()){ %>
+                                                            <option value='<%=tk2.getMaTK() %>'><%=tk2.getHoTen() %></option>
                                                             <%} %>
                                                             </select>
                                                      </td>
                                                         <td>
                                                             <select style="height:30px" name="UyVien">
-                                                             <option value="" select>Chọn Ủy Viên</option>
+                                                             <option value="" selected>Chọn Ủy Viên</option>
                                                                <%for(TaiKhoan tk:taikhoanDAO.getListTenThanhVienHDQL()){ %>
-                                                            <option  name="selectUV" value='<%=tk.getMaTK() %>'><%=tk.getHoTen() %></option>
+                                                            <option value='<%=tk.getMaTK() %>'><%=tk.getHoTen() %></option>
                                                             <%} %>
                                                             </select>
                                                         </td>
                                                           <td>
                                                              <!--ngày thành lập-->
-                                                      	 <input  style=" height:30px" type="" name="bday" id="date_select" />
+                                                      	 <input  style=" height:30px" name="bday" id="date_select" />
 	                                                          <script>
 																	
 																		    var tg = new Date();
@@ -187,16 +188,13 @@
                                                     </tr>     
                                                 </tbody>
                                             </table>
-                                        <div>
-		                                    
-                                          <span class="input-group-btn" style="float:right;margin-right:200px;">   
+                                               <span class="input-group-btn" style="float:right;margin-right:200px;">   
                                                       <input name="submit" type="submit" class="btn-info btn" value="Xác nhận">
                                                   </span>
-                                                  <p style="color:red;float:right"> <b>xx
-											   	${statusMsg}</b>
-											  </p>
-                                                 
                                			 </form> 
+                                        <div>
+		                                    
+                                       
                                			 </div>	
                                             </div>
                                         
@@ -404,7 +402,7 @@
 
                                                     <div style=";width:400px; " id="imaginary_container ">
                                                         <div class="input-group stylish-input-group">
-                                                            <input type="text " id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
+                                                            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
                                                             <span class="input-group-addon ">
                                                                         <button type="submit" id="tkiem">
                                                                             <span class="glyphicon glyphicon-search "></span>

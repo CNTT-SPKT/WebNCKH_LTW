@@ -66,13 +66,13 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		try{
 			switch(command){
 				case "update":
-					System.out.println("Vào update");
+					System.out.println("VÃ o update");
 					
 					if(crt.updateCTNT(ctnt) && ctrl.updateTrangThai_DeTai(dt))
 					{
-						error = "thành công";
+						error = "thÃ nh cÃ´ng";
 						type ="ntdt_1";
-						// Đánh giá thành công thì gửi thông báo về cho sinh viên
+						// Ä�Ã¡nh giÃ¡ thÃ nh cÃ´ng thÃ¬ gá»­i thÃ´ng bÃ¡o vá»� cho sinh viÃªn
 						String nguoigui = request.getParameter("nguoigui");
 						TB_TK tbtk = new TB_TK();
 						ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
@@ -85,19 +85,19 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 						    tb.setNguoiGui(nguoigui);
 						    tb.setNguoiNhan(dt.getMaCN());
 						    if(thongbaoctrl.createThongBao(tb))
-						    	System.out.println("Tạo hộp thoại thành công");
+						    	System.out.println("Táº¡o há»™p thoáº¡i thÃ nh cÃ´ng");
 					    }
 						tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
 						tbtk.setMaLTB("ltt1");
 						tbtk.setMaTB(tb.getMaTB());
 						
 						System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
-						tbtk.setTinTB("Thông báo đề tài "+maDT+" đã có kết quả nghiệm thu");
+						tbtk.setTinTB("ThÃ´ng bÃ¡o Ä‘á»� tÃ i "+maDT+" Ä‘Ã£ cÃ³ káº¿t quáº£ nghiá»‡m thu");
 						
 						if(tb_tkctrl.insertTB_TK(tbtk))
 							System.out.println(tbtk.getTinTB());
-						System.out.println("Gửi thông báo thành công!");
-						
+						System.out.println("Gá»­i thÃ´ng bÃ¡o thÃ nh cÃ´ng!");
+						System.out.println("Quyen:" +quyen);
 						if(quyen.equals("Lecturers"))
 							url="giangvienPage.jsp?type="+type;
 						if(quyen.equals("Manager"))
@@ -107,7 +107,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 					
 					else
 					{
-						error="Nghiệm thu thất bại";
+						error="Nghiá»‡m thu tháº¥t báº¡i";
 						type = "ntdt_0";
 						if(quyen.equals("Lecturers"))
 							url="giangvienPage.jsp?type="+type;
@@ -119,7 +119,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 			}
 			
 		}catch(Exception e){
-			error="Xảy ra lỗi ngẫu nhiên!";
+			error="Xáº£y ra lá»—i ngáº«u nhiÃªn!";
 		}
 		System.out.println(url);
 		request.setAttribute("error", error);

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Controller.HoiDong_Controller;
+import Model.DeTai;
+import Model.HoiDong;
 import javafx.print.Printer;
 
 /**
@@ -47,22 +49,14 @@ public class HoiDong_Servlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//	     response.setContentType("text/html");
-// response.setContentType("text/html");  
-		StringBuilder statusMsg = new StringBuilder();
-			
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		System.out.println("vao servlet");
 	    response.setContentType("text/html;charset=UTF-8"); 
 	    request.setCharacterEncoding("UTF-8");
 	    response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
+	
 		try{
-	     
-
-	   
-		HttpSession session = request.getSession();
-		session.removeAttribute("erro");
 		String ChuTich = request.getParameter("ChuTich");
 		String PhanBien = request.getParameter("PhanBien");
 		String UyVien = request.getParameter("UyVien");
@@ -72,41 +66,25 @@ public class HoiDong_Servlet extends HttpServlet {
 		if(HoiDongDao.kiemTra(MaHD))
 		{
 			out.print("Trùng mã hd");
-//			  statusMsg.append("Trùng mã hội đồng!");
-//			  request.setAttribute("statusMsg", statusMsg.toString());
-			//  response.sendRedirect("/WebNCKH_LTW/quanlyPage_LTHDNT.jsp");
-//			session.setAttribute("erro", "Đã tồn tại mã hội đồng");
-//			response.sendRedirect("quanlyPage_LTHDNT.jsp");
-			//out.print("trùng mã hd");
 		}
-		else{
+		else{		
 			
 			HoiDongDao.insert(MaHD, PhanBien, ChuTich, UyVien, NgayThanhLap);
-//			 statusMsg.append("THÀNH CÔNG!");
-//			  request.setAttribute("statusMsg", statusMsg.toString());
-			//  response.sendRedirect("/WebNCKH_LTW/quanlyPage_LTHDNT.jsp");
 			out.print("Thêm thành công");
-//			session.setAttribute("scs", "thêm thành công");
-//			String adding =  (String) session.getAttribute("adding");
-//			if(adding != null)
-//			{
-//				resp.sendRedirect("addDishToRts.html");
-//			}
-//			else
-//			{
-//				resp.sendRedirect("add-new-dish.html");
-//			}
-			
 		}
 	}
 		catch (Exception e ) {
-		
-//			out.println("Lỗi rồi!:" );
-//			out.println("Chủ tịch: "+ChuTich);
-//			out.println("pb: "+PhanBien);
-//			out.println("uv:"+UyVien);
-//			out.println("mahd:" +MaHD);
-//			out.println("ngaythanhlap:" +NgayThanhLap);
+			String ChuTich = request.getParameter("ChuTich");
+			String PhanBien = request.getParameter("PhanBien");
+			String UyVien = request.getParameter("UyVien");
+			String MaHD = request.getParameter("MaHD");
+			String NgayThanhLap = request.getParameter("bday");
+			out.println("Lỗi rồi!:" );
+			out.println("Chủ tịch: "+ChuTich);
+			out.println("pb: "+PhanBien);
+			out.println("uv:"+UyVien);
+			out.println("mahd:" +MaHD);
+			out.println("ngaythanhlap:" +NgayThanhLap);
 			//Why?
 		
 		}

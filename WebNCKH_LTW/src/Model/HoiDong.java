@@ -11,6 +11,9 @@ public class HoiDong {
     private String TenUyVien;
     private String NgayThanhLap;
     private String MaDT;
+    private String TKCT;
+    private String TKPB;
+    private String TKUV;
 	public String getMaDT() {
 		return MaDT;
 	}
@@ -41,13 +44,14 @@ public class HoiDong {
 		super();
 	}
 
-	public HoiDong(String maHD, String phanBien, String tenChuTich, String tenPhanBien,
+	public HoiDong(String maHD, String phanBien, String tenChuTich, String tenPhanBien,String tenUyVien,
 			ArrayList<CTNghiemThu> dsCTNghiemThu) {
 		super();
 		MaHD = maHD;
 		PhanBien = phanBien;
 		TenChuTich = tenChuTich;
 		TenPhanBien = tenPhanBien;
+		TenUyVien=tenUyVien;
 		this.dsCTNghiemThu = dsCTNghiemThu;
 	}
 
@@ -89,6 +93,30 @@ public class HoiDong {
 
 	public void setDsCTNghiemThu(ArrayList<CTNghiemThu> dsCTNghiemThu) {
 		this.dsCTNghiemThu = dsCTNghiemThu;
+	}
+
+	public String getTKCT() {
+		return TKCT;
+	}
+
+	public void setTKCT(String tKCT) {
+		TKCT = tKCT;
+	}
+
+	public String getTKPB() {
+		return TKPB;
+	}
+
+	public void setTKPB(String tKPB) {
+		TKPB = tKPB;
+	}
+
+	public String getTKUV() {
+		return TKUV;
+	}
+
+	public void setTKUV(String tKUV) {
+		TKUV = tKUV;
 	}
 	
 

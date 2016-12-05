@@ -33,12 +33,12 @@
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+	DeTai_Controller dt = new DeTai_Controller();	
 	DeTai detai=new DeTai();
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
 		detai = detaiDAO.getDeTai(maDT);
-	}
 %>
 
     <div class="page">
@@ -68,7 +68,7 @@
                                     <li><a href="#">Hướng dẫn</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"> <%=session.getAttribute("Email") %></span></a></li>
+                                    <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"><%=session.getAttribute("Email") %> 	 </span></a></li>
                                     <li><a href="mainPage.jsp">Đăng xuất</a></li>
                                 </ul>
                             </div>
@@ -126,13 +126,12 @@
                 </div>
                 <div class="col-md-10">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="DanhGia">
+                      	<div class="tab-pane active" id="DanhGia">
 							<div class="row">
 							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
 								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
-								
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
-											<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
+										<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
 										<input type="hidden" name="command" value="update">
 										<input type="hidden" name="Quyen" value="Manager">
 										<input type="hidden" name="MaDT" value=<%=maDT%>>
@@ -187,7 +186,7 @@
 													<tr>
 														<td>Tổng điểm</td>
 														<td>100</td>
-														<td><input type="text" name="tongdiem" id="input" class="form-control required diem4" value="" required="required" min="0" max="100" pattern="" title="" data-content="Vui lòng nhập vào ký tự số từ 0-100." data-placement="left" data-trigger="hover"></td>
+														<td><input type="text" name="tongdiem" class="form-control " value=""></td>
 													</tr>
 												</tbody>
 											</table>
@@ -198,8 +197,8 @@
 											<input type="submit" value="Đánh giá" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">
 										</form>
 									</div>
+								</div>
 							</div>
-						</div>
 						</div>
 
                           <div class="tab-pane" id="postThongBao">
@@ -790,7 +789,7 @@
 								<div class="gv_duyetHuy_GianHan" style="background:white;height:390px;margin-right:15px;border-radius:3px">
 									<h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
 									<div class="gv_tb_dsDeTaiDK">
-										<table class="table table-striped table-hover">
+									<table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -802,18 +801,16 @@
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: detaiDAO.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
+													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
-												<%
-			    							}
-											%>	
+												<%}} %>
 											</tbody>
 										</table>
 									</div>

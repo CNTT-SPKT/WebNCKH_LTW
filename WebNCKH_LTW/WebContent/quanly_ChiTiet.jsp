@@ -127,7 +127,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                         			<div class="tab-pane active" id="CTDT">
 									<div class="row" style="margin-right:0px;">
 										<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
-											<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI</h2>
+											<h2 class="tieude_theh">CHI TIẾT ĐỀ TÀI</h2>
 											<hr>
 											<div class="container" style="width:800px">
 												<div class="row">

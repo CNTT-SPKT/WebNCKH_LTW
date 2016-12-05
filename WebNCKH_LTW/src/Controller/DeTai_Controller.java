@@ -23,10 +23,27 @@ public class DeTai_Controller {
 	
 /*BẮT ĐÀU TÍn*/
 	
+	public boolean updateTrangThai_DeTai_QL(DeTai dt) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "update DeTai set MaTT=?, MaHienThi=? where MaDT=?";
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1,dt.getMaTT());
+			ps.setString(2, dt.getMaHienThi());
+			ps.setString(3, dt.getMaDT());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
+	
+	
 	public ArrayList<DeTai> getListDeTaiPheDuyetQL()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql ="select distinct * from detai,trangthai,taikhoan "
-        		+ "where detai.MaTT='tt1' and detai.matt=trangthai.matt and taikhoan.matk=detai.macn";
+        String sql ="select distinct * from detai,trangthai,taikhoan as tkgv,taikhoan as tksv  "
+        		+ "where detai.MaTT='tt1' and detai.matt=trangthai.matt and tksv.MaTK=detai.macn and tkgv.MaTK=detai.GVHD";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -37,7 +54,8 @@ public class DeTai_Controller {
             	dt.setMaCN(rs.getString("MaCN"));
             	dt.setLinhVuc(rs.getString("LinhVuc"));
             	dt.setTenDT(rs.getString("TenDT"));
-            	dt.setTenCN(rs.getString("HoTen"));
+            	dt.setTenGVHD(rs.getString("tkgv.hoten"));
+            	dt.setTenCN(rs.getString("tksv.hoten"));
             	list.add(dt);
             }
            
@@ -47,7 +65,31 @@ public class DeTai_Controller {
         }
         return list;
     }
-	
+	public ArrayList<DeTai> getListDeTaiPheDuyetQL_loai2()  throws SQLException{
+        Connection cons = DBConnect.getConnecttion();
+        String sql ="select distinct * from detai,trangthai,taikhoan as tkgv "
+        		+ "where detai.MaTT='tt10' and detai.matt=trangthai.matt and tkgv.matk=detai.gvhd and detai.MaCN is null";
+        ArrayList<DeTai> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	DeTai dt = new DeTai();
+            	dt.setMaDT(rs.getString("detai.madt"));
+            	dt.setMaCN(rs.getString("MaCN"));
+            	dt.setTenGVHD(rs.getString("tkgv.hoten"));
+            	dt.setLinhVuc(rs.getString("LinhVuc"));
+            	dt.setTenDT(rs.getString("TenDT"));
+
+            	list.add(dt);
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 //	public ArrayList<DeTai> getListDeTaiPhanCongPheDuyetQL(String Email)  throws SQLException{
 //        Connection cons = DBConnect.getConnecttion();
 //        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD,DeTai.LinhVuc as LinhVuc "+
@@ -73,6 +115,7 @@ public class DeTai_Controller {
 //        }
 //        return list;
 //    }
+	
 	
 	public ArrayList<DeTai> getListDeTaiCanPhanCongPB()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
@@ -173,6 +216,7 @@ public class DeTai_Controller {
         }
         return list;
     }
+	
 	
 	/*KẾT THÚC TIn*/
 	public DeTai getDeTai(String maDT) {
@@ -610,6 +654,8 @@ public class DeTai_Controller {
 		return false;
 	}
 	
+	
+
 	public boolean insert_DeTaiSVDK(DeTai dt) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
 		String sql = "insert into DeTai values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -737,12 +783,12 @@ public class DeTai_Controller {
 	}
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
-//		for(DeTai ct:ctrl.getListDeTaiGV_DK("tin@gmail.com"))
-//		System.out.println(ct.getMaDT());
-		DeTai dt= new DeTai();
-		dt=ctrl.getDeTai("dt12");
-		dt.setMaTT("tt1");
-		if(ctrl.updateTrangThai_DeTai(dt))
-			System.out.println(dt.getMaTT());
+		for(DeTai ct:ctrl.getListDeTaiPheDuyetQL_loai2())
+			System.out.println(ct.getMaDT());
+//		DeTai dt= new DeTai();
+//		dt=ctrl.getDeTai("dt12");
+//		dt.setMaTT("tt1");
+//		if(ctrl.updateTrangThai_DeTai(dt))
+//			System.out.println(dt.getMaTT());
 		
 }}

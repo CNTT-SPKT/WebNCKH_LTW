@@ -38,6 +38,7 @@
 	BaoCaoDT_Controller bc= new BaoCaoDT_Controller();
 	DeTai detai=new DeTai();
 	String maDT = "";
+
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
 		detai = dt.getDeTai(maDT);
@@ -131,14 +132,15 @@
                     <div class="tab-content">
                        	<div class="tab-pane active" id="PheDuyet">
 							<div class="row">
-							<div class="gv_PheDuyetDT" style="background:white;height:1500px;margin-right:15px;border-radius:3px">
+							<div class="gv_PheDuyetDT" style="background:white;height:1670px;margin-right:15px;border-radius:3px">
 								<h2 class="tieude_theh">PHÊ DUYỆT ĐỀ TÀI</h2><hr>
 								<div class="container" style="width:800px">
 									<div class="row">
 										<div class="mota">
 											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-												<form action=" " onsubmit="" method="POST" role="form" class="form-horizontal">
+												<form action="DeTai_Servlet_PheDuyet" method="post" role="form" class="form-horizontal">
 														<div class="form-group">
+														<input type="hidden" name="laymaDT" value=<%=maDT%>>
 															<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
 															<div class="col-sm-10" style="margin-bottom:5px">
 																<input class="form-control" id="tendetai" type="text" required value="<%=detai.getTenDT() %>" readonly>
@@ -304,22 +306,29 @@
 															<div class="col-sm-10" style="margin-bottom:5px">
 																<input class="form-control" id="dxuatkinhphi" type="text" required value=<%=detai.getKinhPhi()%> readonly>
 															</div>
-
+															<label class="col-sm-2 control-label" for="capmadetai">Cấp mã đề tài:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<input class="form-control" type="text" name="CapMHT">
+																
+															</div>
+															
 															<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
 															<div class="col-sm-10" style="margin-bottom:10px">
 																<input class="form-control" id="tendetai" type="file">
 															</div>
-
+															<button type="submit" class="btn btn-lg btn-warning" style="margin-left:300px">Phê duyệt btn</button>
+															</form>
 															
 														</div>
 													</div>
-												</form>
+												<a href="DeTai_Servlet?command=QL_pheduyetDT&capmdt=<%=request.getParameter("CapMHT")%>&xuly=dongy&MaDT=<%=detai.getMaDT()%>"><button type="submit" class="btn btn-lg btn-warning" style="margin-left:300px">Phê duyệt</button></a>
+									<a href="DeTai_Servlet?command=QL_pheduyetDT&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
 											</div>
 										</div>
 									</div>
-									<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=dongy&MaDT=<%=detai.getMaDT()%>&nguoigui=<%=detai.getGVHD() %>&Quyen="Manager""><button type="button" class="btn btn-lg btn-default btn-warning" style="margin-left:300px">Phê duyệt</button></a>
-								<a href="DeTai_Servlet?command=GV_pheduyetDT&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>&nguoigui=<%=detai.getGVHD() %>&Quyen="Manager""><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
+									
 								</div>
+								
 							</div>
 						</div>
                                                           

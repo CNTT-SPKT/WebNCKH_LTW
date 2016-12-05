@@ -57,7 +57,7 @@ if (request.getParameter("MaDT") != null) {
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
+									<li><a href="#"><span  style="color:blue"></span></a></li>
 										<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
@@ -737,9 +737,9 @@ if (request.getParameter("MaDT") != null) {
 							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
 								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
-										<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
+							<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
 										<input type="hidden" name="command" value="update">
-										<input type="hidden" name="Quyen" value="Manager">
+										<input type="hidden" name="Quyen" value="Lecturers">
 										<input type="hidden" name="MaDT" value=<%=maDT%>>
 										<input type="hidden" name="nguoigui" value="<%=detai.getGVHD() %>">
 											<table class="table table-striped table-hover">
@@ -792,7 +792,7 @@ if (request.getParameter("MaDT") != null) {
 													<tr>
 														<td>Tổng điểm</td>
 														<td>100</td>
-														<td><input type="text" name="tongdiem" id="input" class="form-control required diem4" value="" required="required" min="0" max="100" pattern="" title="" data-content="Vui lòng nhập vào ký tự số từ 0-100." data-placement="left" data-trigger="hover"></td>
+														<td><input type="text" name="tongdiem" id="input" class="form-control required diem4" value="" required="required" min="0" max="100" data-content="Vui lòng nhập vào ký tự số từ 0-100." data-placement="left" data-trigger="hover"></td>
 													</tr>
 												</tbody>
 											</table>

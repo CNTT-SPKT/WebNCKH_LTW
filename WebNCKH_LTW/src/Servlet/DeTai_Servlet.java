@@ -239,7 +239,11 @@ public class DeTai_Servlet extends HttpServlet {
 							tbtk.setMaTB(tb.getMaTB());
 							if(tb_tkctrl.insertTB_TK(tbtk))
 							System.out.println("Gửi thông báo thành công!");
-						}		
+						}	
+						if(nguoidk.equals("Manager"))
+						{
+							url="quanlyPage.jsp?type="+type;
+						}
 						
 					}
 					else{
@@ -250,8 +254,8 @@ public class DeTai_Servlet extends HttpServlet {
 							url="sinhvienPage.jsp";
 						if(nguoidk.equals("Lecturers"))
 							url="giangvienPage.jsp?type="+type;
-						else
-							url="quanlyPage.jsp";
+						if(nguoidk.equals("Manager"))
+							url="quanlyPage.jsp?type="+type;
 					}
 					System.out.println(url);
 					break;

@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Controller.*,Model.*" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -5,10 +6,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <title> Example </title>
@@ -23,18 +22,23 @@
 </head>
 
 <body>
-<%
-DeTai_Controller detaiDAO = new DeTai_Controller();
-TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
-ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
+
+<%  
 HoiDong_Controller hoidongDao =new HoiDong_Controller();
 TB_TK_Controller cttb= new TB_TK_Controller();
-ThongBao_Controller tb= new ThongBao_Controller();
-TrangThai_Controller tt=  new TrangThai_Controller();
-CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
-TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
-
+	ThongBao_Controller thongbaoDAO= new ThongBao_Controller();
+	DeTai_Controller detaiDAO= new DeTai_Controller();
+	TrangThai_Controller trangthaiDAO=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+	DeTai detai=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		detai = detaiDAO.getDeTai(maDT);
+	}
 %>
+
     <div class="page">
         <div class="menu">
             <div class="row">
@@ -61,7 +65,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                     <li><a href="#">Liên Hệ</a></li>
                                     <li><a href="#">Hướng dẫn</a></li>
                                 </ul>
-                                <ul class="nav navbar-nav navbar-right">
+                               <ul class="nav navbar-nav navbar-right">
                                     <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"> <%=session.getAttribute("Email") %></span></a></li>
                                     <li><a href="mainPage.jsp">Đăng xuất</a></li>
                                 </ul>
@@ -118,52 +122,16 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                         </li>
                     </ul>
                 </div>
+                
+                
                 <div class="col-md-10">
                     <div class="tab-content">
-                         <div class="tab-pane active" id="dsPCPB">
-                            <div class="row">
-                                <div class="cldsPCPB" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px; overflow:auto;">
-                                    <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI CẦN PHÂN CÔNG PHẢN BIỆN</h2><hr>
-                                    <form action="HoiDongPCPB_Servlet" method="post">
-                                    <div class="ql_table_dsDeTai">
-                                        <table class="table table-striped table-hover">
-                                            <thead class="thead-default">
-                                                <tr class="success">
-                                                    <th>Mã đề tài</th>
-                                                    <th>Tên đề tài</th>
-                                                    <th>Chủ nhiệm đề tài</th>
-                                                    <th>Chi tiết</th>
-                                                    <th>Phân công</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                              <%for(DeTai c:detaiDAO.getListDeTaiCanPhanCongPB()){ %>
-                                                <tr>
-                                                    <td> <input type="hidden" name="chonmdt" value='<%=c.getMaDT() %>'><%=c.getMaDT() %> </td>
-                                                    <td><%=c.getTenDT() %></td>
-                                                    <td><%=c.getHoTen() %></td>
-                                                   <td><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT()%>">Chi tiết</a></td>
-                                                
-                                                    <td><a href="quanlyPage_PCPB_select.jsp?MaDT=<%=c.getMaDT()%>">Phân công</a></td>
-                                                   
-                                                   
-                                                </tr>
-                                                <%} %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                          <div class="tab-pane" id="postThongBao">
+                      <div class="tab-pane" id="postThongBao">
                             <div class="row">
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">THÔNG BÁO</h2><hr>
                                     <div class="ql_table_thongbao">
-                                       <table class="table table-striped table-hover">
+                                         <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
                                                     <th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
@@ -220,6 +188,59 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 </div>
                             </div>
                         </div>
+                        			<div class="tab-pane active" id="CNTT">
+									<div class="row" style="margin-right:0px;">
+										<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
+										  <h2 class="tieude_theh">CẬP NHẬP TRẠNG THÁI</h2><hr>
+                                        <div class="ql_tb_CAPNHAPTT" style="font-size:13px">  </div>
+                                        <form action="DeTai_Servlet_CNTT" method="get" role="form" class="form-horizontal">
+                                        <input type="hidden" name="command" value="updatett">
+                                          <input type="hidden" name="chonmdt" value='<%=detai.getMaDT()%>'>
+                                         <table class="table table-striped table-hover" id="myTable">
+                                            <thead class="thead-default ">
+                                               <tr class="success ">
+                                            
+                                                    <th>Mã đề tài</th>
+                                                    <th>Tên đề tài</th>
+                                                    <th>Chủ nghiệm đề tài</th>
+                                                    <th>Giảng viên hướng dẫn</th>
+                                                    <th>Chi tiết</th>
+                                                    <th>Trạng thái</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                         	     <tr>
+                                                  <th><%=detai.getMaHienThi()%></th>
+                                                    <th><%=detai.getTenDT()%> </th>
+                                                    <th><%=detai.getTenCN()%></th>
+                                               		<th><%=detai.getTenGVHD() %></th>                                      
+                                                    	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=detai.getMaDT() %>">Chi tiết</a></th>
+                                                    <th>
+                                                        <div class="form-group ">
+                                                      
+                                                            <select name="chontt" class="ql_TrangThai ">
+                                                       			 <option value="">TRẠNG THÁI MỚI</option>   
+                                                       			      <%   for(TrangThai ct:trangthaiDAO.getListTrangThai() ){ %>
+                                                                  <option value="<%=ct.getMaTT() %>"><%=ct.getTenTT() %></option>       
+		                                                                <%
+		                                                				}
+		                                                  		     %>  
+                                                           </select>
+                                                             
+                                                         </div>
+                                                    </th>
+                                                    </tr>    
+                        
+                                            </tbody>
+                                        </table>
+                                        
+                                        <input type="submit" style="margin-left:20px;margin-bottom:20px" class="btn btn-primary btn-lg" id="CapNhat" value="Cập nhật trạng thái">
+                                  </form>
+                                    </div>
+                                </div>
+                            </div>
+                  
+
                         <div class="tab-pane" id="dsHDNT">
                             <div class="row">
                                 <div class="cldsHDNT" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
@@ -300,12 +321,12 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 </div>
                             </div>
                         </div>
-                       <div class="tab-pane" id="dsDeTaiPhanBien">
+                        <div class="tab-pane" id="dsDeTaiPhanBien">
                             <div class="row">
                                 <div class="ql_dsDeTaiPhanBien" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="ql_tb_dsDeTaiPhanBien">
-                                       <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -326,12 +347,12 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="quanly_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
-													<th><a href="quanly_XemBaoCao.jsp?MaDT=">Xem báo cáo</a></th>
-													<th><a href="quanly_DanhGia.jsp?MaDT=">Đánh giá</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
+													<th><a href="quanly_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
 												</tr>
 												<%
-			    											}
+			    								}
 												%>		
 											</tbody>
 										</table>
@@ -339,7 +360,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 </div>
                             </div>
                         </div>
-                      <div class="tab-pane " id="quanLyDeTai">
+                         <div class="tab-pane " id="quanLyDeTai">
                             <div class="row">
                                 <div class="form-group" style="margin-bottom:0px;">
                                     <div class="ql_quanLyDeTai" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px;">
@@ -370,7 +391,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                             </div>
 
                                         </div>
-                                          <table class="table table-striped table-hover" id="myTable">
+                                         <table class="table table-striped table-hover" id="myTable">
                                             <thead class="thead-default ">
                                                 <tr class="success ">
                                                     <th>Mã đề tài</th>
@@ -416,6 +437,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                                     %>                       
                                             </tbody>
                                         </table>
+                                      
                                         <button style="margin-left:20px;margin-bottom:20px" class="btn btn-primary btn-lg" id="CapNhat">Cập nhật trạng thái</button>
                                         <script>
                                          $(function() {
@@ -437,13 +459,12 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 </div>
                             </div>
                         </div>
-                        
                        <div class="tab-pane " id="dsDeTaiPheDuyet">
                             <div class="row ">
                                 <div class="ql_dsDeTaiPheDuyet " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHÊ DUYỆT</h2><hr>
                                     <div class="ql_tb_dsDeTaiPheDuyet ">
-                                         <table class="table table-striped table-hover">
+                                          <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -473,7 +494,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane " id="dsDeTaiHuongDan">
+                       <div class="tab-pane " id="dsDeTaiHuongDan">
                             <div class="row ">
                                 <div class="ql_dsDeTaiHuongDan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI HƯỚNG DẪN</h2><hr>
@@ -508,7 +529,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 </div>
                             </div>
                         </div>
-               		    <div class="tab-pane" id="dkDeTai">
+                           <div class="tab-pane" id="dkDeTai">
 										<div class="row" style="margin-right:0px;">
 											<div class="qldkDeTai" style="background:white;border-radius:3px">
 												<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI</h2>
@@ -704,12 +725,13 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 											</div>
 										</div>
 									</div>                    
-                       <div class="tab-pane " id="dsDeTaiDK">
+                    
+                         <div class="tab-pane " id="dsDeTaiDK">
                             <div class="row ">
                                 <div class="ql_dsDeTaiDK " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐÃ ĐĂNG KÝ</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                      <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -744,7 +766,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                        <table class="table table-striped table-hover">
+                                          <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -778,6 +800,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                 </div>
             </div>
         </div>
+        
         <div id='bttop'>
             <img src="images/backtotop.png" alt="backtotop" width="50px" height="50px">
         </div>

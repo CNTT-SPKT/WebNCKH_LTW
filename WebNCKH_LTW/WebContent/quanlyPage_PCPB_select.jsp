@@ -33,7 +33,14 @@ ThongBao_Controller tb= new ThongBao_Controller();
 TrangThai_Controller tt=  new TrangThai_Controller();
 CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
-
+DeTai detai=new DeTai();
+DeTai detai2=new DeTai();
+String maDT = "";
+if (request.getParameter("MaDT") != null) {
+	maDT = request.getParameter("MaDT");
+	detai = detaiDAO.getDeTai(maDT);
+	detai2=detaiDAO.getListDeTaiByMaDT(maDT);
+}
 %>
     <div class="page">
         <div class="menu">
@@ -123,7 +130,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                          <div class="tab-pane active" id="dsPCPB">
                             <div class="row">
                                 <div class="cldsPCPB" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px; overflow:auto;">
-                                    <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI CẦN PHÂN CÔNG PHẢN BIỆN</h2><hr>
+                                    <h2 class="tieude_theh">PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <form action="HoiDongPCPB_Servlet" method="post">
                                     <div class="ql_table_dsDeTai">
                                         <table class="table table-striped table-hover">
@@ -133,26 +140,33 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                                     <th>Tên đề tài</th>
                                                     <th>Chủ nhiệm đề tài</th>
                                                     <th>Chi tiết</th>
-                                                    <th>Phân công</th>
+                                                    <th>Chọn hội đồng phản biện</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                              <%for(DeTai c:detaiDAO.getListDeTaiCanPhanCongPB()){ %>
                                                 <tr>
-                                                    <td> <input type="hidden" name="chonmdt" value='<%=c.getMaDT() %>'><%=c.getMaDT() %> </td>
-                                                    <td><%=c.getTenDT() %></td>
-                                                    <td><%=c.getHoTen() %></td>
-                                                   <td><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT()%>">Chi tiết</a></td>
-                                                
-                                                    <td><a href="quanlyPage_PCPB_select.jsp?MaDT=<%=c.getMaDT()%>">Phân công</a></td>
-                                                   
-                                                   
+                                                    <td> <input type="hidden" name="chonmdt" value='<%=detai.getMaDT() %>'><%=detai.getMaDT() %> </td>
+                                                    <td><%=detai.getTenDT() %></td>
+                                                    <td><%=detai.getTenCN() %></td>
+                                                   <th><a href="quanly_ChiTiet.jsp?MaDT=<%=detai.getMaDT()%>">Chi tiết</a></th>
+                                                    <td>
+                                                         <select name="HoiDongPCPB">
+                                                              <option value="">Chọn Hội Đồng</option>
+                                                              <%for(HoiDong hd:hoidongDao.getListHoiDongQL()){ %>
+                                                              <option name="" value='<%=hd.getMaHD() %>'><%=hd.getMaHD() %></option>
+                                                              <%} %>
+                                                           </select>
+                                                    </td>
                                                 </tr>
-                                                <%} %>
+                                           
                                             </tbody>
                                         </table>
                                     </div>
-                                    
+                                    <div class="btnXacNhan" style="padding-top:0px;width:600px; margin-left: 550px;">
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <button class="btn btn-small btn-info" type="submit" >XÁC NHẬN</button>
+                                        </div>
+                                    </div>
                                     </form>
                                 </div>
 
