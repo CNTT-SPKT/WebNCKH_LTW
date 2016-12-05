@@ -31,6 +31,7 @@ HoiDong_Controller hoidongDao =new HoiDong_Controller();
 TB_TK_Controller cttb= new TB_TK_Controller();
 ThongBao_Controller tb= new ThongBao_Controller();
 TrangThai_Controller tt=  new TrangThai_Controller();
+DeTai_Controller dt= new DeTai_Controller();
 CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 
@@ -247,8 +248,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                                     <td><%=hd.getTenPhanBien() %></td>
                                                     <td><%=hd.getTenUyVien() %></td>
                                                     <td><%=hd.getNgayThanhLap() %></td>
-                                                    <td class="dropdown">
-                                                        <a style="margin-top: -5px;" class="btn btn-danger dsDeTai_actionButton" data-toggle="dropdown" href="#"> Xóa hội đồng </a></td>
+                                                   <td><a href="XoaHoiDong_Servlet?command=delete&MaHD=<%=hd.getMaHD() %>"> Xóa</a></td>
                                                 </tr>
                                                 <%} %>
                                             </tbody>
@@ -267,14 +267,14 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                     <div class="quanly_dsHDPB">
 
                                         <div class="ql_table_dsDTPB">
-                                            <table class="table table-striped table-hover">
+                                           <table class="table table-striped table-hover">
                                                 <thead class="thead-default">
                                                     <tr class="success">
                                                         <th>Mã đề tài</th>
                                                         <th>Tên đề tài</th>
                                                         <th>Chủ nhiện đề tài</th>
                                                         <th>Giảng viên hướng dẫn</th>
-                                                            <th>Hội đồng phản biện</th>
+                                                         <th>Hội đồng phản biện</th>
                                                         <th>Chi tiết</th>
                                                         <th>Xem báo cáo</th>
                                                     </tr>
@@ -305,7 +305,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 <div class="ql_dsDeTaiPhanBien" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="ql_tb_dsDeTaiPhanBien">
-                                       <table class="table table-striped table-hover">
+                                      <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -326,9 +326,9 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="quanly_ChiTiet.jsp?MaDT=">Chi tiết</a></th>
-													<th><a href="quanly_XemBaoCao.jsp?MaDT=">Xem báo cáo</a></th>
-													<th><a href="quanly_DanhGia.jsp?MaDT=">Đánh giá</a></th>
+													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
+													<th><a href="quanlyPage_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
 												</tr>
 												<%
 			    											}
@@ -379,60 +379,30 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                                     <th>Giảng viên hướng dẫn</th>
                                                     <th>Chi tiết</th>
                                                     <th>Trạng thái</th>
-                                                    <th>Báo cáo</th>
+                                                    <th>CNTT</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                          	   <%
-                                         	  		
-                                                	for(DeTai c: detaiDAO.getListDeTaiQL()){                      			
+                                         	  		for(DeTai c: detaiDAO.getListDeTaiQL()){                      			
                                                 %>
                                                 <tr>
-                                                
-                                                    <th><%=c.getMaHienThi()%></th>
+                                                 <th><%=c.getMaHienThi()%></th>
                                                     <th><%=c.getTenDT()%> </th>
                                                     <th><%=c.getHoTen()%></th>
                                                		<th><%=c.getTenGVHD() %></th>                                      
                                                     	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
-                                                    <th>
-                                                        <div class="form-group ">
-                                                      
-                                                            <select class="ql_TrangThai ">
-                                                       			 <option value="<%=c.getMaTT() %> "><%=c.getTenTT() %></option>   
-                                                       			      <%   for(TrangThai ct:trangthaiDAO.getListTrangThai() ){ %>
-                                                                  <option value="<%=ct.getMaTT() %> "><%=ct.getTenTT() %></option>       
-		                                                                <%
-		                                                				}
-		                                                  		     %>  
-                                                           </select>
-                                                             
-                                                         </div>
-                                                    </th>
+                                                    <th><%=c.getTenTT() %></th>
+                                                   
                                               
-                                                    	<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=c.getMaDT() %>">Xem báo cáo</a></th>
+                                                    	<th><a href="QuanLy_CapNhapTT.jsp?MaDT=<%=c.getMaDT() %>">CHỌN</a></th>
                                                 </tr>    
                                                    <%
                                                    }
                                                     %>                       
                                             </tbody>
                                         </table>
-                                        <button style="margin-left:20px;margin-bottom:20px" class="btn btn-primary btn-lg" id="CapNhat">Cập nhật trạng thái</button>
-                                        <script>
-                                         $(function() {
-                                        	 $('#CapNhat').on('click', function(){
-                                        			 var rowCount = $('#myTable tbody tr').length;
-                                        			 var i=0;
-                                        			 var madt;
-                                   				 	 var matt="";
-                                   				 	 for(i;i<rowCount;i++)
-                                   				 	{
-                                   				 		var x=$('#myTable tbody').find('tr:eq('+i+')').find('th:eq(0)').text();
-                                       				 	var y=$('#myTable tbody').find('tr:eq('+i+')').find('option').val();
-                                       				 	// Ham cap nhat trang thai
-                                   				 	}
-                                        	 });
-                                         });
-                                        </script>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -450,6 +420,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 													<th>Tên đề tài</th>
 													<th>Lĩnh vực</th>
 													<th>Chủ nghiệm đề tài</th>
+													<th>GVHD</th>
 													<th>Phê duyệt</th>
 												</tr>
 											</thead>
@@ -462,7 +433,22 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 													<th><%=ct.getTenDT()%></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenGVHD()%></th>											
 													<th><a href="quanly_PheDuyetDT.jsp?MaDT=<%=ct.getMaDT() %>">Phê duyệt</a></th>
+												</tr>
+											<%
+			    							}
+											%>
+											<%
+											for (DeTai ct1: detaiDAO.getListDeTaiPheDuyetQL_loai2()) {
+											%>
+												<tr>
+													<th>null</th>
+													<th><%=ct1.getTenDT()%></th>
+													<th><%=ct1.getLinhVuc() %></th>
+													<th><%=ct1.getTenCN() %></th>
+													<th><%=ct1.getTenGVHD()%></th>											
+													<th><a href="quanly_PheDuyetDT.jsp?MaDT=<%=ct1.getMaDT() %>">Phê duyệt</a></th>
 												</tr>
 											<%
 			    							}
@@ -728,7 +714,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
+													 <th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
 												</tr>
 											<%
 			    							}
@@ -744,7 +730,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
                                 <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                        <table class="table table-striped table-hover">
+                                         <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -756,7 +742,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: detaiDAO.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>
@@ -765,9 +751,7 @@ TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 													<th><%=ct.getTenTT() %></th>
 													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
-												<%
-			    							}
-											%>	
+												<%} %>
 											</tbody>
 										</table>
                                     </div>
