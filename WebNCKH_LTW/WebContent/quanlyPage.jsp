@@ -34,7 +34,7 @@
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 	DeTai_Controller dt= new DeTai_Controller();
-String type = request.getParameter("type");
+	String type = request.getParameter("type");
 	String error ="";
 	if (request.getParameter("type") != null)
 	{
@@ -58,6 +58,30 @@ String type = request.getParameter("type");
 			error = "Đăng ký đề tài thành công!";
 		if(type.equals("dkdt_0"))
 			error = "Đăng ký đề tài thất bại!";
+		if(type.equals("updatett_1"))
+			error = "Cập nhập trạng thái thành công!";
+		if(type.equals("updatett_0"))
+			error = "Cập nhập trạng thái thất bại!";
+		if(type.equals("kpd_1"))
+			error= "Không phê duyệt!";
+		if(type.equals("kqd_0"))
+			error= "Lỗi!!!!!!!!!";
+		if(type.equals("themhd_1"))
+			error= "Thêm hội đồng thành công!";
+		if(type.equals("themhd_t"))
+			error= "Trùng mã hội đồng!";
+		if(type.equals("themhd_0"))
+			error= "Thêm hội đồng thất bại!";
+		if(type.equals("xoahd_0"))
+			error= "Xóa hội đồng thất bại!";
+		if(type.equals("xoahd_1"))
+			error= "Xóa hội thành công!";
+		if(type.equals("pcpb_t"))
+			error= "Đã phân công phản biện!";
+		if(type.equals("pcpb_1"))
+			error= "Phân công phản biện thành công!";
+		if(type.equals("pcpb_0"))
+			error= "Phân công phản biện thất bại!";
 	}
 %>
 <body>
@@ -67,9 +91,9 @@ String type = request.getParameter("type");
        var y = $('.TypeMssg').text();
     	if(x != "null" && x != "")
     	{
-    		if( y == "ntdt_1" || y == "pddt_1" || y == "huydt_1" || y == "ghdt_1" || y == "dkdt_1")
+    		if( y == "ntdt_1" || y == "pddt_1" || y == "huydt_1" || y == "ghdt_1" || y == "dkdt_1" || y=="updatett_1" || y=="kpd_1" ||y=="themhd_1"||y=="xoahd_1"||y=="pcpb_1")
     			$("#ModalSuccess").modal('show');
-    		if( y == "ntdt_0" || y == "pddt_0" || y == "huydt_0" || y == "ghdt_0" || y == "dkdt_0")
+    		if( y == "ntdt_0" || y == "pddt_0" || y == "huydt_0" || y == "ghdt_0" || y == "dkdt_0" || y=="updatett_0" || y=="kpd_0" || y=="themhd_0" || y=="themhd_t"||y=="xoahd_0"||y=="pcpb_0"||y=="pcpb_t")
     			$("#ModalFail").modal('show');
     	}
     });
@@ -96,8 +120,8 @@ String type = request.getParameter("type");
          </div>
      </div>
 </div>
-
-
+<h4 class="Mssg hidden" style="text-align:center"><%=error%></h4>
+<h4 class="TypeMssg hidden" style="text-align:center"><%=type%></h4>
     <div class="page">
         <div class="menu">
             <div class="row">
@@ -203,6 +227,7 @@ String type = request.getParameter("type");
                                          	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLDK()){                      			
                                               %>
                                                 <tr>
+                                                <input name="laymatb" type="hidden" value="<%=c.getMaTB() %>">
                                                     <td><input type="checkbox" name="" value=""></td>
                                                     <td><%=c.getTenLoaiTB() %></td>
                                                     <td><%=c.getTenNguoiGui() %></td>
@@ -409,12 +434,10 @@ String type = request.getParameter("type");
                                             </thead>
                                             <tbody>
                                          	   <%
-                                         	  		
-                                                	for(DeTai c: detaiDAO.getListDeTaiQL()){                      			
+                                         	  		for(DeTai c: detaiDAO.getListDeTaiQL()){                      			
                                                 %>
                                                 <tr>
-                                                
-                                                    <th><%=c.getMaHienThi()%></th>
+                                                 <th><%=c.getMaHienThi()%></th>
                                                     <th><%=c.getTenDT()%> </th>
                                                     <th><%=c.getHoTen()%></th>
                                                		<th><%=c.getTenGVHD() %></th>                                      
@@ -525,7 +548,7 @@ String type = request.getParameter("type");
 										<div class="row" style="margin-right:0px;">
 											<div class="qldkDeTai" style="background:white;border-radius:3px">
 												<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI</h2>
-												<hr>
+											<hr>
 												<div class="container" style="width:800px">
 													<div class="row">
 														<div class="mota">
@@ -707,14 +730,17 @@ String type = request.getParameter("type");
 
 																		<div id="guidon" style="">
 																			<button type="submit" id="btn_GuiDon" style="color: #fff;background-color: #5bc0de;border-color: #46b8da; height:35px;width:150px;background-image: none;border: 1px solid transparent;border-radius: 4px; margin-right:15px;float:right;">Gửi đơn đăng ký</button>
+																			<a class="btn btn-warning" href="sinhvien_DeTaiDeXuat.jsp" role="button" style="margin-left:10px">Đăng ký đề tài được đề xuất</a>
+
 																		</div>
 																	</div>
 																	</form>
 																</div>
-															</div>
+															
+														</div>
 													</div>
 												</div>
-											</div>
+											</div><hr>
 										</div>
 									</div>
                         <div class="tab-pane " id="dsDeTaiDK">

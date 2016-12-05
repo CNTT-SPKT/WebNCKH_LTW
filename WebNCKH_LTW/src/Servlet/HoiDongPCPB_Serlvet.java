@@ -2,33 +2,28 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import Controller.DeTai_Controller;
 import Controller.HoiDong_Controller;
 import Model.DeTai;
-import Model.HoiDong;
-import javafx.print.Printer;
 
 /**
- * Servlet implementation class HoiDong_Servlet
+ * Servlet implementation class HoiDongPCPB_Serlvet
  */
-@WebServlet("/HoiDong_Servlet")
-public class HoiDong_Servlet extends HttpServlet {
+@WebServlet("/HoiDongPCPB_Servlet")
+public class HoiDongPCPB_Serlvet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HoiDong_Servlet() {
+    public HoiDongPCPB_Serlvet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +31,13 @@ public class HoiDong_Servlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		   // Set response content type
 		   response.setContentType("text/html;charset=UTF-8"); 
 		    request.setCharacterEncoding("UTF-8");
 		    response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("dooo gettt");
+
 	}
 
 	/**
@@ -51,33 +45,34 @@ public class HoiDong_Servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		System.out.println("vao servlet");
+		DeTai_Controller crt= new DeTai_Controller();
+		HoiDong_Controller hd=new HoiDong_Controller();
+		DeTai dt= new DeTai();
 	    response.setContentType("text/html;charset=UTF-8"); 
 	    request.setCharacterEncoding("UTF-8");
 	    response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
 		String error="";
 		String type="";
 		String url="";
 		try{
-		String ChuTich = request.getParameter("ChuTich");
-		String PhanBien = request.getParameter("PhanBien");
-		String UyVien = request.getParameter("UyVien");
-		String MaHD = request.getParameter("MaHD");
-		String NgayThanhLap = request.getParameter("bday");
-		HoiDong_Controller HoiDongDao = new HoiDong_Controller();
-		if(HoiDongDao.kiemTra(MaHD))
+		String chonmdt = request.getParameter("chonmdt");
+		String HoiDongPCPB = request.getParameter("HoiDongPCPB");
+		if(crt.kiemTraPCPB(chonmdt))
 		{
-			type="themhd_t";
+			type="pcpb_t";
 			url="quanlyPage.jsp?type="+type;	
 		}
 		else{		
-			HoiDongDao.insert(MaHD, PhanBien, ChuTich, UyVien, NgayThanhLap);
-			type="themhd_1";
+			dt.setMaDT(chonmdt);
+			dt.setMaTT("tt8");
+			hd.insert_PCPB(HoiDongPCPB, chonmdt);
+			crt.updateTrangThai_DeTai(dt);
+			type="pcpb_1";
 			url="quanlyPage.jsp?type="+type;	
-		}
+			}
 		}
 		catch (Exception e ) {
-			type="themhd_0";
+			type="pcpb_0";
 			url="quanlyPage.jsp?type="+type;	
 		}
 		request.setAttribute("error", error);

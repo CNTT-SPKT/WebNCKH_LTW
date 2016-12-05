@@ -36,27 +36,36 @@ public class XoaHoiDong_Servlet extends HttpServlet {
 		String maHD= request.getParameter("MaHD");
 		
 		String url="", error="";
-		
+		String type="";
 		try{
 			switch(command){
 				case "delete":
 					System.out.println("Vào delete");
-					boolean f=ctctrl.deleteCTNT(maHD);
+					//boolean f=ctctrl.deleteCTNT(maHD);
 					boolean g=crt.deleteHoiDong(maHD);
-					if(f&g)
+					if(g)
+					{
+						type="xoahd_1";
 						error="Thành công";
+						url="quanlyPage.jsp?type="+type;
+					}	
 					else
+					{
+						type="xoahd_0";
 						error="Thất bại";
-					url="quanlyPage.jsp";
+						url="quanlyPage.jsp?type="+type;
+					}
 					System.out.println(error+"__________"+url);
 					break;
 			}
 			
 		}catch(Exception e){
+			type="xoahd_0";
+			url="quanlyPage.jsp?type="+type;
 			error="Xảy ra lỗi ngẫu nhiên!";
 		}
 		request.setAttribute("error", error);
-		response.sendRedirect("quanlyPage.jsp");
+		response.sendRedirect(url);
 	}
 
 	/**

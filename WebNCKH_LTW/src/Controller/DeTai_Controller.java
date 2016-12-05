@@ -90,31 +90,7 @@ public class DeTai_Controller {
         }
         return list;
     }
-//	public ArrayList<DeTai> getListDeTaiPhanCongPheDuyetQL(String Email)  throws SQLException{
-//        Connection cons = DBConnect.getConnecttion();
-//        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD,DeTai.LinhVuc as LinhVuc "+
-//			" from DeTai,TaiKhoan as TK1,TaiKhoan as TK2"+
-//			" where DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and TK2.Email='"+Email+"' and DeTai.MaTT='tt1'" ;
-//        ArrayList<DeTai> list = new ArrayList<>();
-//        try {
-//            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//            	DeTai dt = new DeTai();
-//            	dt.setMaDT(rs.getString("MaDT"));
-//            	dt.setTenDT(rs.getString("TenDT"));
-//            	dt.setTenCN(rs.getString("MaCN"));
-//            	dt.setTenGVHD(rs.getString("GVHD"));
-//            	dt.setLinhVuc(rs.getString("LinhVuc"));
-//            	list.add(dt);
-//            }
-//           
-//            cons.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
+
 	
 	
 	public ArrayList<DeTai> getListDeTaiCanPhanCongPB()  throws SQLException{
@@ -162,7 +138,40 @@ public class DeTai_Controller {
         }
         return list;
     }
-	
+	public Boolean kiemTraTT(String madt)
+	{
+		Connection connection = DBConnect.getConnecttion();
+		String sql ="SELECT * FROM detai WHERE detai.matt='tt10' and detai.Madt='"+madt+"'";
+		try {
+			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public Boolean kiemTraPCPB(String madt)
+	{
+		Connection connection = DBConnect.getConnecttion();
+		String sql ="SELECT * FROM ctnghiemthu WHERE ctnghiemthu.Madt='"+madt+"'";
+		try {
+			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	public ArrayList<DeTai> getListPCPBQL()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql ="select detai.MaDT,TenDT,tensv.HoTen as TenSV,tengv.HoTen as TenGV,ctnghiemthu.MaHD as MHD "
@@ -271,6 +280,7 @@ public class DeTai_Controller {
         }
         return dt;
     }
+	
 	
 	public ArrayList<DeTai> getListDeTaiByMaCN(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();

@@ -41,43 +41,71 @@ public class DeTai_Servlet_PheDuyet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		System.out.println("Vào đề tài servlet thành công!");
+		System.out.println("Vào servlet");
 		String MaDT="";
 		String capMHT="";
 		String error="";
+		String type="";
 		String url="";
 			try{
-				System.out.println("Vào phê duyệt");
+				String Submit=request.getParameter("Submit");
+				System.out.print("Submit:  "+Submit);
 				MaDT = request.getParameter("laymaDT");
-				capMHT=request.getParameter("CapMHT");
+				String cndetaiql=request.getParameter("cndetaiql");
 				DeTai dtql = detaictrl.getDeTai(MaDT);
-				System.out.println("Ma de tai: "+MaDT);
-					dtql.setMaTT("tt2");
-					dtql.setMaHienThi(capMHT);
-				
-				
-				if(detaictrl.updateTrangThai_DeTai_QL(dtql))
+				if(Submit.equals("dongy"))
 				{
-					System.out.println("Update thành công");
-					//System.out.println("MaHienThi: "+capMHT);
+					capMHT=request.getParameter("CapMHT");
+						if(cndetaiql=="" || cndetaiql==null)
+						{
+							dtql.setMaDT(MaDT);
+							dtql.setMaTT("tt11");
+							dtql.setMaHienThi(capMHT);
+						}
+						else
+						{
+							dtql.setMaDT(MaDT);
+							dtql.setMaTT("tt2");
+							dtql.setMaHienThi(capMHT);
+						}
+						if(detaictrl.updateTrangThai_DeTai_QL(dtql))
+						{
+							type="pddt_1";
+							System.out.println("Update thÃ nh cÃ´ng");
+							url="quanlyPage.jsp?type="+type;	
+						}
+			
+						else
+						{
+							type="pddt_0";
+							System.out.println("Update thatbai");
+							url="quanlyPage.jsp?type="+type;	
+						}
 				}
-				
-				else
-				{
-//					error="Thất bại";
-//					if(quyen1.equals("Lecturers"))
-//						url="giangvienPage.jsp";
-//					if(quyen1.equals("Manager"))
-//						url="quanlyPage.jsp";
-					System.out.println("thêm thất bại");
-				
-				}
+				if(Submit.equals("khongdongy"))
+						{
+					System.out.println("vào kiem tra khong dong y");
+							dtql.setMaDT(MaDT);
+							dtql.setMaTT("tt5");
+							if(detaictrl.updateTrangThai_DeTai(dtql))
+							{
+								type="kpd_1";
+								System.out.println("Update thành công");
+								url="quanlyPage.jsp?type="+type;	
+							}
+							
+							else
+							{
+								type="kpd_0";
+								System.out.println("Update thatbai");
+								url="quanlyPage.jsp?type="+type;	
+							}
+						}
 			
 			}
 		catch(Exception e){
-			error="Xảy ra lỗi ngẫu nhiên!";
+			error="Xáº£y ra lá»—i ngáº«u nhiÃªn!";
 		}
-		
 		request.setAttribute("error", error);
 		response.sendRedirect(url);
 	}

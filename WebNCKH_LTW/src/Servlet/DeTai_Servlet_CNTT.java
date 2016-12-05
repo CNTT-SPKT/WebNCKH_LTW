@@ -1,6 +1,8 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +48,7 @@ public class DeTai_Servlet_CNTT extends HttpServlet {
 		System.out.println("Vao servlet!");
 		String error="";
 		String url="";
-			
+		String type="";
 				System.out.println("VÃ o phÃª duyá»‡t");
 				String MaDT = request.getParameter("chonmdt");
 				String chontt=request.getParameter("chontt");
@@ -61,18 +63,16 @@ public class DeTai_Servlet_CNTT extends HttpServlet {
 							
 							if(detaictrl.updateTrangThai_DeTai(dtql))
 							{
-								System.out.println("Update thÃ nh cÃ´ng");
+								type = "updatett_1";
+								url="quanlyPage.jsp?type="+type;
+								System.out.println("Update thành công");
 							}
-							
 							else
 							{
-//								error="Tháº¥t báº¡i";
-//								if(quyen1.equals("Lecturers"))
-//									url="giangvienPage.jsp";
-//								if(quyen1.equals("Manager"))
-//									url="quanlyPage.jsp";
-								System.out.println("thÃªm tháº¥t báº¡i");
-							
+								System.out.println("THất bại");
+								type = "updatett_0";
+								url="quanlyPage.jsp?type="+type;
+								System.out.println("Update thành công");
 							}
 							break;
 				

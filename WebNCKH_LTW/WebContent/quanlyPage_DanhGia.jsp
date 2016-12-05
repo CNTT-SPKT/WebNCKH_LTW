@@ -1,74 +1,86 @@
+<%@ page import="Controller.*,Model.*" %>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="Controller.*,Model.*" %>
 <!DOCTYPE html>
-<html lang="en"><head>
-<title> Example </title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">  
-<script type="text/javascript" src="vendor/bootstrap.js"></script>
-<script type="text/javascript" src="1.js"></script>
-<link rel="stylesheet" href="vendor/bootstrap.css">
-<link rel="stylesheet" href="1.css">
-<link rel="stylesheet" href="vendor/font-awesome.css">
-</head>
-<%
-DeTai_Controller detaiDAO = new DeTai_Controller();
-TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
-ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
-HoiDong_Controller hoidongDao =new HoiDong_Controller();
-TB_TK_Controller cttb= new TB_TK_Controller();
-ThongBao_Controller tb= new ThongBao_Controller();
-TrangThai_Controller tt=  new TrangThai_Controller();
-CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
-TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
-DeTai detai=new DeTai();
-String maDT = "";
-if (request.getParameter("MaDT") != null) {
-	maDT = request.getParameter("MaDT");
-	detai = detaiDAO.getDeTai(maDT);
-}
-%>
-<body >
-	<div class="page">
-		<div class="menu">
-			<div class="row">
-				<div class="pictureMain">
-					<img src="images/skpt_banner_2.jpg" class="img-responsive" alt="Image">
-				</div>
-				<div class="menuBar">
-					<nav class="navbar navbar-default " role="navigation">
-						<div class="container" id="container_menuBar">
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								</button>
-							</div>
+<html lang="en">
 
-							<!-- Collect the nav links, forms, and other content for toggling -->
-							<div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
-								<ul class="nav navbar-nav">
-									<li><a href="#">Trang chủ</a></li>
-									<li><a href="#">Biểu Mẫu</a></li>
-									<li><a href="#">Liên Hệ</a></li>
-									<li><a href="#">Hướng dẫn</a></li>
-								</ul>
-								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue"></span></a></li>
-										<li><a href="mainPage.jsp">Đăng xuất</a></li>
-								</ul>
-							</div><!-- /.navbar-collapse -->
-						</div>
-					</nav>
-				</div>
-			</div>	
-		</div>
-		<div class="gvContent">
-			<div class="row">
-				<div class="col-md-2">
+<head>
+    <title> Example </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="vendor/bootstrap.js"></script>
+    <script type="text/javascript" src="1.js"></script>
+    <script type="text/javascript" src="jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap.css">
+    <link rel="stylesheet" href="1.css">
+    <link rel="stylesheet" href="vendor/font-awesome.css">
+</head>
+
+<body>
+<%
+	DeTai_Controller detaiDAO = new DeTai_Controller();
+	TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
+	ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
+	HoiDong_Controller hoidongDao =new HoiDong_Controller();
+	TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller tb= new ThongBao_Controller();
+	TrangThai_Controller tt=  new TrangThai_Controller();
+	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
+	DeTai_Controller dt = new DeTai_Controller();	
+	DeTai detai=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+		detai = detaiDAO.getDeTai(maDT);
+%>
+
+<div class="page">
+        <div class="menu">
+            <div class="row">
+                <div class="pictureMain">
+                    <img src="images/skpt_banner_2.jpg" class="img-responsive" alt="Image">
+                </div>
+                <div class="menuBar">
+                    <nav class="navbar navbar-default " role="navigation">
+                        <div class="container" id="container_menuBar">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#">Trang chủ</a></li>
+                                    <li><a href="#">Biểu Mẫu</a></li>
+                                    <li><a href="#">Liên Hệ</a></li>
+                                    <li><a href="#">Hướng dẫn</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"><%=session.getAttribute("Email") %> 	 </span></a></li>
+                                    <li><a href="mainPage.jsp">Đăng xuất</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.navbar-collapse -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="qlContent">
+            <div class="row">
+                <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
                         <li>
                             <a class="list-group-item" href="#postThongBao" data-toggle="pill">
@@ -112,9 +124,82 @@ if (request.getParameter("MaDT") != null) {
                         </li>
                     </ul>
                 </div>
-				<div class="col-md-10">
-					<div class="tab-content">
-						 <div class="tab-pane" id="postThongBao">
+                <div class="col-md-10">
+                    <div class="tab-content">
+                      	<div class="tab-pane active" id="DanhGia">
+							<div class="row">
+							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
+								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
+									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
+										<form action="CTNghiemThuQL_Servlet" method="post">
+										<input type="hidden" name="command1" value="updateql">
+										<input type="hidden" name="MaDT" value=<%=maDT%>>	
+											<table class="table table-striped table-hover">
+												<thead class="thead-default">
+													<tr class="success">
+														<th>Nội dung đánh giá</th>
+														<th>Điểm tối đa</th>
+														<th>Điểm đánh giá</th>	
+													</tr>
+												</thead>
+												<tbody>
+													<tr  >
+														<td>Tổng quan tình hình và lý do chọn đề tài</td>
+														<td>10</td>
+														<td><input type="text" name="diemtongquan" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+													</tr>
+													<tr>
+														<td>Mục tiêu đề tài</td>
+														<td>15</td>
+														<td><input type="text" name="diemmuctieu" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
+
+													</tr>
+													<tr>
+														<td>Phương pháp nghiên cứu</td>
+														<td>15</td>
+														<td><input type="text" name="diemphuongphap" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
+
+													</tr>
+													<tr>
+														<td>Nội dung khoa học</td>
+														<td>35</td>
+														<td><input type="text" name="diemnoidung" class="form-control required diem3" id="" required min="0" max="35" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-35."></td>
+													</tr>
+													<tr>
+														<td>Đóng góp cho KT-XH-GD</td>
+														<td>10</td>
+														<td><input type="text" name="diemdonggop" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+
+													</tr>
+													<tr>
+														<td>Hình thức báo cáo tổng kết</td>
+														<td>10</td>
+														<td><input type="text" name="diemhinhthuc" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+													</tr>
+													<tr>
+														<td>Điểm thưởng</td>
+														<td>10</td>
+														<td><input type="text" name="diemthuong" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
+													</tr>
+													<tr>
+														<td>Tổng điểm</td>
+														<td>100</td>
+														<td><input type="text" name="tongdiem" class="form-control " value=""></td>
+													</tr>
+												</tbody>
+											</table>
+											<label class="col-sm-2 control-label" for="mota">Ý kiến đánh giá</label><br>
+											<div class="col-sm-12">
+												<textarea type="text" name="ykien" class="form-control required mota" placeholder=""  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required></textarea>
+											</div>
+											<input type="submit" value="Đánh giá" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+                          <div class="tab-pane" id="postThongBao">
                             <div class="row">
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">THÔNG BÁO</h2><hr>
@@ -702,7 +787,7 @@ if (request.getParameter("MaDT") != null) {
 								<div class="gv_duyetHuy_GianHan" style="background:white;height:390px;margin-right:15px;border-radius:3px">
 									<h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
 									<div class="gv_tb_dsDeTaiDK">
-										<table class="table table-striped table-hover">
+									<table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -714,112 +799,34 @@ if (request.getParameter("MaDT") != null) {
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: detaiDAO.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th><a href="giangvien_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
+													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
-												<%
-			    							}
-											%>	
+												<%}} %>
 											</tbody>
 										</table>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane active" id="DanhGia">
-							<div class="row">
-							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
-								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
-									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
-							<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
-										<input type="hidden" name="command" value="update">
-										<input type="hidden" name="Quyen" value="Lecturers">
-										<input type="hidden" name="MaDT" value=<%=maDT%>>
-										<input type="hidden" name="nguoigui" value="<%=detai.getGVHD() %>">
-											<table class="table table-striped table-hover">
-												<thead class="thead-default">
-													<tr class="success">
-														<th>Nội dung đánh giá</th>
-														<th>Điểm tối đa</th>
-														<th>Điểm đánh giá</th>	
-													</tr>
-												</thead>
-												<tbody>
-													<tr  >
-														<td>Tổng quan tình hình và lý do chọn đề tài</td>
-														<td>10</td>
-														<td><input type="text" name="diemtongquan" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-													</tr>
-													<tr>
-														<td>Mục tiêu đề tài</td>
-														<td>15</td>
-														<td><input type="text" name="diemmuctieu" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
-
-													</tr>
-													<tr>
-														<td>Phương pháp nghiên cứu</td>
-														<td>15</td>
-														<td><input type="text" name="diemphuongphap" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
-
-													</tr>
-													<tr>
-														<td>Nội dung khoa học</td>
-														<td>35</td>
-														<td><input type="text" name="diemnoidung" class="form-control required diem3" id="" required min="0" max="35" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-35."></td>
-													</tr>
-													<tr>
-														<td>Đóng góp cho KT-XH-GD</td>
-														<td>10</td>
-														<td><input type="text" name="diemdonggop" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-
-													</tr>
-													<tr>
-														<td>Hình thức báo cáo tổng kết</td>
-														<td>10</td>
-														<td><input type="text" name="diemhinhthuc" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-													</tr>
-													<tr>
-														<td>Điểm thưởng</td>
-														<td>10</td>
-														<td><input type="text" name="diemthuong" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-													</tr>
-													<tr>
-														<td>Tổng điểm</td>
-														<td>100</td>
-														<td><input type="text" name="tongdiem" id="input" class="form-control required diem4" value="" required="required" min="0" max="100" data-content="Vui lòng nhập vào ký tự số từ 0-100." data-placement="left" data-trigger="hover"></td>
-													</tr>
-												</tbody>
-											</table>
-											<label class="col-sm-2 control-label" for="mota">Ý kiến đánh giá</label><br>
-											<div class="col-sm-12">
-												<textarea type="text" name="ykien" class="form-control required mota" placeholder=""  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required></textarea>
-											</div>
-											<input type="submit" value="Đánh giá" style="float:right;height:40px; width:100px;margin:20px 10px 0px 0px;">
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id='bttop'>
-			<img src="images/backtotop.png" alt="backtotop" width="50px" height="50px">
-		</div>
-		<footer style="margin-bottom:0px;margin-top:10px;">
-			<pre style="margin-bottom:0px;">
-				Copyright@ Phòng nghiên cứu khoa học và quan hệ quốc tế
-			</pre>
-		</footer>	
-	</div>
-
-
+                </div>
+            </div>
+        </div>
+        <div id='bttop'>
+            <img src="images/backtotop.png" alt="backtotop" width="50px" height="50px">
+        </div>
+        <footer style="margin-bottom:0px;margin-top:10px;">
+            <pre style="margin-bottom:0px;">
+                Copyright@ Phòng nghiên cứu khoa học và quan hệ quốc tế
+            </pre>
+        </footer>
+    </div>
 </body>
+
 </html>

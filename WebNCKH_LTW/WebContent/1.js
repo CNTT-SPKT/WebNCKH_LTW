@@ -254,58 +254,58 @@ $(document).ready(function() {
             //     regex: /^(?=\s*\S).*$/,
             // }
         };
-        var validate = function(klass, value) {
-            var isValid = true,
-                error = '';
-
-            if (!value && /required/.test(klass)) {
-                error = 'This field is required';
-                isValid = false;
-            } else {
-                klass = klass.split(/\s/);
-                $.each(klass, function(i, k) {
-                    if (validators[k]) {
-                        if (value && !validators[k].regex.test(value)) {
-                            isValid = false;
-                            error = validators[k].error;
-                        }
-                    }
-                });
-            }
-            return {
-                isValid: isValid,
-                error: error
-            }
-        };
-        var showError = function($e) {
-            var klass = $e.attr('class'),
-                value = $e.val(),
-                test = validate(klass, value);
-
-            $e.removeClass('invalid');
-            $('#form-error').addClass('hide');
-
-            if (!test.isValid) {
-                $e.addClass('invalid');
-
-                if (typeof $e.data("shown") == "undefined" || $e.data("shown") == false) {
-                    $e.popover('show');
-                }
-
-            } else {
-                $e.popover('hide');
-            }
-        };
-
-        $inputs.keyup(function() {
-            showError($(this));
-        });
-        $selects.change(function() {
-            showError($(this));
-        });
-        $textAreas.keyup(function() {
-            showError($(this));
-        });
+//        var validate = function(klass, value) {
+//            var isValid = true,
+//                error = '';
+//
+//            if (!value && /required/.test(klass)) {
+//                error = 'This field is required';
+//                isValid = false;
+//            } else {
+//                klass = klass.split(/\s/);
+//                $.each(klass, function(i, k) {
+//                    if (validators[k]) {
+//                        if (value && !validators[k].regex.test(value)) {
+//                            isValid = false;
+//                            error = validators[k].error;
+//                        }
+//                    }
+//                });
+//            }
+//            return {
+//                isValid: isValid,
+//                error: error
+//            }
+//        };
+//        var showError = function($e) {
+//            var klass = $e.attr('class'),
+//                value = $e.val(),
+//                test = validate(klass, value);
+//
+//            $e.removeClass('invalid');
+//            $('#form-error').addClass('hide');
+//
+//            if (!test.isValid) {
+//                $e.addClass('invalid');
+//
+//                if (typeof $e.data("shown") == "undefined" || $e.data("shown") == false) {
+//                    $e.popover('show');
+//                }
+//
+//            } else {
+//                $e.popover('hide');
+//            }
+//        };
+//
+//        $inputs.keyup(function() {
+//            showError($(this));
+//        });
+//        $selects.change(function() {
+//            showError($(this));
+//        });
+//        $textAreas.keyup(function() {
+//            showError($(this));
+//        });
 
         $inputs.on('shown.bs.popover', function() {
             $(this).data("shown", true);

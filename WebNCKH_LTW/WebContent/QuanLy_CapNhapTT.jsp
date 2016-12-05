@@ -190,17 +190,16 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                         </div>
                         			<div class="tab-pane active" id="CNTT">
 									<div class="row" style="margin-right:0px;">
-										<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
+										<div class="svdkDeTai" style="background:white;height:600px;border-radius:3px">
 										  <h2 class="tieude_theh">CẬP NHẬP TRẠNG THÁI</h2><hr>
                                         <div class="ql_tb_CAPNHAPTT" style="font-size:13px">  </div>
-                                        <form action="DeTai_Servlet_CNTT" method="get" role="form" class="form-horizontal">
+                                        <form action="DeTai_Servlet_CNTT"  method="post" role="form" class="form-horizontal">
                                         <input type="hidden" name="command" value="updatett">
                                           <input type="hidden" name="chonmdt" value='<%=detai.getMaDT()%>'>
                                          <table class="table table-striped table-hover" id="myTable">
                                             <thead class="thead-default ">
                                                <tr class="success ">
-                                            
-                                                    <th>Mã đề tài</th>
+                                            		 <th>Mã đề tài</th>
                                                     <th>Tên đề tài</th>
                                                     <th>Chủ nghiệm đề tài</th>
                                                     <th>Giảng viên hướng dẫn</th>

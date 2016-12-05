@@ -41,8 +41,14 @@
 
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
+		if(dt.kiemTraTT(maDT))
+		{
+			detai=dt.getDeTaiGV(maDT);
+		}
+		else
+		{
 		detai = dt.getDeTai(maDT);
-	}
+	}}
 %>
 
     <div class="page">
@@ -200,7 +206,7 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text" required  readonly value="<%=detai.getTenCN()%>">
+																				<input name="cndetaiql" lass="form-control" id="hoten1" type="text" required  readonly value="<%=detai.getTenCN()%>">
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
@@ -316,13 +322,11 @@
 															<div class="col-sm-10" style="margin-bottom:10px">
 																<input class="form-control" id="tendetai" type="file">
 															</div>
-															<button type="submit" class="btn btn-lg btn-warning" style="margin-left:300px">Phê duyệt btn</button>
+															<button name="Submit" type="submit" value="dongy" class="btn btn-lg btn-info" style="top:1500px;right:100px;">Phê duyệt</button>
+															<button name="Submit" type="submit" value="khongdongy" class="btn btn-lg btn-warning" style="left:200px;">Không phê duyệt</button>
 															</form>
-															
 														</div>
 													</div>
-												<a href="DeTai_Servlet?command=QL_pheduyetDT&capmdt=<%=request.getParameter("CapMHT")%>&xuly=dongy&MaDT=<%=detai.getMaDT()%>"><button type="submit" class="btn btn-lg btn-warning" style="margin-left:300px">Phê duyệt</button></a>
-									<a href="DeTai_Servlet?command=QL_pheduyetDT&xuly=khongdongy&MaDT=<%=detai.getMaDT()%>"><button type="button" class="btn btn-lg btn-default btn-danger">Không đồng ý</button></a>
 											</div>
 										</div>
 									</div>
@@ -631,8 +635,8 @@
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: detaiDAO.getListDeTaiPheDuyetQL()) {
-											%>
+											for (DeTai ct: detaiDAO.getListDeTaiPheDuyetQL()) { %>
+											
 												<tr>
 													<th>null</th>
 													<th><%=ct.getTenDT()%></th>
@@ -640,7 +644,7 @@
 													<th><%=ct.getTenCN() %></th>
 													<th><a href="quanly_PheDuyetDT.jsp?MaDT=<%=ct.getMaDT() %>">Phê duyệt</a></th>
 												</tr>
-											<%
+											<% 
 			    							}
 											%>
 											</tbody>

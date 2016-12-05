@@ -259,6 +259,50 @@ public class DeTai_Servlet extends HttpServlet {
 					}
 					System.out.println(url);
 					break;
+				case "QL_DKDT":		
+					System.out.println("Vào gv đăng ký đề tài");
+					DeTai QL_DKDT=new DeTai();
+					int sodt2=detaictrl.getListDeTai().size()+1;
+					MaDT="dt"+Integer.toString(sodt2);
+					QL_DKDT.setMaDT(MaDT);
+					QL_DKDT.setMaHienThi(null);
+					QL_DKDT.setMaTT("tt10");
+					TaiKhoan tk69=new TaiKhoan();
+					tk69 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenGVHD"));
+					QL_DKDT.setGVHD(tk69.getMaTK());
+					QL_DKDT.setTenDT(request.getParameter("tenDT"));
+					QL_DKDT.setMoTa(request.getParameter("mota"));
+					QL_DKDT.setLinhVuc("Tự nhiên");
+					QL_DKDT.setLoaiHinh("Cơ bản");
+					QL_DKDT.setNgayThucHien(request.getParameter("ngaybatdau"));
+					QL_DKDT.setNgayKetThuc(request.getParameter("ngayketthuc"));
+					QL_DKDT.setCoQuanChuTri(request.getParameter("coquanchutri"));
+					QL_DKDT.setTinhHinhTrong(request.getParameter("tinhhinhTrong"));
+					QL_DKDT.setTinhHinhNgoai(request.getParameter("tinhhinhNgoai"));
+					QL_DKDT.setTinhCapThiet(request.getParameter("tinhcapThiet"));
+					QL_DKDT.setMucTieu(request.getParameter("muctieu"));
+					QL_DKDT.setPPNC(request.getParameter("PPNC"));
+					QL_DKDT.setNoiDungNC(request.getParameter("NoiDungNC"));
+					QL_DKDT.setSPDuKien(request.getParameter("SPDuKien"));
+					QL_DKDT.setDiaChiUD(request.getParameter("DiaChiUD"));
+					QL_DKDT.setKinhPhi(Double.parseDouble(request.getParameter("kinhphi")));
+					
+					if(detaictrl.insert_DeTaiSVDK(QL_DKDT))
+					{
+						error="Thành công!";
+						type = "dkdt_1";
+						System.out.println("Đăng ký đề tài thành công!");
+						
+							url="quanlyPage.jsp?type="+type;
+						
+					}
+					else{
+						System.out.println("Đăng ký thất bại");
+						error="Thất bại!";
+							url="quanlyPage.jsp?type="+type;
+					}
+					response.sendRedirect(url);
+					break;
 				case "GV_pheduyeHuy_GiaHan":
 					String yeucau = request.getParameter("yeucau");
 					xuly = request.getParameter("xuly");

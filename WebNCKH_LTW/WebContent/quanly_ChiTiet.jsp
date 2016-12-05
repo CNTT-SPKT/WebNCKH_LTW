@@ -28,6 +28,7 @@ HoiDong_Controller hoidongDao =new HoiDong_Controller();
 TB_TK_Controller cttb= new TB_TK_Controller();
 	ThongBao_Controller thongbaoDAO= new ThongBao_Controller();
 	DeTai_Controller detaiDAO= new DeTai_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
 	TrangThai_Controller trangthaiDAO=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
@@ -35,8 +36,14 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		detai = detaiDAO.getDeTai(maDT);
-	}
+		if(dt.kiemTraTT(maDT))
+		{
+			detai=dt.getDeTaiGV(maDT);
+		}
+		else
+		{
+		detai = dt.getDeTai(maDT);
+	}}
 %>
 
     <div class="page">
