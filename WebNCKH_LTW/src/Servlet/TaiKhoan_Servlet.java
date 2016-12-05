@@ -78,10 +78,18 @@ public class TaiKhoan_Servlet extends HttpServlet {
 			case "doimk":
 				System.out.println("Vào đổi mk");
 				TaiKhoan tk1= new TaiKhoan();
-				tk1 = crt.gettk(request.getParameter("MaTK"));
-				tk1.setMatKhau(request.getParameter("matkhau"));
-				if(crt.updateTKDoiMK(tk1))
-					error="Thành công";
+				String maTK2=request.getParameter("MaTK");
+				tk1=crt.getTaiKhoanByMaTK(maTK2);
+				String mk=request.getParameter("pass");
+				if(mk.equals(tk1.getMatKhau()))
+				{	System.out.println("Mật Khẩu cũ khớp");
+					tk1.setMatKhau(request.getParameter("npass"));
+					if(crt.updateTKDoiMK(tk1))
+					{
+						System.out.println("Vào update mật khẩu");
+						error="Thành công";
+					}
+				}
 				else
 					error="Thất bại";
 				url="sinhvienPage.jsp";
