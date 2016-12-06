@@ -79,6 +79,8 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 			
 		}catch(Exception e){
 			error="Xáº£y ra lá»—i ngáº«u nhiÃªn!";
+			type ="ntdt_0";
+			url="quanlyPage.jsp?type="+type;			
 		}
 		System.out.println(url);
 		request.setAttribute("error", error);

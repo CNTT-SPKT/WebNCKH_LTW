@@ -205,7 +205,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                                         <div class="form-group ">
                                                       
                                                             <select name="chontt" class="ql_TrangThai ">
-                                                       			 <option value="">TRẠNG THÁI MỚI</option>   
+                                                       			 <option value="ttmoi">TRẠNG THÁI MỚI</option>   
                                                        			      <%   for(TrangThai ct:trangthaiDAO.getListTrangThai() ){ %>
                                                                   <option value="<%=ct.getMaTT() %>"><%=ct.getTenTT() %></option>       
 		                                                                <%
@@ -273,16 +273,16 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                     <div class="quanly_dsHDPB">
 
                                         <div class="ql_table_dsDTPB">
-                                            <table class="table table-striped table-hover">
+                                              <table class="table table-striped table-hover">
                                                 <thead class="thead-default">
                                                     <tr class="success">
                                                         <th>Mã đề tài</th>
                                                         <th>Tên đề tài</th>
                                                         <th>Chủ nhiện đề tài</th>
                                                         <th>Giảng viên hướng dẫn</th>
-                                                            <th>Hội đồng phản biện</th>
-                                                        <th>Chi tiết</th>
-                                                        <th>Xem báo cáo</th>
+                                                         <th>Hội đồng phản biện</th>
+                                                        <th>Phản biện</th>
+                                                        <th>Xem KQ</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -293,9 +293,19 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                       	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
-                                                        
-                                                       	<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=c.getMaDT() %>">Xem báo cáo</a></th>
+                                                        <td><%="XONG"%>                                        
+                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
+                                                    </tr>
+                                                    <%} %>
+                                                     <%for(DeTai c:detaiDAO.getListPCPBQL_CNT()){ %>
+                                                     <tr>
+                                                        <td><%=c.getMaDT() %></td>
+                                                        <td><%=c.getTenDT() %></td>
+                                                        <td><%=c.getHoTen() %></td>
+                                                        <td><%=c.getTenGVHD() %></td>
+                                                        <td><%=c.getMaHD() %></td>
+                                                        <td><%="CHƯA"%>                                        
+                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>"></a></th>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>
@@ -354,11 +364,13 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                             <div class="timQLDT" style="float:right;margin-bottom:10px;padding-top:-5;">
                                                 <div style="margin-left:0px;" class=" col-sm-6 col-sm-offset-3 ">
 
-                                                            <select style="float:left;width:150p x; " class="form-control" id="tkql" >
-                                                    <option  value="tatca" selected>Tất cả</option>     
-                                                    <option  value="madetai">Mã đề tài</option>
-                                                    <option  value="tengvhd">Tên GVHD</option>
+                                                      <select style="float:left;width:150p x; " class="form-control" id="tkql" >
+                                                    <option value="tatca" selected>Tất cả</option>     
+                                                    <option value="madetai">Mã đề tài</option>
+                                                    <option value="stendt">Tên đề tài</option>
+                                                    <option value="tengvhd">Tên GVHD</option>
                                                     </select>
+
 
                                                     <div style=";width:400px; " id="imaginary_container ">
                                                         <div class="input-group stylish-input-group">

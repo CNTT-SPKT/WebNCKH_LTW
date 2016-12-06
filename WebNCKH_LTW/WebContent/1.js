@@ -407,7 +407,30 @@ $(function() {
 //tìm kiếm theo GVHD,MDETAI,KEYWWORD của thèn quản lý
 $(function() {
 $("#tkiem").on("click", function () {
-		if ($("#tkql").val() == "madetai") 
+	if ($("#tkql").val() == "madetai") 
+	{
+		// Declare variables 
+        var input, filter, table, tr, td, i;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("myTable");
+		tr = table.getElementsByTagName("tr");
+
+		// Loop through all table rows, and hide those who don't match the search query
+		for (i = 0; i < tr.length; i++)
+		 {
+			td = tr[i].getElementsByTagName("th")[0];
+			if (td) 
+			{
+				if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	};
+		if ($("#tkql").val() == "stendt") 
 		{
 			// Declare variables 
             var input, filter, table, tr, td, i;
@@ -419,7 +442,7 @@ $("#tkiem").on("click", function () {
 			// Loop through all table rows, and hide those who don't match the search query
 			for (i = 0; i < tr.length; i++)
 			 {
-				td = tr[i].getElementsByTagName("th")[0];
+				td = tr[i].getElementsByTagName("th")[1];
 				if (td) 
 				{
 					if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
@@ -430,7 +453,7 @@ $("#tkiem").on("click", function () {
 				}
 			}
 		}
-		else
+		else 
 			{
 			if ($("#tkql").val() == "tengvhd") 
     		{
@@ -485,3 +508,46 @@ $("#tkiem").on("click", function () {
 	})
 });
 //hết tìm kiếm quản lý
+/*
+Please consider that the JS part isn't production ready at all, I just code it to show the concept of merging filters and titles together !
+*/
+//Demo of Searching and Sorting Table with AngularJS
+var myApp = angular.module('myApp', []);
+
+myApp.controller('TableCtrl', ['$scope', function ($scope) {
+
+    $scope.allItems = getDummyData();
+
+    $scope.resetAll = function () {
+        $scope.filteredList = $scope.allItems;
+        $scope.newEmpId = '';
+        $scope.newName = '';
+        $scope.newEmail = '';
+        $scope.searchText = '';
+    }
+
+    $scope.add = function () {
+        $scope.allItems.push({
+            EmpId: $scope.newEmpId,
+            name: $scope.newName,
+            Email: $scope.newEmail
+        });
+        $scope.resetAll();
+    }
+
+    $scope.search = function () {
+        $scope.filteredList = _.filter($scope.allItems,
+
+        function (item) {
+            return searchUtil(item, $scope.searchText);
+        });
+
+        if ($scope.searchText == '') {
+            $scope.filteredList = $scope.allItems;
+        }
+    }
+
+    $scope.resetAll();
+}]);
+
+/* Search Text in all 3 fields */

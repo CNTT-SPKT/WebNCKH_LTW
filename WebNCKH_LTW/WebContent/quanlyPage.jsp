@@ -313,8 +313,8 @@
                                                         <th>Chủ nhiện đề tài</th>
                                                         <th>Giảng viên hướng dẫn</th>
                                                          <th>Hội đồng phản biện</th>
-                                                        <th>Chi tiết</th>
-                                                        <th>Xem báo cáo</th>
+                                                        <th>Phản biện</th>
+                                                        <th>Xem KQ</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -325,9 +325,19 @@
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                       	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
-                                                        
-                                                       	<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=c.getMaDT() %>">Xem báo cáo</a></th>
+                                                        <td><%="XONG"%>                                        
+                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
+                                                    </tr>
+                                                    <%} %>
+                                                     <%for(DeTai c:detaiDAO.getListPCPBQL_CNT()){ %>
+                                                     <tr>
+                                                        <td><%=c.getMaDT() %></td>
+                                                        <td><%=c.getTenDT() %></td>
+                                                        <td><%=c.getHoTen() %></td>
+                                                        <td><%=c.getTenGVHD() %></td>
+                                                        <td><%=c.getMaHD() %></td>
+                                                        <td><%="CHƯA ĐÁNH GIÁ"%>                                        
+                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>"></a></th>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>
@@ -394,7 +404,7 @@
 
                                                     <div style=";width:400px; " id="imaginary_container ">
                                                         <div class="input-group stylish-input-group">
-                                                            <input type="text " id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
+                                                            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
                                                             <span class="input-group-addon ">
                                                                         <button type="submit" id="tkiem">
                                                                             <span class="glyphicon glyphicon-search "></span>

@@ -176,7 +176,32 @@ public class DeTai_Controller {
         Connection cons = DBConnect.getConnecttion();
         String sql ="select detai.MaDT,TenDT,tensv.HoTen as TenSV,tengv.HoTen as TenGV,ctnghiemthu.MaHD as MHD "
         		+ "from detai,ctnghiemthu,taikhoan as tensv,taikhoan as tengv "
-        		+ "where detai.MaDT=ctnghiemthu.MaDT and detai.GVHD=tengv.MaTK and detai.MaCN=tensv.MaTK";
+        		+ "where detai.MaDT=ctnghiemthu.MaDT and detai.GVHD=tengv.MaTK and detai.MaCN=tensv.MaTK and detai.matt='tt9'";
+        ArrayList<DeTai> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	DeTai dt = new DeTai();
+            	dt.setMaDT(rs.getString("MaDT"));
+            	dt.setTenDT(rs.getString("TenDT"));
+            	dt.setHoTen(rs.getString("TenSV"));
+            	dt.setTenGVHD(rs.getString("TenGV"));
+            	dt.setMaHD(rs.getString("MHD"));
+            	list.add(dt);
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+	public ArrayList<DeTai> getListPCPBQL_CNT()  throws SQLException{
+        Connection cons = DBConnect.getConnecttion();
+        String sql ="select detai.MaDT,TenDT,tensv.HoTen as TenSV,tengv.HoTen as TenGV,ctnghiemthu.MaHD as MHD "
+        		+ "from detai,ctnghiemthu,taikhoan as tensv,taikhoan as tengv "
+        		+ "where detai.MaDT=ctnghiemthu.MaDT and detai.GVHD=tengv.MaTK and detai.MaCN=tensv.MaTK and detai.matt='tt8'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

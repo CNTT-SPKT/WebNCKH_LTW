@@ -82,6 +82,8 @@ public class DeTai_Servlet_CNTT extends HttpServlet {
 			
 		catch(Exception e){
 			error="Xáº£y ra lá»—i ngáº«u nhiÃªn!";
+			type = "updatett_0";
+			url="quanlyPage.jsp?type="+type;
 		}
 		
 		request.setAttribute("error", error);

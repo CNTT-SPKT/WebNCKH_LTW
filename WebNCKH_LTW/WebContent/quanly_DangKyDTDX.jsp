@@ -687,11 +687,11 @@
                                         <div class="ql_tb_quanLyDeTai" style="font-size:13px">
                                             <div class="timQLDT" style="float:right;margin-bottom:10px;padding-top:-5;">
                                                 <div style="margin-left:0px;" class=" col-sm-6 col-sm-offset-3 ">
-
-                                                            <select style="float:left;width:150p x; " class="form-control" id="tkql" >
-                                                    <option  value="tatca" selected>Tất cả</option>     
-                                                    <option  value="madetai">Mã đề tài</option>
-                                                    <option  value="tengvhd">Tên GVHD</option>
+													<select style="float:left;width:150p x; " class="form-control" id="tkql" >
+                                                    <option value="tatca" selected>Tất cả</option>     
+                                                    <option value="madetai">Mã đề tài</option>
+                                                    <option value="stendt">Tên đề tài</option>
+                                                    <option value="tengvhd">Tên GVHD</option>
                                                     </select>
 
                                                     <div style=";width:400px; " id="imaginary_container ">
