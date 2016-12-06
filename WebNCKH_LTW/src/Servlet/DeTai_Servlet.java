@@ -152,6 +152,7 @@ public class DeTai_Servlet extends HttpServlet {
 					if(detaictrl.insert_DeTaiSVDK(dkDT))
 					{
 						error="Thành công!";
+						type = "dkdt_1";
 						System.out.println("Đăng ký đề tài thành công!");
 						String nguoidk = request.getParameter("nguoidk");
 						if(nguoidk.equals("Student"))
@@ -168,13 +169,14 @@ public class DeTai_Servlet extends HttpServlet {
 							System.out.println("Gửi thông báo thành công!");
 						}	
 						if(nguoidk.equals("Lecturers"))
-							url="giangvienPage.jsp";
+							url="giangvienPage.jsp?type="+type;
 						if(nguoidk.equals("Manager"))
-							url="quanlyPage.jsp";
+							url="quanlyPage.jsp?type="+type;
 						
 					}
 					else{
 						error="Thất bại!";
+						type = "dkdt_0";
 						String nguoidk = request.getParameter("nguoidk");
 						if(nguoidk.equals("Student"))
 							url="sinhvienPage.jsp";
@@ -434,8 +436,7 @@ public class DeTai_Servlet extends HttpServlet {
 					System.out.println(MaDT+"______"+dkDT2.getMaCN()+"________"+dkDT2.getSinhVien1()+"_______"+dkDT2.getSinhVien2());
 					if(detaictrl.DangKyDTDX(dkDT2))
 					{
-						
-						
+						type = "dkdtdx_1";
 						System.out.println("Đăng ký đề tài thành công!");
 						 dkDT2 = detaictrl.getDeTai(MaDT);
 						TaiKhoan taikhoan =taikhoanctrl.gettk("tk1") ;
@@ -473,14 +474,15 @@ public class DeTai_Servlet extends HttpServlet {
 					}
 					else
 						error="Thất bại";
+					type = "dkdtdx_0";
 					System.out.println(error);
 					String nguoidk = request.getParameter("nguoidk");
 					if(nguoidk.equals("Student"))
-						url="sinhvienPage.jsp";
+						url="sinhvienPage.jsp?type="+type;
 					if(nguoidk.equals("Lecturers"))
-						url="giangvienPage.jsp";
+						url="giangvienPage.jsp?type="+type;
 					if(nguoidk.equals("Manager"))
-						url="quanlyPage.jsp";
+						url="quanlyPage.jsp?type="+type;
 					
 					break;
 			}

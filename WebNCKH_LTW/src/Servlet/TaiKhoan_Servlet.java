@@ -37,13 +37,10 @@ public class TaiKhoan_Servlet extends HttpServlet {
 		String command = request.getParameter("command");
 		
 		
-		String url="", error="";
+		String url="", error="", type="";
 		
 		try{
 			switch(command){
-			case "insert":
-				url="";
-				break;
 			case "update":
 				System.out.println("Vào update TT");
 				String quyen = request.getParameter("Quyen");
@@ -58,20 +55,21 @@ public class TaiKhoan_Servlet extends HttpServlet {
 				boolean ktra=crt.updateTaiKhoan(tk);
 				if(ktra)
 				{
-
+					type = "cntt_1";
 					error="Thành công";
 					if(quyen.equals("Admin"))
-						url="Admin.jsp";
+						url="Admin.jsp?type="+type;
 					if(quyen.equals("Student"))
-						url="sinhvienPage.jsp";
+						url="sinhvienPage.jsp?type="+type;
 				}
 				else
 				{
+					type = "cntt_0";
 					error="Thất bại";
 					if(quyen.equals("Admin"))
-						url="Admin.jsp";
+						url="Admin.jsp?type="+type;
 					if(quyen.equals("Student"))
-						url="sinhvienPage.jsp";
+						url="sinhvienPage.jsp?type="+type;
 					
 				}
 				break;
@@ -86,13 +84,17 @@ public class TaiKhoan_Servlet extends HttpServlet {
 					tk1.setMatKhau(request.getParameter("npass"));
 					if(crt.updateTKDoiMK(tk1))
 					{
+						type = "dmk_1";
 						System.out.println("Vào update mật khẩu");
 						error="Thành công";
 					}
 				}
 				else
+				{
 					error="Thất bại";
-				url="sinhvienPage.jsp";
+					type = "dmk_0";
+				}
+				url="sinhvienPage.jsp?type="+type;
 				System.out.println(error+"__________"+url);
 				break;
 			}

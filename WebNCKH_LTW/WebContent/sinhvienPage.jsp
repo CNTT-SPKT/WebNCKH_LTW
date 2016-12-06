@@ -40,8 +40,75 @@ $( document ).ready(function() {
 	TrangThai_Controller tt=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	String type = request.getParameter("type");
+	String error ="";
+	if (request.getParameter("type") != null)
+	{
+		
+		if(type.equals("dkdt_1"))
+			error = "Đăng ký đề tài thành công!";
+		if(type.equals("dkdt_0"))
+			error = "Đăng ký đề tài thất bại!";
+		if(type.equals("dkdtdx_1"))
+			error = "Đăng ký đề tài thành công!";
+		if(type.equals("dkdtdx_0"))
+			error = "Đăng ký đề tài thất bại!";
+		if(type.equals("ghdt_1"))
+			error = "Gửi đơn gia hạn thành công!";
+		if(type.equals("ghdt_0"))
+			error = "Gửi dơn gia hạn thất bại!";
+		if(type.equals("hdt_1"))
+			error = "Gửi dơn hủy thành công!";
+		if(type.equals("hdt_0"))
+			error = "Gửi dơn hủy thất bại!";
+		if(type.equals("cntt_1"))
+			error = "Cập nhật thông tin thành công!";
+		if(type.equals("cntt_0"))
+			error = "Cập nhật thông tin thất bại!";
+		if(type.equals("dmk_1"))
+			error = "Đổi mật khẩu thành công!";
+		if(type.equals("dmk_0"))
+			error = "Đổi mật khẩu thất bại!";
+	}
 %>
 <body>
+<script type="text/javascript">
+   $(document).ready(function() {
+       var x = $('.Mssg').text();
+       var y = $('.TypeMssg').text();
+    	if(x != "null" && x != "")
+    	{
+    		if( y == "dkdt_1" || y == "dkdtdx_1" || y == "ghdt_1" || y == "hdt_1" || y == "cntt_1" || y == "dmk_1")
+    			$("#ModalSuccess").modal('show');
+    		if( y == "dkdt_0" || y == "dkdtdx_0" || y == "ghdt_0" || y == "hdt_0" || y == "cntt_0" || y == "dmk_1")
+    			$("#ModalFail").modal('show');
+    	}
+    });
+</script>
+<div class="modal fade" id="ModalSuccess">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-success">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<div class="modal fade" id="ModalFail">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-danger">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<h4 class="Mssg hidden" style="text-align:center"><%=error%></h4>
+<h4 class="TypeMssg hidden" style="text-align:center"><%=type%></h4>
 	<div class="page">
 		<div class="menu">
 			<div class="row">

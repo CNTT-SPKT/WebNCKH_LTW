@@ -56,7 +56,7 @@ public class GiaHanDT_Servlet extends HttpServlet {
 		String maDT = request.getParameter("MaDT");
 		DeTai dt = detaictrl.getDeTai(maDT);
 		String MaDonXin="";
-		String url="", error="";
+		String url="", error="", type="";
 		try{
 			switch(command){
 				case "insert":
@@ -87,6 +87,7 @@ public class GiaHanDT_Servlet extends HttpServlet {
 						dongh.setGHDen(request.getParameter("ngay"));
 						if(ghctr.insertDonGiaHan(dongh))
 						{
+							type = "ghdt_1";
 							System.out.println("vào gửi thông báo!");
 							dt.setMaTT("tt6");
 							if(detaictrl.updateTrangThai_DeTai(dt))
@@ -107,8 +108,11 @@ public class GiaHanDT_Servlet extends HttpServlet {
 						}
 						
 						else
+						{
 							error="Thất bại";
-						url="sinhvienPage.jsp";
+							type = "ghdt_0";
+						}
+						url="sinhvienPage.jsp?type="+type;
 						System.out.println(error+"__________"+url);
 					}
 					if(xuly.equals("guidonhuy"))
@@ -123,6 +127,7 @@ public class GiaHanDT_Servlet extends HttpServlet {
 						System.out.println(donh.getMaDonXin()+"__________"+donh.getMaDT()+"________"+donh.getLyDo());
 						if(hctr.insertDonHuy(donh))
 						{
+							type = "hdt_1";
 							System.out.println("vào gửi thông báo!");
 							dt.setMaTT("tt6");
 							if(detaictrl.updateTrangThai_DeTai(dt))
@@ -143,8 +148,11 @@ public class GiaHanDT_Servlet extends HttpServlet {
 						}
 						
 						else
+						{
+							type = "hdt_0";
 							error="Thất bại";
-						url="sinhvienPage.jsp";
+						}
+						url="sinhvienPage.jsp?type="+type;
 						System.out.println(error+"__________"+url);
 					}
 					
@@ -156,7 +164,7 @@ public class GiaHanDT_Servlet extends HttpServlet {
 			error="Xảy ra lỗi ngẫu nhiên!";
 		}
 		request.setAttribute("error", error);
-		response.sendRedirect("sinhvienPage.jsp");
+		response.sendRedirect(url);
 	}
 
 	/**
