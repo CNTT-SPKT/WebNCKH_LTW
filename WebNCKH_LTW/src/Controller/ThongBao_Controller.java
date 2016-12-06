@@ -18,12 +18,11 @@ public class ThongBao_Controller {
 	//BAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
 	public ArrayList<ThongBao> getListThongBaoQLDK() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
+        String sql = "SELECT tb_tk.MaCTTB,thongbao.MaTB,loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
         		+ "FROM ThongBao,LoaiTb,tb_tk,taikhoan, taikhoan as TenNguoiGui "
         		+ "where loaitb.MaLTB=tb_tk.MaLTB and thongbao.matb=tb_tk.Matb and thongbao.nguoinhan=taikhoan.matk"
         		+ " and TenNguoiGui.MaTK=thongbao.NguoiGui "
-        		+ "and TaiKhoan.Quyen='Manager' and loaitb.MaLTB='ltt2'"
-			;
+        		+ "and TaiKhoan.Quyen='Manager' and loaitb.MaLTB='ltt2'";
         		
         ArrayList<ThongBao> list = new ArrayList<>();
         try {
@@ -34,6 +33,8 @@ public class ThongBao_Controller {
             	tb.setTenLoaiTB(rs.getString("TenLoaiTB"));
             	tb.setTenNguoiGui(rs.getString("TenNG"));
             	tb.setNgayGui(rs.getString("NgayGui"));
+            	tb.setMaTB(rs.getString("thongbao.matb"));
+            	tb.setMaCTTB(rs.getString("tb_tk.MaCTTB"));
             	list.add(tb);
             }
             cons.close();
@@ -42,9 +43,35 @@ public class ThongBao_Controller {
         }
         return list;
     }
+	public boolean deleteThongBao(String MaTB) throws SQLException {
+		 Connection connection = DBConnect.getConnecttion();
+	     String sql = "DELETE FROM ThongBao WHERE MaTB =?";
+	    try {
+	       
+	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+	       ps.setString(1,MaTB);
+	       return ps.executeUpdate()==1;
+	    } catch (Exception e) {
+	    	return false;
+	    }
+	    
+	}
+	public boolean deleteThongBao_TaiKhoan(String MaCTTB) throws SQLException {
+		 Connection connection = DBConnect.getConnecttion();
+	     String sql = "DELETE FROM tb_tk WHERE MaCTTB =?";
+	    try {
+	       
+	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+	       ps.setString(1,MaCTTB);
+	       return ps.executeUpdate()==1;
+	    } catch (Exception e) {
+	    	return false;
+	    }
+	    
+	}
 	public ArrayList<ThongBao> getListThongBaoQLHuyGH() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
+        String sql = "SELECT tb_tk.MaCTTB, thongbao.matb, loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
         		+ "FROM ThongBao,LoaiTb,tb_tk,taikhoan, taikhoan as TenNguoiGui "
         		+ "where loaitb.MaLTB=tb_tk.MaLTB and thongbao.matb=tb_tk.Matb and thongbao.nguoinhan=taikhoan.matk"
         		+ " and TenNguoiGui.MaTK=thongbao.NguoiGui "
@@ -60,6 +87,8 @@ public class ThongBao_Controller {
             	tb.setTenLoaiTB(rs.getString("TenLoaiTB"));
             	tb.setTenNguoiGui(rs.getString("TenNG"));
             	tb.setNgayGui(rs.getString("NgayGui"));
+            	tb.setMaTB(rs.getString("thongbao.matb"));
+            	tb.setMaCTTB(rs.getString("tb_tk.MaCTTB"));
             	list.add(tb);
             }
             cons.close();
@@ -194,8 +223,9 @@ public class ThongBao_Controller {
 	public static void main(String[] args) throws SQLException, ParseException {
 		TB_TK_Controller ctrl= new TB_TK_Controller();
 		ThongBao_Controller thongbaoctrl = new ThongBao_Controller();
-		ThongBao tb = thongbaoctrl.getThongBao("tk3","tk4");
-	    System.out.println(tb.getMaTB());
+	//	ThongBao tb = thongbaoctrl.getThongBao("tk3","tk4");
+		for(ThongBao c: thongbaoctrl.getListThongBaoQLHuyGH()){              
+	    System.out.println(c.getMaTB());
 //	    if(thongbaoctrl.getThongBao("tk3","tk4").getMaTB()==null)
 //	    {
 //	    	int n =thongbaoctrl.getListThongBao().size();
@@ -207,5 +237,5 @@ public class ThongBao_Controller {
 //		    
 //	    }
 	    
-	}
+		}}
 }

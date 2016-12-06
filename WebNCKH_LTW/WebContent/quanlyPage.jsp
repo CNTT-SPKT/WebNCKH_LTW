@@ -82,6 +82,10 @@
 			error= "Phân công phản biện thành công!";
 		if(type.equals("pcpb_0"))
 			error= "Phân công phản biện thất bại!";
+		if(type.equals("xoatb_1"))
+			error= "Xóa thông báo thành công!";
+		if(type.equals("xoatb_0"))
+			error= "Xóa thông báo thất bại!";
 	}
 %>
 <body>
@@ -91,9 +95,9 @@
        var y = $('.TypeMssg').text();
     	if(x != "null" && x != "")
     	{
-    		if( y == "ntdt_1" || y == "pddt_1" || y == "huydt_1" || y == "ghdt_1" || y == "dkdt_1" || y=="updatett_1" || y=="kpd_1" ||y=="themhd_1"||y=="xoahd_1"||y=="pcpb_1")
+    		if(y=="xoatb_1"|| y == "ntdt_1" || y == "pddt_1" || y == "huydt_1" || y == "ghdt_1" || y == "dkdt_1" || y=="updatett_1" || y=="kpd_1" ||y=="themhd_1"||y=="xoahd_1"||y=="pcpb_1")
     			$("#ModalSuccess").modal('show');
-    		if( y == "ntdt_0" || y == "pddt_0" || y == "huydt_0" || y == "ghdt_0" || y == "dkdt_0" || y=="updatett_0" || y=="kpd_0" || y=="themhd_0" || y=="themhd_t"||y=="xoahd_0"||y=="pcpb_0"||y=="pcpb_t")
+    		if( y=="xoatb_0"|| y == "ntdt_0" || y == "pddt_0" || y == "huydt_0" || y == "ghdt_0" || y == "dkdt_0" || y=="updatett_0" || y=="kpd_0" || y=="themhd_0" || y=="themhd_t"||y=="xoahd_0"||y=="pcpb_0"||y=="pcpb_t")
     			$("#ModalFail").modal('show');
     	}
     });
@@ -215,11 +219,11 @@
                                          <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
-                                                    <th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
                                                     <th>Thông báo</th>
                                                     <th>Người gửi</th>
                                                     <th>Ngày gửi</th>
                                                     <th>Chi tiết thông báo</th>
+                                                    <th>Xóa thông báo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -227,13 +231,12 @@
                                          	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLDK()){                      			
                                               %>
                                                 <tr>
-                                                <input name="laymatb" type="hidden" value="<%=c.getMaTB() %>">
-                                                    <td><input type="checkbox" name="" value=""></td>
+                                               
                                                     <td><%=c.getTenLoaiTB() %></td>
                                                     <td><%=c.getTenNguoiGui() %></td>
                                                     <td><%=c.getNgayGui() %></td>
-                                                    <th><a href="quanly_PheDuyetDT.jsp?MaDT=<%%>">Phê duyệt</a></th>
-                                                  
+                                                    <th><a href="quanly_PheDuyetDT.jsp?MaDT=">Phê duyệt</a></th>
+                                                    <td><a href="XoaThongBao_Servlet?command=deleteTB&MaCTTB=<%=c.getMaCTTB()%>"> Xóa</a></td>
                                                 </tr>
                                          <%} %>
                                          
@@ -241,32 +244,17 @@
                                          	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLHuyGH()){                      			
                                               %>
                                                 <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><%=c.getTenLoaiTB() %></td>
+                                                
+                                             	  <td><%=c.getTenLoaiTB() %></td>
                                                     <td><%=c.getTenNguoiGui() %></td>
                                                     <td><%=c.getNgayGui() %></td>
-                                                    <th><a href="quanly_DuyetDon.jsp?MaDT=<%%>">Duyệt đơn</a></th>
+                                                    <th><a href="quanly_DuyetDon.jsp?MaDT=">Duyệt đơn</a></th>
+                                                     <td><a href="XoaThongBao_Servlet?command=deleteTB&MaCTTB=<%=c.getMaCTTB()%>"> Xóa</a></td>
                                                 </tr>
                                          <%} %>
                                             </tbody>
                                         </table>
-                                        <script>
-                                                $('#selectAll_ThongBao').change(function(){
-                                                    if($(this).prop('checked')){
-                                                        $('tbody tr td input[type="checkbox"]').each(function(){
-                                                            $(this).prop('checked', true);
-                                                        });
-                                                    }else{
-                                                        $('tbody tr td input[type="checkbox"]').each(function(){
-                                                            $(this).prop('checked', false);
-                                                        });
-                                                    }
-                                                });
-                                               
-                                        </script>
                                         </div>
-                                        <button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px; margin-bottom:10px;">
-                                            <span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
                                 </div>
                             </div>
                         </div>
@@ -397,11 +385,11 @@
                                         <div class="ql_tb_quanLyDeTai" style="font-size:13px">
                                             <div class="timQLDT" style="float:right;margin-bottom:10px;padding-top:-5;">
                                                 <div style="margin-left:0px;" class=" col-sm-6 col-sm-offset-3 ">
-
-                                                            <select style="float:left;width:150p x; " class="form-control" id="tkql" >
-                                                    <option  value="tatca" selected>Tất cả</option>     
-                                                    <option  value="madetai">Mã đề tài</option>
-                                                    <option  value="tengvhd">Tên GVHD</option>
+													 <select style="float:left;width:150p x; " class="form-control" id="tkql" >
+                                                    <option value="tatca" selected>Tất cả</option>     
+                                                    <option value="madetai">Mã đề tài</option>
+                                                    <option value="stendt">Tên đề tài</option>
+                                                    <option value="tengvhd">Tên GVHD</option>
                                                     </select>
 
                                                     <div style=";width:400px; " id="imaginary_container ">
@@ -441,7 +429,7 @@
                                                     <th><%=c.getTenDT()%> </th>
                                                     <th><%=c.getHoTen()%></th>
                                                		<th><%=c.getTenGVHD() %></th>                                      
-                                                    	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
+                                                   	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
                                                     <th><%=c.getTenTT() %></th>
                                                    
                                               

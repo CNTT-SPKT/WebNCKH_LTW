@@ -10,6 +10,7 @@ public class ThongBao {
     private String TenNguoiNhan;
     //TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
     private String TenLoaiTB;
+    private String MaCTTB;
     private String NgayGui;
 	public String getTenLoaiTB() {
 		return TenLoaiTB;
@@ -90,6 +91,14 @@ public class ThongBao {
 
 	public void setCTTB(ArrayList<TB_TK> cTTB) {
 		CTTB = cTTB;
+	}
+
+	public String getMaCTTB() {
+		return MaCTTB;
+	}
+
+	public void setMaCTTB(String maCTTB) {
+		MaCTTB = maCTTB;
 	}
 	
 }

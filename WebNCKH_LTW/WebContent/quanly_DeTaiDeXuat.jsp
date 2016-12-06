@@ -126,14 +126,14 @@
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">THÔNG BÁO</h2><hr>
                                     <div class="ql_table_thongbao">
-                                       <table class="table table-striped table-hover">
+                                         <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
-                                                    <th><input type="checkbox" name="" id="selectAll_ThongBao" value=""></th>
                                                     <th>Thông báo</th>
                                                     <th>Người gửi</th>
                                                     <th>Ngày gửi</th>
                                                     <th>Chi tiết thông báo</th>
+                                                    <th>Xóa thông báo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -141,12 +141,12 @@
                                          	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLDK()){                      			
                                               %>
                                                 <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
+                                               
                                                     <td><%=c.getTenLoaiTB() %></td>
                                                     <td><%=c.getTenNguoiGui() %></td>
                                                     <td><%=c.getNgayGui() %></td>
-                                                    <th><a href="quanly_PheDuyetDT.jsp?MaDT=<%%>">Phê duyệt</a></th>
-                                                  
+                                                    <th><a href="quanly_PheDuyetDT.jsp?MaDT=">Phê duyệt</a></th>
+                                                    <td><a href="XoaThongBao_Servlet?command=deleteTB&MaCTTB=<%=c.getMaCTTB()%>"> Xóa</a></td>
                                                 </tr>
                                          <%} %>
                                          
@@ -154,36 +154,20 @@
                                          	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLHuyGH()){                      			
                                               %>
                                                 <tr>
-                                                    <td><input type="checkbox" name="" value=""></td>
-                                                    <td><%=c.getTenLoaiTB() %></td>
+                                                
+                                             	  <td><%=c.getTenLoaiTB() %></td>
                                                     <td><%=c.getTenNguoiGui() %></td>
                                                     <td><%=c.getNgayGui() %></td>
-                                                    <th><a href="quanly_DuyetDon.jsp?MaDT=<%%>">Duyệt đơn</a></th>
+                                                    <th><a href="quanly_DuyetDon.jsp?MaDT=">Duyệt đơn</a></th>
+                                                     <td><a href="XoaThongBao_Servlet?command=deleteTB&MaCTTB=<%=c.getMaCTTB()%>"> Xóa</a></td>
                                                 </tr>
                                          <%} %>
                                             </tbody>
                                         </table>
-                                        <script>
-                                                $('#selectAll_ThongBao').change(function(){
-                                                    if($(this).prop('checked')){
-                                                        $('tbody tr td input[type="checkbox"]').each(function(){
-                                                            $(this).prop('checked', true);
-                                                        });
-                                                    }else{
-                                                        $('tbody tr td input[type="checkbox"]').each(function(){
-                                                            $(this).prop('checked', false);
-                                                        });
-                                                    }
-                                                });
-                                               
-                                        </script>
-                                        </div>
-                                        <button type="button" class="btn btn-danger" id="btn_Xoa" style="float:right; margin-right:10px; margin-bottom:10px;">
-                                            <span class="glyphicon glyphicon-trash"></span> Xóa thông báo</button>
                                 </div>
                             </div>
                         </div>
-                        
+                         </div>
 						<div class="tab-pane active" id="dsDeTaiDeXuat"  >
 							<div class="row">
 								<div class="qldsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">

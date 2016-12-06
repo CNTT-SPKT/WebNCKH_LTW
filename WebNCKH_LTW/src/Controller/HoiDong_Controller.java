@@ -160,6 +160,7 @@ public class HoiDong_Controller {
 		    }
 		    
 		}
+		
 		//ENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTIN
 	public ArrayList<HoiDong> getListThongBao() {
         Connection cons = DBConnect.getConnecttion();
