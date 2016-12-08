@@ -5,17 +5,92 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 
 import com.mysql.jdbc.PreparedStatement;
 import com.sun.istack.internal.logging.Logger;
 
 import Model.DeTai;
+import Model.TB_TK;
 import Model.ThongBao;
 import Packages.DBConnect;
 
 public class ThongBao_Controller {
 	//BAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
+	public boolean insert_thongbao(ThongBao tb) {
+		Connection cons = DBConnect.getConnecttion();
+		 String sql = "INSERT INTO thongbao(MaTB,NguoiGui,NguoiNhan)"
+	        		+ " values (?,?,?)";
+		try {
+			 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			 java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	            ps.setString(1, tb.getMaTB());
+	            ps.setString(2, tb.getNguoiGui());
+	            ps.setString(3, tb.getNguoiNhan());
+	        
+	          return ps.executeUpdate()==1;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+			return false;
+		}
+	}
+	public Boolean kiemTraKhoaChinhTB(String maTB)
+	{
+		Connection connection = DBConnect.getConnecttion();
+		String sql ="SELECT * FROM ThongBao WHERE thongbao.Matb='"+maTB+"'";
+		try {
+			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public Boolean kiemTraKhoaChinhTBTK(String maCTTB)
+	{
+		Connection connection = DBConnect.getConnecttion();
+		String sql ="SELECT * FROM tb_tk WHERE tb_tk.MaCTTB='"+maCTTB+"'";
+		try {
+			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean insert_CTthongbao(TB_TK cttb) {
+		Connection cons = DBConnect.getConnecttion();
+		 String sql = "INSERT INTO tb_tk(MaCTTB,MaTB,MaLTB,TinTB,NgayGui)"
+	        		+ " values (?,?,?,?,?)";
+		try {
+			 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			 java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	            ps.setString(1, cttb.getMaCTTB());
+	            ps.setString(2, cttb.getMaTB());
+	            ps.setString(3, cttb.getMaLTB());
+	            ps.setString(4, cttb.getTinTB());
+	            ps.setDate(5,date);
+	          return ps.executeUpdate()==1;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+			return false;
+		}
+	}
 	public ArrayList<ThongBao> getListThongBaoQLDK() {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT tb_tk.MaCTTB,thongbao.MaTB,loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "

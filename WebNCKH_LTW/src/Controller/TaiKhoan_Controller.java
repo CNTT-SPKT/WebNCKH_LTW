@@ -43,6 +43,27 @@ public class TaiKhoan_Controller {
 	        }
 	        return list;
 	    }
+		public ArrayList<TaiKhoan> getListSinhVien() {
+	        Connection cons = DBConnect.getConnecttion();
+	        String sql = "select MaTk,HoTen "
+	        		+ "from TaiKhoan "
+	        		+ "where Quyen='Student'";
+	        ArrayList<TaiKhoan> list = new ArrayList<>();
+	        try {
+	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+	            ResultSet rs = ps.executeQuery();
+	            while (rs.next()) {
+	            	TaiKhoan hd = new TaiKhoan();
+	            	hd.setHoTen(rs.getString("HoTen"));
+	            	hd.setMaTK(rs.getString("MaTk"));
+	               	list.add(hd);
+	            }
+	            cons.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return list;
+	    }
 		//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
 	public ArrayList<TaiKhoan> getListTaiKhoan() throws ParseException {
 		Connection cons = DBConnect.getConnecttion();

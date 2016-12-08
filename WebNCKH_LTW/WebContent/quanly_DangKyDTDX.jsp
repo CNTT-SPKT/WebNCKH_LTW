@@ -35,6 +35,9 @@
 		maDT = request.getParameter("MaDT");
 		detai = detaiDAO.getDeTaiDX(maDT);
 	}
+	TaiKhoan tktb =new TaiKhoan();
+	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
+
 %>
 <body>
 	<div class="page">
@@ -322,8 +325,63 @@
 						  <div class="tab-pane" id="postThongBao">
                             <div class="row">
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
-                                    <h2 class="tieude_theh">THÔNG BÁO</h2><hr>
+                                    <h2 class="tieude_theh">THÔNG BÁO</h2>                    
+            		      	<a class="btn btn-primary" data-toggle="modal" href="#modaltb" style="float:right;margin-right:50px;margin-top:-30px;">Tạo thông báo</a>
+																<div class="modal fade" id="modaltb">
+																	<div class="modal-dialog">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+																				<h4 class="modal-title">Modal title</h4>
+																			</div>
+																			<div class="modal-body">
+																				<div class="row">
+																					<div class="title " style=" text-align:center; margin-bottom:15px;">
+																						<h2> TẠO THÔNG BÁO MỚI </h2>
+																					</div>
+																				</div>
+																				<div class="row">
+																					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+																						<form action="TaoThongBao_Servlet" id="formtb" method="post" class="form-horizontal">
+																					
+																							<input type="hidden" name="MaTK" value="<%=tktb.getMaTK()%>">
+																							<div class="form-group has-feedback" style="margin-left:20px;">
+																								<div class="col-xs-11">
+																									<label for="">Người gửi<span>:</span></label> 
+																									<input readonly class="form-control" value="<%=tktb.getHoTen()%>" name="nguoigui" id="nguoigui" type="nguoigui" required/>
+																								</div>
+																							</div>
+																							<div class="form-group has-feedback" style="margin-left:20px;">
+																								<div class="col-xs-11">
+																									<label for="sodt">Người nhận<span>:</span></label>
+																									 <select name="nguoinhan" style="float:left;width:150p x; " class="form-control" id="nguoinhan" >
+																									  <%for(TaiKhoan tkhd:taikhoanDAO.getListSinhVien()){ %>
+											                                                            <option value='<%=tkhd.getMaTK() %>'><%=tkhd.getHoTen() %></option>
+											                                                            <%} %>
+													                                                    </select>
+																								</div>
+																							</div>
+																							<div class="form-group has-feedback" style="margin-left:20px;">
+																								<div class="col-xs-11">
+																									<label for="noidung">Nội dung thông báo<span>:</span></label> 
+																									<input class="form-control" name="noidungtb" id="" type="text" required/>
+																								</div>
+																							</div>
+																							
+																							</div>
+																							<div class="modal-footer">
+																								<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+																								<button type="submit" class="btn btn-primary" >Gửi</button>
+																							</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+                                    <hr>
                                     <div class="ql_table_thongbao">
+                     
                                          <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
@@ -362,10 +420,12 @@
                                          <%} %>
                                             </tbody>
                                         </table>
+                                        
+                                        </div>
+                                   
                                 </div>
                             </div>
                         </div>
-                         </div>
 						 <div class="tab-pane" id="dsHDNT">
                             <div class="row">
                                 <div class="cldsHDNT" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
