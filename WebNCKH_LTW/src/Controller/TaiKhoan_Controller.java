@@ -139,6 +139,7 @@ public class TaiKhoan_Controller {
 		}
 		return tk;
 	}
+	
 
 	public TaiKhoan gettk(String tk) throws SQLException {
 		Connection cons = DBConnect.getConnecttion();

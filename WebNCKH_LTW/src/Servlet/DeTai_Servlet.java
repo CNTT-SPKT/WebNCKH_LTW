@@ -251,6 +251,7 @@ public class DeTai_Servlet extends HttpServlet {
 					else{
 						System.out.println("Đăng ký thất bại");
 						error="Thất bại!";
+						type = "dkdt_0";
 						String nguoidk = request.getParameter("nguoidk");
 						if(nguoidk.equals("Student"))
 							url="sinhvienPage.jsp";
@@ -262,7 +263,7 @@ public class DeTai_Servlet extends HttpServlet {
 					System.out.println(url);
 					break;
 				case "QL_DKDT":		
-					System.out.println("Vào gv đăng ký đề tài");
+					System.out.println("Vào ql đăng ký đề tài");
 					DeTai QL_DKDT=new DeTai();
 					int sodt2=detaictrl.getListDeTai().size()+1;
 					MaDT="dt"+Integer.toString(sodt2);
@@ -294,13 +295,12 @@ public class DeTai_Servlet extends HttpServlet {
 						error="Thành công!";
 						type = "dkdt_1";
 						System.out.println("Đăng ký đề tài thành công!");
-						
-							url="quanlyPage.jsp?type="+type;
-						
+							url="quanlyPage.jsp?type="+type;			
 					}
 					else{
 						System.out.println("Đăng ký thất bại");
 						error="Thất bại!";
+						type = "dkdt_0";
 							url="quanlyPage.jsp?type="+type;
 					}
 					response.sendRedirect(url);

@@ -614,9 +614,9 @@
                         </div>
                      <div class="tab-pane" id="dkDeTai">
 										<div class="row" style="margin-right:0px;">
-											<div class="qldkDeTai" style="background:white;border-radius:3px">
+											<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
 												<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI</h2>
-											<hr>
+												<hr>
 												<div class="container" style="width:800px">
 													<div class="row">
 														<div class="mota">
@@ -684,19 +684,19 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text" required name="tenCN">
+																							<input readonly class="form-control" id="hoten1" type="text" name="tenCN">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mss1" type="text" required>
+																							<input readonly class="form-control" id="mss1" type="text">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mail1" type="text" required>
+																							<input readonly class="form-control" id="mail1" type="text">
 																						</div>
 																					</div>
 																					<br>
@@ -704,13 +704,13 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text" name="tenSV1">
+																							<input readonly class="form-control" id="hoten1" type="text" name="tenSV1">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mss1" type="text">
+																							<input readonly class="form-control" id="mss1" type="text">
 																						</div>
 																					</div>
 																				</div>
@@ -719,26 +719,27 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text" required name="tenGVHD">
+																						
+																							<input value="<%=tktb.getHoTen() %>" readonly class="form-control" id="hoten1" type="text" required name="tenGVHD">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mssv1">Email:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mss1" type="text" required>
+																							<input readonly value="<%=session.getAttribute("Email").toString() %>" class="form-control" id="mss1" type="text" required>
 																						</div>
 																						<br><br><br><br><br><br>
 																						<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
 																						<div class="row" style="margin-bottom:5px">
 																							<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																							<div class="col-sm-8">
-																								<input class="form-control" id="hoten1" type="text" name="tenSV2">
+																								<input readonly class="form-control" id="hoten1" type="text" name="tenSV2">
 																							</div>
 																						</div>
 																						<div class="row" style="margin-bottom:5px">
 																							<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																							<div class="col-sm-8">
-																								<input class="form-control" id="mss1" type="text">
+																								<input readonly class="form-control" id="mss1" type="text">
 																							</div>
 																						</div>
 																					</div>
@@ -797,9 +798,7 @@
 																		</div>
 
 																		<div id="guidon" style="">
-																			<button type="submit" id="btn_GuiDon" style="color: #fff;background-color: #5bc0de;border-color: #46b8da; height:35px;width:150px;background-image: none;border: 1px solid transparent;border-radius: 4px; margin-right:15px;float:right;">Gửi đơn đăng ký</button>
-																			<a class="btn btn-warning" href="sinhvien_DeTaiDeXuat.jsp" role="button" style="margin-left:10px">Đăng ký đề tài được đề xuất</a>
-
+																			<button type="submit" id="btn_GuiDon" style="color: #fff;background-color: #5bc0de;border-color: #46b8da; height:35px;width:150px;background-image: none;border: 1px solid transparent;border-radius: 4px; margin-right:15px;float:right;">Gửi đơn đăng ký</button>							
 																		</div>
 																	</div>
 																	</form>
@@ -808,7 +807,7 @@
 														</div>
 													</div>
 												</div>
-											</div><hr>
+											</div>
 										</div>
 									</div>
                         <div class="tab-pane " id="dsDeTaiDK">
