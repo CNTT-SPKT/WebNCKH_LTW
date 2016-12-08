@@ -51,12 +51,13 @@ public class DeTai_Servlet_PheDuyet extends HttpServlet {
 				String Submit=request.getParameter("Submit");
 				System.out.print("Submit:  "+Submit);
 				MaDT = request.getParameter("laymaDT");
-				String cndetaiql=request.getParameter("cndetaiql");
+				String cndetaiql=request.getParameter("cndetaiql");	
 				DeTai dtql = detaictrl.getDeTai(MaDT);
 				if(Submit.equals("dongy"))
 				{
 					capMHT=request.getParameter("CapMHT");
-						if(cndetaiql=="" || cndetaiql==null)
+					System.out.println("cndetaiql:"+cndetaiql);
+						if(cndetaiql.equals("") || cndetaiql.equals(null)||cndetaiql.equals("null"))
 						{
 							dtql.setMaDT(MaDT);
 							dtql.setMaTT("tt11");
