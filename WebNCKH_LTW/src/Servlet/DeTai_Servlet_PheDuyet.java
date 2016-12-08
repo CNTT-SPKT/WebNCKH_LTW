@@ -51,7 +51,9 @@ public class DeTai_Servlet_PheDuyet extends HttpServlet {
 				String Submit=request.getParameter("Submit");
 				System.out.print("Submit:  "+Submit);
 				MaDT = request.getParameter("laymaDT");
-				String cndetaiql=request.getParameter("cndetaiql");	
+				String cndetaiql=request.getParameter("cndetaiql");
+				String matkdn=request.getParameter("matkdn");
+				String matkgv=request.getParameter("matkgv");
 				DeTai dtql = detaictrl.getDeTai(MaDT);
 				if(Submit.equals("dongy"))
 				{
@@ -65,9 +67,18 @@ public class DeTai_Servlet_PheDuyet extends HttpServlet {
 						}
 						else
 						{
+							if(matkdn.equals(matkgv))
+							{
+								dtql.setMaDT(MaDT);
+								dtql.setMaTT("tt3");
+								dtql.setMaHienThi(capMHT);
+							}
+							else
+							{
 							dtql.setMaDT(MaDT);
 							dtql.setMaTT("tt2");
 							dtql.setMaHienThi(capMHT);
+							}
 						}
 						if(detaictrl.updateTrangThai_DeTai_QL(dtql))
 						{

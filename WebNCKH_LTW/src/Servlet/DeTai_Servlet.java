@@ -261,30 +261,21 @@ public class DeTai_Servlet extends HttpServlet {
 					System.out.println(url);
 					break;
 				case "QL_DKDT":		
-					System.out.println("Vào gv đăng ký đề tài");
+					System.out.println("Vào ql đăng ký đề tài");
 					DeTai ql_dkDT=new DeTai();
+	
 					int sodt5=detaictrl.getListDeTai().size()+1;
 					MaDT="dt"+Integer.toString(sodt5);
 					ql_dkDT.setMaDT(MaDT);
-					ql_dkDT.setMaHienThi(null);
-					ql_dkDT.setMaTT("tt10");
-					
-					
+					ql_dkDT.setMaTT("tt11");
 					TaiKhoan tk5=new TaiKhoan();
-					tk5 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenCN"));
-					ql_dkDT.setMaCN(tk5.getMaTK());
-					tk5 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV1"));
-					ql_dkDT.setSinhVien1(tk5.getMaTK());
-					tk5 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV2"));
-					ql_dkDT.setSinhVien2(tk5.getMaTK());
 					tk5 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenGVHD"));
+					System.out.println("tk5= "+tk5.getMaTK());
 					ql_dkDT.setGVHD(tk5.getMaTK());
 					ql_dkDT.setTenDT(request.getParameter("tenDT"));
 					ql_dkDT.setMoTa(request.getParameter("mota"));
 					ql_dkDT.setLinhVuc("Tự nhiên");
 					ql_dkDT.setLoaiHinh("Cơ bản");
-					ql_dkDT.setNgayThucHien(request.getParameter("ngaybatdau"));
-					ql_dkDT.setNgayKetThuc(request.getParameter("ngayketthuc"));
 					ql_dkDT.setCoQuanChuTri(request.getParameter("coquanchutri"));
 					ql_dkDT.setTinhHinhTrong(request.getParameter("tinhhinhTrong"));
 					ql_dkDT.setTinhHinhNgoai(request.getParameter("tinhhinhNgoai"));
@@ -295,27 +286,22 @@ public class DeTai_Servlet extends HttpServlet {
 					ql_dkDT.setSPDuKien(request.getParameter("SPDuKien"));
 					ql_dkDT.setDiaChiUD(request.getParameter("DiaChiUD"));
 					ql_dkDT.setKinhPhi(Double.parseDouble(request.getParameter("kinhphi")));
-					
-					if(detaictrl.insert_DeTaiSVDK(ql_dkDT))
+					System.out.println("chuan bi update");
+					if(detaictrl.insert_DeTaiQLDK(ql_dkDT))
 					{
 						error="Thành công!";
 						type = "dkdt_1";
 						System.out.println("Đăng ký đề tài thành công!");
-						String nguoidk = request.getParameter("nguoidk");			
-						if(nguoidk.equals("Manager"))
-						{
-							url="quanlyPage.jsp?type="+type;
-						}	
+						url="quanlyPage.jsp?type="+type;	
 					}
-					else{
-						String nguoidk = request.getParameter("nguoidk");
+					else
+					{
 						System.out.println("Đăng ký thất bại");
 						error="Thất bại!";
 						type = "dkdt_0";
-						if(nguoidk.equals("Manager"))
-							url="quanlyPage.jsp?type="+type;
+						url="quanlyPage.jsp?type="+type;
 					}
-					System.out.println(url);
+					
 					break;
 				case "QL_pheduyeHuy_GiaHan":
 					String yeucau2 = request.getParameter("yeucau2");

@@ -605,7 +605,7 @@
                                 </div>
                             </div>
                         </div>
-                                 <div class="tab-pane" id="dkDeTai">
+                                  <div class="tab-pane" id="dkDeTai">
 										<div class="row" style="margin-right:0px;">
 											<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
 												<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI</h2>
@@ -615,7 +615,7 @@
 														<div class="mota">
 															<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 																<form action="DeTai_Servlet" method="POST" role="form" class="form-horizontal">
-																<input type="hidden" name="command" value="GV_DKDT">
+																<input type="hidden" name="command" value="QL_DKDT">
 																<input type="hidden" name="nguoidk" value="Manager">
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
@@ -655,11 +655,11 @@
 																					<div class="row">
 																						<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="ngaybatdau" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input readonly type="date" name="ngaybatdau" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																						<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="ngayketthuc" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input readonly type="date" name="ngayketthuc" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																					</div>
 																				</div>

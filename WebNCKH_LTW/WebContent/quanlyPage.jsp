@@ -81,7 +81,7 @@
 		if(type.equals("xoahd_1"))
 			error= "Xóa hội thành công!";
 		if(type.equals("pcpb_t"))
-			error= "Đã phân công phản biện!";
+			error= "Lỗi!! Đề tài đã phân công phản biện!";
 		if(type.equals("pcpb_1"))
 			error= "Phân công phản biện thành công!";
 		if(type.equals("pcpb_0"))
@@ -636,7 +636,7 @@
 														<div class="mota">
 															<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 																<form action="DeTai_Servlet" method="POST" role="form" class="form-horizontal">
-																<input type="hidden" name="command" value="GV_DKDT">
+																<input type="hidden" name="command" value="QL_DKDT">
 																<input type="hidden" name="nguoidk" value="Manager">
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
@@ -676,11 +676,11 @@
 																					<div class="row">
 																						<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="ngaybatdau" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input readonly type="date" name="ngaybatdau" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																						<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="ngayketthuc" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input readonly type="date" name="ngayketthuc" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																					</div>
 																				</div>

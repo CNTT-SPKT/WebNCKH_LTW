@@ -782,7 +782,36 @@ public class DeTai_Controller {
 		}
 		return false;
 	}
-	
+	public boolean insert_DeTaiQLDK(DeTai dt) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "insert into DeTai (MaDT,MaTT,GVHD,TenDT,MoTa,LinhVuc,LoaiHinh,CoQuanChuTri,TinhHinhTrong,TinhHinhNgoai,TinhCapThiet,MucTieu,PPNC,NoiDungNC,SPDuKien,DiaChiUD,KinhPhi)  "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1,dt.getMaDT());
+			ps.setString(2, dt.getMaTT());
+			ps.setString(3, dt.getGVHD());
+			ps.setString(4, dt.getTenDT());
+			ps.setString(5, dt.getMoTa());
+			ps.setString(6, dt.getLinhVuc());
+			ps.setString(7, dt.getLoaiHinh());
+			ps.setString(8, dt.getCoQuanChuTri());
+			ps.setString(9, dt.getTinhHinhTrong());
+			ps.setString(10, dt.getTinhHinhNgoai());
+			ps.setString(11, dt.getTinhCapThiet());
+			ps.setString(12, dt.getMucTieu());
+			ps.setString(13, dt.getPPNC());
+			ps.setString(14, dt.getNoiDungNC());
+			ps.setString(15, dt.getSPDuKien());
+			ps.setString(16, dt.getDiaChiUD());
+			ps.setDouble(17, dt.getKinhPhi());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
 	public ArrayList<DeTai> getListDeTai()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql = "select * from DeTai";
@@ -871,6 +900,26 @@ public class DeTai_Controller {
 		DeTai_Controller ctrl = new DeTai_Controller();
 		for(DeTai ct:ctrl.getListDeTaiPhanCongPhanBien("ly@gmail.com"))
 			System.out.println(ct.getMaDT()+"_____"+ct.getTenDT());
+		System.out.println("cuttt");
+		DeTai dt= new DeTai();
+		dt.setMaDT("dt2");
+		dt.setMaTT("tt11");	
+		dt.setGVHD("tk1");
+		dt.setTenDT("tenDT");
+		dt.setMoTa("mota");
+		dt.setLinhVuc("Tự nhiên");
+		dt.setLoaiHinh("Cơ bản");
+		dt.setCoQuanChuTri("coquanchutri");
+		dt.setTinhHinhTrong("tinhhinhTrong");
+		dt.setTinhHinhNgoai("tinhhinhNgoai");
+		dt.setTinhCapThiet("tinhcapThiet");
+		dt.setMucTieu("muctieu");
+		dt.setPPNC("PPNC");
+		dt.setNoiDungNC("NoiDungNC");
+		dt.setSPDuKien("SPDuKien");
+		dt.setDiaChiUD("DiaChiUD");
+		dt.setKinhPhi(10000);
+		ctrl.insert_DeTaiQLDK(dt);
 //		DeTai dt= new DeTai();
 //		dt=ctrl.getDeTai("dt12");
 //		dt.setMaTT("tt1");
