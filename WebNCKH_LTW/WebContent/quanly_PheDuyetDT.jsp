@@ -41,17 +41,23 @@
 
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		if(dt.kiemTraTT(maDT))
-		{
-			detai=dt.getDeTaiGV(maDT);
-		}
-		else
-		{
-		detai = dt.getDeTai(maDT);
-	}}
+	detai = dt.getDeTai_ALL(maDT);
+	}
 	TaiKhoan tktb =new TaiKhoan();
+	TaiKhoan tktb1 =new TaiKhoan();
+	TaiKhoan tksv1=new TaiKhoan();
+	TaiKhoan tksv2=new TaiKhoan();
+	TaiKhoan tkgv =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
-
+	tktb1=taikhoanDAO.gettk(detai.getMaCN().toString());
+		System.out.print("hihi");
+		String sv1=detai.getSinhVien1().toString();
+		String sv2=detai.getSinhVien2().toString();
+	
+	tksv1=taikhoanDAO.gettk(detai.getSinhVien1().toString());
+	tksv2=taikhoanDAO.gettk(detai.getSinhVien2().toString());
+	tkgv=taikhoanDAO.gettk(detai.getGVHD().toString());
+	
 %>
 
     <div class="page">
@@ -119,19 +125,19 @@
                             <a class="list-group-item" href="#dkDeTai" data-toggle="pill">
                                 <span class="glyphicon glyphicon-inbox"></span> Đăng ký đề tài</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsDeTaiDK">
+                        <li style="margin-top:0px;" id="tab_dsDeTaiDK">
                             <a href="#dsDeTaiDK" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-list-alt"></span> DS đề tài đã đăng ký</a>
                         </li>
-                        <li style="margin-top:0px;" id="duyetHuy_GiaHan">
+                        <li style="margin-top:0px;" id="tab_duyetHuy_GiaHan">
                             <a href="#duyetHuy_GianHan" class="list-group-item" data-toggle="pill" style="border-radius:0px;">
                                 <span class="glyphicon glyphicon-check"></span> Duyệt đơn hủy/gia hạn đề tài</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsHDNT">
+                        <li style="margin-top:0px;" id="tab_dsHDNT">
                             <a href="#dsHDNT" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-list-alt"></span> Danh sách hội đồng nghiệm thu</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsDTPB">
+                        <li style="margin-top:0px;" id="tab_dsDTPB">
                             <a href="#dsDTPB" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-edit"></span> Phân công phản biện</a>
                         </li>
@@ -187,11 +193,11 @@
 																		<div class="row">
 																			<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input type="date" name="" id="thoigianbatdau" class="form-control" readonly required="required" title="" style="padding:0px;">
+																				<input value="<%=detai.getNgayThucHien() %>" type="date" name="" id="thoigianbatdau" class="form-control" readonly required="required" title="" style="padding:0px;">
 																			</div>
 																			<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input type="date" name="" id="thoigianketthuc" class="form-control" readonly required="required" title="" style="padding:0px;">
+																				<input value="<%=detai.getNgayKetThuc() %>" type="date" name="" id="thoigianketthuc" class="form-control" readonly required="required" title="" style="padding:0px;">
 																			</div>
 																		</div>
 																	</div>
@@ -209,19 +215,19 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input name="cndetaiql" lass="form-control" id="hoten1" type="text" required  readonly value="<%=detai.getTenCN()%>">
+																				<input name="cndetaiql" lass="form-control" id="hoten1" type="text" required  readonly value="<%=tktb1.getHoTen()%>">
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" required readonly value=<%=detai.getMSSVCN()%>>
+																				<input class="form-control" id="mss1" type="text" required readonly value=<%=tktb1.getMatKhau()%>>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mail1" type="text" required  readonly value=<%=detai.getEmailCN()%>>
+																				<input class="form-control" id="mail1" type="text" required  readonly value=<%=tktb1.getEmail()%>>
 																			</div>
 																		</div>
 																		<br>
@@ -229,13 +235,13 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text"  readonly value="<%=detai.getTenSV1()%>">
+																				<input class="form-control" id="hoten1" type="text"  readonly value="<%=tksv1.getHoTen()%>">
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text"  readonly value=<%=detai.getMSSV1()%>>
+																				<input class="form-control" id="mss1" type="text"  readonly value=<%=tksv1.getMatKhau()%>>
 																			</div>
 																		</div>
 																	</div>
@@ -244,26 +250,26 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text" required value="<%=detai.getTenGVHD()%>" readonly>
+																				<input class="form-control" id="hoten1" type="text" required value="<%=tkgv.getHoTen()%>" readonly>
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="mssv1">Email:</label>
 																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" required value=<%=detai.getEmailGV()%> readonly>
+																				<input class="form-control" id="mss1" type="text" required value=<%=tkgv.getEmail()%> readonly>
 																			</div>
 																			<br><br><br><br><br><br>
 																			<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
 																			<div class="row" style="margin-bottom:5px">
 																				<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																				<div class="col-sm-8">
-																					<input class="form-control" id="hoten1" type="text" readonly value="<%=detai.getTenSV2()%>">
+																					<input class="form-control" id="hoten1" type="text" readonly value="<%=tksv2.getHoTen()%>">
 																				</div>
 																			</div>
 																			<div class="row" style="margin-bottom:5px">
 																				<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																				<div class="col-sm-8">
-																					<input class="form-control" id="mss1" type="text" readonly value="<%=detai.getMSSV2()%>">
+																					<input class="form-control" id="mss1" type="text" readonly value="<%=tksv2.getMatKhau()%>">
 																				</div>
 																			</div>
 																		</div>
@@ -320,11 +326,7 @@
 																<input class="form-control" type="text" name="CapMHT">
 																
 															</div>
-															
-															<label class="col-sm-2 control-label" for="tendetai">Tải file chi tiết:</label>
-															<div class="col-sm-10" style="margin-bottom:10px">
-																<input class="form-control" id="tendetai" type="file">
-															</div>
+														
 															<button name="Submit" type="submit" value="dongy" class="btn btn-lg btn-info" style="top:1500px;right:100px;">Phê duyệt</button>
 															<button name="Submit" type="submit" value="khongdongy" class="btn btn-lg btn-warning" style="left:200px;">Không phê duyệt</button>
 															</form>
@@ -457,16 +459,16 @@
                                    
                                 </div>
                             </div>
-                        </div>
+                       
                         <div class="tab-pane" id="dsHDNT">
                             <div class="row">
                                 <div class="cldsHDNT" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
-                                    <h2 class="tieude_theh">DANH SÁCH HỘI ĐỒNG NGHIỆM THU</h2><hr>
+              <h2 class="tieude_theh">DANH SÁCH HỘI ĐỒNG NGHIỆM THU</h2><hr>
                                     
                                     <div class="quanly_dsHDNT">
                                         <div class="ql_table_dsHDNT"></div>
 
-                                     <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
                                                     <th>Mã HĐ</th>
@@ -485,8 +487,7 @@
                                                     <td><%=hd.getTenPhanBien() %></td>
                                                     <td><%=hd.getTenUyVien() %></td>
                                                     <td><%=hd.getNgayThanhLap() %></td>
-                                                    <td class="dropdown">
-                                                        <a style="margin-top: -5px;" class="btn btn-danger dsDeTai_actionButton" data-toggle="dropdown" href="#"> Xóa hội đồng </a></td>
+                                                   <td><a href="XoaHoiDong_Servlet?command=delete&MaHD=<%=hd.getMaHD() %>"> Xóa</a></td>
                                                 </tr>
                                                 <%} %>
                                             </tbody>

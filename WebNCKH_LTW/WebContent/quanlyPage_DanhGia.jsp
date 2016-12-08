@@ -43,7 +43,6 @@
 		maDT = request.getParameter("MaDT");
 		detai = detaiDAO.getDeTai(maDT);
 	}
-	TaiKhoan tk=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 %>
 
 <div class="page">
@@ -87,7 +86,7 @@
             <div class="row">
                   <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active" id="tab_postThongbao">
+                        <li class="" id="tab_postThongbao">
                             <a class="list-group-item" href="#postThongBao" data-toggle="pill">
                                 <span class="glyphicon glyphicon-home"></span> Thông báo</a>
                         </li>
@@ -111,19 +110,19 @@
                             <a class="list-group-item" href="#dkDeTai" data-toggle="pill">
                                 <span class="glyphicon glyphicon-inbox"></span> Đăng ký đề tài</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsDeTaiDK">
+                        <li style="margin-top:0px;" id="tab_dsDeTaiDK">
                             <a href="#dsDeTaiDK" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-list-alt"></span> DS đề tài đã đăng ký</a>
                         </li>
-                        <li style="margin-top:0px;" id="duyetHuy_GiaHan">
+                        <li style="margin-top:0px;" id="tab_duyetHuy_GiaHan">
                             <a href="#duyetHuy_GianHan" class="list-group-item" data-toggle="pill" style="border-radius:0px;">
                                 <span class="glyphicon glyphicon-check"></span> Duyệt đơn hủy/gia hạn đề tài</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsHDNT">
+                        <li style="margin-top:0px;" id="tab_dsHDNT">
                             <a href="#dsHDNT" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-list-alt"></span> Danh sách hội đồng nghiệm thu</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsDTPB">
+                        <li style="margin-top:0px;" id="tab_dsDTPB">
                             <a href="#dsDTPB" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-edit"></span> Phân công phản biện</a>
                         </li>
@@ -138,9 +137,7 @@
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
 										<form action="CTNghiemThuQL_Servlet" method="post">
 										<input type="hidden" name="command1" value="updateql">
-										<input type="hidden" name="MaDT" value=<%=maDT%>>
-										<input type="hidden" name="MaTK" value=<%=tk.getMaTK() %>>
-										<input type="hidden" name="nguoigui" value="<%=tk.getMaTK() %>">
+										<input type="hidden" name="MaDT" value=<%=maDT%>>	
 										<table class="table table-striped table-hover">
 												<thead class="thead-default">
 													<tr class="success">
@@ -324,8 +321,7 @@
                                    
                                 </div>
                             </div>
-                        </div>
-
+                     
                         <div class="tab-pane" id="dsHDNT">
                             <div class="row">
                                 <div class="cldsHDNT" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">

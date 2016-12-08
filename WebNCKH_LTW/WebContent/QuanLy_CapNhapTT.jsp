@@ -36,11 +36,14 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		detai = detaiDAO.getDeTai(maDT);
+		detai = detaiDAO.getDeTai_ALL(maDT);
 	}
+	TaiKhoan cndetai =new TaiKhoan();
+	cndetai=taikhoanDAO.gettk(detai.getMaCN().toString());
 	TaiKhoan tktb =new TaiKhoan();
+	TaiKhoan tengvhd =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
-
+	tengvhd=taikhoanDAO.gettk(detai.getGVHD().toString());
 %>
 
     <div class="page">
@@ -84,7 +87,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
             <div class="row">
                  <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active" id="tab_postThongbao">
+                        <li class="" id="tab_postThongbao">
                             <a class="list-group-item" href="#postThongBao" data-toggle="pill">
                                 <span class="glyphicon glyphicon-home"></span> Thông báo</a>
                         </li>
@@ -108,19 +111,19 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                             <a class="list-group-item" href="#dkDeTai" data-toggle="pill">
                                 <span class="glyphicon glyphicon-inbox"></span> Đăng ký đề tài</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsDeTaiDK">
+                        <li style="margin-top:0px;" id="tab_dsDeTaiDK">
                             <a href="#dsDeTaiDK" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-list-alt"></span> DS đề tài đã đăng ký</a>
                         </li>
-                        <li style="margin-top:0px;" id="duyetHuy_GiaHan">
+                        <li style="margin-top:0px;" id="tab_duyetHuy_GiaHan">
                             <a href="#duyetHuy_GianHan" class="list-group-item" data-toggle="pill" style="border-radius:0px;">
                                 <span class="glyphicon glyphicon-check"></span> Duyệt đơn hủy/gia hạn đề tài</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsHDNT">
+                        <li style="margin-top:0px;" id="tab_dsHDNT">
                             <a href="#dsHDNT" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-list-alt"></span> Danh sách hội đồng nghiệm thu</a>
                         </li>
-                        <li style="margin-top:0px;" id="dsDTPB">
+                        <li style="margin-top:0px;" id="tab_dsDTPB">
                             <a href="#dsDTPB" class="list-group-item" data-toggle="pill">
                                 <span class="glyphicon glyphicon-edit"></span> Phân công phản biện</a>
                         </li>
@@ -247,7 +250,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                    
                                 </div>
                             </div>
-                        </div>
+                       
                         			<div class="tab-pane active" id="CNTT">
 									<div class="row" style="margin-right:0px;">
 										<div class="svdkDeTai" style="background:white;height:600px;border-radius:3px">
@@ -271,8 +274,8 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                          	     <tr>
                                                   <th><%=detai.getMaHienThi()%></th>
                                                     <th><%=detai.getTenDT()%> </th>
-                                                    <th><%=detai.getTenCN()%></th>
-                                               		<th><%=detai.getTenGVHD() %></th>                                      
+                                                    <th><%=cndetai.getHoTen()%></th>
+                                               		<th><%=tengvhd.getHoTen() %></th>                                      
                                                     	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=detai.getMaDT() %>">Chi tiết</a></th>
                                                     <th>
                                                         <div class="form-group ">

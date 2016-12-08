@@ -92,12 +92,62 @@ public class DeTai_Controller {
     }
 
 	
-	
+	public DeTai getDeTai_ALL(String maDT) {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM DeTai" +
+        " where MaDT='"+maDT+"'";
+        DeTai dt = new DeTai();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	
+            	
+            	dt.setMaDT(rs.getString("MaDT"));
+            	dt.setMaHienThi(rs.getString("MaHienThi"));
+            	dt.setMaTT(rs.getString("MaTT"));
+            	dt.setMaCN(rs.getString("MaCN"));
+            	dt.setSinhVien1(rs.getString("SinhVien1"));
+            	dt.setSinhVien2(rs.getString("SinhVien2"));
+            	dt.setGVHD(rs.getString("GVHD"));
+            	dt.setTenDT(rs.getString("TenDT"));
+            	dt.setMoTa(rs.getString("MoTa"));
+            	dt.setLinhVuc(rs.getString("LinhVuc"));
+            	dt.setLoaiHinh(rs.getString("LoaiHinh"));
+            	dt.setNgayThucHien(rs.getString("NgayThucHien"));
+            	dt.setNgayKetThuc(rs.getString("NgayKetThuc"));
+            	dt.setCoQuanChuTri(rs.getString("CoQuanChuTri"));
+            	dt.setTinhHinhTrong(rs.getString("TinhHinhTrong"));
+            	dt.setTinhHinhNgoai(rs.getString("TinhHinhNgoai"));
+            	dt.setTinhCapThiet(rs.getString("TinhCapThiet"));
+            	dt.setMucTieu(rs.getString("MucTieu"));
+            	dt.setPPNC(rs.getString("PPNC"));
+            	dt.setNoiDungNC(rs.getString("NoiDungNC"));
+            	dt.setSPDuKien(rs.getString("SPDuKien"));
+            	dt.setDiaChiUD(rs.getString("DiaChiUD"));
+            	dt.setTenCN(rs.getString("TaiKhoan.HoTen"));
+            	dt.setMSSVCN(rs.getString("TaiKhoan.MatKhau"));
+            	dt.setTenSV1(rs.getString("TK2.HoTen"));
+            	dt.setTenSV2(rs.getString("TK3.HoTen"));
+            	dt.setTenGVHD(rs.getString("TK1.HoTen"));
+            	dt.setEmailCN(rs.getString("TaiKhoan.Email"));
+            	dt.setEmailGV(rs.getString("TK1.Email"));
+            	dt.setMSSV1(rs.getString("TK2.MatKhau"));
+            	dt.setMSSV2(rs.getString("TK3.MatKhau"));
+            	dt.setKinhPhi(rs.getDouble("KinhPhi"));
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dt;
+    }
 	public ArrayList<DeTai> getListDeTaiCanPhanCongPB()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql ="select *"
-        		+ "from detai,trangthai,taikhoan "
-        		+ "where detai.MaTT='tt11' and detai.matt=trangthai.matt and taikhoan.matk=detai.macn";
+        		+ " from detai,trangthai,taikhoan "
+        		+ "where detai.MaTT='tt3' and detai.matt=trangthai.matt and taikhoan.matk=detai.macn";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
