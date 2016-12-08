@@ -472,7 +472,7 @@ public class DeTai_Controller {
     }
 	public ArrayList<DeTai> getListDeTaiNT(String email)  throws SQLException{
 		 Connection cons = DBConnect.getConnecttion();
-	        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
+	        String sql = "select distinct DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
 					" CTNghiemThu.NgayNT as NgayNT"+
 					" from DeTai,TaiKhoan,CTNghiemThu "+
 					" where DeTai.MaCN=TaiKhoan.MaTK "+
@@ -499,9 +499,10 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiPhanCongPhanBien(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD"+
+        String sql = "select distinct DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD"+
 			" from DeTai,CTNghiemThu,HoiDong,TaiKhoan,TaiKhoan as TK1, TaiKhoan as TK2"+
-			" where DeTai.MaDT=CTNghiemThu.MaDT and CTNghiemThu.MaHD=HoiDong.MaHD and HoiDong.PhanBien=TaiKhoan.MaTK"+
+			" where DeTai.MaDT=CTNghiemThu.MaDT and CTNghiemThu.MaHD=HoiDong.MaHD and "
+			+ " (HoiDong.PhanBien=TaiKhoan.MaTK or HoiDong.ChuTich=TaiKhoan.MaTK)"+
 			" and TaiKhoan.Email='"+Email+"' and DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and MaTT='tt8' ";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
@@ -818,8 +819,8 @@ public class DeTai_Controller {
 	}
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
-		for(DeTai ct:ctrl.getListDeTaiPheDuyetQL_loai2())
-			System.out.println(ct.getMaDT());
+		for(DeTai ct:ctrl.getListDeTaiPhanCongPhanBien("ly@gmail.com"))
+			System.out.println(ct.getMaDT()+"_____"+ct.getTenDT());
 //		DeTai dt= new DeTai();
 //		dt=ctrl.getDeTai("dt12");
 //		dt.setMaTT("tt1");

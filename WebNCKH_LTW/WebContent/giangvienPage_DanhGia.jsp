@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="vendor/font-awesome.css">
 </head>
 <%
+CTNghiemThu_Controller ctntDao=new CTNghiemThu_Controller();
+TaiKhoan_Controller tkDao=new TaiKhoan_Controller();
 DeTai_Controller detaiDAO = new DeTai_Controller();
 DeTai detai=new DeTai();
 String maDT = "";
@@ -20,6 +22,7 @@ if (request.getParameter("MaDT") != null) {
 	maDT = request.getParameter("MaDT");
 	detai = detaiDAO.getDeTai(maDT);
 }
+	TaiKhoan tk=tkDao.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 %>
 <body >
 	<div class="page">
@@ -49,7 +52,7 @@ if (request.getParameter("MaDT") != null) {
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span  style="color:blue">Giảng Viên A</span></a></li>
+									<li><a href="#"><span  style="color:blue"><%=session.getAttribute("Email") %></span></a></li>
 										<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div><!-- /.navbar-collapse -->
@@ -475,7 +478,8 @@ if (request.getParameter("MaDT") != null) {
 										<input type="hidden" name="command" value="update">
 										<input type="hidden" name="Quyen" value="Lecturers">
 										<input type="hidden" name="MaDT" value=<%=maDT%>>
-										<input type="hidden" name="nguoigui" value="<%=detai.getGVHD() %>">
+										<input type="hidden" name="MaTK" value=<%=tk.getMaTK() %>>
+										<input type="hidden" name="nguoigui" value="<%=tk.getMaTK() %>">
 											<table class="table table-striped table-hover">
 												<thead class="thead-default">
 													<tr class="success">

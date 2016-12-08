@@ -17,14 +17,18 @@ public class CTNghiemThu {
     private String MaPhanBien;
     private String TenPhanBien;
     private String TenChuTich;
+    private String MaChuTich;
+    private String MaTK;
+    private String TenTK;
     
 	public CTNghiemThu() {
 		super();
 	}
 
+	
 	public CTNghiemThu(String maDT, String maHD, int tongQuan, int mucTieu, int phuongPhap, int noiDung, int dongGop,
 			int hinhThuc, int diemThuong, int tongDiem, String yKien, String ngayNT, String tenDT, String maPhanBien,
-			String tenPB, String tenChuTich) {
+			String tenPhanBien, String tenChuTich, String maChuTich, String maTK, String tenTK) {
 		super();
 		MaDT = maDT;
 		MaHD = maHD;
@@ -40,33 +44,33 @@ public class CTNghiemThu {
 		NgayNT = ngayNT;
 		TenDT = tenDT;
 		MaPhanBien = maPhanBien;
-		TenPhanBien = tenPB;
-		TenChuTich = tenChuTich;
-	}
-
-	public String getMaPhanBien() {
-		return MaPhanBien;
-	}
-
-	public void setMaPhanBien(String maPhanBien) {
-		MaPhanBien = maPhanBien;
-	}
-
-	public String getTenPhanBien() {
-		return TenPhanBien;
-	}
-
-	public void setTenPhanBien(String tenPhanBien) {
 		TenPhanBien = tenPhanBien;
-	}
-
-	public String getTenChuTich() {
-		return TenChuTich;
-	}
-
-	public void setTenChuTich(String tenChuTich) {
 		TenChuTich = tenChuTich;
+		MaChuTich = maChuTich;
+		MaTK = maTK;
+		TenTK = tenTK;
 	}
+
+	
+	public String getMaTK() {
+		return MaTK;
+	}
+
+
+	public void setMaTK(String maTK) {
+		MaTK = maTK;
+	}
+
+
+	public String getTenTK() {
+		return TenTK;
+	}
+
+
+	public void setTenTK(String tenTK) {
+		TenTK = tenTK;
+	}
+
 
 	public String getMaDT() {
 		return MaDT;
@@ -172,5 +176,38 @@ public class CTNghiemThu {
 		TenDT = tenDT;
 	}
 
+	public String getMaPhanBien() {
+		return MaPhanBien;
+	}
+
+	public void setMaPhanBien(String maPhanBien) {
+		MaPhanBien = maPhanBien;
+	}
+
+	public String getTenPhanBien() {
+		return TenPhanBien;
+	}
+
+	public void setTenPhanBien(String tenPhanBien) {
+		TenPhanBien = tenPhanBien;
+	}
+
+	public String getTenChuTich() {
+		return TenChuTich;
+	}
+
+	public void setTenChuTich(String tenChuTich) {
+		TenChuTich = tenChuTich;
+	}
+
+	public String getMaChuTich() {
+		return MaChuTich;
+	}
+
+	public void setMaChuTich(String maChuTich) {
+		MaChuTich = maChuTich;
+	}
+
+	
 	
 }

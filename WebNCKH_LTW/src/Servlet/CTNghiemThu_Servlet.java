@@ -46,8 +46,10 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		String command = request.getParameter("command");
 		String quyen = request.getParameter("Quyen");
 		String maDT= request.getParameter("MaDT");
+		String maTK=request.getParameter("MaTK");
 		CTNghiemThu ctnt=new CTNghiemThu();
 		ctnt = crt.getListCTNghiemThu(maDT);
+		ctnt=crt.getCTNghiemThuMaTK(maTK);
 		ctnt.setTongQuan(Integer.parseInt(request.getParameter("diemtongquan")));
 		ctnt.setMucTieu(Integer.parseInt(request.getParameter("diemmuctieu")));
 		ctnt.setPhuongPhap(Integer.parseInt(request.getParameter("diemphuongphap")));
@@ -66,11 +68,11 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		try{
 			switch(command){
 				case "update":
-					System.out.println("VÃ o update");
-					
+					System.out.println(ctnt.getMaTK()+"____"+ctnt.getMaDT());
+					System.out.println("Vào update");
 					if(crt.updateCTNT(ctnt) && ctrl.updateTrangThai_DeTai(dt))
 					{
-						error = "thÃ nh cÃ´ng";
+						error = "Thành công";
 						type ="ntdt_1";
 						// Ä�Ã¡nh giÃ¡ thÃ nh cÃ´ng thÃ¬ gá»­i thÃ´ng bÃ¡o vá»� cho sinh viÃªn
 						String nguoigui = request.getParameter("nguoigui");
@@ -85,14 +87,14 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 						    tb.setNguoiGui(nguoigui);
 						    tb.setNguoiNhan(dt.getMaCN());
 						    if(thongbaoctrl.createThongBao(tb))
-						    	System.out.println("Táº¡o há»™p thoáº¡i thÃ nh cÃ´ng");
+						    	System.out.println("Tạo hộp thoại thành công");
 					    }
 						tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
 						tbtk.setMaLTB("ltt1");
 						tbtk.setMaTB(tb.getMaTB());
 						
 						System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
-						tbtk.setTinTB("ThÃ´ng bÃ¡o Ä‘á»� tÃ i "+maDT+" Ä‘Ã£ cÃ³ káº¿t quáº£ nghiá»‡m thu");
+						tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
 						
 						if(tb_tkctrl.insertTB_TK(tbtk))
 							System.out.println(tbtk.getTinTB());
@@ -107,7 +109,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 					
 					else
 					{
-						error="Nghiá»‡m thu tháº¥t báº¡i";
+						error="Nghiệm thu thất bại";
 						type = "ntdt_0";
 						if(quyen.equals("Lecturers"))
 							url="giangvienPage.jsp?type="+type;

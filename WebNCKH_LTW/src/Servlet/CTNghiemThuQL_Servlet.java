@@ -13,6 +13,8 @@ import Controller.TB_TK_Controller;
 import Controller.ThongBao_Controller;
 import Model.CTNghiemThu;
 import Model.DeTai;
+import Model.TB_TK;
+import Model.ThongBao;
 
 /**
  * Servlet implementation class CTNghiemThuQL_Servlet
@@ -39,10 +41,12 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("UTF-8");
-		String command = request.getParameter("command1");
+		String command = request.getParameter("command");
 		String maDT= request.getParameter("MaDT");
+		String maTK=request.getParameter("MaTK");
 		CTNghiemThu ctnt=new CTNghiemThu();
 		ctnt = crt.getListCTNghiemThu(maDT);
+		ctnt=crt.getCTNghiemThuMaTK(maTK);
 		ctnt.setTongQuan(Integer.parseInt(request.getParameter("diemtongquan")));
 		ctnt.setMucTieu(Integer.parseInt(request.getParameter("diemmuctieu")));
 		ctnt.setPhuongPhap(Integer.parseInt(request.getParameter("diemphuongphap")));
@@ -66,6 +70,30 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 					if(crt.updateCTNT(ctnt) && ctrl.updateTrangThai_DeTai(dt))
 					{			
 							type ="ntdt_1";
+							String nguoigui = request.getParameter("nguoigui");
+							TB_TK tbtk = new TB_TK();
+							ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
+							
+							if(tb.getMaTB()==null)
+						    {
+								System.out.println("chua co hop thoai");
+						    	int n =thongbaoctrl.getListThongBao().size();
+							    tb.setMaTB("tb"+(n+1));
+							    tb.setNguoiGui(nguoigui);
+							    tb.setNguoiNhan(dt.getMaCN());
+							    if(thongbaoctrl.createThongBao(tb))
+							    	System.out.println("Tạo hộp thoại thành công");
+						    }
+							tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+							tbtk.setMaLTB("ltt1");
+							tbtk.setMaTB(tb.getMaTB());
+							
+							System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
+							tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
+							
+							if(tb_tkctrl.insertTB_TK(tbtk))
+								System.out.println(tbtk.getTinTB());
+							System.out.println("Gửi thông báo thành côcng!");
 							url="quanlyPage.jsp?&type="+type;
 					}
 					else

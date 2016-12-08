@@ -9,7 +9,7 @@
 <html lang="en">
 
 <head>
-	<title> Example </title>
+	<title> Sinh Viên Page </title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">  
 
@@ -32,6 +32,14 @@ $( document ).ready(function() {
     	}
 	 });
 });
+
+$( document ).ready(function() {
+	$( ".message" ).hide(1000);	
+	$( "#pass" ).click(function(){
+		$( ".message" ).show(1000).delay(5000);  
+		});
+	});
+		
 </script>
 </head>
 <% TB_TK_Controller cttb= new TB_TK_Controller();
@@ -130,7 +138,7 @@ $( document ).ready(function() {
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
 								<ul class="nav navbar-nav">
-									<li><a href="#">Trang chủ</a></li>
+									<li><a href="sinhvienPage.jsp">Trang chủ</a></li>
 									<li><a href="#">Biểu Mẫu</a></li>
 									<li><a href="#">Liên Hệ</a></li>
 									<li><a href="#">Hướng dẫn</a></li>
@@ -178,11 +186,12 @@ $( document ).ready(function() {
 													<div class="form-group">
 														<div class="input-group col-xs-8" style="margin-left:50px;" >
 															<div class="input-group-addon"><i class="fa fa-search"></i></div>
-															<input type="text" class="form-control" placeholder="Search da Fish" ng-model="searchFish">
-														</div>      
+															<input type="text" class="search form-control" placeholder="Search da Fish" ng-model="searchFish">
+														</div> 
+														<span class="counter pull-right"></span>   
 													</div>
 												</form>
-												<table class="table table-striped table-hover">
+												<table class="table table-striped table-hover results">
 													<thead>
 														<tr class="success">
 
@@ -214,7 +223,7 @@ $( document ).ready(function() {
 																	<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
 																</a>
 															</th>
-															<th><a href="">Xóa TB</a></th>
+															<th><a href="" >Xóa TB</a></th>
 														</tr>
 													</thead>
 		
@@ -314,7 +323,7 @@ $( document ).ready(function() {
 																<td><%=detai.getTenDT() %></td>
 																<td><%=detai.getNgayThucHien() %></td>
 																<td><%=detai.getNgayNT() %></td>
-																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+																<td><a href="sinhvien_KetQuaNT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
 															<%
 			    											}

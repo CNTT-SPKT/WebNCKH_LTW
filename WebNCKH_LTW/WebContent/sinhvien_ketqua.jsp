@@ -37,9 +37,11 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
 	CTNghiemThu ctnt = new CTNghiemThu();
 	String maDT = "";
-	if (request.getParameter("MaDT") != null) {
+	String maTK="";
+	if ((request.getParameter("MaDT") != null) && (request.getParameter("MaTK") != null) ) {
 	maDT = request.getParameter("MaDT");
-	ctnt = ct.getListCTNghiemThuByDeTai(maDT);
+	maTK=request.getParameter("MaTK");
+	ctnt = ct.getCTNghiemThuByMaTK(maDT,maTK);
 }
 %>
 	<div class="page">
@@ -63,7 +65,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
 								<ul class="nav navbar-nav">
-									<li><a href="#">Trang chủ</a></li>
+									<li><a href="sinhvienPage.jsp">Trang chủ</a></li>
 									<li><a href="#">Biểu Mẫu</a></li>
 									<li><a href="#">Liên Hệ</a></li>
 									<li><a href="#">Hướng dẫn</a></li>
@@ -101,7 +103,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 					<div class="tab-content">
 						<div class="tab-pane active" id="KetQua">
 							<div class="sv_KetQua" style="background:white;height:600px;border-radius:3px">
-								<h2 class="tieude_theh">NGHIỆM THU</h2>
+								<h2 class="tieude_theh">KẾT QUẢ NGHIỆM THU</h2>
 								<hr>
 								<div class="ad_table_qltk table-responsive" style="margin:15px 5px 0px 5px;">
 									<table class="table table-striped table-hover">

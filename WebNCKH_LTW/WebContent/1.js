@@ -24,10 +24,6 @@ $(window).load(function(){
 // 		document.getElementById("pass-error").style.display='none';
 // 	return true;
 // };
-// $(document).ready(function(){
-// 	$("#btn_GuiDon").click(function(){
-// 		alert('Gửi đơn đăng ký thành công!');
-// 	});
 
 // });
 // $function Remove(){
@@ -254,58 +250,58 @@ $(document).ready(function() {
             //     regex: /^(?=\s*\S).*$/,
             // }
         };
-//        var validate = function(klass, value) {
-//            var isValid = true,
-//                error = '';
-//
-//            if (!value && /required/.test(klass)) {
-//                error = 'This field is required';
-//                isValid = false;
-//            } else {
-//                klass = klass.split(/\s/);
-//                $.each(klass, function(i, k) {
-//                    if (validators[k]) {
-//                        if (value && !validators[k].regex.test(value)) {
-//                            isValid = false;
-//                            error = validators[k].error;
-//                        }
-//                    }
-//                });
-//            }
-//            return {
-//                isValid: isValid,
-//                error: error
-//            }
-//        };
-//        var showError = function($e) {
-//            var klass = $e.attr('class'),
-//                value = $e.val(),
-//                test = validate(klass, value);
-//
-//            $e.removeClass('invalid');
-//            $('#form-error').addClass('hide');
-//
-//            if (!test.isValid) {
-//                $e.addClass('invalid');
-//
-//                if (typeof $e.data("shown") == "undefined" || $e.data("shown") == false) {
-//                    $e.popover('show');
-//                }
-//
-//            } else {
-//                $e.popover('hide');
-//            }
-//        };
-//
-//        $inputs.keyup(function() {
-//            showError($(this));
-//        });
-//        $selects.change(function() {
-//            showError($(this));
-//        });
-//        $textAreas.keyup(function() {
-//            showError($(this));
-//        });
+        var validate = function(klass, value) {
+            var isValid = true,
+                error = '';
+
+            if (!value && /required/.test(klass)) {
+                error = 'This field is required';
+                isValid = false;
+            } else {
+                klass = klass.split(/\s/);
+                $.each(klass, function(i, k) {
+                    if (validators[k]) {
+                        if (value && !validators[k].regex.test(value)) {
+                            isValid = false;
+                            error = validators[k].error;
+                        }
+                    }
+                });
+            }
+            return {
+                isValid: isValid,
+                error: error
+            }
+        };
+        var showError = function($e) {
+            var klass = $e.attr('class'),
+                value = $e.val(),
+                test = validate(klass, value);
+
+            $e.removeClass('invalid');
+            $('#form-error').addClass('hide');
+
+            if (!test.isValid) {
+                $e.addClass('invalid');
+
+                if (typeof $e.data("shown") == "undefined" || $e.data("shown") == false) {
+                    $e.popover('show');
+                }
+
+            } else {
+                $e.popover('hide');
+            }
+        };
+
+        $inputs.keyup(function() {
+            showError($(this));
+        });
+        $selects.change(function() {
+            showError($(this));
+        });
+        $textAreas.keyup(function() {
+            showError($(this));
+        });
 
         $inputs.on('shown.bs.popover', function() {
             $(this).data("shown", true);
@@ -551,3 +547,29 @@ Please consider that the JS part isn't production ready at all, I just code it t
 //}]);
 
 /* Search Text in all 3 fields */
+
+$(document).ready(function() {
+	  $(".search").keyup(function () {
+	    var searchTerm = $(".search").val();
+	    var listItem = $('.results tbody').children('tr');
+	    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+	    
+	  $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+	        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+	    }
+	  });
+	    
+	  $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+	    $(this).attr('visible','false');
+	  });
+
+	  $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+	    $(this).attr('visible','true');
+	  });
+
+	  var jobCount = $('.results tbody tr[visible="true"]').length;
+
+	  if(jobCount == '0') {$('.no-result').show();}
+	    else {$('.no-result').hide();}
+			  });
+	});

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<%@ page import="Controller.*,Model.*" %>
+ <%@ page import="Controller.*,Model.*" %>
+ 
 <!DOCTYPE html>
 <html lang="en"><head>
-<title> Example </title>
+<title> Kết quả nghiệm thu </title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">  
 <script type="text/javascript" src="vendor/bootstrap.js"></script>
@@ -27,12 +28,19 @@ $( document ).ready(function() {
 </script>
 </head>
 <body >
-<% TB_TK_Controller cttb= new TB_TK_Controller();
+<% 
+TB_TK_Controller cttb= new TB_TK_Controller();
 	ThongBao_Controller tb= new ThongBao_Controller();
 	DeTai_Controller dt= new DeTai_Controller();
 	TrangThai_Controller tt=  new TrangThai_Controller();
-	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
+	CTNghiemThu_Controller ct= new CTNghiemThu_Controller();
 	TaiKhoan_Controller tk=new TaiKhoan_Controller();
+	CTNghiemThu ctnt = new CTNghiemThu();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+	maDT = request.getParameter("MaDT");
+	ctnt = ct.getListCTNghiemThuByDeTai(maDT);
+}
 %>
 	<div class="page">
 		<div class="menu">
@@ -91,46 +99,39 @@ $( document ).ready(function() {
 				</div>
 				<div class="col-md-10">
 					<div class="tab-content">
-						
-						<div class="tab-pane active" id="dsDeTaiDeXuat"  >
-							<div class="row">
-								<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
-									<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC ĐỀ XUẤT</h2>
-									<hr>
-									<div class="sv_table_dsDeTai" style="Margin-top:20px;">
-										<table class="table table-striped table-hover">
-											<thead class="thead-default">
-												<tr class="success">
-													<th>Mã số</th>
-													<th>Tên đề tài</th>
-													<th>Ngày đăng ký</th>	
-													<th>Giảng viên hướng dẫn</th>
-													<th></th>
-													
-												</tr>
-											</thead>
-											<tbody>
-											<%
-				     							for (DeTai dtdx: dt.getListDeTaiDeXuat()){
-												%>
-												<tr>
-													<td><%=dtdx.getMaDT() %></td>
-													<td><%=dtdx.getTenDT() %></td>
-													<td><%=dtdx.getNgayThucHien() %></td>
-													<td><%=dtdx.getTenGVHD() %></td>
-													<td><a href="sinhvien_DangKyDTDX.jsp?MaDT=<%=dtdx.getMaDT()%>" >Đăng ký</a></td>
-												</tr>
-												
-												<%
+						<div class="tab-pane active" id="kqNghiemThu">
+										<div class="row">
+											<div class="svkqNghiemThu" style="background:white;height:500px;margin-right:15px;border-radius:3px">
+												<h2 class="tieude_theh">KẾT QUẢ NGHIỆM THU</h2><hr>
+												<div class="sv_table_kqNghiemThu">
+													<table class="table table-striped table-hover">
+														<thead class="thead-default">
+															<tr class="success">
+																<th>Tên đề tài</th>
+																<th>Giảng Viên</th>
+																<th>Ngày nghiệm thu</th>
+																<th>Kết quả chi tiết</th>
+															</tr>
+														</thead>
+														<tbody>
+															<%
+				     										for (CTNghiemThu ctnt1:ct.getListCTNghiemThuMaDT(maDT)) {
+															%>
+															<tr>
+																<td><%=ctnt1.getTenDT() %></td>
+																<td><%=ctnt1.getTenTK() %></td>
+																<td><%=ctnt1.getNgayNT() %></td>
+																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=ctnt1.getMaDT()%>&MaTK=<%=ctnt1.getMaTK() %>">Xem</a></td>
+															</tr>
+															<%
 			    											}
 															%>
-											</tbody>
-										</table>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
 									</div>
-
-								</div>
-							</div>
-						</div>
 						<div class="tab-pane" id="thongbao">
 									<div class="row">
 										<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
@@ -669,5 +670,7 @@ $( document ).ready(function() {
             </pre>
 				</div>
 			</div>
+
+
 </body>
 </html>

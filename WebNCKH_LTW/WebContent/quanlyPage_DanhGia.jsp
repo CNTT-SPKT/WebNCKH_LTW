@@ -43,6 +43,7 @@
 		maDT = request.getParameter("MaDT");
 		detai = detaiDAO.getDeTai(maDT);
 	}
+	TaiKhoan tk=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 %>
 
 <div class="page">
@@ -137,7 +138,9 @@
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
 										<form action="CTNghiemThuQL_Servlet" method="post">
 										<input type="hidden" name="command1" value="updateql">
-										<input type="hidden" name="MaDT" value=<%=maDT%>>	
+										<input type="hidden" name="MaDT" value=<%=maDT%>>
+										<input type="hidden" name="MaTK" value=<%=tk.getMaTK() %>>
+										<input type="hidden" name="nguoigui" value="<%=tk.getMaTK() %>">
 										<table class="table table-striped table-hover">
 												<thead class="thead-default">
 													<tr class="success">
