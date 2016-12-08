@@ -177,7 +177,7 @@
 													Xây dựng trang web quản lý NCKH
 												</p>
 												<div id="dt1" class="collapse">
-													<img src="images/ha3.jpg">
+													<img src="images/ha3.JPG">
 													<p>Đề tài đã hoàn thành vào tháng 11/2014...
 													</p>
 												</div>
@@ -187,7 +187,7 @@
 													Nghiên cứu về thực phẩm dinh dưỡng
 												</p>
 												<div id="dt2" class="collapse">
-													<img src="images/ha4.jpg">
+													<img src="images/ha4.JPG">
 													<p>Đề tài đã hoàn thành vào tháng 4/2015...
 													</p>
 												</div>
@@ -197,7 +197,7 @@
 													Nghiên cứu thiết kế nhà ở đẹp
 												</p>
 												<div id="dt3" class="collapse">
-													<img src="images/ha2.jpg">
+													<img src="images/ha2.JPG">
 													<p>Đề tài được chứng nhận có thiết kế đẹp và lạ nhất...
 													</p>
 												</div>
