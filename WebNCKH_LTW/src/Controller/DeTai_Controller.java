@@ -14,6 +14,7 @@ import java.sql.Date;
 import com.mysql.jdbc.PreparedStatement;
 import com.sun.istack.internal.logging.Logger;
 
+import Model.CTNghiemThu;
 import Model.DeTai;
 import Model.DonGiaHan;
 import Model.TaiKhoan;
@@ -526,14 +527,32 @@ public class DeTai_Controller {
 					" CTNghiemThu.NgayNT as NgayNT"+
 					" from DeTai,TaiKhoan,CTNghiemThu "+
 					" where DeTai.MaCN=TaiKhoan.MaTK "+
-					" and DeTai.MaDT=CTNghiemThu.MaDT and TaiKhoan.Email='"+email+"'";
+					" and DeTai.MaDT=CTNghiemThu.MaDT and TaiKhoan.Email='"+email+"' and MaTT='tt9'";
 	        ArrayList<DeTai> list = new ArrayList<>();
+	        CTNghiemThu_Controller crt = new CTNghiemThu_Controller();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
 	            	DeTai dt = new DeTai();
 	            	dt.setMaDT(rs.getString("MaDT"));
+	            	boolean f=true;
+	            	int TongDiemChung = 0;
+					for(CTNghiemThu ct:crt.getListCTNghiemThuMaDT(rs.getString("MaDT")))
+					{
+						TongDiemChung+=ct.getTongDiem();
+						if((Integer.toString(ct.getTongQuan())=="0") || ct.getTongQuan() == 0 )
+							f=false;		
+					}
+					if(f){
+						TongDiemChung = (int)TongDiemChung/2;
+						if(TongDiemChung<50)
+							dt.setTrangThaiNT("Trung Bình");
+						if(TongDiemChung>=50 && TongDiemChung<80)
+							dt.setTrangThaiNT("Khá");
+						if(TongDiemChung>=80)
+							dt.setTrangThaiNT("Giỏi");
+					}
 	            	dt.setTenDT(rs.getString("TenDT"));
 	            	dt.setNgayThucHien(rs.getString("NgayDK"));
 	            	dt.setNgayNT(rs.getString("NgayNT"));
@@ -545,7 +564,7 @@ public class DeTai_Controller {
 	            e.printStackTrace();
 	        }
 	        return list;
-    }
+   }
 	
 	public ArrayList<DeTai> getListDeTaiPhanCongPhanBien(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
@@ -553,7 +572,8 @@ public class DeTai_Controller {
 			" from DeTai,CTNghiemThu,HoiDong,TaiKhoan,TaiKhoan as TK1, TaiKhoan as TK2"+
 			" where DeTai.MaDT=CTNghiemThu.MaDT and CTNghiemThu.MaHD=HoiDong.MaHD and "
 			+ " (HoiDong.PhanBien=TaiKhoan.MaTK or HoiDong.ChuTich=TaiKhoan.MaTK)"+
-			" and TaiKhoan.Email='"+Email+"' and DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and MaTT='tt8' ";
+			" and TaiKhoan.Email='"+Email+"' and DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and TongQuan is null"+
+			" and ctnghiemthu.MaTK=TaiKhoan.MaTK" ;
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

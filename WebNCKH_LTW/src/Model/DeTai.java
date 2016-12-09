@@ -29,6 +29,7 @@ public class DeTai {
     private String TenTT;
     private String NgayNT;
     private String TenCN;
+    private String TrangThaiNT;
     
   //BAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
     private String MSSV;
@@ -88,7 +89,7 @@ public class DeTai {
 			String mucTieu, String pPNC, String noiDungNC, String sPDuKien, String diaChiUD, double kinhPhi,
 			String tenTT, String ngayNT, String tenCN, String mSSVCN, String tenGVHD, String tenSV1, String tenSV2,
 			String emailCN, String emailGV, String mSSV1, String mSSV2, ArrayList<DonHuy> dsDonHuy,
-			ArrayList<DonGiaHan> dsDonGiaHan, ArrayList<BaoCaoDT> dsBaoCaoDT) {
+			ArrayList<DonGiaHan> dsDonGiaHan, ArrayList<BaoCaoDT> dsBaoCaoDT, String TrangThaiNT) {
 		super();
 		MaDT = maDT;
 		MaHienThi = maHienThi;
@@ -124,9 +125,18 @@ public class DeTai {
 		EmailGV = emailGV;
 		MSSV1 = mSSV1;
 		MSSV2 = mSSV2;
+		this.TrangThaiNT = TrangThaiNT;
 		this.dsDonHuy = dsDonHuy;
 		this.dsDonGiaHan = dsDonGiaHan;
 		this.dsBaoCaoDT = dsBaoCaoDT;
+	}
+
+	public String getTrangThaiNT() {
+		return TrangThaiNT;
+	}
+
+	public void setTrangThaiNT(String trangThaiNT) {
+		TrangThaiNT = trangThaiNT;
 	}
 
 	public String getMaDT() {

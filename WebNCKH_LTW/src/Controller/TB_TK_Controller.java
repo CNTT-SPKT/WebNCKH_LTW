@@ -16,7 +16,7 @@ import Packages.DBConnect;
 public class TB_TK_Controller {
 	public ArrayList<TB_TK> getListTB_TK() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM TB_TK";
+        String sql = "SELECT * FROM tb_tk";
         ArrayList<TB_TK> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -37,7 +37,7 @@ public class TB_TK_Controller {
     }
 	public TB_TK getListTB_TKMaTB(String maCTTB) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM TB_TK where MaCTTB='"+maCTTB+"'";
+        String sql = "SELECT * FROM tb_tk where macttb='"+maCTTB+"'";
         TB_TK cttb = new TB_TK();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -60,7 +60,8 @@ public class TB_TK_Controller {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT MaCTTB, ThongBao.MaTB, TinTB,NgayGui,Tk2.HoTen as TenNguoiGui FROM TB_TK,ThongBao,TaiKhoan,"+
         " TaiKhoan as TK2 where ThongBao.MaTB=TB_TK.MaTB and "+ 
-        "ThongBao.NguoiNhan=TaiKhoan.MaTK and ThongBao.NguoiGui=TK2.MaTK and TaiKhoan.Email='"+email+"'";
+        "ThongBao.NguoiNhan=TaiKhoan.MaTK and ThongBao.NguoiGui=TK2.MaTK and TaiKhoan.Email='"+email+"'"
+        		+ " order by ngaygui desc";
         ArrayList<TB_TK> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

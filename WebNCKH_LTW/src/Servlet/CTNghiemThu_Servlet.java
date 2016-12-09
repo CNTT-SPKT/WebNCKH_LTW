@@ -47,6 +47,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		String quyen = request.getParameter("Quyen");
 		String maDT= request.getParameter("MaDT");
 		String maTK=request.getParameter("MaTK");
+		int TongDiem = 0;
 		CTNghiemThu ctnt=new CTNghiemThu();
 		ctnt = crt.getListCTNghiemThu(maDT);
 		ctnt=crt.getCTNghiemThuMaTK(maTK);
@@ -57,21 +58,43 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		ctnt.setDongGop(Integer.parseInt(request.getParameter("diemdonggop")));
 		ctnt.setHinhThuc(Integer.parseInt(request.getParameter("diemhinhthuc")));
 		ctnt.setDiemThuong(Integer.parseInt(request.getParameter("diemthuong")));
-		ctnt.setTongDiem(Integer.parseInt(request.getParameter("tongdiem")));
+		TongDiem = ctnt.getTongQuan() + ctnt.getDiemThuong() + ctnt.getDongGop() + ctnt.getHinhThuc()+
+				ctnt.getMucTieu()+ ctnt.getNoiDung()+ ctnt.getHinhThuc();
+		ctnt.setTongDiem(TongDiem);
 		ctnt.setYKien(request.getParameter("ykien"));
+		
 		
 		DeTai dt=new DeTai();
 		dt=ctrl.getDeTai(maDT);
-		dt.setMaTT("tt9");
-		
 		String url="", error="", type="";
 		try{
 			switch(command){
 				case "update":
 					System.out.println(ctnt.getMaTK()+"____"+ctnt.getMaDT());
 					System.out.println("Vào update");
-					if(crt.updateCTNT(ctnt) && ctrl.updateTrangThai_DeTai(dt))
+					int TongDiemChung = 0;
+					if(crt.updateCTNT(ctnt) )
 					{
+						boolean f=true;
+						System.out.println(ctnt.getDiemThuong()+"____"+ctnt.getNoiDung());
+						for(CTNghiemThu ct:crt.getListCTNghiemThuMaDT(maDT))
+						{
+							TongDiemChung+=ct.getTongDiem();
+							System.out.println(ct.getTongQuan()+"____"+ct.getMaTK());
+							if((Integer.toString(ct.getTongQuan())=="0") || ct.getTongQuan() == 0 )
+							{
+								f=false;		
+							}
+						}
+						TongDiemChung = (int)TongDiemChung/2;
+						System.out.println(TongDiemChung);
+						if(f)
+						{	
+							dt.setMaTT("tt9");
+							if(ctrl.updateTrangThai_DeTai(dt))
+								System.out.println("Update trạng thái của đề tài thành công");
+						}	
+				
 						error = "Thành công";
 						type ="ntdt_1";
 						// Ä�Ã¡nh giÃ¡ thÃ nh cÃ´ng thÃ¬ gá»­i thÃ´ng bÃ¡o vá»� cho sinh viÃªn

@@ -62,6 +62,8 @@ public class CTNghiemThu_Controller {
 	            while (rs.next()) {
 	            	CTNghiemThu ct = new CTNghiemThu();
 	            	ct.setMaDT(rs.getString("CTNghiemThu.MaDT"));
+	            	ct.setTongDiem(rs.getInt("TongDiem"));
+	            	ct.setTongQuan(rs.getInt("TongQuan"));
 	            	ct.setTenDT(rs.getString("TenDT"));
 	            	ct.setMaHD(rs.getString("HoiDong.MaHD"));
 	            	ct.setNgayNT(rs.getString("NgayNT"));
@@ -243,8 +245,9 @@ public class CTNghiemThu_Controller {
 		 public static void main(String[] args) throws SQLException, ParseException {
 		       CTNghiemThu_Controller ctrl= new CTNghiemThu_Controller();
 		       CTNghiemThu ctnt=ctrl.getCTNghiemThuByMaTK("dt4","tk7");
-		    	   System.out.println(ctnt.getMaDT()+"_____"+ctnt.getTenDT()+"____"+ctnt.getNoiDung());
-
+		    	   //System.out.println(ctnt.getMaDT()+"_____"+ctnt.getTenDT()+"____"+ctnt.getNoiDung());
+		    	   for(CTNghiemThu ct : ctrl.getListCTNghiemThuMaDT("dt9"))
+		    		   System.out.println(ct.getTongQuan()+"___"+ct.getTongDiem()+"___"+ct.getMaTK());
 		    	   
 //		       CTNghiemThu ct= new CTNghiemThu();
 //		       ct = ctrl.getListCTNghiemThu("dt9");

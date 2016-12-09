@@ -547,7 +547,7 @@ Please consider that the JS part isn't production ready at all, I just code it t
 //}]);
 
 /* Search Text in all 3 fields */
-
+// bắt đầu search của sinh viên
 $(document).ready(function() {
 	  $(".search").keyup(function () {
 	    var searchTerm = $(".search").val();
@@ -573,3 +573,5 @@ $(document).ready(function() {
 	    else {$('.no-result').hide();}
 			  });
 	});
+
+// kết thúc search

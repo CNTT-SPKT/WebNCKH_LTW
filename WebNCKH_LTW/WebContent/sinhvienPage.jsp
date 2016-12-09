@@ -77,6 +77,10 @@ $( document ).ready(function() {
 			error = "Đổi mật khẩu thành công!";
 		if(type.equals("dmk_0"))
 			error = "Đổi mật khẩu thất bại!";
+		if(type.equals("xoatb_1"))
+			error = "Xóa thông báo thành công!";
+		if(type.equals("xoatb_0"))
+			error = "Xóa thông báo thất bại!";
 	}
 %>
 <body>
@@ -86,9 +90,9 @@ $( document ).ready(function() {
        var y = $('.TypeMssg').text();
     	if(x != "null" && x != "")
     	{
-    		if( y == "dkdt_1" || y == "dkdtdx_1" || y == "ghdt_1" || y == "hdt_1" || y == "cntt_1" || y == "dmk_1")
+    		if( y == "dkdt_1" || y == "dkdtdx_1" || y == "ghdt_1" || y == "hdt_1" || y == "cntt_1" || y == "dmk_1"|| y == "xoatb_1")
     			$("#ModalSuccess").modal('show');
-    		if( y == "dkdt_0" || y == "dkdtdx_0" || y == "ghdt_0" || y == "hdt_0" || y == "cntt_0" || y == "dmk_1")
+    		if( y == "dkdt_0" || y == "dkdtdx_0" || y == "ghdt_0" || y == "hdt_0" || y == "cntt_0" || y == "dmk_1"|| y == "xoatb_0")
     			$("#ModalFail").modal('show');
     	}
     });
@@ -311,6 +315,7 @@ $( document ).ready(function() {
 																<th>Tên đề tài</th>
 																<th>Ngày đăng ký</th>
 																<th>Ngày nghiệm thu</th>
+																<th>Xếp loại</th>
 																<th>Kết quả chi tiết</th>
 															</tr>
 														</thead>
@@ -323,6 +328,7 @@ $( document ).ready(function() {
 																<td><%=detai.getTenDT() %></td>
 																<td><%=detai.getNgayThucHien() %></td>
 																<td><%=detai.getNgayNT() %></td>
+																<td><%=detai.getTrangThaiNT()%></td>
 																<td><a href="sinhvien_KetQuaNT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
 															<%

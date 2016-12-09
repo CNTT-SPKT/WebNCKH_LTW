@@ -167,7 +167,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 								</div>
 								<label class="col-sm-4 control-label" for="mota">Ý kiến đánh giá</label><br>
 								<div class="col-sm-12">
-									<textarea name="" id="mota" class="form-control" rows="3" readonly>Bài làm khá tốt!</textarea>
+									<textarea name="" id="mota" class="form-control" rows="3" readonly><%=ctnt.getYKien() %></textarea>
 								</div>
 								
 							</div>

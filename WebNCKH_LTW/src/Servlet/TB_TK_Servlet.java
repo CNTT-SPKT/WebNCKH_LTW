@@ -34,17 +34,25 @@ public class TB_TK_Servlet extends HttpServlet {
 		String command = request.getParameter("command");
 		String maCTTB= request.getParameter("MaCTTB");
 		
-		String url="", error="";
+		String url="", error="",type="";
 		
 		try{
 			switch(command){
 				case "delete":
 					System.out.println("Vào delete");
 					if(crt.deleteTB_TK(maCTTB))
+					{
+						type="xoatb_1";
 						error="Thành công";
+					}
+						
 					else
+					{
+						type="xoatb_0";
 						error="Thất bại";
-					url="sinhvienPage.jsp";
+					}
+						
+					url="sinhvienPage.jsp?type="+type;
 					System.out.println(error+"__________"+url);
 					break;
 			}
@@ -53,7 +61,7 @@ public class TB_TK_Servlet extends HttpServlet {
 			error="Xảy ra lỗi ngẫu nhiên!";
 		}
 		request.setAttribute("error", error);
-		response.sendRedirect("sinhvienPage.jsp");
+		response.sendRedirect(url);
 	}
 
 	/**
