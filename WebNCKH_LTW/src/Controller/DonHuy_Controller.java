@@ -18,7 +18,7 @@ import Packages.DBConnect;
 public class DonHuy_Controller {
 	public ArrayList<DonHuy> getListDonHuy() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DonHuy";
+        String sql = "SELECT * FROM donhuy";
         ArrayList<DonHuy> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class DonHuy_Controller {
     }
 	public DonHuy getDonHuy(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DonHuy,DeTai where DoHuy.MaDT=DeTai.MaDT and DeTai.MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM donhuy,detai where donhuy.madt=detai.madt and detai.madt='"+maDT+"'";
         DonHuy dh = new DonHuy();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class DonHuy_Controller {
     }
 	public boolean insertDonHuy(DonHuy dh) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "insert into DonHuy values(?,?,?)";
+		String sql = "insert into donhuy values(?,?,?)";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1,dh.getMaDonXin());

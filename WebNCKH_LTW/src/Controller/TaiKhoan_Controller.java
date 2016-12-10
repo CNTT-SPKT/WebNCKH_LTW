@@ -24,9 +24,9 @@ public class TaiKhoan_Controller {
 	//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
 		public ArrayList<TaiKhoan> getListTenThanhVienHDQL() {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "select MaTk,HoTen "
-	        		+ "from TaiKhoan "
-	        		+ "where Quyen='Lecturers' or Quyen='Manager'";
+	        String sql = "select matk,hoten "
+	        		+ "from taikhoan "
+	        		+ "where quyen='Lecturers' or quyen='Manager'";
 	        ArrayList<TaiKhoan> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -45,9 +45,9 @@ public class TaiKhoan_Controller {
 	    }
 		public ArrayList<TaiKhoan> getListSinhVien() {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "select MaTk,HoTen "
-	        		+ "from TaiKhoan "
-	        		+ "where Quyen='Student'";
+	        String sql = "select matk,hoten "
+	        		+ "from taikhoan "
+	        		+ "where quyen='Student'";
 	        ArrayList<TaiKhoan> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -67,7 +67,7 @@ public class TaiKhoan_Controller {
 		//TINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTINTIN
 	public ArrayList<TaiKhoan> getListTaiKhoan() throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "SELECT * FROM TaiKhoan";
+		String sql = "SELECT * FROM taikhoan";
 		ArrayList<TaiKhoan> list = new ArrayList<>();
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -94,7 +94,7 @@ public class TaiKhoan_Controller {
 	}
 	public ArrayList<TaiKhoan> getListTKQuyen() throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "SELECT distinct Quyen FROM TaiKhoan";
+		String sql = "SELECT distinct quyen FROM taikhoan";
 		ArrayList<TaiKhoan> list = new ArrayList<>();
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class TaiKhoan_Controller {
 
 	public TaiKhoan getTaiKhoanByMaTK(String email) {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "SELECT * FROM TaiKhoan where Email='" + email + "'";
+		String sql = "SELECT * FROM taikhoan where email='" + email + "'";
 		TaiKhoan tk = new TaiKhoan();
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -143,7 +143,7 @@ public class TaiKhoan_Controller {
 
 	public TaiKhoan gettk(String tk) throws SQLException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "SELECT * FROM TaiKhoan where MaTK='" + tk + "'";
+		String sql = "SELECT * FROM taikhoan where matk='" + tk + "'";
 		TaiKhoan tkh = new TaiKhoan();
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -169,7 +169,7 @@ public class TaiKhoan_Controller {
 	}
 	public TaiKhoan getQL() throws SQLException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "SELECT * FROM TaiKhoan where MaTK='tk1'";
+		String sql = "SELECT * FROM taikhoan where matk='tk1'";
 		TaiKhoan tkh = new TaiKhoan();
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -195,7 +195,7 @@ public class TaiKhoan_Controller {
 	}
 	public boolean insertTaiKhoan(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "insert into TaiKhoan values (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into taikhoan values (?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			SimpleDateFormat format = new SimpleDateFormat( "MM/dd/yyyy" );  
 			java.util.Date myDate = format.parse(tk.getNgaySinh());
@@ -221,7 +221,7 @@ public class TaiKhoan_Controller {
 	
 	public boolean updateTaiKhoan(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "update TaiKhoan set Email=?, Nganh=?, MSNH=?,CNNH=? where MaTK=?";
+		String sql = "update taikhoan set email=?, nganh=?, msnh=?,cnnh=? where matk=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1, tk.getEmail());
@@ -238,7 +238,7 @@ public class TaiKhoan_Controller {
 	}
 	public boolean updateTKDoiMK(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "update TaiKhoan set MatKhau=? where MaTK=?";
+		String sql = "update taikhoan set matkhau=? where matk=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1, tk.getMatKhau());
@@ -254,7 +254,7 @@ public class TaiKhoan_Controller {
 	
 	public boolean deleteTaiKhoan(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "delete from TaiKhoan where MaTK=?";
+		String sql = "delete from taikhoan where matk=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1, tk.getMaTK());
@@ -268,7 +268,7 @@ public class TaiKhoan_Controller {
 	
 	public ArrayList<TaiKhoan> getListTaiKhoantheoMaTK(String matk) {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "SELECT * FROM TaiKhoan where MaTK='" + matk + "' ";
+		String sql = "SELECT * FROM taikhoan where matk='" + matk + "' ";
 		ArrayList<TaiKhoan> list = new ArrayList<>();
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -295,7 +295,7 @@ public class TaiKhoan_Controller {
 	
 	public TaiKhoan getTaiKhoanByTen(String hoten) {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "SELECT * FROM TaiKhoan where HoTen='" + hoten + "'";
+		String sql = "SELECT * FROM taikhoan where hoten='" + hoten + "'";
 		TaiKhoan tk = new TaiKhoan();
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

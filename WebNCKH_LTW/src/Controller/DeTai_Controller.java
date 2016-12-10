@@ -26,7 +26,7 @@ public class DeTai_Controller {
 	
 	public boolean updateTrangThai_DeTai_QL(DeTai dt) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "update DeTai set MaTT=?, MaHienThi=? where MaDT=?";
+		String sql = "update detai set matt=?, mahienthi=? where madt=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1,dt.getMaTT());
@@ -44,7 +44,7 @@ public class DeTai_Controller {
 	public ArrayList<DeTai> getListDeTaiPheDuyetQL()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql ="select distinct * from detai,trangthai,taikhoan as tkgv,taikhoan as tksv  "
-        		+ "where detai.MaTT='tt1' and detai.matt=trangthai.matt and tksv.MaTK=detai.macn and tkgv.MaTK=detai.GVHD";
+        		+ "where detai.matt='tt1' and detai.matt=trangthai.matt and tksv.matk=detai.macn and tkgv.matk=detai.gvhd";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -69,7 +69,7 @@ public class DeTai_Controller {
 	public ArrayList<DeTai> getListDeTaiPheDuyetQL_loai2()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql ="select distinct * from detai,trangthai,taikhoan as tkgv "
-        		+ "where detai.MaTT='tt10' and detai.matt=trangthai.matt and tkgv.matk=detai.gvhd and detai.MaCN is null";
+        		+ "where detai.matt='tt10' and detai.matt=trangthai.matt and tkgv.matk=detai.gvhd and detai.macn is null";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -95,8 +95,8 @@ public class DeTai_Controller {
 	
 	public DeTai getDeTai_ALL(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DeTai" +
-        " where MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM detai" +
+        " where madt='"+maDT+"'";
         DeTai dt = new DeTai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -126,15 +126,15 @@ public class DeTai_Controller {
             	dt.setNoiDungNC(rs.getString("NoiDungNC"));
             	dt.setSPDuKien(rs.getString("SPDuKien"));
             	dt.setDiaChiUD(rs.getString("DiaChiUD"));
-            	dt.setTenCN(rs.getString("TaiKhoan.HoTen"));
-            	dt.setMSSVCN(rs.getString("TaiKhoan.MatKhau"));
-            	dt.setTenSV1(rs.getString("TK2.HoTen"));
-            	dt.setTenSV2(rs.getString("TK3.HoTen"));
-            	dt.setTenGVHD(rs.getString("TK1.HoTen"));
-            	dt.setEmailCN(rs.getString("TaiKhoan.Email"));
-            	dt.setEmailGV(rs.getString("TK1.Email"));
-            	dt.setMSSV1(rs.getString("TK2.MatKhau"));
-            	dt.setMSSV2(rs.getString("TK3.MatKhau"));
+            	dt.setTenCN(rs.getString("taikhoan.hoten"));
+            	dt.setMSSVCN(rs.getString("taikhoan.matkhau"));
+            	dt.setTenSV1(rs.getString("tk2.hoten"));
+            	dt.setTenSV2(rs.getString("TK3.hoten"));
+            	dt.setTenGVHD(rs.getString("tk1.hoten"));
+            	dt.setEmailCN(rs.getString("taikhoan.Email"));
+            	dt.setEmailGV(rs.getString("tk1.Email"));
+            	dt.setMSSV1(rs.getString("tk2.matkhau"));
+            	dt.setMSSV2(rs.getString("TK3.matkhau"));
             	dt.setKinhPhi(rs.getDouble("KinhPhi"));
             }
            
@@ -148,7 +148,7 @@ public class DeTai_Controller {
         Connection cons = DBConnect.getConnecttion();
         String sql ="select *"
         		+ " from detai,trangthai,taikhoan "
-        		+ "where detai.MaTT='tt3' and detai.matt=trangthai.matt and taikhoan.matk=detai.macn";
+        		+ "where detai.matt='tt3' and detai.matt=trangthai.matt and taikhoan.matk=detai.macn";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -172,7 +172,7 @@ public class DeTai_Controller {
         Connection cons = DBConnect.getConnecttion();
         String sql ="select *"
         		+ "from detai,trangthai "
-        		+ "where detai.MaTT='tt11' and detai.matt=trangthai.matt";
+        		+ "where detai.matt='tt11' and detai.matt=trangthai.matt";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -192,7 +192,7 @@ public class DeTai_Controller {
 	public Boolean kiemTraTT(String madt)
 	{
 		Connection connection = DBConnect.getConnecttion();
-		String sql ="SELECT * FROM detai WHERE detai.matt='tt10' and detai.Madt='"+madt+"'";
+		String sql ="SELECT * FROM detai WHERE detai.matt='tt10' and detai.madt='"+madt+"'";
 		try {
 			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();
@@ -209,7 +209,7 @@ public class DeTai_Controller {
 	public Boolean kiemTraPCPB(String madt)
 	{
 		Connection connection = DBConnect.getConnecttion();
-		String sql ="SELECT * FROM ctnghiemthu WHERE ctnghiemthu.Madt='"+madt+"'";
+		String sql ="SELECT * FROM ctnghiemthu WHERE ctnghiemthu.madt='"+madt+"'";
 		try {
 			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();
@@ -225,9 +225,9 @@ public class DeTai_Controller {
 	}
 	public ArrayList<DeTai> getListPCPBQL()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql ="select detai.MaDT,TenDT,tensv.HoTen as TenSV,tengv.HoTen as TenGV,ctnghiemthu.MaHD as MHD "
+        String sql ="select detai.madt,tendt,tensv.hoten as TenSV,tengv.hoten as TenGV,ctnghiemthu.mahd as MHD "
         		+ "from detai,ctnghiemthu,taikhoan as tensv,taikhoan as tengv "
-        		+ "where detai.MaDT=ctnghiemthu.MaDT and detai.GVHD=tengv.MaTK and detai.MaCN=tensv.MaTK and detai.matt='tt9'";
+        		+ "where detai.madt=ctnghiemthu.madt and detai.gvhd=tengv.matk and detai.macn=tensv.matk and detai.matt='tt9'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -250,9 +250,9 @@ public class DeTai_Controller {
     }
 	public ArrayList<DeTai> getListPCPBQL_CNT()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql ="select detai.MaDT,TenDT,tensv.HoTen as TenSV,tengv.HoTen as TenGV,ctnghiemthu.MaHD as MHD "
+        String sql ="select detai.madt,tendt,tensv.hoten as TenSV,tengv.hoten as TenGV,ctnghiemthu.mahd as MHD "
         		+ "from detai,ctnghiemthu,taikhoan as tensv,taikhoan as tengv "
-        		+ "where detai.MaDT=ctnghiemthu.MaDT and detai.GVHD=tengv.MaTK and detai.MaCN=tensv.MaTK and detai.matt='tt8'";
+        		+ "where detai.madt=ctnghiemthu.madt and detai.gvhd=tengv.matk and detai.macn=tensv.matk and detai.matt='tt8'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -276,9 +276,9 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiQL()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql ="select DeTai.MaDT as MaDT, TKGV.HoTen as TenGV, TKSV.HoTen as TenSV, MaHienThi, TenDT, GVHD,TenTT"
-        		+ " from DeTai,TaiKhoan as TKSV, TaiKhoan as TKGV,TrangThai "
-        		+ "where DeTai.MaCN=TKSV.MaTk and TrangThai.MaTT=DeTai.MaTT and DeTai.GVHD=TKGV.MaTk";
+        String sql ="select detai.madt as MaDT, tkgv.hoten as TenGV, tksv.hoten as TenSV, mahienthi, tendt, gvhd,tentt"
+        		+ " from detai,taikhoan as tksv, taikhoan as tkgv,trangthai "
+        		+ "where detai.macn=tksv.matk and trangthai.matt=detai.matt and detai.gvhd=tkgv.matk";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -306,9 +306,9 @@ public class DeTai_Controller {
 	/*KẾT THÚC TIn*/
 	public DeTai getDeTai(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DeTai,TaiKhoan,TaiKhoan as TK1,TaiKhoan as TK2,TaiKhoan as TK3"+
-        " where TaiKhoan.MaTK=DeTai.MaCN and TK1.MaTK=DeTai.GVHD"+
-        " and TK2.MaTK=DeTai.SinhVien1 and TK3.MaTK=DeTai.SinhVien2 and MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM detai,taikhoan,taikhoan as tk1,taikhoan as tk2,taikhoan as tk3"+
+        " where taikhoan.matk=detai.macn and tk1.matk=detai.gvhd"+
+        " and tk2.matk=detai.sinhvien1 and tk3.matk=detai.sinhvien2 and madt='"+maDT+"'";
         DeTai dt = new DeTai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -338,15 +338,15 @@ public class DeTai_Controller {
             	dt.setNoiDungNC(rs.getString("NoiDungNC"));
             	dt.setSPDuKien(rs.getString("SPDuKien"));
             	dt.setDiaChiUD(rs.getString("DiaChiUD"));
-            	dt.setTenCN(rs.getString("TaiKhoan.HoTen"));
-            	dt.setMSSVCN(rs.getString("TaiKhoan.MatKhau"));
-            	dt.setTenSV1(rs.getString("TK2.HoTen"));
-            	dt.setTenSV2(rs.getString("TK3.HoTen"));
-            	dt.setTenGVHD(rs.getString("TK1.HoTen"));
-            	dt.setEmailCN(rs.getString("TaiKhoan.Email"));
-            	dt.setEmailGV(rs.getString("TK1.Email"));
-            	dt.setMSSV1(rs.getString("TK2.MatKhau"));
-            	dt.setMSSV2(rs.getString("TK3.MatKhau"));
+            	dt.setTenCN(rs.getString("taikhoan.hoten"));
+            	dt.setMSSVCN(rs.getString("taikhoan.matkhau"));
+            	dt.setTenSV1(rs.getString("tk2.hoten"));
+            	dt.setTenSV2(rs.getString("TK3.hoten"));
+            	dt.setTenGVHD(rs.getString("tk1.hoten"));
+            	dt.setEmailCN(rs.getString("taikhoan.Email"));
+            	dt.setEmailGV(rs.getString("tk1.Email"));
+            	dt.setMSSV1(rs.getString("tk2.matkhau"));
+            	dt.setMSSV2(rs.getString("TK3.matkhau"));
             	dt.setKinhPhi(rs.getDouble("KinhPhi"));
             }
            
@@ -360,11 +360,11 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiByMaCN(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
-				" DeTai.NgayKetThuc as NgayNT, TrangThai.tenTT as TenTT"+
-				" from DeTai,TaiKhoan,TrangThai"+
-				" where DeTai.MaCN=TaiKhoan.MaTK and DeTai.MaTT=TrangThai.MaTT "+
-				" and TaiKhoan.Email='"+Email+"'";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,detai.ngaythuchien as NgayDK,"+
+				" detai.ngayketthuc as NgayNT, trangthai.tentt as TenTT"+
+				" from detai,taikhoan,trangthai"+
+				" where detai.macn=taikhoan.matk and detai.matt=trangthai.matt "+
+				" and taikhoan.email='"+Email+"'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -387,10 +387,10 @@ public class DeTai_Controller {
     }
 	public ArrayList<DeTai> getListDeTaiDeXuat()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
-				" TaiKhoan.HoTen as TenGVHD "+
-				" from DeTai,TaiKhoan,TrangThai where DeTai.GVHD=TaiKhoan.MaTK "+
-				" and DeTai.MaTT=TrangThai.MaTT and TrangThai.MaTT='tt11'";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,detai.ngaythuchien as NgayDK,"+
+				" taikhoan.hoten as TenGVHD "+
+				" from detai,taikhoan,trangthai where detai.gvhd=taikhoan.matk "+
+				" and detai.matt=trangthai.matt and trangthai.matt='tt11'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -412,9 +412,9 @@ public class DeTai_Controller {
     }
 	public DeTai getDeTaiDX(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DeTai,TaiKhoan as TK1 "+
-        " where TK1.MaTK=DeTai.GVHD"+
-        "  and MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM detai,taikhoan as tk1 "+
+        " where tk1.matk=detai.gvhd"+
+        "  and madt='"+maDT+"'";
         DeTai dt = new DeTai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -454,11 +454,11 @@ public class DeTai_Controller {
     }
 	public DeTai getListDeTaiByMaDT(String maDT)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
-				" DeTai.NgayKetThuc as NgayNT, TrangThai.tenTT as TenTT,MatKhau as MSSV, HoTen as TenCN"+
-				" from DeTai,TaiKhoan,TrangThai"+
-				" where DeTai.MaCN=TaiKhoan.MaTK and DeTai.MaTT=TrangThai.MaTT "+
-				" and MaDT='"+maDT+"'";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,detai.ngaythuchien as NgayDK,"+
+				" detai.ngayketthuc as NgayNT, trangthai.tentt as TenTT,matkhau as MSSV, hoten as TenCN"+
+				" from detai,taikhoan,trangthai"+
+				" where detai.macn=taikhoan.matk and detai.matt=trangthai.matt "+
+				" and madt='"+maDT+"'";
         DeTai dt = new DeTai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -483,7 +483,7 @@ public class DeTai_Controller {
     }
 	public ArrayList<DeTai> getListDeTaiByGVHD(String gvhd)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DeTai,TaiKhoan where DeTai.MaCN=TaiKhoan.MaTK and GVHD='"+gvhd+"'";
+        String sql = "SELECT * FROM detai,taikhoan where detai.macn=taikhoan.matk and gvhd='"+gvhd+"'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -523,11 +523,11 @@ public class DeTai_Controller {
     }
 	public ArrayList<DeTai> getListDeTaiNT(String email)  throws SQLException{
 		 Connection cons = DBConnect.getConnecttion();
-	        String sql = "select distinct DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,DeTai.NgayThucHien as NgayDK,"+
-					" CTNghiemThu.NgayNT as NgayNT"+
-					" from DeTai,TaiKhoan,CTNghiemThu "+
-					" where DeTai.MaCN=TaiKhoan.MaTK "+
-					" and DeTai.MaDT=CTNghiemThu.MaDT and TaiKhoan.Email='"+email+"' and MaTT='tt9'";
+	        String sql = "select distinct detai.madt as MaDT, detai.tendt as TenDT,detai.ngaythuchien as NgayDK,"+
+					" ctnghiemthu.ngaynt as NgayNT"+
+					" from detai,taikhoan,ctnghiemthu "+
+					" where detai.macn=taikhoan.matk "+
+					" and detai.madt=ctnghiemthu.madt and taikhoan.email='"+email+"' and matt='tt9'";
 	        ArrayList<DeTai> list = new ArrayList<>();
 	        CTNghiemThu_Controller crt = new CTNghiemThu_Controller();
 	        try {
@@ -568,12 +568,12 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiPhanCongPhanBien(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select distinct DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD"+
-			" from DeTai,CTNghiemThu,HoiDong,TaiKhoan,TaiKhoan as TK1, TaiKhoan as TK2"+
-			" where DeTai.MaDT=CTNghiemThu.MaDT and CTNghiemThu.MaHD=HoiDong.MaHD and "
-			+ " (HoiDong.PhanBien=TaiKhoan.MaTK or HoiDong.ChuTich=TaiKhoan.MaTK)"+
-			" and TaiKhoan.Email='"+Email+"' and DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and TongQuan is null"+
-			" and ctnghiemthu.MaTK=TaiKhoan.MaTK" ;
+        String sql = "select distinct detai.madt as MaDT, detai.tendt as TenDT,tk1.hoten as MaCN,tk2.hoten as GVHD"+
+			" from detai,ctnghiemthu,hoidong,taikhoan,taikhoan as tk1, taikhoan as tk2"+
+			" where detai.madt=ctnghiemthu.madt and ctnghiemthu.mahd=hoidong.mahd and "
+			+ " (hoidong.phanbien=taikhoan.matk or hoidong.chutich=taikhoan.matk)"+
+			" and taikhoan.email='"+Email+"' and detai.macn=tk1.matk and detai.gvhd=tk2.matk and tongquan is null"+
+			" and ctnghiemthu.matk=taikhoan.matk" ;
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -596,9 +596,9 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiPhanCongPheDuyet(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD,DeTai.LinhVuc as LinhVuc "+
-			" from DeTai,TaiKhoan as TK1,TaiKhoan as TK2"+
-			" where DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and TK2.Email='"+Email+"' and DeTai.MaTT='tt2'";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,tk1.hoten as MaCN,tk2.hoten as GVHD,detai.linhvuc as LinhVuc "+
+			" from detai,taikhoan as tk1,taikhoan as tk2"+
+			" where detai.macn=tk1.matk and detai.gvhd=tk2.matk and tk2.email='"+Email+"' and detai.matt='tt2'";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -622,10 +622,10 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiHuongDan(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK1.HoTen as MaCN,TK2.HoTen as GVHD "+
-			" from DeTai,TaiKhoan as TK1,TaiKhoan as TK2"+
-			" where DeTai.MaCN=TK1.MaTK and DeTai.GVHD=TK2.MaTK and TK2.Email='"+Email+"' and (DeTai.MaTT='tt11' or"+
-			" DeTai.MaTT='tt3' or DeTai.MaTT='tt4' or DeTai.MaTT='tt6' or DeTai.MaTT='tt7' or DeTai.MaTT='tt8')";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,tk1.hoten as MaCN,tk2.hoten as GVHD "+
+			" from detai,taikhoan as tk1,taikhoan as tk2"+
+			" where detai.macn=tk1.matk and detai.gvhd=tk2.matk and tk2.email='"+Email+"' and (detai.matt='tt11' or"+
+			" detai.matt='tt3' or detai.matt='tt4' or detai.matt='tt6' or detai.matt='tt7' or detai.matt='tt8')";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -648,10 +648,10 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiGV_DK(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TaiKhoan.HoTen as GVHD,TrangThai.tenTT as TenTT,DeTai.LinhVuc"+
-			" from DeTai,TaiKhoan,TrangThai "+
-			" where DeTai.GVHD=TaiKhoan.MaTK and DeTai.MaTT=TrangThai.MaTT and TaiKhoan.Email='"+Email+"' "+
-			" and (DeTai.MaTT='tt11' or DeTai.MaTT='tt10')";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,taikhoan.hoten as GVHD,trangthai.tentt as TenTT,detai.linhvuc"+
+			" from detai,taikhoan,trangthai "+
+			" where detai.gvhd=taikhoan.matk and detai.matt=trangthai.matt and taikhoan.email='"+Email+"' "+
+			" and (detai.matt='tt11' or detai.matt='tt10')";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -661,7 +661,7 @@ public class DeTai_Controller {
             	dt.setMaDT(rs.getString("MaDT"));
             	dt.setTenDT(rs.getString("TenDT"));
             	dt.setTenGVHD(rs.getString("GVHD"));
-            	dt.setLinhVuc(rs.getString("DeTai.LinhVuc"));
+            	dt.setLinhVuc(rs.getString("detai.LinhVuc"));
             	dt.setTenTT(rs.getString("TenTT"));
             	list.add(dt);
             }
@@ -675,10 +675,10 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTai_YC_Huy_GiaHan(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK2.HoTen as TenCN,TaiKhoan.HoTen as GVHD,TrangThai.tenTT as TenTT,DeTai.MaTT"+
-			" from DeTai,TaiKhoan,TrangThai,TaiKhoan as TK2 "+
-			" where DeTai.MaCN=TK2.MaTK and DeTai.GVHD=TaiKhoan.MaTK and DeTai.MaTT=TrangThai.MaTT and TaiKhoan.Email='"+Email+"' " + 
-			" and (DeTai.MaTT='tt4' or DeTai.MaTT='tt6')";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,tk2.hoten as TenCN,taikhoan.hoten as GVHD,trangthai.tentt as TenTT,detai.matt"+
+			" from detai, taikhoan, trangthai, taikhoan as tk2 "+
+			" where detai.macn=tk2.matk and detai.gvhd=taikhoan.matk and detai.matt=trangthai.matt and taikhoan.email='"+Email+"' " + 
+			" and (detai.matt='tt4' or detai.matt='tt6')";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -689,7 +689,7 @@ public class DeTai_Controller {
             	dt.setTenDT(rs.getString("TenDT"));
             	dt.setTenCN(rs.getString("TenCN"));
             	dt.setTenTT(rs.getString("TenTT"));
-            	dt.setMaTT(rs.getString("DeTai.MaTT"));
+            	dt.setMaTT(rs.getString("detai.matt"));
             	list.add(dt);
             }
            
@@ -702,9 +702,9 @@ public class DeTai_Controller {
 	
 	public DeTai getDeTaiGV(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM DeTai,TaiKhoan"+
-        " where TaiKhoan.MaTK=DeTai.GVHD"+
-        " and  MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM detai,taikhoan"+
+        " where taikhoan.matk=detai.gvhd"+
+        " and  madt='"+maDT+"'";
         DeTai dt = new DeTai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -733,8 +733,8 @@ public class DeTai_Controller {
             	dt.setNoiDungNC(rs.getString("NoiDungNC"));
             	dt.setSPDuKien(rs.getString("SPDuKien"));
             	dt.setDiaChiUD(rs.getString("DiaChiUD"));
-            	dt.setTenGVHD(rs.getString("TaiKhoan.HoTen"));
-            	dt.setEmailGV(rs.getString("TaiKhoan.Email"));
+            	dt.setTenGVHD(rs.getString("taikhoan.hoten"));
+            	dt.setEmailGV(rs.getString("taikhoan.Email"));
             	dt.setKinhPhi(rs.getDouble("KinhPhi"));
             }
            
@@ -747,7 +747,7 @@ public class DeTai_Controller {
 	
 	public boolean updateTrangThai_DeTai(DeTai dt) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "update DeTai set MaTT=? where MaDT=?";
+		String sql = "update detai set matt=? where madt=?";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1,dt.getMaTT());
@@ -764,7 +764,7 @@ public class DeTai_Controller {
 
 	public boolean insert_DeTaiSVDK(DeTai dt) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "insert into DeTai values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into detai values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			SimpleDateFormat format = new SimpleDateFormat( "MM/dd/yyyy" );  
 			java.util.Date myDate = format.parse(dt.getNgayThucHien());
@@ -804,7 +804,8 @@ public class DeTai_Controller {
 	}
 	public boolean insert_DeTaiQLDK(DeTai dt) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "insert into DeTai (MaDT,MaTT,GVHD,TenDT,MoTa,LinhVuc,LoaiHinh,CoQuanChuTri,TinhHinhTrong,TinhHinhNgoai,TinhCapThiet,MucTieu,PPNC,NoiDungNC,SPDuKien,DiaChiUD,KinhPhi)  "
+		String sql = "insert into detai (madt,matt,gvhd,tendt,mota,linhvuc,loaihinh,coquanchutri,tinhhinhtrong,"
+				+ "tinhhinhngoai,tinhcapthiet,muctieu,ppnc,noidungnc,spdukien,diachiud,kinhphi)  "
 				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -834,7 +835,7 @@ public class DeTai_Controller {
 	}
 	public ArrayList<DeTai> getListDeTai()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select * from DeTai";
+        String sql = "select * from detai";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -875,10 +876,10 @@ public class DeTai_Controller {
     }
 	public ArrayList<DeTai> getListLinhVuc(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select DeTai.MaDT as MaDT, DeTai.TenDT as TenDT,TK2.HoTen as TenCN,TaiKhoan.HoTen as GVHD,TrangThai.tenTT as TenTT,DeTai.MaTT"+
-			" from DeTai,TaiKhoan,TrangThai,TaiKhoan as TK2 "+
-			" where DeTai.MaCN=TK2.MaTK and DeTai.GVHD=TaiKhoan.MaTK and DeTai.MaTT=TrangThai.MaTT and TaiKhoan.Email='"+Email+"' " + 
-			" and (DeTai.MaTT='tt4' or DeTai.MaTT='tt6')";
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,tk2.hoten as TenCN,taikhoan.hoten as GVHD,trangthai.tentt as TenTT,detai.matt"+
+			" from detai, taikhoan, trangthai, taikhoan as tk2 "+
+			" where detai.macn=tk2.matk and detai.gvhd=taikhoan.matk and detai.matt=trangthai.matt and taikhoan.email='"+Email+"' " + 
+			" and (detai.matt='tt4' or detai.matt='tt6')";
         ArrayList<DeTai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -889,7 +890,7 @@ public class DeTai_Controller {
             	dt.setTenDT(rs.getString("TenDT"));
             	dt.setTenCN(rs.getString("TenCN"));
             	dt.setTenTT(rs.getString("TenTT"));
-            	dt.setMaTT(rs.getString("DeTai.MaTT"));
+            	dt.setMaTT(rs.getString("detai.MaTT"));
             	list.add(dt);
             }
            
@@ -901,7 +902,7 @@ public class DeTai_Controller {
     }
 	public boolean DangKyDTDX(DeTai dt) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "update DeTai set MaCN=? ,SinhVien1=? ,SinhVien2=? where MaDT=? ";
+		String sql = "update detai set macn=? ,sinhvien1=? ,sinhvien2=? where madt=? ";
 		
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

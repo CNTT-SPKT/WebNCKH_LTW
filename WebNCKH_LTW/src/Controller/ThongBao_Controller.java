@@ -20,7 +20,7 @@ public class ThongBao_Controller {
 	//BAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
 	public boolean insert_thongbao(ThongBao tb) {
 		Connection cons = DBConnect.getConnecttion();
-		 String sql = "INSERT INTO thongbao(MaTB,NguoiGui,NguoiNhan)"
+		 String sql = "INSERT INTO thongbao(matb,mguoigui,nguoinhan)"
 	        		+ " values (?,?,?)";
 		try {
 			 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -40,7 +40,7 @@ public class ThongBao_Controller {
 	public Boolean kiemTraKhoaChinhTB(String maTB)
 	{
 		Connection connection = DBConnect.getConnecttion();
-		String sql ="SELECT * FROM ThongBao WHERE thongbao.Matb='"+maTB+"'";
+		String sql ="SELECT * FROM thongbao WHERE thongbao.matb='"+maTB+"'";
 		try {
 			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();
@@ -57,7 +57,7 @@ public class ThongBao_Controller {
 	public Boolean kiemTraKhoaChinhTBTK(String maCTTB)
 	{
 		Connection connection = DBConnect.getConnecttion();
-		String sql ="SELECT * FROM tb_tk WHERE tb_tk.MaCTTB='"+maCTTB+"'";
+		String sql ="SELECT * FROM tb_tk WHERE tb_tk.macttb='"+maCTTB+"'";
 		try {
 			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();
@@ -73,7 +73,7 @@ public class ThongBao_Controller {
 	}
 	public boolean insert_CTthongbao(TB_TK cttb) {
 		Connection cons = DBConnect.getConnecttion();
-		 String sql = "INSERT INTO tb_tk(MaCTTB,MaTB,MaLTB,TinTB,NgayGui)"
+		 String sql = "INSERT INTO tb_tk(macttb,matb,maltb,tintb,ngaygui)"
 	        		+ " values (?,?,?,?,?)";
 		try {
 			 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -93,11 +93,11 @@ public class ThongBao_Controller {
 	}
 	public ArrayList<ThongBao> getListThongBaoQLDK() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT tb_tk.MaCTTB,thongbao.MaTB,loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
-        		+ "FROM ThongBao,LoaiTb,tb_tk,taikhoan, taikhoan as TenNguoiGui "
-        		+ "where loaitb.MaLTB=tb_tk.MaLTB and thongbao.matb=tb_tk.Matb and thongbao.nguoinhan=taikhoan.matk"
-        		+ " and TenNguoiGui.MaTK=thongbao.NguoiGui "
-        		+ "and TaiKhoan.Quyen='Manager' and loaitb.MaLTB='ltt2'";
+        String sql = "SELECT tb_tk.macttb,thongbao.matb,loaitb.tenloaitb,tennguoigui.hoten as TenNG,thongbao.nguoigui, tb_tk.ngaygui "
+        		+ "FROM thongbao,loaitb,tb_tk,taikhoan, taikhoan as tennguoigui "
+        		+ "where loaitb.maltb=tb_tk.maltb and thongbao.matb=tb_tk.matb and thongbao.nguoinhan=taikhoan.matk"
+        		+ " and tennguoigui.matb=thongbao.nguoigui "
+        		+ "and taikhoan.quyen='Manager' and loaitb.maltb='ltt2'";
         		
         ArrayList<ThongBao> list = new ArrayList<>();
         try {
@@ -120,7 +120,7 @@ public class ThongBao_Controller {
     }
 	public boolean deleteThongBao(String MaTB) throws SQLException {
 		 Connection connection = DBConnect.getConnecttion();
-	     String sql = "DELETE FROM ThongBao WHERE MaTB =?";
+	     String sql = "DELETE FROM thongbao WHERE matb =?";
 	    try {
 	       
 	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
@@ -133,7 +133,7 @@ public class ThongBao_Controller {
 	}
 	public boolean deleteThongBao_TaiKhoan(String MaCTTB) throws SQLException {
 		 Connection connection = DBConnect.getConnecttion();
-	     String sql = "DELETE FROM tb_tk WHERE MaCTTB =?";
+	     String sql = "DELETE FROM tb_tk WHERE macttb =?";
 	    try {
 	       
 	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
@@ -146,11 +146,11 @@ public class ThongBao_Controller {
 	}
 	public ArrayList<ThongBao> getListThongBaoQLHuyGH() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT tb_tk.MaCTTB, thongbao.matb, loaitb.TenLoaiTB,TenNguoiGui.HoTen as TenNG,thongbao.NguoiGui, tb_tk.NgayGui "
-        		+ "FROM ThongBao,LoaiTb,tb_tk,taikhoan, taikhoan as TenNguoiGui "
-        		+ "where loaitb.MaLTB=tb_tk.MaLTB and thongbao.matb=tb_tk.Matb and thongbao.nguoinhan=taikhoan.matk"
-        		+ " and TenNguoiGui.MaTK=thongbao.NguoiGui "
-        		+ "and TaiKhoan.Quyen='Manager' and (loaitb.MaLTB='ltt3' or loaitb.MaLTB='ltt4')";
+        String sql = "SELECT tb_tk.macttb,thongbao.matb,loaitb.tenloaitb,tennguoigui.hoten as TenNG,thongbao.nguoigui, tb_tk.ngaygui "
+        		+ "FROM thongbao,loaitb,tb_tk,taikhoan, taikhoan as tennguoigui "
+        		+ "where loaitb.maltb=tb_tk.maltb and thongbao.matb=tb_tk.matb and thongbao.nguoinhan=taikhoan.matk"
+        		+ " and tennguoigui.matk=thongbao.nguoigui "
+        		+ "and taikhoan.quyen='Manager' and (loaitb.maltb='ltt3' or loaitb.maltb='ltt4')";
 			;
         		
         ArrayList<ThongBao> list = new ArrayList<>();
@@ -175,7 +175,7 @@ public class ThongBao_Controller {
 //KET THUC TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
 	public ArrayList<ThongBao> getListThongBao() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM ThongBao";
+        String sql = "SELECT * FROM thongbao";
         ArrayList<ThongBao> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -195,7 +195,7 @@ public class ThongBao_Controller {
     }
 	public ThongBao getListThongBaoNN(String maTB) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM ThongBao where MaTB='"+maTB+"'";
+        String sql = "SELECT * FROM thongbao where matb='"+maTB+"'";
         ThongBao tb = new ThongBao();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -215,8 +215,8 @@ public class ThongBao_Controller {
     }
 	public ThongBao getListThongBao(String nguoiGui) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM ThongBao inner join TaiKhoan on ThongBao.NguoiGui=TaiKhoan.MaTK" +
-        " Where ThongBao.NguoiGui='"+nguoiGui+"'";
+        String sql = "SELECT * FROM thongbao inner join taikhoan on thongbao.nguoigui=taikhoan.matk" +
+        " Where thongbao.nguoigui='"+nguoiGui+"'";
         ThongBao tb = new ThongBao();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -236,8 +236,8 @@ public class ThongBao_Controller {
     }
 	public ThongBao getTBNguoiNhan(String nguoiNhan) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM ThongBao inner join TaiKhoan on ThongBao.NguoiGui=TaiKhoan.MaTK" +
-        " Where ThongBao.NguoiNhan='"+nguoiNhan+"'";
+        String sql = "SELECT * FROM thongbao inner join taikhoan on thongbao.nguoinhan=taikhoan.matk" +
+        " Where thongbao.nguoinhan='"+nguoiNhan+"'";
         ThongBao tb = new ThongBao();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -258,8 +258,8 @@ public class ThongBao_Controller {
 	
 	public ThongBao getThongBao(String nguoiGui,String nguoiNhan) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM ThongBao inner join TaiKhoan on ThongBao.NguoiGui=TaiKhoan.MaTK" +
-        " Where ThongBao.NguoiGui='"+nguoiGui+"' and ThongBao.NguoiNhan='"+nguoiNhan+"'";
+        String sql = "SELECT * FROM thongbao inner join taikhoan on thongbao.nguoigui=taikhoan.matk" +
+        " Where thongbao.nguoigui='"+nguoiGui+"' and nguoiGui='"+nguoiNhan+"'";
         ThongBao tb = new ThongBao();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -280,7 +280,7 @@ public class ThongBao_Controller {
 	
 	public boolean createThongBao(ThongBao tb) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "insert into ThongBao values(?,?,?)";
+		String sql = "insert into thongbao values(?,?,?)";
 		try {
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 			ps.setString(1,tb.getMaTB());

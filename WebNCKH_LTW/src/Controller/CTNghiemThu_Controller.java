@@ -22,7 +22,7 @@ import Packages.DBConnect;
 public class CTNghiemThu_Controller {
 		public ArrayList<CTNghiemThu> getListCTNghiemThu() {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT * FROM CTNghiemThu";
+	        String sql = "SELECT * FROM ctnghiemthu";
 	        ArrayList<CTNghiemThu> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -51,28 +51,28 @@ public class CTNghiemThu_Controller {
 	    }
 		public ArrayList<CTNghiemThu> getListCTNghiemThuMaDT(String maDT) {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT distinct * FROM CTNghiemThu,HoiDong,TaiKhoan as ct, TaiKhoan as pb,DeTai,TaiKhoan "
-	        		+ "where CTNghiemThu.MaHD=HoiDong.MaHD and DeTai.MaDT=CTNghiemThu.MaDT and "
-	        		+ "HoiDong.ChuTich=ct.MaTK and HoiDong.PhanBien=pb.MaTK "
-	        		+ "and ctnghiemthu.MaTK=TaiKhoan.MaTK and ctnghiemthu.MaDT='"+maDT+"'";
+	        String sql = "SELECT distinct * FROM ctnghiemthu,hoidong,taikhoan as ct, taikhoan as pb,detai,taikhoan "
+	        		+ "where ctnghiemthu.mahd=hoidong.mahd and detai.madt=ctnghiemthu.madt and "
+	        		+ "hoidong.chutich=ct.matk and hoidong.phanbien=pb.matk "
+	        		+ "and ctnghiemthu.matk=taikhoan.matk and ctnghiemthu.madt='"+maDT+"'";
 	        ArrayList<CTNghiemThu> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
 	            	CTNghiemThu ct = new CTNghiemThu();
-	            	ct.setMaDT(rs.getString("CTNghiemThu.MaDT"));
+	            	ct.setMaDT(rs.getString("ctnghiemthu.MaDT"));
 	            	ct.setTongDiem(rs.getInt("TongDiem"));
 	            	ct.setTongQuan(rs.getInt("TongQuan"));
 	            	ct.setTenDT(rs.getString("TenDT"));
-	            	ct.setMaHD(rs.getString("HoiDong.MaHD"));
+	            	ct.setMaHD(rs.getString("hoidong.mahd"));
 	            	ct.setNgayNT(rs.getString("NgayNT"));
 	            	ct.setMaPhanBien(rs.getString("PhanBien"));
 	            	ct.setTenPhanBien(rs.getString("pb.HoTen"));
 	            	ct.setMaChuTich(rs.getString("ChuTich"));
 	            	ct.setTenChuTich(rs.getString("ct.HoTen"));
-	            	ct.setMaTK(rs.getString("CTNghiemThu.MaTK"));
-	            	ct.setTenTK(rs.getString("TaiKhoan.HoTen"));
+	            	ct.setMaTK(rs.getString("ctnghiemthu.matk"));
+	            	ct.setTenTK(rs.getString("taikhoan.HoTen"));
 	                list.add(ct);
 	            }
 	            cons.close();
@@ -83,26 +83,26 @@ public class CTNghiemThu_Controller {
 	    }
 		public CTNghiemThu getCTNghiemThuMaTK(String maTK) {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT distinct * FROM CTNghiemThu,HoiDong,TaiKhoan as ct, TaiKhoan as pb,DeTai,TaiKhoan "
-	        		+ "where CTNghiemThu.MaHD=HoiDong.MaHD and DeTai.MaDT=CTNghiemThu.MaDT and "
-	        		+ "HoiDong.ChuTich=ct.MaTK and HoiDong.PhanBien=pb.MaTK "
-	        		+ "and ctnghiemthu.MaTK=TaiKhoan.MaTK and ctnghiemthu.MaTK='"+maTK+"'";
+	        String sql = "SELECT distinct * FROM ctnghiemthu,hoidong,taikhoan as ct, taikhoan as pb,detai,taikhoan "
+	        		+ "where ctnghiemthu.mahd=hoidong.mahd and detai.madt=ctnghiemthu.madt and "
+	        		+ "hoidong.chutich=ct.matk and hoidong.phanbien=pb.matk "
+	        		+ "and ctnghiemthu.matk=taikhoan.matk and ctnghiemthu.matk='"+maTK+"'";
 	        CTNghiemThu ct = new CTNghiemThu();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
 	            	
-	            	ct.setMaDT(rs.getString("CTNghiemThu.MaDT"));
+	            	ct.setMaDT(rs.getString("ctnghiemthu.MaDT"));
 	            	ct.setTenDT(rs.getString("TenDT"));
-	            	ct.setMaHD(rs.getString("HoiDong.MaHD"));
+	            	ct.setMaHD(rs.getString("hoidong.mahd"));
 	            	ct.setNgayNT(rs.getString("NgayNT"));
 	            	ct.setMaPhanBien(rs.getString("PhanBien"));
 	            	ct.setTenPhanBien(rs.getString("pb.HoTen"));
 	            	ct.setMaChuTich(rs.getString("ChuTich"));
 	            	ct.setTenChuTich(rs.getString("ct.HoTen"));
-	            	ct.setMaTK(rs.getString("CTNghiemThu.MaTK"));
-	            	ct.setTenTK(rs.getString("TaiKhoan.HoTen"));
+	            	ct.setMaTK(rs.getString("ctnghiemthu.matk"));
+	            	ct.setTenTK(rs.getString("taikhoan.HoTen"));
 	               
 	            }
 	            cons.close();
@@ -113,7 +113,7 @@ public class CTNghiemThu_Controller {
 	    }
 		public CTNghiemThu getListCTNghiemThuByDeTai(String maDT) throws SQLException {
 	        Connection connection = DBConnect.getConnecttion();
-	        String sql = "SELECT * FROM CTNghiemThu where MaDT='"+maDT+"'";
+	        String sql = "SELECT * FROM ctnghiemthu where madt='"+maDT+"'";
 	        PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 	        ResultSet rs = ps.executeQuery();
 	        CTNghiemThu ct = new CTNghiemThu();
@@ -137,9 +137,9 @@ public class CTNghiemThu_Controller {
 	    }
 		public CTNghiemThu getListCTNghiemThu(String maDT) {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT * FROM CTNghiemThu,DeTai where"+
-	        " CTNghiemThu.MaDT=DeTai.MaDT"+
-	        " and DeTai.MaDT='"+maDT+"'";
+	        String sql = "SELECT * FROM ctnghiemthu,detai where"+
+	        " ctnghiemthu.madt=detai.madt"+
+	        " and detai.madt='"+maDT+"'";
 	        CTNghiemThu ct = new CTNghiemThu();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -168,19 +168,19 @@ public class CTNghiemThu_Controller {
 	    }
 		public CTNghiemThu getCTNghiemThuByMaTK(String maDT,String maTK) {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT distinct * FROM CTNghiemThu,HoiDong,TaiKhoan,DeTai "
-	        		+ "where CTNghiemThu.MaHD=HoiDong.MaHD and DeTai.MaDT=CTNghiemThu.MaDT  "
-	        		+ "and TaiKhoan.MaTK=CTNghiemThu.MaTK and CTNghiemThu.MaTK='"+maTK+"' and CTNghiemThu.MaDT='"+maDT+"'";
+	        String sql = "SELECT distinct * FROM ctnghiemthu,hoidong,taikhoan,detai "
+	        		+ "where ctnghiemthu.mahd=hoidong.mahd and detai.madt=ctnghiemthu.madt  "
+	        		+ "and taikhoan.matk=ctnghiemthu.matk and ctnghiemthu.matk='"+maTK+"' and ctnghiemthu.madt='"+maDT+"'";
 	        CTNghiemThu ct = new CTNghiemThu();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
 	            	
-	            	ct.setMaDT(rs.getString("CTNghiemThu.MaDT"));
-	            	ct.setTenDT(rs.getString("DeTai.TenDT"));
-	            	ct.setMaHD(rs.getString("HoiDong.MaHD"));
-	            	ct.setMaTK(rs.getString("CTNghiemThu.MaTK"));
+	            	ct.setMaDT(rs.getString("ctnghiemthu.MaDT"));
+	            	ct.setTenDT(rs.getString("detai.TenDT"));
+	            	ct.setMaHD(rs.getString("hoidong.MaHD"));
+	            	ct.setMaTK(rs.getString("ctnghiemthu.MaTK"));
 	            	ct.setTenTK(rs.getString("HoTen"));
 	            	ct.setTongQuan(rs.getInt("TongQuan"));
 	            	ct.setMucTieu(rs.getInt("MucTieu"));
@@ -203,8 +203,8 @@ public class CTNghiemThu_Controller {
 		
 		public boolean updateCTNT(CTNghiemThu ctnt) throws ParseException {
 			Connection cons = DBConnect.getConnecttion();
-			String sql = "update CTNghiemThu set TongQuan=?, MucTieu=?, PhuongPhap=?,NoiDung=?,DongGop=?,"
-					+ " HinhThuc=?, DiemThuong=?, TongDiem=?, YKien=?, NgayNT=? where MaDT=? and MaTK=? ";
+			String sql = "update ctnghiemthu set tongquan=?, muctieu=?, phuongphap=?,noidung=?,donggop=?,"
+					+ " hinhthuc=?, diemthuong=?, tongdiem=?, ykien=?, ngaynt=? where madt=? and matk=? ";
 			try {
 				PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 				java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -229,7 +229,7 @@ public class CTNghiemThu_Controller {
 		}
 		public boolean deleteCTNT(String maHD) throws SQLException {
 			 Connection connection = DBConnect.getConnecttion();
-		     String sql = "DELETE FROM CTNghiemThu WHERE MaHD = ?";
+		     String sql = "DELETE FROM ctnghiemthu WHERE mahd = ?";
 		    try {
 		       
 		       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);

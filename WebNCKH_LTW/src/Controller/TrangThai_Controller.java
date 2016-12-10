@@ -13,7 +13,7 @@ import Packages.DBConnect;
 public class TrangThai_Controller {
 	public ArrayList<TrangThai> getListTrangThai() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM TrangThai";
+        String sql = "SELECT * FROM trangthai";
         ArrayList<TrangThai> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -32,7 +32,7 @@ public class TrangThai_Controller {
     }
 	public TrangThai getListTrangThaiByDT() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM TrangThai";
+        String sql = "SELECT * FROM trangthai";
         TrangThai tt = new TrangThai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

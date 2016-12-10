@@ -20,7 +20,7 @@ public class HoiDong_Controller {
 	public Boolean kiemTra(String MaHD)
 	{
 		Connection connection = DBConnect.getConnecttion();
-		String sql ="SELECT * FROM HoiDong WHERE HoiDong.MaHD='"+MaHD+"'";
+		String sql ="SELECT * FROM hoidong WHERE hoidong.mahd='"+MaHD+"'";
 		try {
 			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();
@@ -60,7 +60,7 @@ public class HoiDong_Controller {
 
 		public void insert_PCPB(String MaHD,String MaDT) {
 			Connection cons = DBConnect.getConnecttion();
-			 String sql = "INSERT INTO ctnghiemthu(MaDT,MaHD)"
+			 String sql = "INSERT INTO ctnghiemthu(madt,mahd)"
 		        		+ " values (?,?)";
 			try {
 				 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -77,12 +77,12 @@ public class HoiDong_Controller {
 	
 //		public ArrayList<HoiDong> getListHoiDongQL() {
 //	        Connection cons = DBConnect.getConnecttion();
-//	        String sql = "SELECT distinct hoidong.MaHD as MHD, TKChuTich.HoTen as TenCT, TKPhanBien.HoTen as TenPB, "
-//	        		+ "TKUyVien.HoTen as TenUV,HoiDong.NgayThanhLap as NTL "
-//	        		+ "FROM HoiDong,taikhoan as TKChuTich,"
-//	        		+ "taikhoan as TKPhanBien,taikhoan as TKUyVien "
-//	        		+ "where  TKChuTich.MaTK=hoidong.ChuTich "
-//	        		+ "and TKPhanBien.MaTK=hoidong.PhanBien and TKUyVien.MaTK=hoidong.UyVien ";
+//	        String sql = "SELECT distinct hoidong.mahd as MHD, tkchutich.hoten as TenCT, tkphanbien.hoten as TenPB, "
+//	        		+ "tkuyvien.hoten as TenUV,hoidong.ngaythanhlap as NTL "
+//	        		+ "FROM HoiDong,taikhoan as tkchutich,"
+//	        		+ "taikhoan as tkphanbien,taikhoan as tkuyvien "
+//	        		+ "where  tkchutich.matk=hoidong.chutich "
+//	        		+ "and tkphanbien.matk=hoidong.PhanBien and tkuyvien.matk=hoidong.uyvien ";
 //	        ArrayList<HoiDong> list = new ArrayList<>();
 //	        try {
 //	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -104,12 +104,12 @@ public class HoiDong_Controller {
 //	    }
 		public ArrayList<HoiDong> getListHoiDongQL() {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT distinct hoidong.MaHD as MHD, TKChuTich.HoTen as TenCT, "
-	        		+ "TKPhanBien.HoTen as TenPB, TKUyVien.HoTen as TenUV "
-	        		+ ",HoiDong.NgayThanhLap as NTL FROM HoiDong,taikhoan "
-	        		+ "as TKChuTich, taikhoan as TKUyVien,taikhoan as TKPhanBien where  "
-	        		+ "TKChuTich.MaTK=hoidong.ChuTich and TKPhanBien.MaTK=hoidong.PhanBien "
-	        		+ "and TKUyVien.MaTK=hoidong.UyVien";
+	        String sql = "SELECT distinct hoidong.mahd as MHD, tkchutich.hoten as TenCT, "
+	        		+ "tkphanbien.hoten as TenPB, tkuyvien.hoten as TenUV "
+	        		+ ",hoidong.ngaythanhlap as NTL FROM hoidong,taikhoan "
+	        		+ "as tkchutich, taikhoan as tkuyvien,taikhoan as tkphanbien where  "
+	        		+ "tkchutich.matk=hoidong.chutich and tkphanbien.matk=hoidong.PhanBien "
+	        		+ "and tkuyvien.matk=hoidong.uyvien";
 	        ArrayList<HoiDong> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -133,7 +133,7 @@ public class HoiDong_Controller {
 		public Boolean kiemtra(String MaHD)
 		{
 			Connection connection = DBConnect.getConnecttion();
-			String sql ="SELECT * FROM hoidong WHERE hoidong.MaHD='"+MaHD+"'";
+			String sql ="SELECT * FROM hoidong WHERE hoidong.mahd='"+MaHD+"'";
 			try {
 				PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 				ResultSet rs = ps.executeQuery();
@@ -149,7 +149,7 @@ public class HoiDong_Controller {
 		}
 		public boolean deleteHoiDong(String maHD) throws SQLException {
 			 Connection connection = DBConnect.getConnecttion();
-		     String sql = "DELETE FROM HoiDong WHERE MaHD = ?";
+		     String sql = "DELETE FROM hoidong WHERE mahd = ?";
 		    try {
 		       
 		       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
@@ -164,7 +164,7 @@ public class HoiDong_Controller {
 		//ENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTINENDTIN
 	public ArrayList<HoiDong> getListThongBao() {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM HoiDong";
+        String sql = "SELECT * FROM hoidong";
         ArrayList<HoiDong> list = new ArrayList<>();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);

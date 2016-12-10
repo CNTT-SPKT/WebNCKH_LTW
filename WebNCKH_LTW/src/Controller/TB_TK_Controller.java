@@ -58,9 +58,9 @@ public class TB_TK_Controller {
     }
 	public ArrayList<TB_TK> getListTB_TKByMaTK(String email) throws SQLException {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT MaCTTB, ThongBao.MaTB, TinTB,NgayGui,Tk2.HoTen as TenNguoiGui FROM TB_TK,ThongBao,TaiKhoan,"+
-        " TaiKhoan as TK2 where ThongBao.MaTB=TB_TK.MaTB and "+ 
-        "ThongBao.NguoiNhan=TaiKhoan.MaTK and ThongBao.NguoiGui=TK2.MaTK and TaiKhoan.Email='"+email+"'"
+        String sql = "SELECT macttb, thongbao.matb, tintb,ngaygui,tk2.hoten as TenNguoiGui FROM tb_tk,thongbao,taikhoan,"+
+        " taikhoan as tk2 where thongbao.matb=tb_tk.matb and "+ 
+        "thongbao.nguoinhan=taikhoan.matk and thongbao.nguoigui=tk2.matk and taikhoan.email='"+email+"'"
         		+ " order by ngaygui desc";
         ArrayList<TB_TK> list = new ArrayList<>();
         try {
@@ -84,7 +84,7 @@ public class TB_TK_Controller {
 	
 	public boolean deleteTB_TK(String maCTTB) throws SQLException {
 		 Connection connection = DBConnect.getConnecttion();
-	     String sql = "DELETE FROM TB_TK WHERE MaCTTB = ?";
+	     String sql = "DELETE FROM tb_tk WHERE macttb = ?";
 	    try {
 	       
 	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
@@ -98,7 +98,7 @@ public class TB_TK_Controller {
 	
 	public boolean insertTB_TK(TB_TK tbtk) throws SQLException {
 		 Connection connection = DBConnect.getConnecttion();
-	     String sql = "insert into TB_TK values(?,?,?,?,?)";
+	     String sql = "insert into tb_tk values(?,?,?,?,?)";
 	    try { 
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);

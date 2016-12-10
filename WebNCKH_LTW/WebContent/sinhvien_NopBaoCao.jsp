@@ -101,6 +101,7 @@ $( document ).ready(function() {
 						<div class="tab-pane active" id="NopBaoCao">
 							<div class="sv_NopBC" style="background:white;height:500px;border-radius:3px;overflow:auto;">
 								<h2 class="tieude_theh" >NỘP BÁO CÁO ĐỀ TÀI</h2><hr>
+								
 								<div class="gv_bcdt" style="margin:15px 0px 10px 15px;">
 								
 									<label>Mã số đề tài: <%=ctdt.getMaDT() %></label><br>
@@ -133,12 +134,13 @@ $( document ).ready(function() {
 										</tbody>
 									</table>
 								</div>
+								<form action="UploadFile_Servlet" method="post" enctype="multipart/form-data">
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-left:-10px">
 										
 										<div class="fileinput fileinput-new" data-provides="fileinput">
 									    <span class="btn btn-default btn-file">
-									    		<input accept=".pdf,.docx" type="file" multiple />
+									    		<input accept=".pdf,.docx" type="file" name="uploadfile" multiple />
 									    </span>
 																		</div>
 									</div>
@@ -146,6 +148,7 @@ $( document ).ready(function() {
 										<button type="submit" class="btn btn-primary btn-md">Nộp file</button>
 									</div>
 								</div>
+								</form>
 								<script type="text/javascript">
 								$(function() {
 									var x=4;

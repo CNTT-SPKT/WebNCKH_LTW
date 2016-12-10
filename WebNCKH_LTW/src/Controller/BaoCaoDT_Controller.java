@@ -2,9 +2,13 @@ package Controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import com.mysql.jdbc.PreparedStatement;
+import com.sun.istack.internal.logging.Logger;
+
 import java.sql.ResultSet;
 
 import Model.BaoCaoDT;
@@ -14,7 +18,7 @@ import Packages.DBConnect;
 public class BaoCaoDT_Controller {
 	public BaoCaoDT getBaoCaoDT(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM BaoCaoDT,DeTai where DeTai.MaDT=BaoCaoDT.MaDT and MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM baocaodt,detai where detai.madt=baocaodt.madt and madt='"+maDT+"'";
         BaoCaoDT bc = new BaoCaoDT();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -36,8 +40,8 @@ public class BaoCaoDT_Controller {
     }
 	public ArrayList<BaoCaoDT> getListBaoCaoDT(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM BaoCaoDT,DeTai where "+
-        " DeTai.MaDT=BaoCaoDT.MaDT and DeTai.MaDT='"+maDT+"'";
+        String sql = "SELECT * FROM baocaodt,detai where "+
+        " detai.madt=baocaodt.madt and detai.madt='"+maDT+"'";
         
         ArrayList<BaoCaoDT> list = new ArrayList<>();
         try {
@@ -46,7 +50,7 @@ public class BaoCaoDT_Controller {
             while (rs.next()) {
             	BaoCaoDT bc = new BaoCaoDT();
             	bc.setMaBC(rs.getString("MaBC"));
-            	bc.setMaDT(rs.getString("DeTai.MaDT"));
+            	bc.setMaDT(rs.getString("detai.MaDT"));
             	bc.setNgayBC(rs.getString("NgayBC"));
             	bc.setTenBC(rs.getString("TenBC"));
             	bc.setTenDT(rs.getString("TenDT"));
@@ -61,7 +65,7 @@ public class BaoCaoDT_Controller {
 	
 	public BaoCaoDT getBaoCaoDTByMaBC(String maBC) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM BaoCaoDT where MaBC='"+maBC+"'";
+        String sql = "SELECT * FROM baocaodt where mabc='"+maBC+"'";
         BaoCaoDT bc = new BaoCaoDT();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -80,6 +84,23 @@ public class BaoCaoDT_Controller {
         }
         return bc;
     }
+	public boolean insertDonHuy(BaoCaoDT bc) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "insert into baocaodt values(?,?,?,?)";
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1,bc.getMaBC());
+			ps.setString(2, bc.getMaDT());
+			ps.setString(3, bc.getTenBC());
+			ps.setString(4, bc.getFileBC());
+			
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DonHuy_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
 	public static void main(String[] args) throws SQLException {
 		BaoCaoDT_Controller ctrl= new BaoCaoDT_Controller();
 	       for(BaoCaoDT ct:ctrl.getListBaoCaoDT("dt1"))

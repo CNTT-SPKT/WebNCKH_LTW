@@ -19,7 +19,7 @@ import Packages.DBConnect;
 public class DonGiaHan_Controller {
 		public ArrayList<DonGiaHan> getListDonGiaHan() {
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT * FROM DonGiaHan";
+	        String sql = "SELECT * FROM dongiahan";
 	        ArrayList<DonGiaHan> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -40,7 +40,7 @@ public class DonGiaHan_Controller {
 	    }
 		public ArrayList<DonGiaHan> getListDonGiaHanByMaDT(String maDT)  throws SQLException{
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT * FROM DonGiaHan,DeTai where DonGiaHan.MaDT=DeTai.MaDT and DeTai.MaDT='"+maDT+"'";
+	        String sql = "SELECT * FROM dongiahan,detai where dongiahan.madt=DeTai.madt and detai.madt='"+maDT+"'";
 	        ArrayList<DonGiaHan> list = new ArrayList<>();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -63,7 +63,7 @@ public class DonGiaHan_Controller {
 		
 		public DonGiaHan getDGH(String maDT)  throws SQLException{
 	        Connection cons = DBConnect.getConnecttion();
-	        String sql = "SELECT * FROM DonGiaHan,DeTai where DonGiaHan.MaDT=DeTai.MaDT and DeTai.MaDT='"+maDT+"'";
+	        String sql = "SELECT * FROM dongiahan,detai where dongiahan.madt=detai.madt and detai.madt='"+maDT+"'";
 	        DonGiaHan gh = new DonGiaHan();
 	        try {
 	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class DonGiaHan_Controller {
 	    }
 		public boolean insertDonGiaHan(DonGiaHan gh) throws ParseException {
 			Connection cons = DBConnect.getConnecttion();
-			String sql = "insert into DonGiaHan values(?,?,?,?)";
+			String sql = "insert into dongiahan values(?,?,?,?)";
 			try {
 				SimpleDateFormat format = new SimpleDateFormat( "MM/dd/yyyy" );  
 				java.util.Date myDate = format.parse(gh.getGHDen());
