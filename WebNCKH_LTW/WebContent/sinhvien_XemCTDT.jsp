@@ -420,19 +420,21 @@ $( document ).ready(function() {
 																<th>Tên đề tài</th>
 																<th>Ngày đăng ký</th>
 																<th>Ngày nghiệm thu</th>
+																<th>Xếp loại</th>
 																<th>Kết quả chi tiết</th>
 															</tr>
 														</thead>
 														<tbody>
 															<%
-				     										for (DeTai detai1: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
+				     										for (DeTai detai2: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
 															%>
 															<tr>
-																<td><%=detai1.getMaDT() %></td>
-																<td><%=detai1.getTenDT() %></td>
-																<td><%=detai1.getNgayThucHien() %></td>
-																<td><%=detai1.getNgayNT() %></td>
-																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+																<td><%=detai2.getMaDT() %></td>
+																<td><%=detai2.getTenDT() %></td>
+																<td><%=detai2.getNgayThucHien() %></td>
+																<td><%=detai2.getNgayNT() %></td>
+																<td><%=detai2.getTrangThaiNT()%></td>
+																<td><a href="sinhvien_KetQuaNT.jsp?MaDT=<%=detai2.getMaDT()%>">Xem</a></td>
 															</tr>
 															<%
 			    											}

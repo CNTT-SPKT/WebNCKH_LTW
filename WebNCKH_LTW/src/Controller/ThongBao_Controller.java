@@ -96,7 +96,7 @@ public class ThongBao_Controller {
         String sql = "SELECT tb_tk.macttb,thongbao.matb,loaitb.tenloaitb,tennguoigui.hoten as TenNG,thongbao.nguoigui, tb_tk.ngaygui "
         		+ "FROM thongbao,loaitb,tb_tk,taikhoan, taikhoan as tennguoigui "
         		+ "where loaitb.maltb=tb_tk.maltb and thongbao.matb=tb_tk.matb and thongbao.nguoinhan=taikhoan.matk"
-        		+ " and tennguoigui.matb=thongbao.nguoigui "
+        		+ " and tennguoigui.matk=thongbao.nguoigui "
         		+ "and taikhoan.quyen='Manager' and loaitb.maltb='ltt2'";
         		
         ArrayList<ThongBao> list = new ArrayList<>();

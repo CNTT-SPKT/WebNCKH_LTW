@@ -310,6 +310,7 @@ $( document ).ready(function() {
 																<th>Tên đề tài</th>
 																<th>Ngày đăng ký</th>
 																<th>Ngày nghiệm thu</th>
+																<th>Xếp loại</th>
 																<th>Kết quả chi tiết</th>
 															</tr>
 														</thead>
@@ -322,7 +323,8 @@ $( document ).ready(function() {
 																<td><%=detai.getTenDT() %></td>
 																<td><%=detai.getNgayThucHien() %></td>
 																<td><%=detai.getNgayNT() %></td>
-																<td><a href="sinhvien_ketqua.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
+																<td><%=detai.getTrangThaiNT()%></td>
+																<td><a href="sinhvien_KetQuaNT.jsp?MaDT=<%=detai.getMaDT()%>">Xem</a></td>
 															</tr>
 															<%
 			    											}
