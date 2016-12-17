@@ -358,6 +358,67 @@ public class DeTai_Servlet extends HttpServlet {
 					url="quanlyPage.jsp";
 					
 					break;
+				case "GV_pheduyeHuy_GiaHan":
+					String ycau = request.getParameter("yeucau");
+					xuly = request.getParameter("xuly");
+					MaDT = request.getParameter("MaDT");
+					DeTai dtai = detaictrl.getDeTai(MaDT);
+					TB_TK tbtk_gv = new TB_TK();
+					ThongBao tb_gv = new ThongBao();
+					tb_gv=thongbaoctrl.getThongBao(dtai.getGVHD(),dtai.getMaCN());
+					if(thongbaoctrl.getThongBao(dtai.getGVHD(),dtai.getMaCN()).getMaTB()==null)
+				    {
+						System.out.println("chua co hop thoai");
+				    	int n =thongbaoctrl.getListThongBao().size();
+				    	tb_gv.setMaTB("tb"+(n+1));
+				    	tb_gv.setNguoiGui(dtai.getMaCN());
+				    	tb_gv.setNguoiNhan(dtai.getMaCN());
+					    if(thongbaoctrl.createThongBao(tb_gv))
+					    	System.out.println("Tạo hộp thoại thành công");
+				    }
+					tbtk_gv.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+					tbtk_gv.setMaLTB("ltt1");
+					tbtk_gv.setMaTB(tb_gv.getMaTB());
+					System.out.println(dtai.getGVHD()+"_______"+tb_gv.getMaTB()+"______"+dtai.getMaCN());
+					if(xuly.equals("khongdongy"))
+					{
+						dtai.setMaTT("tt3"); System.out.println("Yêu cầu không được đồng ý, đề tài vẫn được tiến hành");
+						if(ycau.equals("tt6"))
+						{
+							tbtk_gv.setTinTB("Thông báo: yêu cầu gia hạn đề tài "+MaDT+" không được đồng ý");
+							type="ghdt_0";
+						}
+						else if(ycau.equals("tt4"))
+						{
+							tbtk_gv.setTinTB("Thông báo: yêu cầu hủy đề tài "+MaDT+" không được đồng ý");
+							type="huydt_0";
+						}
+					}
+					else if(xuly.equals("dongy"))
+					{
+						if(ycau.equals("tt6"))
+						{
+							dtai.setMaTT("tt7"); System.out.println("Gia hạn đề tài thành công");
+							tbtk_gv.setTinTB("Thông báo: gia hạn đề tài "+MaDT+" thành công");
+							type="ghdt_1";
+						}
+						else if(ycau.equals("tt4"))
+						{
+							dtai.setMaTT("tt5"); System.out.println("Hủy đề tài thành công");
+							tbtk_gv.setTinTB("Thông báo: hủy đề tài "+MaDT+" thành công");
+							type="huydt_1";
+						}
+					}
+					if(tb_tkctrl.insertTB_TK(tbtk_gv))
+						System.out.println(tbtk_gv.getTinTB());
+					if(detaictrl.updateTrangThai_DeTai(dtai))
+						error="thành công!";
+					else
+						error="Thất bại";
+					System.out.println(error);
+					url="giangvienPage.jsp?type="+type;
+					
+					break;
 				case "dkdtdexuat":
 					System.out.println("Vào đăng ký đề tài đề xuất");
 					DeTai dkDT2=new DeTai();

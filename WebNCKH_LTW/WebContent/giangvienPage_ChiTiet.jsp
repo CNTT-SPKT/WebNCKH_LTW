@@ -29,6 +29,8 @@
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
 		detai = dt.getDeTai(maDT);
+		if(detai.getMaCN() == null)
+			detai = dt.getDeTaiGV(maDT);
 	}
 %>
 <body>

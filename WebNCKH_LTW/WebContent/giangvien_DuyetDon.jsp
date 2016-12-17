@@ -536,7 +536,7 @@ $( document ).ready(function() {
 									</div>
 									<form>
 										<label style="margin-left:15px;margin-right:5px;">Tên chủ nhiệm đề tài:</label>
-										<input type="text" name="firstname" style="margin-right:50px;" value=<%=detai.getTenCN() %> readonly>
+										<input type="text" name="firstname" style="margin-right:50px;" value="<%=detai.getTenCN()%>"  readonly>
 										<label style="margin-left:10px;margin-right:5px;">MSSV:</label>
 										<input type="text" name="lastname" value="14110180" readonly>
 										<input type="hidden" id="trangthaiDT" value=<%=maTT%>>
