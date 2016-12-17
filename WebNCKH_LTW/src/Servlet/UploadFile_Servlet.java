@@ -144,7 +144,7 @@ public class UploadFile_Servlet extends HttpServlet {
 			PrintWriter a = response.getWriter();
 			a.println("False");
 		}
-		response.sendRedirect("sinhvien_NopBaoCao.jsp");
+		response.sendRedirect("UploadFile.jsp?MaDT="+maDT);
 		//response.setHeader("REFRESH", "0");
 	}
 
