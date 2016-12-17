@@ -96,6 +96,10 @@
 			error="Gửi thông báo thất bại!!!";
 		if(type.equals("themtb_2"))
 			error="Lỗi!!!!";
+		if(type.equals("ghdt_kdy"))
+			error="Yêu cầu gia hạn - Không đồng ý!!!";
+		if(type.equals("huydt_kdy"))
+			error="Yêu hủy đề tài - Không đồng ý!!!";
 	}
 %>
 
@@ -107,7 +111,7 @@
        var y = $('.TypeMssg').text();
     	if(x != "null" && x != "")
     	{
-    		if(y=="themtb_1" || y=="xoatb_1"|| y == "ntdt_1" || y == "pddt_1" || y == "huydt_1" || y == "ghdt_1" || y == "dkdt_1" || y=="updatett_1" || y=="kpd_1" ||y=="themhd_1"||y=="xoahd_1"||y=="pcpb_1")
+    		if(y=="ghdt_kdy"||y=="huydt_kdy"||y=="themtb_1" || y=="xoatb_1"|| y == "ntdt_1" || y == "pddt_1" || y == "huydt_1" || y == "ghdt_1" || y == "dkdt_1" || y=="updatett_1" || y=="kpd_1" ||y=="themhd_1"||y=="xoahd_1"||y=="pcpb_1")
     			$("#ModalSuccess").modal('show');
     		if(y=="themtb_2" || y=="themtb_0" || y=="xoatb_0"|| y == "ntdt_0" || y == "pddt_0" || y == "huydt_0" || y == "ghdt_0" || y == "dkdt_0" || y=="updatett_0" || y=="kpd_0" || y=="themhd_0" || y=="themhd_t"||y=="xoahd_0"||y=="pcpb_0"||y=="pcpb_t")
     			$("#ModalFail").modal('show');
@@ -832,7 +836,7 @@
                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
-													<th>Mã đề tài</th>
+													
 													<th>Tên đề tài</th>
 													<th>Giảng viên hướng dẫn</th>
 													<th>Chi tiết</th>
@@ -844,7 +848,7 @@
 											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+													
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>

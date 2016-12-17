@@ -396,12 +396,12 @@ public class DeTai_Servlet extends HttpServlet {
 						if(ycau1.equals("tt6"))
 						{
 							tbtk_ql.setTinTB("Thông báo: yêu cầu gia hạn đề tài "+MaDT+" không được đồng ý");
-							type="ghdt_1";
+							type="ghdt_kdy";
 						}
 						else if(ycau1.equals("tt4"))
 						{
 							tbtk_ql.setTinTB("Thông báo: yêu cầu hủy đề tài "+MaDT+" không được đồng ý");
-							type="huydt_1";
+							type="huydt_kdy";
 						}
 					}
 					else if(xuly.equals("dongy"))

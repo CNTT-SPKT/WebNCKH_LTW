@@ -61,7 +61,10 @@
 		else
 			yeucauXuly="ĐƠN HỦY ĐỀ TÀI";
 	}
+
 	TaiKhoan tktb =new TaiKhoan();
+	TrangThai ttm=new TrangThai();
+	ttm=trangthaiDAO.getTenTT(detai.getMaTT());
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 
 %>
@@ -179,7 +182,7 @@ $( document ).ready(function() {
 													<td> <%=detai.getTenDT() %></td>
 													<td> <%=detai.getNgayThucHien() %></td>
 													<td> <%=detai.getNgayKetThuc() %></td>
-													<td> <%=detai.getTenTT() %></td>
+													<td><%=ttm.getTenTT() %> </td>
 													
 												</tr>
 
@@ -188,10 +191,9 @@ $( document ).ready(function() {
                                     </div>
                                    <form>
 										<label style="margin-left:15px;margin-right:5px;">Tên chủ nhiệm đề tài:</label>
-										<input type="text" name="firstname" style="margin-right:50px;" value=<%=detai.getTenCN() %> readonly>
-										<label style="margin-left:10px;margin-right:5px;">MSSV:</label>
-										<input type="text" name="lastname" value=<%=detai.getMSSV() %> readonly>
-										<input type="hidden" id="trangthaiDT" value=<%=maTT%>>
+										<input type="text" name="firstname" style="margin-right:50px;" value='<%=detai.getTenCN() %>' readonly>
+										
+										<input type="hidden" id="trangthaiDT" value='<%=maTT%>'>
 									</form><br>
 									<div id="thoigianGiahan">
 									<label style="margin-left:15px;margin-right:5px;">Gia hạn đến ngày:</label>
@@ -817,7 +819,7 @@ $( document ).ready(function() {
                                       <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
-													<th>Mã đề tài</th>
+												
 													<th>Tên đề tài</th>
 													<th>Giảng viên hướng dẫn</th>
 													<th>Chi tiết</th>
@@ -829,7 +831,7 @@ $( document ).ready(function() {
 											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+											
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>

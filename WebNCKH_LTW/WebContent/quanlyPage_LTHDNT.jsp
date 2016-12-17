@@ -817,7 +817,7 @@
                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
-													<th>Mã đề tài</th>
+												
 													<th>Tên đề tài</th>
 													<th>Giảng viên hướng dẫn</th>
 													<th>Chi tiết</th>
@@ -829,7 +829,7 @@
 											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+													
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>

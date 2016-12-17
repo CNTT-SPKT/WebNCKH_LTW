@@ -959,7 +959,7 @@
                                         <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
-													<th>Mã đề tài</th>
+												
 													<th>Tên đề tài</th>
 													<th>Giảng viên hướng dẫn</th>
 													<th>Chi tiết</th>
@@ -971,7 +971,7 @@
 											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+													
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenTT() %></th>
@@ -991,30 +991,30 @@
                                 <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                  <table class="table table-striped table-hover">
-                                            <thead class="thead-default">
-                                                <tr class="success">
-                                                    <th>Mã HĐ</th>
-                                                    <th>Chủ tịch</th>
-                                                    <th>Phản biện</th>
-                                                    <th>Ủy viên</th>
-                                                    <th>Ngày thành lập</th>
-                                                    <th style="">Xóa</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                               <% for (HoiDong hd:hoidongDao.getListHoiDongQL()){ %>
-                                                <tr>
-                                                    <td><%=hd.getMaHD() %></td>
-                                                   <td><%=hd.getTenChuTich() %></td>
-                                                    <td><%=hd.getTenPhanBien() %></td>
-                                                    <td><%=hd.getTenUyVien() %></td>
-                                                    <td><%=hd.getNgayThanhLap() %></td>
-                                                   <td><a href="XoaHoiDong_Servlet?command=delete&MaHD=<%=hd.getMaHD() %>"> Xóa</a></td>
-                                                </tr>
-                                                <%} %>
-                                            </tbody>
-                                        </table>
+                                 <table class="table table-striped table-hover">
+											<thead class="thead-default">
+												<tr class="success">
+													<th>Mã đề tài</th>
+													<th>Tên đề tài</th>
+													<th>Chủ nhiệm đề tài</th>
+													<th>Yêu cầu</th>
+													<th>Xử lý</th>
+												</tr>
+											</thead>
+											<tbody>
+											<%
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
+											%>
+												<tr>
+													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getTenDT() %></th>
+													<th><%=ct.getTenCN() %></th>
+													<th><%=ct.getTenTT() %></th>
+													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
+												</tr>
+												<%} %>
+											</tbody>
+										</table>
                                     </div>
                                 </div>
                             </div>
