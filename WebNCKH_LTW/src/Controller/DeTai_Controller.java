@@ -226,7 +226,7 @@ public class DeTai_Controller {
 	}
 	public ArrayList<DeTai> getListPCPBQL()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql ="select detai.madt,tendt,tensv.hoten as TenSV,tengv.hoten as TenGV,ctnghiemthu.mahd as MHD "
+        String sql ="select distinct detai.madt,tendt,tensv.hoten as TenSV,tengv.hoten as TenGV,ctnghiemthu.mahd as MHD "
         		+ "from detai,ctnghiemthu,taikhoan as tensv,taikhoan as tengv "
         		+ "where detai.madt=ctnghiemthu.madt and detai.gvhd=tengv.matk and detai.macn=tensv.matk and detai.matt='tt9'";
         ArrayList<DeTai> list = new ArrayList<>();
@@ -251,7 +251,7 @@ public class DeTai_Controller {
     }
 	public ArrayList<DeTai> getListPCPBQL_CNT()  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql ="select detai.madt,tendt,tensv.hoten as TenSV,tengv.hoten as TenGV,ctnghiemthu.mahd as MHD "
+        String sql ="select distinct detai.madt,tendt,tensv.hoten as TenSV,tengv.hoten as TenGV,ctnghiemthu.mahd as MHD "
         		+ "from detai,ctnghiemthu,taikhoan as tensv,taikhoan as tengv "
         		+ "where detai.madt=ctnghiemthu.madt and detai.gvhd=tengv.matk and detai.macn=tensv.matk and detai.matt='tt8'";
         ArrayList<DeTai> list = new ArrayList<>();
@@ -597,7 +597,33 @@ public class DeTai_Controller {
         }
         return list;
     }
-	
+	public ArrayList<DeTai> getListDeTaiPhanCongPhanBienQL(String Email)  throws SQLException{
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "select distinct detai.madt as MaDT, detai.tendt as TenDT,tk1.hoten as MaCN,tk2.hoten as GVHD"+
+			" from detai,trangthai,ctnghiemthu,hoidong,taikhoan,taikhoan as tk1, taikhoan as tk2"+
+			" where detai.madt=ctnghiemthu.madt and ctnghiemthu.mahd=hoidong.mahd and "
+			+ " (hoidong.phanbien=taikhoan.matk or hoidong.chutich=taikhoan.matk)"+
+			" and taikhoan.email='"+Email+"' and detai.macn=tk1.matk and detai.gvhd=tk2.matk"+
+			" and ctnghiemthu.matk=taikhoan.matk and detai.matrangthai='tt8'" ;
+        ArrayList<DeTai> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	DeTai dt = new DeTai();
+            	dt.setMaDT(rs.getString("MaDT"));
+            	dt.setTenDT(rs.getString("TenDT"));
+            	dt.setTenCN(rs.getString("MaCN"));
+            	dt.setTenGVHD(rs.getString("GVHD"));
+            	list.add(dt);
+            }
+           
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 	public ArrayList<DeTai> getListDeTaiPhanCongPheDuyet(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
         String sql = "select detai.madt as MaDT, detai.tendt as TenDT,tk1.hoten as MaCN,tk2.hoten as GVHD,detai.linhvuc as LinhVuc "+

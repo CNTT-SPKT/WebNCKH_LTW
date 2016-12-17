@@ -81,6 +81,26 @@ public class CTNghiemThu_Controller {
 	        }
 	        return list;
 	    }
+		public ArrayList<CTNghiemThu> getCTNThu_QL(String madt) {
+	        Connection cons = DBConnect.getConnecttion();
+	        String sql ="select ctnghiemthu.matk, taikhoan.HoTen,Quyen from taikhoan,ctnghiemthu where ctnghiemthu.MaTK=taikhoan.MaTK and ctnghiemthu.madt='"+madt+"'";
+	        ArrayList<CTNghiemThu> list = new ArrayList<>();
+	        try {
+	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+	            ResultSet rs = ps.executeQuery();
+	            while (rs.next()) {
+	            	CTNghiemThu ct = new CTNghiemThu();
+	            	ct.setQuyen(rs.getString("Quyen"));
+	            	ct.setTenTK(rs.getString("taikhoan.HoTen"));
+	            	ct.setMaTK(rs.getString("ctnghiemthu.matk"));
+	                list.add(ct);
+	            }
+	            cons.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return list;
+	    }
 		public CTNghiemThu getCTNghiemThuMaTK(String maTK) {
 	        Connection cons = DBConnect.getConnecttion();
 	        String sql = "SELECT distinct * FROM ctnghiemthu,hoidong,taikhoan as ct, taikhoan as pb,detai,taikhoan "
@@ -114,6 +134,30 @@ public class CTNghiemThu_Controller {
 		public CTNghiemThu getListCTNghiemThuByDeTai(String maDT) throws SQLException {
 	        Connection connection = DBConnect.getConnecttion();
 	        String sql = "SELECT * FROM ctnghiemthu where madt='"+maDT+"'";
+	        PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+	        ResultSet rs = ps.executeQuery();
+	        CTNghiemThu ct = new CTNghiemThu();
+	        while (rs.next()) {
+	        	
+	        	ct.setMaDT(rs.getString("MaDT"));
+            	ct.setMaHD(rs.getString("MaHD"));
+            	ct.setTongQuan(rs.getInt("TongQuan"));
+            	ct.setMucTieu(rs.getInt("MucTieu"));
+            	ct.setPhuongPhap(rs.getInt("PhuongPhap"));
+            	ct.setNoiDung(rs.getInt("NoiDung"));
+            	ct.setDongGop(rs.getInt("DongGop"));
+            	ct.setHinhThuc(rs.getInt("HinhThuc"));
+            	ct.setDiemThuong(rs.getInt("DiemThuong"));
+            	ct.setTongDiem(rs.getInt("TongDiem"));
+            	ct.setYKien(rs.getString("YKien"));
+            	ct.setNgayNT(rs.getString("NgayNT"));
+                
+	        }
+	        return ct;
+	    }
+		public CTNghiemThu getListCTNghiemThuByMaTK(String MaTk) throws SQLException {
+	        Connection connection = DBConnect.getConnecttion();
+	        String sql = "SELECT * FROM ctnghiemthu where matk='"+MaTk+"'";
 	        PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 	        ResultSet rs = ps.executeQuery();
 	        CTNghiemThu ct = new CTNghiemThu();

@@ -409,8 +409,8 @@
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><%="XONG"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
+                                                        <td><%="XONG"%>                                  
+                                                       	<th><a href="quanly_XemDanhGiaCT.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
                                                     </tr>
                                                     <%} %>
                                                      <%for(DeTai c:detaiDAO.getListPCPBQL_CNT()){ %>
@@ -421,7 +421,7 @@
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
                                                         <td><%="CHƯA ĐÁNH GIÁ"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>"></a></th>
+                                                       	<td></td>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>

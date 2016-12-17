@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Controller.*,Model.*" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -5,10 +6,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <title> Example </title>
@@ -23,29 +22,34 @@
 </head>
 
 <body>
-<%
-	DeTai_Controller detaiDAO = new DeTai_Controller();
-	TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
-	ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
-	HoiDong_Controller hoidongDao =new HoiDong_Controller();
-	TB_TK_Controller cttb= new TB_TK_Controller();
-	ThongBao_Controller tb= new ThongBao_Controller();
+
+<%  
+HoiDong_Controller hoidongDao =new HoiDong_Controller();
+TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller thongbaoDAO= new ThongBao_Controller();
+	DeTai_Controller detaiDAO= new DeTai_Controller();
 	DeTai_Controller dt= new DeTai_Controller();
-	TrangThai_Controller tt=  new TrangThai_Controller();
+	TrangThai_Controller trangthaiDAO=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
-	CTNghiemThu ctnghiemthu=new CTNghiemThu();
-	String MaTK = "";
-	if (request.getParameter("MaTK") != null) {
-		MaTK = request.getParameter("MaTK");
-		ctnghiemthu = ctnt.getListCTNghiemThuByMaTK(MaTK);
+	DeTai detai=new DeTai();
+	String maDT = "";
+	if (request.getParameter("MaDT") != null) {
+		maDT = request.getParameter("MaDT");
+	
+		
+		detai = dt.getDeTai(maDT);
+		if(detai.getMaCN()==null)
+		{
+			detai=dt.getDeTaiGV(maDT);
+		}
 	}
 	TaiKhoan tktb =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 
 %>
 
-<div class="page">
+    <div class="page">
         <div class="menu">
             <div class="row">
                 <div class="pictureMain">
@@ -71,8 +75,8 @@
                                     <li><a href="#">Liên Hệ</a></li>
                                     <li><a href="#">Hướng dẫn</a></li>
                                 </ul>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"><%=session.getAttribute("Email") %> 	 </span></a></li>
+                               <ul class="nav navbar-nav navbar-right">
+                                    <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"> <%=session.getAttribute("Email") %></span></a></li>
                                     <li><a href="mainPage.jsp">Đăng xuất</a></li>
                                 </ul>
                             </div>
@@ -84,7 +88,7 @@
         </div>
         <div class="qlContent">
             <div class="row">
-                  <div class="col-md-2">
+                 <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
                         <li class="" id="tab_postThongbao">
                             <a class="list-group-item" href="#postThongBao" data-toggle="pill">
@@ -130,79 +134,37 @@
                 </div>
                 <div class="col-md-10">
                     <div class="tab-content">
-                      	<div class="tab-pane active" id="DanhGia">
-							<div class="row">
-							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
-								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
-									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
-										<form action="CTNghiemThuQL_Servlet" method="post">
-										<input type="hidden" name="command1" value="updateql">
-										<input type="hidden" name="MaDT" value=<%=MaTK%>>	
-											<table class="table table-striped table-hover">
-												<thead class="thead-default">
-													<tr class="success">
-														<th>Nội dung đánh giá</th>
-														<th>Điểm tối đa</th>
-														<th>Điểm đánh giá</th>	
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Tổng quan tình hình và lý do chọn đề tài</td>
-														<td>10</td>
-														<td><input disabled value='<%=ctnghiemthu.getTongQuan() %>' type="text" name="diemtongquan" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-													</tr>
-													<tr>
-														<td>Mục tiêu đề tài</td>
-														<td>15</td>
-														<td><input disabled value='<%=ctnghiemthu.getMucTieu() %>' type="text" name="diemmuctieu" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
-
-													</tr>
-													<tr>
-														<td>Phương pháp nghiên cứu</td>
-														<td>15</td>
-														<td><input disabled value='<%=ctnghiemthu.getPhuongPhap() %>' type="text" name="diemphuongphap" class="form-control required diem2" id="" required min="0" max="15" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-15."></td>
-
-													</tr>
-													<tr>
-														<td>Nội dung khoa học</td>
-														<td>35</td>
-														<td><input disabled value='<%=ctnghiemthu.getNoiDung() %>' type="text" name="diemnoidung" class="form-control required diem3" id="" required min="0" max="35" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-35."></td>
-													</tr>
-													<tr>
-														<td>Đóng góp cho KT-XH-GD</td>
-														<td>10</td>
-														<td><input disabled value='<%=ctnghiemthu.getDongGop() %>' type="text" name="diemdonggop" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-
-													</tr>
-													<tr>
-														<td>Hình thức báo cáo tổng kết</td>
-														<td>10</td>
-														<td><input disabled value='<%=ctnghiemthu.getHinhThuc() %>' type="text" name="diemhinhthuc" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-													</tr>
-													<tr>
-														<td>Điểm thưởng</td>
-														<td>10</td>
-														<td><input disabled value='<%=ctnghiemthu.getDiemThuong() %>' type="text" name="diemthuong" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
-													</tr>
-													<tr>
-														<td>Tổng điểm</td>
-														<td>100</td>
-														<td><input disabled value='<%=ctnghiemthu.getTongDiem()%>' type="text" name="tongdiem" class="form-control "></td>
-													</tr>
-												</tbody>
-											</table>
-											<label class="col-sm-2 control-label" for="mota">Ý kiến đánh giá</label><br>
-											<div class="col-sm-12">
-												<textarea disabled type="text" name="ykien" class="form-control required mota" placeholder=""  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="4" required><%=ctnghiemthu.getYKien() %></textarea>
-											</div>
-											
-										</form>
+                        			<div class="tab-pane active" id="CTDT">
+									<div class="row" style="margin-right:0px;">
+										<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
+											<h2 class="tieude_theh">DANH SÁCH ĐÁNH GIÁ</h2>
+											<hr>
+											 <div class="quanly_dsHDNT">
+                                        <div class="ql_table_dsHDNT"></div>
+										<h5 style="margin-left:10px">ĐIỂM CHI TIẾT ĐÁNH GIÁ ĐỀ TÀI: <%=detai.getTenDT() %></h5>
+                                       <table class="table table-striped table-hover">
+                                            <thead class="thead-default">
+                                                <tr class="success">
+                                                    <th>Họ và tên</th>
+                                                    <th>Chức vụ</th>
+                                                    <th>Chi tiết điểm</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               <% for (CTNghiemThu ctn:ctnt.getCTNThu_QL(maDT)){ %>
+                                                <tr>
+                                                    <td><%=ctn.getTenTK() %></td>
+                                                   <td><%=ctn.getQuyen() %></td>
+                                                  <td><a href="quanly_XemDanhGia.jsp?MaTK=<%=ctn.getMaTK()%>">Xem kết quả</a></td>
+                                                </tr>
+                                                <%} %>
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-
                          <div class="tab-pane" id="postThongBao">
                             <div class="row">
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
@@ -300,7 +262,7 @@
                                          <%} %>
                                             </tbody>
                                         </table>
-                                      <!--     <script type="text/javascript">
+                                          <!--     <script type="text/javascript">
                                         	$(function() {
                                         		$('#tb_pheduyet').on('click',function(){
                                         			$('#tab_postThongbao,#postThongBao').removeClass('active');
@@ -318,6 +280,7 @@
                                         </script>--> 
                                         </div>
                                         </div>
+                                   
                                 </div>
                             </div>
                         
@@ -329,7 +292,7 @@
                                     <div class="quanly_dsHDNT">
                                         <div class="ql_table_dsHDNT"></div>
 
-                                        <table class="table table-striped table-hover">
+                                       <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
                                                     <th>Mã HĐ</th>
@@ -367,7 +330,7 @@
                                     <div class="quanly_dsHDPB">
 
                                         <div class="ql_table_dsDTPB">
-                                             <table class="table table-striped table-hover">
+                                            <table class="table table-striped table-hover">
                                                 <thead class="thead-default">
                                                     <tr class="success">
                                                         <th>Mã đề tài</th>
@@ -404,18 +367,18 @@
                                                     <%} %>
                                                 </tbody>
                                             </table>
-                                             <a class="btn btn-info" style="float:right; margin-right: 10px;" href="quanlyPage_PCPB.jsp" role="button">Phân công phản biện</a>
+                                            <a class="btn btn-info" style="float:right; margin-right: 10px;" href="quanlyPage_PCPB.jsp" role="button">Phân công phản biện</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      <div class="tab-pane" id="dsDeTaiPhanBien">
+                        <div class="tab-pane" id="dsDeTaiPhanBien">
                             <div class="row">
                                 <div class="ql_dsDeTaiPhanBien" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="ql_tb_dsDeTaiPhanBien">
-                                       <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -449,8 +412,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                       <div class="tab-pane " id="quanLyDeTai">
+                         <div class="tab-pane " id="quanLyDeTai">
                             <div class="row">
                                 <div class="form-group" style="margin-bottom:0px;">
                                     <div class="ql_quanLyDeTai" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px;">
@@ -458,8 +420,7 @@
                                         <div class="ql_tb_quanLyDeTai" style="font-size:13px">
                                             <div class="timQLDT" style="float:right;margin-bottom:10px;padding-top:-5;">
                                                 <div style="margin-left:0px;" class=" col-sm-6 col-sm-offset-3 ">
-
-                                                         <select style="float:left;width:150p x; " class="form-control" id="tkql" >
+													 <select style="float:left;width:150p x; " class="form-control" id="tkql" >
                                                     <option value="tatca" selected>Tất cả</option>     
                                                     <option value="madetai">Mã đề tài</option>
                                                     <option value="stendt">Tên đề tài</option>
@@ -468,7 +429,7 @@
 
                                                     <div style=";width:400px; " id="imaginary_container ">
                                                         <div class="input-group stylish-input-group">
-                                                            <input type="text " id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
+                                                            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
                                                             <span class="input-group-addon ">
                                                                         <button type="submit" id="tkiem">
                                                                             <span class="glyphicon glyphicon-search "></span>
@@ -482,7 +443,7 @@
                                             </div>
 
                                         </div>
-                                          <table class="table table-striped table-hover" id="myTable">
+                                        <table class="table table-striped table-hover" id="myTable">
                                             <thead class="thead-default ">
                                                 <tr class="success ">
                                                     <th>Mã đề tài</th>
@@ -503,7 +464,7 @@
                                                     <th><%=c.getTenDT()%> </th>
                                                     <th><%=c.getHoTen()%></th>
                                                		<th><%=c.getTenGVHD() %></th>                                      
-                                                    	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
+                                                   	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
                                                     <th><%=c.getTenTT() %></th>
                                                    
                                               
@@ -514,11 +475,12 @@
                                                     %>                       
                                             </tbody>
                                         </table>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      <div class="tab-pane " id="dsDeTaiPheDuyet">
+                       <div class="tab-pane " id="dsDeTaiPheDuyet">
                             <div class="row ">
                                 <div class="ql_dsDeTaiPheDuyet " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHÊ DUYỆT</h2><hr>
@@ -569,12 +531,12 @@
                                 </div>
                             </div>
                         </div>
-                      <div class="tab-pane " id="dsDeTaiHuongDan">
+                       <div class="tab-pane " id="dsDeTaiHuongDan">
                             <div class="row ">
                                 <div class="ql_dsDeTaiHuongDan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI HƯỚNG DẪN</h2><hr>
                                     <div class="ql_tb_dsDeTaiHuongDan ">
-                                       <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -803,12 +765,12 @@
 										</div>
 									</div>
                     
-                        <div class="tab-pane " id="dsDeTaiDK">
+                         <div class="tab-pane " id="dsDeTaiDK">
                             <div class="row ">
                                 <div class="ql_dsDeTaiDK " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐÃ ĐĂNG KÝ</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                      <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -838,12 +800,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="duyetHuy_GianHan">
-							<div class="row">
-								<div class="gv_duyetHuy_GianHan" style="background:white;height:390px;margin-right:15px;border-radius:3px">
-									<h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
-									<div class="gv_tb_dsDeTaiDK">
-									  <table class="table table-striped table-hover">
+                        <div class="tab-pane " id="duyetHuy_GianHan">
+                            <div class="row ">
+                                <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
+                                    <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
+                                    <div class="ql_tb_dsDeTaiDK ">
+                                            <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -855,32 +817,27 @@
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString()))
-											{
+											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													<th><%=ct.getMaDT() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenTT() %></th>
-													<th>
-													<a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a>
-													</th>
-													<%
-													}
-											
-											%>
-											
+													<th><a href="quanly_DuyetDon.jsp?MaDT=<%=ct.getMaDT() %>&MaTT=<%=ct.getMaTT() %>">Xử lý</a></th>
 												</tr>
+												<%} %>
 											</tbody>
 										</table>
-									</div>
-								</div>
-							</div>
-						</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
         <div id='bttop'>
             <img src="images/backtotop.png" alt="backtotop" width="50px" height="50px">
         </div>

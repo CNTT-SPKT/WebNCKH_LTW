@@ -59,7 +59,7 @@ public class HoiDong_Controller {
 	}
 		
 
-		public boolean insert_PCPB(String MaHD,String MaDT,String MaTK) {
+		public boolean insert_PCPB(String MaDT,String MaHD,String MaTK) {
 			Connection cons = DBConnect.getConnecttion();
 			 String sql = " INSERT INTO ctnghiemthu(madt,mahd,matk)"
 		        		+ " values (?,?,?)";
@@ -195,7 +195,7 @@ public class HoiDong_Controller {
             while (rs.next()) {
             	
             	hd.setTKCT(rs.getString("ChuTich"));
-            	hd.setTKPB(rs.getString("UyVien"));
+            	hd.setTKPB(rs.getString("PhanBien"));
             }
             cons.close();
         } catch (SQLException e) {

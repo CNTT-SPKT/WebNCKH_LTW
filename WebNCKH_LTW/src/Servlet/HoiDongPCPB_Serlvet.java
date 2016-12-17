@@ -62,7 +62,7 @@ public class HoiDongPCPB_Serlvet extends HttpServlet {
 		 hd1=hd.getCTPB(HoiDongPCPB);
 		 String tkct=hd1.getTKCT();
 		 String tkpb=hd1.getTKPB();
-		System.out.println("mad t: "+chonmdt);
+		System.out.println("madt: "+chonmdt);
 		System.out.println("mahd: "+HoiDongPCPB);
 		System.out.println("mact: "+tkct);
 		System.out.println("mapb: "+tkpb);
