@@ -189,11 +189,7 @@
 														<td>10</td>
 														<td><input type="text" name="diemthuong" class="form-control required diem1" id="" required min="0" max="10" data-placement="left" data-trigger="hover" data-content="Vui lòng nhập vào ký tự số từ 0-10."></td>
 													</tr>
-													<tr>
-														<td>Tổng điểm</td>
-														<td>100</td>
-														<td><input type="text" name="tongdiem" class="form-control " value=""></td>
-													</tr>
+													
 												</tbody>
 											</table>
 											<label class="col-sm-2 control-label" for="mota">Ý kiến đánh giá</label><br>

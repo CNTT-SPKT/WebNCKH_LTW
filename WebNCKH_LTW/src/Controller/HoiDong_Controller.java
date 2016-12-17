@@ -14,6 +14,7 @@ import com.sun.istack.internal.logging.Logger;
 import Model.CTNghiemThu;
 import Model.DeTai;
 import Model.HoiDong;
+import Model.ThongBao;
 import Packages.DBConnect;
 
 public class HoiDong_Controller {
@@ -58,21 +59,23 @@ public class HoiDong_Controller {
 	}
 		
 
-		public void insert_PCPB(String MaHD,String MaDT) {
+		public boolean insert_PCPB(String MaHD,String MaDT,String MaTK) {
 			Connection cons = DBConnect.getConnecttion();
-			 String sql = "INSERT INTO ctnghiemthu(madt,mahd)"
-		        		+ " values (?,?)";
+			 String sql = " INSERT INTO ctnghiemthu(madt,mahd,matk)"
+		        		+ " values (?,?,?)";
 			try {
 				 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
 		           
 		            ps.setString(1, MaDT);
 		            ps.setString(2, MaHD);
-		          ps.executeUpdate();
+		            ps.setString(3, MaTK);;
+		          return ps.executeUpdate()==1;
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-				Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+				Logger.getLogger(CTNghiemThu_Controller.class.getName(), null).log(Level.SEVERE, null, e);
 			}
+			return false;
 		}
 	
 //		public ArrayList<HoiDong> getListHoiDongQL() {
@@ -182,6 +185,24 @@ public class HoiDong_Controller {
         }
         return list;
     }
+	public HoiDong getCTPB(String MaHD) {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM HoiDong where MaHD='"+MaHD+"'";
+        HoiDong hd = new HoiDong();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	
+            	hd.setTKCT(rs.getString("ChuTich"));
+            	hd.setTKPB(rs.getString("UyVien"));
+            }
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hd;
+    }
 	public static void main(String[] args) throws SQLException, Exception{
 	      HoiDong_Controller ctrl= new HoiDong_Controller();
 	       for(HoiDong ct : ctrl.getListHoiDongQL())
@@ -189,5 +210,9 @@ public class HoiDong_Controller {
 	    	   System.out.println(ct.getTenChuTich());
 	       }
 	      
+
+	       if(ctrl.insert_PCPB("dt7","hd1", "tk3"))
+	    	   System.out.println("thanh cong");
+	       
 	    }
 }

@@ -41,7 +41,11 @@
 
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-	detai = dt.getDeTai_ALL(maDT);
+		detai = dt.getDeTai(maDT);
+		if(detai.getMaCN()==null)
+		{
+			detai=dt.getDeTaiGV(maDT);
+		}
 	}
 	TaiKhoan tktb =new TaiKhoan();
 	TaiKhoan tktb1 =new TaiKhoan();
@@ -57,6 +61,7 @@
 	tksv1=taikhoanDAO.gettk(detai.getSinhVien1());
 	tksv2=taikhoanDAO.gettk(detai.getSinhVien2());
 	tkgv=taikhoanDAO.gettk(detai.getGVHD());
+	
 	
 %>
 
@@ -215,7 +220,7 @@
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																			<div class="col-sm-8">
-																				<input name="cndetaiql" lass="form-control" id="hoten1" type="text" required  readonly value="<%=tktb1.getHoTen()%>">
+																				<input name="cndetaiql" class="form-control" id="hoten1" type="text" required  readonly value="<%=tktb1.getHoTen()%>">
 																			</div>
 																		</div>
 																		<div class="row" style="margin-bottom:5px">

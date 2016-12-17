@@ -323,8 +323,8 @@ public class TaiKhoan_Controller {
 	public static void main(String[] args) throws SQLException, Exception {
 		TaiKhoan_Controller ctrl = new TaiKhoan_Controller();
 		
-		for(TaiKhoan tk:ctrl.getListTKQuyen())
-			System.out.println(tk.getQuyen());
+		TaiKhoan tk=ctrl.gettk("tk3");
+			System.out.println(tk.getHoTen());
 //			TaiKhoan tk=ctrl.getQL();
 //			System.out.println(tk.getMaTK());
 	}

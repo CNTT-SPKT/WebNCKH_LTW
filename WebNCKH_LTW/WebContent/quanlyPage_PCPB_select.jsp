@@ -36,6 +36,8 @@ CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 DeTai detai=new DeTai();
 DeTai detai2=new DeTai();
+HoiDong hoidong=new HoiDong();
+
 String maDT = "";
 if (request.getParameter("MaDT") != null) {
 	maDT = request.getParameter("MaDT");
@@ -149,7 +151,9 @@ tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td> <input type="hidden" name="chonmdt" value='<%=detai.getMaDT() %>'><%=detai.getMaDT() %> </td>
+                                                <input type="hidden" name="chonmdt" value='<%=detai.getMaDT() %>'>
+                                                 
+                                                    <td> <%=detai.getMaHienThi() %> </td>
                                                     <td><%=detai.getTenDT() %></td>
                                                     <td><%=detai.getTenCN() %></td>
                                                    <th><a href="quanly_ChiTiet.jsp?MaDT=<%=detai.getMaDT()%>">Chi tiết</a></th>

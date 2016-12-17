@@ -36,14 +36,14 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		if(dt.kiemTraTT(maDT))
+	
+		
+		detai = dt.getDeTai(maDT);
+		if(detai.getMaCN()==null)
 		{
 			detai=dt.getDeTaiGV(maDT);
 		}
-		else
-		{
-		detai = dt.getDeTai(maDT);
-	}}
+	}
 	TaiKhoan tktb =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
 
@@ -579,18 +579,16 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                         <div class="ql_tb_quanLyDeTai" style="font-size:13px">
                                             <div class="timQLDT" style="float:right;margin-bottom:10px;padding-top:-5;">
                                                 <div style="margin-left:0px;" class=" col-sm-6 col-sm-offset-3 ">
-
-                                                    <select style="float:left;width:150p x; " class="form-control" id="tkql" >
+													 <select style="float:left;width:150p x; " class="form-control" id="tkql" >
                                                     <option value="tatca" selected>Tất cả</option>     
                                                     <option value="madetai">Mã đề tài</option>
                                                     <option value="stendt">Tên đề tài</option>
                                                     <option value="tengvhd">Tên GVHD</option>
                                                     </select>
 
-
                                                     <div style=";width:400px; " id="imaginary_container ">
                                                         <div class="input-group stylish-input-group">
-                                                            <input type="text " id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
+                                                            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
                                                             <span class="input-group-addon ">
                                                                         <button type="submit" id="tkiem">
                                                                             <span class="glyphicon glyphicon-search "></span>
@@ -604,36 +602,39 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                             </div>
 
                                         </div>
-                                      <table class="table table-striped table-hover">
-											<thead class="thead-default">
-												<tr class="success">
-													<th>Mã đề tài</th>
-													<th>Tên đề tài</th>
-													<th>Chủ nghiệm đề tài</th>
-													<th>Giảng viên hướng dẫn</th>
-													<th>Chi tiết</th>
-													<th>Báo cáo</th>
-													<th>Đánh giá</th>
-												</tr>
-											</thead>
-											<tbody>
-											   <%
-				     							for (DeTai ct: detaiDAO.getListDeTaiPhanCongPhanBien(session.getAttribute("Email").toString())) {
-												%>
-												<tr>
-													<th><%=ct.getMaDT() %></th>
-													<th><%=ct.getTenDT() %></th>
-													<th><%=ct.getTenCN() %></th>
-													<th><%=ct.getTenGVHD() %></th>
-													<th><a href="quanly_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
-													<th><a href="quanly_XemBaoCao.jsp?MaDT=<%=ct.getMaDT() %>">Xem báo cáo</a></th>
-													<th><a href="quanlyPage_DanhGia.jsp?MaDT=<%=ct.getMaDT() %>">Đánh giá</a></th>
-												</tr>
-												<%
-			    											}
-												%>		
-											</tbody>
-										</table>
+                                        <table class="table table-striped table-hover" id="myTable">
+                                            <thead class="thead-default ">
+                                                <tr class="success ">
+                                                    <th>Mã đề tài</th>
+                                                    <th>Tên đề tài</th>
+                                                    <th>Chủ nghiệm đề tài</th>
+                                                    <th>Giảng viên hướng dẫn</th>
+                                                    <th>Chi tiết</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>CNTT</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                         	   <%
+                                         	  		for(DeTai c: detaiDAO.getListDeTaiQL()){                      			
+                                                %>
+                                                <tr>
+                                                 <th><%=c.getMaHienThi()%></th>
+                                                    <th><%=c.getTenDT()%> </th>
+                                                    <th><%=c.getHoTen()%></th>
+                                               		<th><%=c.getTenGVHD() %></th>                                      
+                                                   	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
+                                                    <th><%=c.getTenTT() %></th>
+                                                   
+                                              
+                                                    	<th><a href="QuanLy_CapNhapTT.jsp?MaDT=<%=c.getMaDT() %>">CHỌN</a></th>
+                                                </tr>    
+                                                   <%
+                                                   }
+                                                    %>                       
+                                            </tbody>
+                                        </table>
+                                       
                                     </div>
                                 </div>
                             </div>

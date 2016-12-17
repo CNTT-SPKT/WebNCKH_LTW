@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import Controller.DeTai_Controller;
 import Controller.HoiDong_Controller;
 import Model.DeTai;
+import Model.HoiDong;
 
 /**
  * Servlet implementation class HoiDongPCPB_Serlvet
@@ -47,6 +48,7 @@ public class HoiDongPCPB_Serlvet extends HttpServlet {
 		System.out.println("vao servlet");
 		DeTai_Controller crt= new DeTai_Controller();
 		HoiDong_Controller hd=new HoiDong_Controller();
+		HoiDong hd1=new HoiDong();
 		DeTai dt= new DeTai();
 	    response.setContentType("text/html;charset=UTF-8"); 
 	    request.setCharacterEncoding("UTF-8");
@@ -57,6 +59,13 @@ public class HoiDongPCPB_Serlvet extends HttpServlet {
 		try{
 		String chonmdt = request.getParameter("chonmdt");
 		String HoiDongPCPB = request.getParameter("HoiDongPCPB");
+		 hd1=hd.getCTPB(HoiDongPCPB);
+		 String tkct=hd1.getTKCT();
+		 String tkpb=hd1.getTKPB();
+		System.out.println("mad t: "+chonmdt);
+		System.out.println("mahd: "+HoiDongPCPB);
+		System.out.println("mact: "+tkct);
+		System.out.println("mapb: "+tkpb);
 		if(crt.kiemTraPCPB(chonmdt))
 		{
 			type="pcpb_t";
@@ -65,13 +74,15 @@ public class HoiDongPCPB_Serlvet extends HttpServlet {
 		else{		
 			dt.setMaDT(chonmdt);
 			dt.setMaTT("tt8");
-			hd.insert_PCPB(HoiDongPCPB, chonmdt);
+			hd.insert_PCPB(chonmdt,HoiDongPCPB,tkct);
+			hd.insert_PCPB(chonmdt,HoiDongPCPB,tkpb);
 			crt.updateTrangThai_DeTai(dt);
 			type="pcpb_1";
 			url="quanlyPage.jsp?type="+type;	
 			}
 		}
 		catch (Exception e ) {
+			System.out.println("LỖI Ở CATCH");
 			type="pcpb_0";
 			url="quanlyPage.jsp?type="+type;	
 		}
