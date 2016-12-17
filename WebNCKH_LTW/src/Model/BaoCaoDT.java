@@ -1,30 +1,25 @@
 package Model;
 
-import java.io.File;
-import java.util.ArrayList;
-
 public class BaoCaoDT {
 	private String MaDT;
     private String MaBC;
-    private String TenBC;
     private String NgayBC;
     private String FileBC;
     private String TenDT;
-   
+    private String TenBC;
     
 	public BaoCaoDT() {
 		super();
 	}
 
-	public BaoCaoDT(String MaDT, String MaBC, String TenBC,String FileBC, String NgayBC,
-			 String TenDT) {
+	public BaoCaoDT(String maDT, String maBC, String ngayBC, String fileBC, String tenDT, String tenBC) {
 		super();
-		this.MaDT = MaDT;
-		this.MaBC = MaBC;
-		this.TenBC = TenBC;
-		this.FileBC = FileBC;
-		this.NgayBC = NgayBC;
-		this.TenDT = TenDT;
+		MaDT = maDT;
+		MaBC = maBC;
+		NgayBC = ngayBC;
+		FileBC = fileBC;
+		TenDT = tenDT;
+		TenBC = tenBC;
 	}
 
 	public String getMaDT() {
@@ -41,14 +36,6 @@ public class BaoCaoDT {
 
 	public void setMaBC(String maBC) {
 		MaBC = maBC;
-	}
-
-	public String getTenBC() {
-		return TenBC;
-	}
-
-	public void setTenBC(String tenBC) {
-		TenBC = tenBC;
 	}
 
 	public String getNgayBC() {
@@ -75,4 +62,13 @@ public class BaoCaoDT {
 		TenDT = tenDT;
 	}
 
+	public String getTenBC() {
+		return TenBC;
+	}
+
+	public void setTenBC(String tenBC) {
+		TenBC = tenBC;
+	}
+
+	
 }

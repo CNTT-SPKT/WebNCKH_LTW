@@ -31,7 +31,55 @@
 		maBC = request.getParameter("MaBC");
 		bcdt = bc.getBaoCaoDTByMaBC(maBC);
 	}
+	String type = request.getParameter("type");
+	String error ="";
+	if (request.getParameter("type") != null)
+	{
+		
+		if(type.equals("nopbc_1"))
+			error = "Nộp báo cáo thành công!";
+		if(type.equals("nopbc_0"))
+			error = "Đăng ký đề tài thất bại!";
+		
+	}
 %>
+<script type="text/javascript">
+   $(document).ready(function() {
+       var x = $('.Mssg').text();
+       var y = $('.TypeMssg').text();
+    	if(x != "null" && x != "")
+    	{
+    		if( y == "nopbc_1" )
+    			$("#ModalSuccess").modal('show');
+    		if( y == "nopbc_0" )
+    			$("#ModalFail").modal('show');
+    	}
+    });
+</script>
+<div class="modal fade" id="ModalSuccess">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-success">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<div class="modal fade" id="ModalFail">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-danger">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<h4 class="Mssg hidden" style="text-align:center"><%=error%></h4>
+<h4 class="TypeMssg hidden" style="text-align:center"><%=type%></h4>
 	<div class="page">
 		<div class="menu">
 			<div class="row">

@@ -25,6 +25,26 @@ $( document ).ready(function() {
 	 });
 });
 </script>
+
+<script src="jquery-2.1.1.min.js" type="text/javascript"></script>
+ <script src="jquery.form.min.js" type="text/javascript"></script>
+<script>
+   $(function() {
+        $('#tengi').ajaxForm({
+            success: function(msg) {
+            	
+           /*      $(".upload-error").attr('value',msg);
+                $(".upload-error").attr('src',msg); */
+                window.href='sinhvien_NopBaoCao';
+                
+            },
+            error: function(msg) {
+            	$(".upload-error").attr('value','loi roi');
+            }
+        });
+      
+    });  
+   </script>
 </head>
 <body >
 <% TB_TK_Controller cttb= new TB_TK_Controller();
@@ -104,8 +124,8 @@ $( document ).ready(function() {
 								
 								<div class="gv_bcdt" style="margin:15px 0px 10px 15px;">
 								
-									<label>Mã số đề tài: <%=ctdt.getMaDT() %></label><br>
-									<label>Tên đề tài: <%=ctdt.getTenDT()%></label>
+									<label >Mã số đề tài:<%=ctdt.getMaDT() %></label><br>
+									<label>Tên đề tài:<%=ctdt.getTenDT()%></label>
 								</div>
 								
 								<div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
@@ -123,33 +143,59 @@ $( document ).ready(function() {
 											%>
 											<tr>
 												<td><%=nbc.getNgayBC() %></td>
-												<td><a href="sinhvien_BaoCaoTienDo.jsp?MaBC=<%=nbc.getMaBC()%>"><%=nbc.getTenBC() %></a></td>
+												<td><a href="" onclick="downloadAll(window.links)"><%=nbc.getTenBC() %></a></td>
 												<td><%=nbc.getTenBC() %></td>
 
 											</tr>
+											<script type="text/javascript">
+											var links = ['<%=nbc.getFileBC() %>', ];
+										
+											function downloadAll(urls) {
+												var link = document.createElement('a');
+												link.setAttribute('download', "<%=nbc.getTenBC() %>");
+													link.style.display = 'none';
+										
+													document.body.appendChild(link);
+										
+													for (var i = 0; i < urls.length; i++) {
+														link.setAttribute('href', urls[i]);
+														link.click();
+													}
+										
+													document.body.removeChild(link);
+												}
+										</script>
 											
 											<%
 			    								}
 											%>
 										</tbody>
+										
+										
 									</table>
 								</div>
-								<form action="UploadFile_Servlet" method="post" enctype="multipart/form-data">
+								<form id="tengi" action="UploadFile_Servlet" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="MaDT" value="<%=ctdt.getMaDT() %>"/>
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-left:-10px">
 										
 										<div class="fileinput fileinput-new" data-provides="fileinput">
 									    <span class="btn btn-default btn-file">
-									    		<input accept=".pdf,.docx" type="file" name="uploadfile" multiple />
+									    		<input accept=".pdf,.docx" type="file"  id="file" name="file1" multiple />
 									    </span>
 																		</div>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-										<button type="submit" class="btn btn-primary btn-md">Nộp file</button>
+										<button type="submit" class="btn btn-primary btn-md" onclick="myFunction()" >Nộp file</button>
 									</div>
 								</div>
 								</form>
-								<script type="text/javascript">
+								<script>
+								function myFunction() {
+								    location.reload();
+								}
+								</script>
+								<!-- <script type="text/javascript">
 								$(function() {
 									var x=4;
 									$("#NopBaoCao button:submit").on('click', function() {
@@ -173,8 +219,7 @@ $( document ).ready(function() {
 										$("#btnUpload").trigger('click');
 									});
 								});
-
-								</script>
+								</script> -->
 							</div>
 						</div>
 						<div class="tab-pane" id="thongbao">

@@ -49,14 +49,14 @@
 	TaiKhoan tksv2=new TaiKhoan();
 	TaiKhoan tkgv =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
-	tktb1=taikhoanDAO.gettk(detai.getMaCN().toString());
+	tktb1=taikhoanDAO.gettk(detai.getMaCN());
 		System.out.print("hihi");
-		String sv1=detai.getSinhVien1().toString();
-		String sv2=detai.getSinhVien2().toString();
+		String sv1=detai.getSinhVien1();
+		String sv2=detai.getSinhVien2();
 	
-	tksv1=taikhoanDAO.gettk(detai.getSinhVien1().toString());
-	tksv2=taikhoanDAO.gettk(detai.getSinhVien2().toString());
-	tkgv=taikhoanDAO.gettk(detai.getGVHD().toString());
+	tksv1=taikhoanDAO.gettk(detai.getSinhVien1());
+	tksv2=taikhoanDAO.gettk(detai.getSinhVien2());
+	tkgv=taikhoanDAO.gettk(detai.getGVHD());
 	
 %>
 

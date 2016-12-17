@@ -195,38 +195,14 @@ $( document ).ready(function() {
 														<span class="counter pull-right"></span>   
 													</div>
 												</form>
-												<table class="table table-striped table-hover results">
+												<table class="table table-striped table-hover results ">
 													<thead>
 														<tr class="success">
 
-															<th>
-																<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-																	Thông báo
-																	<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-																	<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-																</a>
-															</th>
-															<th>
-																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																	Người gửi
-																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																</a>
-															</th>
-															<th>
-																<a href="#" ng-click="sortType = 'fish'; sortReverse = !sortReverse">
-																	Ngày gửi
-																	<span ng-show="sortType == 'fish' && !sortReverse" class="fa fa-caret-down"></span>
-																	<span ng-show="sortType == 'fish' && sortReverse" class="fa fa-caret-up"></span>
-																</a>
-															</th>
-															<th>
-																<a href="#" ng-click="sortType = 'tastiness'; sortReverse = !sortReverse">
-																	Chi tiết 
-																	<span ng-show="sortType == 'tastiness' && !sortReverse" class="fa fa-caret-down"></span>
-																	<span ng-show="sortType == 'tastiness' && sortReverse" class="fa fa-caret-up"></span>
-																</a>
-															</th>
+															<th><a href="#" >Thông báo</a></th>
+															<th><a href="#" >Người gửi</a></th>
+															<th><a href="#" >Ngày gửi</a></th>
+															<th><a href="#" >Chi tiết </a></th>
 															<th><a href="" >Xóa TB</a></th>
 														</tr>
 													</thead>
@@ -252,7 +228,7 @@ $( document ).ready(function() {
 										</div>
 									</div>
 								</div>
-						<div class="tab-pane" id="dsDeTai"  >
+								 <div class="tab-pane" id="dsDeTai"  >
 										<div class="row" id="ttt">
 											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
 												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>

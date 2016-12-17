@@ -3,6 +3,7 @@ package Controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -28,8 +29,8 @@ public class BaoCaoDT_Controller {
             	bc.setMaBC(rs.getString("MaBC"));
             	bc.setMaDT(rs.getString("MaDT"));
             	bc.setNgayBC(rs.getString("NgayBC"));
-            	bc.setTenBC(rs.getString("TenBC"));
             	bc.setTenDT(rs.getString("TenDT"));
+            	bc.setTenBC(rs.getString("TenBC"));
             	
             }
             cons.close();
@@ -52,8 +53,32 @@ public class BaoCaoDT_Controller {
             	bc.setMaBC(rs.getString("MaBC"));
             	bc.setMaDT(rs.getString("detai.MaDT"));
             	bc.setNgayBC(rs.getString("NgayBC"));
-            	bc.setTenBC(rs.getString("TenBC"));
             	bc.setTenDT(rs.getString("TenDT"));
+            	bc.setTenBC(rs.getString("TenBC"));
+            	list.add(bc);
+            }
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+	
+	public ArrayList<BaoCaoDT> getListBaoCao() {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM baocaodt ";
+        
+        ArrayList<BaoCaoDT> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	BaoCaoDT bc = new BaoCaoDT();
+            	bc.setMaBC(rs.getString("MaBC"));
+            	bc.setMaDT(rs.getString("MaDT"));
+            	bc.setNgayBC(rs.getString("NgayBC"));
+            	bc.setFileBC(rs.getString("FileBC"));
+            	bc.setTenBC(rs.getString("TenBC"));
             	list.add(bc);
             }
             cons.close();
@@ -75,8 +100,8 @@ public class BaoCaoDT_Controller {
             	bc.setMaBC(rs.getString("MaBC"));
             	bc.setMaDT(rs.getString("MaDT"));
             	bc.setNgayBC(rs.getString("NgayBC"));
-            	bc.setTenBC(rs.getString("TenBC"));
             	bc.setFileBC(rs.getString("FileBC"));
+            	bc.setTenBC(rs.getString("TenBC"));
             }
             cons.close();
         } catch (SQLException e) {
@@ -84,30 +109,28 @@ public class BaoCaoDT_Controller {
         }
         return bc;
     }
-	public boolean insertDonHuy(BaoCaoDT bc) throws ParseException {
+	public boolean insertBaoCao(BaoCaoDT bc) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "insert into baocaodt values(?,?,?,?)";
+		String sql = "insert into baocaodt values(?,?,?,?,?)";
 		try {
+			
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
-			ps.setString(1,bc.getMaBC());
-			ps.setString(2, bc.getMaDT());
+			ps.setString(1, bc.getMaDT());
+			ps.setString(2,bc.getMaBC());
 			ps.setString(3, bc.getTenBC());
 			ps.setString(4, bc.getFileBC());
-			
+			ps.setString(5, bc.getNgayBC());
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger(DonHuy_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+			Logger.getLogger(BaoCaoDT_Controller.class.getName(), null).log(Level.SEVERE, null, e);
 		}
 		return false;
 	}
 	public static void main(String[] args) throws SQLException {
 		BaoCaoDT_Controller ctrl= new BaoCaoDT_Controller();
-	       for(BaoCaoDT ct:ctrl.getListBaoCaoDT("dt1"))
-	       {
-	    	   System.out.println(ct.getTenDT()+"______"+ct.getTenBC()+"_______"+ct.getNgayBC());
-	    	   
-	       }
+	       for (BaoCaoDT bc:ctrl.getListBaoCao())
+	    	   System.out.println(bc.getMaBC());
 	}
 
 }

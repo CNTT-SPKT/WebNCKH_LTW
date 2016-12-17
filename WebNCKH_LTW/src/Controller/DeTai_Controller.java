@@ -95,8 +95,9 @@ public class DeTai_Controller {
 	
 	public DeTai getDeTai_ALL(String maDT) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM detai" +
-        " where madt='"+maDT+"'";
+        String sql = "SELECT * FROM detai,taikhoan,taikhoan as tk1,taikhoan as tk2,taikhoan as tk3" +
+      		  " where taikhoan.matk=detai.macn and tk1.matk=detai.gvhd"+
+      	        " and tk2.matk=detai.sinhvien1 and tk3.matk=detai.sinhvien2 and madt='"+maDT+"'";
         DeTai dt = new DeTai();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
@@ -129,12 +130,12 @@ public class DeTai_Controller {
             	dt.setTenCN(rs.getString("taikhoan.hoten"));
             	dt.setMSSVCN(rs.getString("taikhoan.matkhau"));
             	dt.setTenSV1(rs.getString("tk2.hoten"));
-            	dt.setTenSV2(rs.getString("TK3.hoten"));
+            	dt.setTenSV2(rs.getString("tk3.hoten"));
             	dt.setTenGVHD(rs.getString("tk1.hoten"));
             	dt.setEmailCN(rs.getString("taikhoan.Email"));
             	dt.setEmailGV(rs.getString("tk1.Email"));
             	dt.setMSSV1(rs.getString("tk2.matkhau"));
-            	dt.setMSSV2(rs.getString("TK3.matkhau"));
+            	dt.setMSSV2(rs.getString("tk3.matkhau"));
             	dt.setKinhPhi(rs.getDouble("KinhPhi"));
             }
            
@@ -910,6 +911,20 @@ public class DeTai_Controller {
 			ps.setString(2, dt.getSinhVien1());
 			ps.setString(3, dt.getSinhVien2());
 			ps.setString(4, dt.getMaDT());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(DeTai_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
+	public boolean updateMaHienThiDT(DeTai dt) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "update detai set mahienthi=? where madt=?";
+		try {
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1,dt.getMaHienThi());
+			ps.setString(2, dt.getMaDT());
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			e.printStackTrace();
