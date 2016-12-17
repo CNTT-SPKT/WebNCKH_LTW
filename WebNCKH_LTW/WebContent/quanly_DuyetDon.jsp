@@ -392,8 +392,8 @@ $( document ).ready(function() {
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><%="XONG"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
+                                                        <td><%="XONG"%>                                  
+                                                       	<th><a href="quanly_XemDanhGiaCT.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
                                                     </tr>
                                                     <%} %>
                                                      <%for(DeTai c:detaiDAO.getListPCPBQL_CNT()){ %>
@@ -403,8 +403,8 @@ $( document ).ready(function() {
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><%="CHƯA"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>"></a></th>
+                                                        <td><%="CHƯA ĐÁNH GIÁ"%>                                        
+                                                       	<td></td>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>

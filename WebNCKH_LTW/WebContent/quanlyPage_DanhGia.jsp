@@ -368,7 +368,7 @@
                                     <div class="quanly_dsHDPB">
 
                                         <div class="ql_table_dsDTPB">
-                                             <table class="table table-striped table-hover">
+                                              <table class="table table-striped table-hover">
                                                 <thead class="thead-default">
                                                     <tr class="success">
                                                         <th>Mã đề tài</th>
@@ -388,8 +388,8 @@
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><%="XONG"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
+                                                        <td><%="XONG"%>                                  
+                                                       	<th><a href="quanly_XemDanhGiaCT.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
                                                     </tr>
                                                     <%} %>
                                                      <%for(DeTai c:detaiDAO.getListPCPBQL_CNT()){ %>
@@ -399,8 +399,8 @@
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><%="CHƯA"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>"></a></th>
+                                                        <td><%="CHƯA ĐÁNH GIÁ"%>                                        
+                                                       	<td></td>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>

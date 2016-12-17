@@ -345,8 +345,8 @@ tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><%="XONG"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
+                                                        <td><%="XONG"%>                                  
+                                                       	<th><a href="quanly_XemDanhGiaCT.jsp?MaDT=<%=c.getMaDT() %>">Xem kết quả</a></th>
                                                     </tr>
                                                     <%} %>
                                                      <%for(DeTai c:detaiDAO.getListPCPBQL_CNT()){ %>
@@ -356,12 +356,11 @@ tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
                                                         <td><%=c.getHoTen() %></td>
                                                         <td><%=c.getTenGVHD() %></td>
                                                         <td><%=c.getMaHD() %></td>
-                                                        <td><%="CHƯA"%>                                        
-                                                       	<th><a href="quanly_XemDanhGia.jsp?MaDT=<%=c.getMaDT() %>"></a></th>
+                                                        <td><%="CHƯA ĐÁNH GIÁ"%>                                        
+                                                       	<td></td>
                                                     </tr>
                                                     <%} %>
                                                 </tbody>
-                                            </table>
                                             </table>
                                             <a class="btn btn-info" style="float:right; margin-right: 10px;" href="quanlyPage_PCPB.jsp" role="button">Phân công phản biện</a>
                                         </div>
