@@ -99,11 +99,11 @@ $(document).ready(function() {
  		},
  		npass: {
  			required: true,
- 			minlength: 5
+ 			minlength: 3
  		},
  		cfpass: {
  			required: true,
- 			minlength: 5,
+ 			minlength: 3,
  			equalTo: "#npass"
  		},
  		
@@ -131,15 +131,15 @@ $(document).ready(function() {
  		
  		pass: {
  			required: 'Vui lòng nhập mật khẩu',
- 			minlength: 'Vui lòng nhập ít nhất 5 kí tự'
+ 			minlength: 'Vui lòng nhập ít nhất 3 kí tự'
  		},
  		npass: {
  			required: 'Vui lòng nhập mật khẩu mới',
- 			minlength: 'Vui lòng nhập ít nhất 5 kí tự'
+ 			minlength: 'Vui lòng nhập ít nhất 3 kí tự'
  		},
  		cfpass: {
  			required: 'Vui lòng nhập lại mật khẩu',
- 			minlength: 'Vui lòng nhập ít nhất 5 kí tự',
+ 			minlength: 'Vui lòng nhập ít nhất 3 kí tự',
  			equalTo: 'Mật khẩu không trùng'
  		},
  		

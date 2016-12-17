@@ -168,6 +168,8 @@ public class DeTai_Servlet extends HttpServlet {
 							if(tb_tkctrl.insertTB_TK(tbtk))
 							System.out.println("Gửi thông báo thành công!");
 						}	
+						if(nguoidk.equals("Student"))
+							url="sinhvienPage.jsp?type="+type;
 						if(nguoidk.equals("Lecturers"))
 							url="giangvienPage.jsp?type="+type;
 						if(nguoidk.equals("Manager"))
@@ -179,11 +181,11 @@ public class DeTai_Servlet extends HttpServlet {
 						type = "dkdt_0";
 						String nguoidk = request.getParameter("nguoidk");
 						if(nguoidk.equals("Student"))
-							url="sinhvienPage.jsp";
+							url="sinhvienPage.jsp?type="+type;
 						if(nguoidk.equals("Lecturers"))
-							url="giangvienPage.jsp";
+							url="giangvienPage.jsp?type="+type;
 						else
-							url="quanlyPage.jsp";
+							url="quanlyPage.jsp?type="+type;
 					}
 					
 					break;

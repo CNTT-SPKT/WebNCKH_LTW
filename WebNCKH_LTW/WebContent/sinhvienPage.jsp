@@ -92,7 +92,7 @@ $( document ).ready(function() {
     	{
     		if( y == "dkdt_1" || y == "dkdtdx_1" || y == "ghdt_1" || y == "hdt_1" || y == "cntt_1" || y == "dmk_1"|| y == "xoatb_1")
     			$("#ModalSuccess").modal('show');
-    		if( y == "dkdt_0" || y == "dkdtdx_0" || y == "ghdt_0" || y == "hdt_0" || y == "cntt_0" || y == "dmk_1"|| y == "xoatb_0")
+    		if( y == "dkdt_0" || y == "dkdtdx_0" || y == "ghdt_0" || y == "hdt_0" || y == "cntt_0" || y == "dmk_0"|| y == "xoatb_0")
     			$("#ModalFail").modal('show');
     	}
     });
@@ -183,9 +183,9 @@ $( document ).ready(function() {
 					<div class="tab-content">
 						<div class="tab-pane active" id="thongbao">
 									<div class="row">
-										<div class="svThongBao " style="background:white;height:500px;margin-right:15px;border-radius:3px">
+										<div class="svThongBao " style="background:white;height:560px;margin-right:15px;border-radius:3px">
 											<h2 class="tieude_theh" >THÔNG BÁO</h2><hr>
-											<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController">
+											<div class="sv_table_thongbao" ng-app="sortApp" ng-controller="mainController" >
 												<form>
 													<div class="form-group">
 														<div class="input-group col-xs-8" style="margin-left:50px;" >
@@ -195,6 +195,7 @@ $( document ).ready(function() {
 														<span class="counter pull-right"></span>   
 													</div>
 												</form>
+												<div style="height:400px; overflow:auto;">
 												<table class="table table-striped table-hover results ">
 													<thead>
 														<tr class="success">
@@ -203,7 +204,7 @@ $( document ).ready(function() {
 															<th><a href="#" >Người gửi</a></th>
 															<th><a href="#" >Ngày gửi</a></th>
 															<th><a href="#" >Chi tiết </a></th>
-															<th><a href="" >Xóa TB</a></th>
+															<th><a href="#" >Xóa TB</a></th>
 														</tr>
 													</thead>
 		
@@ -224,6 +225,7 @@ $( document ).ready(function() {
 														
 													</tbody>
 												</table>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -232,7 +234,7 @@ $( document ).ready(function() {
 										<div class="row" id="ttt">
 											<div class="svdsDeTai" style="background:white;height:500px;margin-right:15px;border-radius:3px">
 												<h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI</h2><hr>
-												<div class="sv_table_dsDeTai">
+												<div class="sv_table_dsDeTai" style="height:400px; overflow:auto;">
 													<table class="table table-striped table-hover" id="DSDeTai_SV">
 														<thead class="thead-default">
 															<tr class="success">
@@ -252,7 +254,7 @@ $( document ).ready(function() {
 				     											
 														%>
 															<tr>
-																<td><%=detai.getMaDT() %></td>
+																<td><%=detai.getMaHienThi() %></td>
 																<td><%=detai.getTenDT() %></td>
 																<td><%=detai.getNgayThucHien() %></td>
 																<td><%=detai.getNgayKetThuc()%></td>

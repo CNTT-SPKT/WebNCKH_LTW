@@ -361,7 +361,7 @@ public class DeTai_Controller {
 	
 	public ArrayList<DeTai> getListDeTaiByMaCN(String Email)  throws SQLException{
         Connection cons = DBConnect.getConnecttion();
-        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,detai.ngaythuchien as NgayDK,"+
+        String sql = "select detai.madt as MaDT, detai.tendt as TenDT,detai.ngaythuchien as NgayDK, mahienthi, "+
 				" detai.ngayketthuc as NgayNT, trangthai.tentt as TenTT"+
 				" from detai,taikhoan,trangthai"+
 				" where detai.macn=taikhoan.matk and detai.matt=trangthai.matt "+
@@ -377,6 +377,7 @@ public class DeTai_Controller {
             	dt.setNgayThucHien(rs.getString("NgayDK"));
             	dt.setNgayKetThuc(rs.getString("NgayNT"));
             	dt.setTenTT(rs.getString("TenTT"));
+            	dt.setMaHienThi(rs.getString("MaHienThi"));
             	list.add(dt);
             }
            
@@ -934,28 +935,28 @@ public class DeTai_Controller {
 	}
 	public static void main(String[] args) throws SQLException, Exception {
 		DeTai_Controller ctrl = new DeTai_Controller();
-		for(DeTai ct:ctrl.getListDeTaiPhanCongPhanBien("ly@gmail.com"))
-			System.out.println(ct.getMaDT()+"_____"+ct.getTenDT());
-		System.out.println("cuttt");
-		DeTai dt= new DeTai();
-		dt.setMaDT("dt2");
-		dt.setMaTT("tt11");	
-		dt.setGVHD("tk1");
-		dt.setTenDT("tenDT");
-		dt.setMoTa("mota");
-		dt.setLinhVuc("Tự nhiên");
-		dt.setLoaiHinh("Cơ bản");
-		dt.setCoQuanChuTri("coquanchutri");
-		dt.setTinhHinhTrong("tinhhinhTrong");
-		dt.setTinhHinhNgoai("tinhhinhNgoai");
-		dt.setTinhCapThiet("tinhcapThiet");
-		dt.setMucTieu("muctieu");
-		dt.setPPNC("PPNC");
-		dt.setNoiDungNC("NoiDungNC");
-		dt.setSPDuKien("SPDuKien");
-		dt.setDiaChiUD("DiaChiUD");
-		dt.setKinhPhi(10000);
-		ctrl.insert_DeTaiQLDK(dt);
+		for(DeTai ct:ctrl.getListDeTaiByMaCN("thao@gmail.com"))
+			System.out.println(ct.getMaHienThi()+"_____"+ct.getTenDT());
+//		System.out.println("cuttt");
+//		DeTai dt= new DeTai();
+//		dt.setMaDT("dt2");
+//		dt.setMaTT("tt11");	
+//		dt.setGVHD("tk1");
+//		dt.setTenDT("tenDT");
+//		dt.setMoTa("mota");
+//		dt.setLinhVuc("Tự nhiên");
+//		dt.setLoaiHinh("Cơ bản");
+//		dt.setCoQuanChuTri("coquanchutri");
+//		dt.setTinhHinhTrong("tinhhinhTrong");
+//		dt.setTinhHinhNgoai("tinhhinhNgoai");
+//		dt.setTinhCapThiet("tinhcapThiet");
+//		dt.setMucTieu("muctieu");
+//		dt.setPPNC("PPNC");
+//		dt.setNoiDungNC("NoiDungNC");
+//		dt.setSPDuKien("SPDuKien");
+//		dt.setDiaChiUD("DiaChiUD");
+//		dt.setKinhPhi(10000);
+//		ctrl.insert_DeTaiQLDK(dt);
 //		DeTai dt= new DeTai();
 //		dt=ctrl.getDeTai("dt12");
 //		dt.setMaTT("tt1");

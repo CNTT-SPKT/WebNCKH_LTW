@@ -112,7 +112,7 @@ public class GiaHanDT_Servlet extends HttpServlet {
 							error="Thất bại";
 							type = "ghdt_0";
 						}
-						url="sinhvienPage.jsp?type="+type;
+						url="sinhvien_GiaHanDT.jsp?type="+type;
 						System.out.println(error+"__________"+url);
 					}
 					if(xuly.equals("guidonhuy"))
@@ -129,7 +129,7 @@ public class GiaHanDT_Servlet extends HttpServlet {
 						{
 							type = "hdt_1";
 							System.out.println("vào gửi thông báo!");
-							dt.setMaTT("tt6");
+							dt.setMaTT("tt4");
 							if(detaictrl.updateTrangThai_DeTai(dt))
 							{
 								error="Thành công";
