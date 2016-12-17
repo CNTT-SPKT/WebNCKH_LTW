@@ -12,6 +12,7 @@ public class ThongBao {
     private String TenLoaiTB;
     private String MaCTTB;
     private String NgayGui;
+    private String TinTB;
 	public String getTenLoaiTB() {
 		return TenLoaiTB;
 	}
@@ -34,7 +35,7 @@ public class ThongBao {
 		super();
 	}
 
-	public ThongBao(String maTB, String nguoiGui, String nguoiNhan, String tenNguoiGui, String tenNguoiNhan,
+	public ThongBao(String maTB, String nguoiGui, String nguoiNhan, String tenNguoiGui, String tenNguoiNhan, String tintb,
 			ArrayList<TB_TK> cTTB) {
 		super();
 		MaTB = maTB;
@@ -42,6 +43,7 @@ public class ThongBao {
 		NguoiNhan = nguoiNhan;
 		TenNguoiGui = tenNguoiGui;
 		TenNguoiNhan = tenNguoiNhan;
+		TinTB=tintb;
 		CTTB = cTTB;
 	}
 
@@ -99,6 +101,14 @@ public class ThongBao {
 
 	public void setMaCTTB(String maCTTB) {
 		MaCTTB = maCTTB;
+	}
+
+	public String getTinTB() {
+		return TinTB;
+	}
+
+	public void setTinTB(String tinTB) {
+		TinTB = tinTB;
 	}
 	
 }

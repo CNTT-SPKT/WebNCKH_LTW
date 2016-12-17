@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Controller.*,Model.*" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -5,10 +6,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <title> Example </title>
@@ -23,24 +22,23 @@
 </head>
 
 <body>
-<%
-	DeTai_Controller detaiDAO = new DeTai_Controller();
-	TrangThai_Controller trangthaiDAO =new TrangThai_Controller();
-	ThongBao_Controller thongbaoDAO = new ThongBao_Controller();
-	HoiDong_Controller hoidongDao =new HoiDong_Controller();
-	TB_TK_Controller cttb= new TB_TK_Controller();
-	ThongBao_Controller tb= new ThongBao_Controller();
-	TrangThai_Controller tt=  new TrangThai_Controller();
+
+<%  
+HoiDong_Controller hoidongDao =new HoiDong_Controller();
+TB_TK_Controller cttb= new TB_TK_Controller();
+	ThongBao_Controller thongbaoDAO= new ThongBao_Controller();
+	DeTai_Controller detaiDAO= new DeTai_Controller();
+	DeTai_Controller dt= new DeTai_Controller();
+	TrangThai_Controller trangthaiDAO=  new TrangThai_Controller();
 	CTNghiemThu_Controller ctnt= new CTNghiemThu_Controller();
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
-	DeTai_Controller dt= new DeTai_Controller();
-	TaiKhoan_Controller tk=new TaiKhoan_Controller();
-	BaoCaoDT_Controller bc= new BaoCaoDT_Controller();
+	TB_TK tbtk =new TB_TK();
 	DeTai detai=new DeTai();
 	String maDT = "";
-
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
+	
+		
 		detai = dt.getDeTai(maDT);
 		if(detai.getMaCN()==null)
 		{
@@ -48,21 +46,12 @@
 		}
 	}
 	TaiKhoan tktb =new TaiKhoan();
-	TaiKhoan tktb1 =new TaiKhoan();
-	TaiKhoan tksv1=new TaiKhoan();
-	TaiKhoan tksv2=new TaiKhoan();
-	TaiKhoan tkgv =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
-	tktb1=taikhoanDAO.gettk(detai.getMaCN());
-		System.out.print("hihi");
-		String sv1=detai.getSinhVien1();
-		String sv2=detai.getSinhVien2();
-	
-	tksv1=taikhoanDAO.gettk(detai.getSinhVien1());
-	tksv2=taikhoanDAO.gettk(detai.getSinhVien2());
-	tkgv=taikhoanDAO.gettk(detai.getGVHD());
-	
-	
+	String maCTTB = "";
+	if (request.getParameter("MaCTTB") != null) {
+		maCTTB = request.getParameter("MaCTTB");
+		tbtk = cttb.getListTB_TKMaTB(maCTTB);
+	}
 %>
 
     <div class="page">
@@ -104,9 +93,9 @@
         </div>
         <div class="qlContent">
             <div class="row">
-                  <div class="col-md-2">
+                 <div class="col-md-2">
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active" id="tab_postThongbao">
+                        <li class="" id="tab_postThongbao">
                             <a class="list-group-item" href="#postThongBao" data-toggle="pill">
                                 <span class="glyphicon glyphicon-home"></span> Thông báo</a>
                         </li>
@@ -150,204 +139,22 @@
                 </div>
                 <div class="col-md-10">
                     <div class="tab-content">
-                       	<div class="tab-pane active" id="PheDuyet">
-							<div class="row">
-							<div class="gv_PheDuyetDT" style="background:white;height:1670px;margin-right:15px;border-radius:3px">
-								<h2 class="tieude_theh">PHÊ DUYỆT ĐỀ TÀI</h2><hr>
-								<div class="container" style="width:800px">
-									<div class="row">
-										<div class="mota">
-											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-												<form action="DeTai_Servlet_PheDuyet" method="post" role="form" class="form-horizontal">
-														<div class="form-group">
-														<input type="hidden" name="laymaDT" value=<%=maDT%>>
-															<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="tendetai" type="text" required value="<%=detai.getTenDT() %>" readonly>
-															</div>
-															<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
-															<div class="col-sm-10">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly> <%=detai.getMoTa()%> </textarea>
-															</div>
-															<br>
-															<br>
-															<label class="col-sm-2 control-label" for="linhvucnghiencuu">Lĩnh vực nghiên cứu:</label>
-															<div class="col-sm-10" id="linhvucnghiencuu">
-																<label class="radio-inline"><input type="radio" value="tunhien" name="linhvucnghiencuu" checked="checked"> Tự nhiên</label>
-																<label class="radio-inline"><input type="radio" value="xhnv" name="linhvucnghiencuu">Xã hội nhân văn</label>
-																<label class="radio-inline"><input type="radio" value="giaoduc" name="linhvucnghiencuu">Giáo dục</label>
-																<label class="radio-inline"><input type="radio" value="kythuat" name="linhvucnghiencuu">Kỹ thuật</label>
-																<label class="radio-inline"><input type="radio" value="nong_ngulam" name="linhvucnghiencuu">Nông-ngư lâm</label>
-																<label class="radio-inline"><input type="radio" value="yduoc" name="linhvucnghiencuu">Y dược</label>
-																<label class="radio-inline"><input type="radio" value="moitruong" name="linhvucnghiencuu">Môi trường</label>
-															</div>
-															<br>
-															<br>
-															<label class="col-sm-2 control-label" for="loaihinhnghiencuu">Loại hình nghiên cứu:</label>
-															<div class="col-sm-10" id="loaihinhnghiencuu">
-																<label class="radio-inline"><input type="radio" value="coban" name="loaihinhnghiencuu" checked="checked"> Cơ bản:</label>
-																<label class="radio-inline"><input type="radio" value="ungdung" name="loaihinhnghiencuu">Ứng dụng:</label>
-																<label class="radio-inline"><input type="radio" value="trienkhai" name="loaihinhnghiencuu">Triển khai:</label>
-															</div>
-															<br>
-															<br><br>
-															<div class="container" style="margin-top:35px; margin-left:20px;width:800px">
-																<div class="row">
-																	<label class="col-sm-2 control-label" for="thoigianthuchien">Thời gian thực hiện:</label>
-																	<div class="col-sm-10" id="thoigianthuchien">
-																		<div class="row">
-																			<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
-																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input value="<%=detai.getNgayThucHien() %>" type="date" name="" id="thoigianbatdau" class="form-control" readonly required="required" title="" style="padding:0px;">
-																			</div>
-																			<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
-																			<div class="col-sm-4" style="margin-bottom:5px;">
-																				<input value="<%=detai.getNgayKetThuc() %>" type="date" name="" id="thoigianketthuc" class="form-control" readonly required="required" title="" style="padding:0px;">
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<label class="col-sm-2 control-label" for="coquanchutri">Cơ quan chủ trì:</label>
-															<div class="col-sm-10">
-																<input class="form-control" id="tendetai" type="text" placeholder="Khoa/Bộ môn trực thuộc" value="<%=detai.getCoQuanChuTri()%>" readonly>
-															</div>
-															<br>
-															<div class="container" style="margin-top:35px;width:800px">
-																<div class="row">
-																	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-																		<label style="margin-left:60px">Chủ nhiệm đề tài:</label><br>
-																		<div class="row" style="margin-bottom:5px">
-																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
-																			<div class="col-sm-8">
-																				<input name="cndetaiql" class="form-control" id="hoten1" type="text" required  readonly value="<%=tktb1.getHoTen()%>">
-																			</div>
-																		</div>
-																		<div class="row" style="margin-bottom:5px">
-																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
-																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" required readonly value=<%=tktb1.getMatKhau()%>>
-																			</div>
-																		</div>
-																		<div class="row" style="margin-bottom:5px">
-																			<label class="col-sm-4 control-label" for="mail1">Email:</label>
-																			<div class="col-sm-8">
-																				<input class="form-control" id="mail1" type="text" required  readonly value=<%=tktb1.getEmail()%>>
-																			</div>
-																		</div>
-																		<br>
-																		<label style="margin-left:60px">Sinh viên cùng thực hiện:</label><br>
-																		<div class="row" style="margin-bottom:5px">
-																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
-																			<div class="col-sm-8">
-																				<input class="form-control" id="hoten1" type="text"  readonly value="<%=tksv1.getHoTen()%>">
-																			</div>
-																		</div>
-																		<div class="row" style="margin-bottom:5px">
-																			<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
-																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text"  readonly value=<%=tksv1.getMatKhau()%>>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-																		<label style="margin-left:60px">Giảng viên hướng dẫn:</label><br>
-																		<div class="row" style="margin-bottom:5px">
-																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
-																			<div class="col-sm-8">
-																			<input name="matkdn" type="hidden" value="<%=tktb.getMaTK()%>">
-																			<input name="matkgv" type="hidden" value="<%=tkgv.getMaTK()%>">
-																				<input name="" class="form-control" id="hoten1" type="text" required value="<%=tkgv.getHoTen()%>" readonly>
-																			</div>
-																		</div>
-																		<div class="row" style="margin-bottom:5px">
-																			<label class="col-sm-4 control-label" for="mssv1">Email:</label>
-																			<div class="col-sm-8">
-																				<input class="form-control" id="mss1" type="text" required value=<%=tkgv.getEmail()%> readonly>
-																			</div>
-																			<br><br><br><br><br><br>
-																			<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
-																			<div class="row" style="margin-bottom:5px">
-																				<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
-																				<div class="col-sm-8">
-																					<input class="form-control" id="hoten1" type="text" readonly value="<%=tksv2.getHoTen()%>">
-																				</div>
-																			</div>
-																			<div class="row" style="margin-bottom:5px">
-																				<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
-																				<div class="col-sm-8">
-																					<input class="form-control" id="mss1" type="text" readonly value="<%=tksv2.getMatKhau()%>">
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<label class="control-label" for="">Tình hình nghiên cứu trong và ngoài nước:</label><br>
-															<label class="col-sm-2 control-label" for="mota">Trong nước:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required"  readonly><%=detai.getTinhHinhTrong()%></textarea>
-															</div>
-															<label class="col-sm-2 control-label" for="mota">Ngoài nước:</label><br><br>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getTinhHinhNgoai()%></textarea>
-															</div>
-
-															<label class="col-sm-2 control-label" for="mota">Tính cấp thiết của đề tài:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required"  readonly><%=detai.getTinhHinhNgoai()%></textarea>
-															</div>
-
-															<label class="col-sm-2 control-label" for="mota">Mục tiêu của đề tài:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required"  readonly><%=detai.getMucTieu()%></textarea>
-															</div>
-
-															<label class="col-sm-2 control-label" for="mota">Phương pháp và phạm vi nghiên cứu:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getPPNC()%></textarea>
-															</div>
-
-															<label class="col-sm-2 control-label" for="mota">Nội dung nghiên cứu và tiến độ thực hiện:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<textarea name="" id="mota" class="form-control" rows="2" required="required" readonly><%=detai.getNoiDungNC()%></textarea>
-															</div>
-
-															<label class="col-sm-2 control-label" for="sanphamdukiem">Sản phẩm dự kiến:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="sanphamdukiem" type="text" required value="<%=detai.getSPDuKien()%>" readonly>
-															</div>
-
-
-															<label class="col-sm-2 control-label" for="diachiungdung">Địa chỉ ứng dụng:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="diachiungdung" type="text" required value="<%=detai.getDiaChiUD()%>"readonly>
-															</div>
-
-															<label class="col-sm-2 control-label" for="dxuatkinhphi">Đề xuất kinh phí:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" id="dxuatkinhphi" type="text" required value=<%=detai.getKinhPhi()%> readonly>
-															</div>
-															<label class="col-sm-2 control-label" for="capmadetai">Cấp mã đề tài:</label>
-															<div class="col-sm-10" style="margin-bottom:5px">
-																<input class="form-control" type="text" name="CapMHT">
-																
-															</div>
-														
-															<button name="Submit" type="submit" value="dongy" class="btn btn-lg btn-info" style="top:1500px;right:100px;">Phê duyệt</button>
-															<button name="Submit" type="submit" value="khongdongy" class="btn btn-lg btn-warning" style="left:200px;">Không phê duyệt</button>
-															</form>
-														</div>
+                        			<div class="tab-pane active" id="CTTB">
+									<div class="row" style="margin-right:0px;">
+										<div class="CTTB" style="background:white;height:600px;border-radius:3px">
+											<h2 class="tieude_theh">CHI TIẾT THÔNG BÁO</h2>
+											<hr>
+											<div class="container" style="width:600px">
+												<div class="row">
+													<div class="mota">
+													 <textarea style="font-size: 25px" readonly="readonly" class="form-control" rows="5"><%=tbtk.getTinTB() %></textarea>
+															
 													</div>
+												</div>
 											</div>
 										</div>
-									</div>
-									
 								</div>
-								
-							</div>
-						</div>
-                                                          
+								</div>
                          <div class="tab-pane" id="postThongBao">
                             <div class="row">
                                 <div class="clposthongbao" style="overflow:auto; background:white;height:600px;margin-right:15px;border-radius:3px">
@@ -407,7 +214,7 @@
 																	</div>
                                     <hr>
                                      <div class="ql_table_thongbao">
-                                        <table class="table table-striped table-hover">
+                                       <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
                                                     <th>Thông báo</th>
@@ -434,7 +241,7 @@
                                          
                                             </tbody>
                                         </table>
-                                           <!--     <script type="text/javascript">
+                                          <!--     <script type="text/javascript">
                                         	$(function() {
                                         		$('#tb_pheduyet').on('click',function(){
                                         			$('#tab_postThongbao,#postThongBao').removeClass('active');
@@ -455,16 +262,16 @@
                                    
                                 </div>
                             </div>
-                       
+                        
                         <div class="tab-pane" id="dsHDNT">
                             <div class="row">
                                 <div class="cldsHDNT" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
-              <h2 class="tieude_theh">DANH SÁCH HỘI ĐỒNG NGHIỆM THU</h2><hr>
+                                    <h2 class="tieude_theh">DANH SÁCH HỘI ĐỒNG NGHIỆM THU</h2><hr>
                                     
                                     <div class="quanly_dsHDNT">
                                         <div class="ql_table_dsHDNT"></div>
 
-                                        <table class="table table-striped table-hover">
+                                       <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
                                                     <th>Mã HĐ</th>
@@ -498,11 +305,11 @@
                             <!--danh sách đề tài phản biện-->
                             <div class="row">
                                 <div class="cldsDTPB" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
-                                     <h2 class="tieude_theh"> DANH SÁCH ĐỀ TÀI ĐÃ PHÂN CÔNG PHẢN BIỆN</h2><hr>
+                                    <h2 class="tieude_theh"> DANH SÁCH ĐỀ TÀI ĐÃ PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="quanly_dsHDPB">
 
                                         <div class="ql_table_dsDTPB">
-                                              <table class="table table-striped table-hover">
+                                             <table class="table table-striped table-hover">
                                                 <thead class="thead-default">
                                                     <tr class="success">
                                                         <th>Mã đề tài</th>
@@ -539,18 +346,18 @@
                                                     <%} %>
                                                 </tbody>
                                             </table>
-                                             <a class="btn btn-info" style="float:right; margin-right: 10px;" href="quanlyPage_PCPB.jsp" role="button">Phân công phản biện</a>
+                                            <a class="btn btn-info" style="float:right; margin-right: 10px;" href="quanlyPage_PCPB.jsp" role="button">Phân công phản biện</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                       <div class="tab-pane" id="dsDeTaiPhanBien">
+                        <div class="tab-pane" id="dsDeTaiPhanBien">
                             <div class="row">
                                 <div class="ql_dsDeTaiPhanBien" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHẢN BIỆN</h2><hr>
                                     <div class="ql_tb_dsDeTaiPhanBien">
-                                       <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -584,8 +391,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                       <div class="tab-pane " id="quanLyDeTai">
+                         <div class="tab-pane " id="quanLyDeTai">
                             <div class="row">
                                 <div class="form-group" style="margin-bottom:0px;">
                                     <div class="ql_quanLyDeTai" style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px;">
@@ -593,18 +399,16 @@
                                         <div class="ql_tb_quanLyDeTai" style="font-size:13px">
                                             <div class="timQLDT" style="float:right;margin-bottom:10px;padding-top:-5;">
                                                 <div style="margin-left:0px;" class=" col-sm-6 col-sm-offset-3 ">
-
-                                                <select style="float:left;width:150p x; " class="form-control" id="tkql" >
+													 <select style="float:left;width:150p x; " class="form-control" id="tkql" >
                                                     <option value="tatca" selected>Tất cả</option>     
                                                     <option value="madetai">Mã đề tài</option>
                                                     <option value="stendt">Tên đề tài</option>
                                                     <option value="tengvhd">Tên GVHD</option>
                                                     </select>
 
-
                                                     <div style=";width:400px; " id="imaginary_container ">
                                                         <div class="input-group stylish-input-group">
-                                                            <input type="text " id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
+                                                            <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search ">
                                                             <span class="input-group-addon ">
                                                                         <button type="submit" id="tkiem">
                                                                             <span class="glyphicon glyphicon-search "></span>
@@ -618,7 +422,7 @@
                                             </div>
 
                                         </div>
-                                            <table class="table table-striped table-hover" id="myTable">
+                                        <table class="table table-striped table-hover" id="myTable">
                                             <thead class="thead-default ">
                                                 <tr class="success ">
                                                     <th>Mã đề tài</th>
@@ -639,7 +443,7 @@
                                                     <th><%=c.getTenDT()%> </th>
                                                     <th><%=c.getHoTen()%></th>
                                                		<th><%=c.getTenGVHD() %></th>                                      
-                                                    	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
+                                                   	<th><a href="quanly_ChiTiet.jsp?MaDT=<%=c.getMaDT() %>">Chi tiết</a></th>
                                                     <th><%=c.getTenTT() %></th>
                                                    
                                               
@@ -650,17 +454,17 @@
                                                     %>                       
                                             </tbody>
                                         </table>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                        <div class="tab-pane " id="dsDeTaiPheDuyet">
                             <div class="row ">
                                 <div class="ql_dsDeTaiPheDuyet " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐƯỢC PHÂN CÔNG PHÊ DUYỆT</h2><hr>
                                     <div class="ql_tb_dsDeTaiPheDuyet ">
-                                          <table class="table table-striped table-hover">
+                                         <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -706,7 +510,7 @@
                                 </div>
                             </div>
                         </div>
-                     <div class="tab-pane " id="dsDeTaiHuongDan">
+                       <div class="tab-pane " id="dsDeTaiHuongDan">
                             <div class="row ">
                                 <div class="ql_dsDeTaiHuongDan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI HƯỚNG DẪN</h2><hr>
@@ -741,7 +545,7 @@
                                 </div>
                             </div>
                         </div>
-                                <div class="tab-pane" id="dkDeTai">
+                                    <div class="tab-pane" id="dkDeTai">
 										<div class="row" style="margin-right:0px;">
 											<div class="svdkDeTai" style="background:white;height:1600px;border-radius:3px">
 												<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI</h2>
@@ -940,7 +744,7 @@
 										</div>
 									</div>
                     
-                      <div class="tab-pane " id="dsDeTaiDK">
+                         <div class="tab-pane " id="dsDeTaiDK">
                             <div class="row ">
                                 <div class="ql_dsDeTaiDK " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DANH SÁCH ĐỀ TÀI ĐÃ ĐĂNG KÝ</h2><hr>
@@ -957,7 +761,7 @@
 											</thead>
 											<tbody>
 											<%
-											for (DeTai ct: dt.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
+											for (DeTai ct: detaiDAO.getListDeTaiGV_DK(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
 													
@@ -980,7 +784,7 @@
                                 <div class="ql_duyetHuy_GianHan " style="background:white;height:600px; overflow: auto;margin-right:15px;border-radius:3px ">
                                     <h2 class="tieude_theh">DUYỆT HỦY/GIA HẠN ĐỀ TÀI</h2><hr>
                                     <div class="ql_tb_dsDeTaiDK ">
-                                 <table class="table table-striped table-hover">
+                                            <table class="table table-striped table-hover">
 											<thead class="thead-default">
 												<tr class="success">
 													<th>Mã đề tài</th>
@@ -1012,6 +816,7 @@
                 </div>
             </div>
         </div>
+        
         <div id='bttop'>
             <img src="images/backtotop.png" alt="backtotop" width="50px" height="50px">
         </div>

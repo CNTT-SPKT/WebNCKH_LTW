@@ -138,7 +138,7 @@
 									<label>Tên đề tài: <%=ctdt.getTenDT()%></label>
 								</div>
 								<div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
-									<table class="table table-striped table-hover">
+										<table class="table table-striped table-hover">
 										<thead class="thead-default">
 											<tr class="success">
 												<th>Ngày Upload</th>
@@ -152,14 +152,32 @@
 											%>
 											<tr>
 												<td><%=nbc.getNgayBC() %></td>
-												<td><a href="#?MaBC=<%=nbc.getMaBC()%>"><%=nbc.getTenBC() %></a></td>
+												<td><a href="" onclick="downloadAll(window.links)"><%=nbc.getTenBC() %></a></td>
 												<td><%=nbc.getTenBC() %></td>
 
 											</tr>
-											
+											<script type="text/javascript">
+											var links = ['<%=nbc.getFileBC() %>', ];
+										
+											function downloadAll(urls) {
+												var link = document.createElement('a');
+												link.setAttribute('download', "<%=nbc.getTenBC() %>");
+													link.style.display = 'none';
+										
+													document.body.appendChild(link);
+										
+													for (var i = 0; i < urls.length; i++) {
+														link.setAttribute('href', urls[i]);
+														link.click();
+													}
+										
+													document.body.removeChild(link);
+												}
+										</script>
 											<%
 			    								}
 											%>
+											
 										</tbody>
 										</tbody>
 									</table>

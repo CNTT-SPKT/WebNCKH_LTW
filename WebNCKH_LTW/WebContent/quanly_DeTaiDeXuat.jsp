@@ -183,7 +183,7 @@
 																	</div>
                                     <hr>
                                      <div class="ql_table_thongbao">
-                                         <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover">
                                             <thead class="thead-default">
                                                 <tr class="success">
                                                     <th>Thông báo</th>
@@ -202,23 +202,12 @@
                                                     <td><%=c.getTenLoaiTB() %></td>
                                                     <td><%=c.getTenNguoiGui() %></td>
                                                     <td><%=c.getNgayGui() %></td>
-                                                    <th><a href="" id="tb_pheduyet">Phê duyệt</a></th>
+                                                    <td><a href="quanly_ChiTietTB.jsp?MaCTTB=<%=c.getMaCTTB() %>">Xem</a></td>
                                                     <td><a href="XoaThongBao_Servlet?command=deleteTB&MaCTTB=<%=c.getMaCTTB()%>"> Xóa</a></td>
                                                 </tr>
                                          <%} %>
                                          
-                                         		  <%
-                                         	     	for(ThongBao c: thongbaoDAO.getListThongBaoQLHuyGH()){                      			
-                                              %>
-                                               <tr>
-                                                
-                                             	  <td><%=c.getTenLoaiTB() %></td>
-                                                    <td><%=c.getTenNguoiGui() %></td>
-                                                    <td><%=c.getNgayGui() %></td>
-                                                    <th><a href="" id="tb_duyetdon">Duyệt đơn</a></th>
-                                                     <td><a href="XoaThongBao_Servlet?command=deleteTB&MaCTTB=<%=c.getMaCTTB()%>"> Xóa</a></td>
-                                                </tr>
-                                         <%} %>
+                                         
                                             </tbody>
                                         </table>
                                           <!--     <script type="text/javascript">

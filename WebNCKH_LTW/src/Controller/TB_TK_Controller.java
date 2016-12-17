@@ -10,7 +10,9 @@ import java.util.Calendar;
 import com.mysql.jdbc.PreparedStatement;
 
 import Model.CTNghiemThu;
+import Model.HoiDong;
 import Model.TB_TK;
+import Model.ThongBao;
 import Packages.DBConnect;
 
 public class TB_TK_Controller {
@@ -55,6 +57,23 @@ public class TB_TK_Controller {
             e.printStackTrace();
         }
         return cttb;
+    }
+	public TB_TK getTinTB(String maCTTB) {
+        Connection cons = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM TB_TK where maCTTB='"+maCTTB+"'";
+        TB_TK tbtk = new TB_TK();
+        try {
+            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            	
+            	tbtk.setTinTB(rs.getString("tinTB"));
+            }
+            cons.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tbtk;
     }
 	public ArrayList<TB_TK> getListTB_TKByMaTK(String email) throws SQLException {
         Connection cons = DBConnect.getConnecttion();
