@@ -127,8 +127,10 @@ public class DeTai_Servlet extends HttpServlet {
 					tk = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenCN"));
 					dkDT.setMaCN(tk.getMaTK());
 					tk = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV1"));
+					System.out.println(request.getParameter("tenSV1"));
 					dkDT.setSinhVien1(tk.getMaTK());
 					tk = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV2"));
+					System.out.println(request.getParameter("tenSV2"));
 					dkDT.setSinhVien2(tk.getMaTK());
 					tk = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenGVHD"));
 					dkDT.setGVHD(tk.getMaTK());
