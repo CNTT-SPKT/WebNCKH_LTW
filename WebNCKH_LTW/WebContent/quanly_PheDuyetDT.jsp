@@ -48,6 +48,7 @@
 		}
 	}
 	TaiKhoan tktb =new TaiKhoan();
+	TaiKhoan tksv =new TaiKhoan();
 	TaiKhoan tktb1 =new TaiKhoan();
 	TaiKhoan tksv1=new TaiKhoan();
 	TaiKhoan tksv2=new TaiKhoan();
@@ -61,7 +62,7 @@
 	tksv1=taikhoanDAO.gettk(detai.getSinhVien1());
 	tksv2=taikhoanDAO.gettk(detai.getSinhVien2());
 	tkgv=taikhoanDAO.gettk(detai.getGVHD());
-	
+	tksv=taikhoanDAO.gettk(detai.getMaCN());
 	
 %>
 
@@ -161,6 +162,8 @@
 												<form action="DeTai_Servlet_PheDuyet" method="post" role="form" class="form-horizontal">
 														<div class="form-group">
 														<input type="hidden" name="laymaDT" value=<%=maDT%>>
+														<input type="hidden" name="nguoinhan" value=<%=detai.getMaCN()%>>
+															<input type="hidden" name="nguoigui" value=<%=tktb.getMaTK()%>>
 															<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
 															<div class="col-sm-10" style="margin-bottom:5px">
 																<input class="form-control" id="tendetai" type="text" required value="<%=detai.getTenDT() %>" readonly>

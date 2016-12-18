@@ -13,6 +13,8 @@ import Controller.TB_TK_Controller;
 import Controller.TaiKhoan_Controller;
 import Controller.ThongBao_Controller;
 import Model.DeTai;
+import Model.TB_TK;
+import Model.ThongBao;
 
 /**
  * Servlet implementation class DeTai_Servlet_PheDuyet
@@ -54,11 +56,15 @@ public class DeTai_Servlet_PheDuyet extends HttpServlet {
 				String cndetaiql=request.getParameter("cndetaiql");
 				String matkdn=request.getParameter("matkdn");
 				String matkgv=request.getParameter("matkgv");
-				DeTai dtql = detaictrl.getDeTai(MaDT);
+				
+				DeTai dtql = new DeTai();
+						dtql=detaictrl.getDeTai(MaDT);
 				if(Submit.equals("dongy"))
 				{
 					capMHT=request.getParameter("CapMHT");
 					System.out.println("cndetaiql:"+cndetaiql);
+					System.out.println("maDT: "+MaDT);
+					System.out.println("ma chu nhien: "+dtql.getMaCN());
 						if(cndetaiql.equals("") || cndetaiql.equals(null)||cndetaiql.equals("null"))
 						{
 							dtql.setMaDT(MaDT);
@@ -84,6 +90,32 @@ public class DeTai_Servlet_PheDuyet extends HttpServlet {
 						{
 							type="pddt_1";
 							System.out.println("Update thÃ nh cÃ´ng");
+							String nguoigui = request.getParameter("nguoigui");
+							String nguoinhan=request.getParameter("nguoinhan");
+							TB_TK tbtk = new TB_TK();
+							ThongBao tb = thongbaoctrl.getThongBao(nguoigui,nguoinhan);
+							System.out.println("Nguoi gui:" +nguoigui);
+							System.out.println("Nguoi nhan:" +nguoinhan);
+							if(thongbaoctrl.getThongBao(nguoigui,nguoinhan).getMaTB()==null)
+						    {
+								System.out.println("chua co hop thoai");
+						    	int n =thongbaoctrl.getListThongBao().size();
+							    tb.setMaTB("tb"+(n+1));
+							    tb.setNguoiGui(nguoigui);	
+							    tb.setNguoiNhan(nguoinhan);
+							    if(thongbaoctrl.createThongBao(tb))
+							    	System.out.println("Tạo hộp thoại thành công");
+						    }
+							tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+							tbtk.setMaLTB("ltt1");
+							tbtk.setMaTB(tb.getMaTB());
+								
+							System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+nguoinhan);
+							tbtk.setTinTB("Thông báo đăng ký thành công đề tài "+MaDT+"");
+							
+							if(tb_tkctrl.insertTB_TK(tbtk))
+								System.out.println(tbtk.getTinTB());
+							System.out.println("Gửi thông báo thành công!");
 							url="quanlyPage.jsp?type="+type;	
 						}
 			

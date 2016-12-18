@@ -236,24 +236,6 @@ public class TaiKhoan_Controller {
 		}
 		return false;
 	}
-	public boolean updateTaiKhoanAdmin(TaiKhoan tk) throws ParseException {
-		Connection cons = DBConnect.getConnecttion();
-		String sql = "update taikhoan set email=?, nganh=?, msnh=?,cnnh=?,quyen=? where matk=?";
-		try {
-			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
-			ps.setString(1, tk.getEmail());
-			ps.setString(2, tk.getNganh());
-			ps.setString(3, tk.getMSNH());
-			ps.setString(4, tk.getCNNH());
-			ps.setString(5,tk.getQuyen());
-			ps.setString(6,tk.getMaTK());
-			return ps.executeUpdate()==1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			Logger.getLogger(TaiKhoan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
-		}
-		return false;
-	}
 	public boolean updateTKDoiMK(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
 		String sql = "update taikhoan set matkhau=? where matk=?";
@@ -337,25 +319,12 @@ public class TaiKhoan_Controller {
 		}
 		return tk;
 	}
-	public boolean deleteTK(String matk) throws SQLException {
-		 Connection connection = DBConnect.getConnecttion();
-	     String sql = "DELETE FROM taikhoan WHERE matk =?";
-	    try {
-	       
-	       PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
-	       ps.setString(1,matk);
-	       return ps.executeUpdate()==1;
-	    } catch (Exception e) {
-	    	return false;
-	    }
-	    
-	}
+
 	public static void main(String[] args) throws SQLException, Exception {
 		TaiKhoan_Controller ctrl = new TaiKhoan_Controller();
 		
 		TaiKhoan tk=ctrl.gettk("tk3");
 			System.out.println(tk.getHoTen());
-			System.out.println(tk.getQuyen());
 //			TaiKhoan tk=ctrl.getQL();
 //			System.out.println(tk.getMaTK());
 	}

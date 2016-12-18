@@ -27,7 +27,6 @@
 </head>
 <%
 TaiKhoan c= new TaiKhoan();
-
 String MaTK;
 if (request.getParameter("MaTK") != null) {
 	MaTK = request.getParameter("MaTK");
@@ -204,7 +203,7 @@ if (request.getParameter("MaTK") != null) {
 																	<div class="row">
 																		<form action="TaiKhoan_Servlet"  method="POST"
 																			class="form-horizontal" role="form">
-																			<input type="hidden" name="command" value="updateADMIN">
+																			<input type="hidden" name="command" value="update">
 																			<input type="hidden" name="MaTK" value=<%=c.getEmail() %>>
 																			<input type="hidden" name="Quyen" value="Admin">
 																			<div class="form-group"
@@ -232,17 +231,6 @@ if (request.getParameter("MaTK") != null) {
 																					<label for="dvct">Mã số ngân hàng<span>:</span></label>
 																					<input class="form-control" name="masoNH" id="dvct" type="text"
 																						required="required">
-																				</div>
-																				<br>
-																				
-																				<div style="margin-top:10px;" class="col-xs-10">
-																					<label for="mail">Quyền<span>:</span></label> 
-																					<select style="height:30px" name="quyen">
-						                                                            <option value='<%=c.getQuyen() %>>' selected><%=c.getQuyen() %></option>
-						                                                            <%for(TaiKhoan tk1:tk.getListTKQuyen()){ %>
-						                                                            <option value='<%=tk1.getQuyen() %>'><%=tk1.getQuyen() %></option>
-						                                                            <%} %>
-						                                                            </select>
 																				</div>
 																				<br>
 																			</div>

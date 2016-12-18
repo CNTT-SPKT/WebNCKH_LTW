@@ -46,59 +46,8 @@ $(document).ready(function() {
 </head>
 <body>
 	<%
-	String type = request.getParameter("type");
-	String error="";
 TaiKhoan_Controller tk=new TaiKhoan_Controller();
-	if (request.getParameter("type") != null)
-	{
-		if(type.equals("cntt_1"))
-			error = "Cập nhập thành công!";
-		if(type.equals("cntt_0"))
-			error = "Cập nhập thất bại!";
-		if(type.equals("xoatk_1"))
-			error = "Xóa tài khoản thành công!";
-		if(type.equals("xoatk_0"))
-			error = "Xóa tài khoản thất bại!";
-		
-	}
 %>
-<script type="text/javascript">
-   $(document).ready(function() {
-       var x = $('.Mssg').text();
-       var y = $('.TypeMssg').text();
-    	if(x != "null" && x != "")
-    	{
-    		if(y=="cntt_1"||y=="xoatk_1")
-    			$("#ModalSuccess").modal('show');
-    		if(y=="cntt_0"||y=="xoatk_0")
-    			$("#ModalFail").modal('show');
-    	}
-    });
-</script>
-<div class="modal fade" id="ModalSuccess">
-   <div class="modal-dialog">
-        <div class="modal-content panel panel-success">
-              <div class="modal-header panel-heading" style="text-align:center">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3><%=error %></h3>
-                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
-               </div>
-         </div>
-     </div>
-</div>
-<div class="modal fade" id="ModalFail">
-   <div class="modal-dialog">
-        <div class="modal-content panel panel-danger">
-              <div class="modal-header panel-heading" style="text-align:center">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3><%=error %></h3>
-                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
-               </div>
-         </div>
-     </div>
-</div>
-<h4 class="Mssg hidden" style="text-align:center"><%=error%></h4>
-<h4 class="TypeMssg hidden" style="text-align:center"><%=type%></h4>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -167,14 +116,13 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 											style="margin: 0px 5px 0px 0px;">
 											<thead class="thead-default">
 												<tr class="success">
-												
+													<th><input type="checkbox" name="" id="input" value=""></th>
 													<th>Tên tài khoản</th>
 													<th>Mã số</th>
 													<th>Tài khoản</th>
 													<th>Quyền truy cập</th>
 													<th>Ngành</th>
 													<th>Chỉnh sửa</th>
-													<th>Xóa</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -182,7 +130,7 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 												for(TaiKhoan a:tk.getListTaiKhoan()){
 											%>
 												<tr>
-													
+													<th><input type="checkbox" name="" id="input" value=""></th>
 													<td><%=a.getHoTen()%></td>
 													<td><%=a.getMaTK()%></td>
 													<td><%=a.getEmail()%></td>
@@ -190,7 +138,7 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 													<td><%=a.getNganh()%></td>
 													<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập
 															nhập</a></td>
- 													<td><a href="TaiKhoan_Servlet?command=XoaTK&MaTK=<%=a.getMaTK()%>"> Xóa</a></td>
+
 												</tr>
 												<%
 												}
@@ -198,7 +146,10 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 											</tbody>
 										</table>
 									</div>
-									
+									<button type="button" class="btn btn-danger" id="btn_Xoa"
+									style="float: right; margin-right: 10px; margin-bottom: 10px;">
+									<span class="glyphicon glyphicon-trash"></span> Xóa tài khoản
+								</button>
 								</div>
 								
 							</div>

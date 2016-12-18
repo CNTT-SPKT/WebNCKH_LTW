@@ -36,10 +36,15 @@ TB_TK_Controller cttb= new TB_TK_Controller();
 	String maDT = "";
 	if (request.getParameter("MaDT") != null) {
 		maDT = request.getParameter("MaDT");
-		detai = detaiDAO.getDeTai_ALL(maDT);
+
+		detai = dt.getDeTai(maDT);
+		if(detai.getMaCN()==null)
+		{
+			detai=dt.getDeTaiGV(maDT);
+		}
 	}
 	TaiKhoan cndetai =new TaiKhoan();
-	cndetai=taikhoanDAO.gettk(detai.getMaCN().toString());
+	cndetai=taikhoanDAO.gettk(detai.getMaCN());
 	TaiKhoan tktb =new TaiKhoan();
 	TaiKhoan tengvhd =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
