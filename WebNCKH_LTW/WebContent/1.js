@@ -192,155 +192,260 @@ $("#formcntt").validate({
 });
 });
 
-
-
 $(document).ready(function() {
+	 $("#loginform").validate({
+	 	rules: {
 
-    $.fn.goValidate = function() {
-        var $form = this,
-            $inputs = $form.find('input:text, input:password'),
-            $selects = $form.find('select'),
-            $textAreas = $form.find('textarea');
+	 		password: {
+	 			required: true,
+	 			minlength: 3
+	 		},
+	 		Email: {
+				required: true,
+				email: true
+			}
+	 		
+	 	},
+	 	  highlight: function(element) {
+		    var id_attr = "#" + $(element).attr("id") + "1";
+		    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		    $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+		  },
+		  unhighlight: function(element) {
+		    var id_attr = "#" + $(element).attr("id") + "1";
+		    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+		    $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+		  },
+		  errorElement: 'span',
+		  errorClass: 'help-block',
+		  errorPlacement: function(error, element) {
+		    if (element.length) {
+		      error.insertAfter(element);
+		    } else {
+		      error.insertAfter(element);
+		    }
+		  },
+	 	messages: {
+	 		
+	 		password: {
+	 			required: 'Vui lòng nhập mật khẩu',
+	 			minlength: 'Vui lòng nhập ít nhất 3 kí tự'
+	 		},
+	 		Email: "Email phải có dạng 'a@b.c'"
+	 		
+	 	}
+	 });
+	});
+//form dkdetai
+$(document).ready(function() {
+	$("#formDKDT").validate({
+		rules: {
 
-        var validators = {
-            name: {
-                regex: /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+(?=\s*\S).*$/,
-            },
-            mssv: {
-                regex: /^[A-Za-z0-9]{6,}$/
-            },
-            mota: {
-               regex: /^(?=\s*\S).*$/,
-            },
-           
-            ngay: {
-                regex: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
-            },
-            dxuatkinhphi: {
-                regex: /^[0-9]\d{0,6}$/
-            },
-            // password1: {
-            //     regex: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-            // },
-            // password1_repeat: {
-            //     regex: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-            // },
-            email: {
-                regex: /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/
-            },
-            diem1: {
-                regex: /^(1[0-0]|[0-9])$/
-            },
-            diem2: {
-                regex: /^(1[0-5]|[0-9])$/
-            },
-            diem3: {
-                regex: /^(3[0-5]|[0-9])$/
-            },
-            diem4: {
-            	regex: /^(10[0-0]|[0-9])$/
-            },
-            // phone: {
-            //     regex: /^[0-9]\d{7,12}$/
-            // },
-            // body: {
-            //     regex: /^.{3,}$/
-            // },
-            // country: {
-            //     regex: /^(?=\s*\S).*$/,
-            // }
-        };
-        var validate = function(klass, value) {
-            var isValid = true,
-                error = '';
+			email: {
+				required: true,
+				email: true
+			},
+			mssv: {
+	 			required: true,
+	 			minlength: 3
+	 		},
+	 		tenCN: "required",
+	 		tenGVHD: "required",
+	 		ngaybatdau: {
+	 			required: true,
+	 			date: true	
+	 		},
+	 		ngayketthuc: {
+	 			required: true,
+	 			date: true	
+	 		}
+		},
+		highlight: function(element) {
+		    var id_attr = "#" + $(element).attr("id") + "1";
+		    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		    $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+		  },
+		  unhighlight: function(element) {
+		    var id_attr = "#" + $(element).attr("id") + "1";
+		    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+		    $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+		  },
+		  errorElement: 'span',
+		  errorClass: 'help-block',
+		  errorPlacement: function(error, element) {
+		    if (element.length) {
+		      error.insertAfter(element);
+		    } else {
+		      error.insertAfter(element);
+		    }
+		  },
+		messages: {
+			
+			email: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 5 characters long",
+				equalTo: "Please enter the same password as above"
+			},
+			email: "Email phải có dạng 'a@b.c'",
+			mssv: {
+	 			required: 'Vui lòng nhập mssv',
+	 			minlength: 'Vui lòng nhập ít nhất 3 kí tự'
+	 		},
+	 		tenCN: "Vui lòng nhập tên chủ nhiệm",
+	 		tenGVHD: "Vui lòng nhập tên GVHD",
+	 		ngaybatdau: "Ngày phải có dạng dd/mm/yy",
+	 		ngayketthuc: "Ngày phải có dạng dd/mm/yy"
+		}
+	});
+	});
 
-            if (!value && /required/.test(klass)) {
-                error = 'This field is required';
-                isValid = false;
-            } else {
-                klass = klass.split(/\s/);
-                $.each(klass, function(i, k) {
-                    if (validators[k]) {
-                        if (value && !validators[k].regex.test(value)) {
-                            isValid = false;
-                            error = validators[k].error;
-                        }
-                    }
-                });
-            }
-            return {
-                isValid: isValid,
-                error: error
-            }
-        };
-        var showError = function($e) {
-            var klass = $e.attr('class'),
-                value = $e.val(),
-                test = validate(klass, value);
-
-            $e.removeClass('invalid');
-            $('#form-error').addClass('hide');
-
-            if (!test.isValid) {
-                $e.addClass('invalid');
-
-                if (typeof $e.data("shown") == "undefined" || $e.data("shown") == false) {
-                    $e.popover('show');
-                }
-
-            } else {
-                $e.popover('hide');
-            }
-        };
-
-        $inputs.keyup(function() {
-            showError($(this));
-        });
-        $selects.change(function() {
-            showError($(this));
-        });
-        $textAreas.keyup(function() {
-            showError($(this));
-        });
-
-        $inputs.on('shown.bs.popover', function() {
-            $(this).data("shown", true);
-        });
-
-        $inputs.on('hidden.bs.popover', function() {
-            $(this).data("shown", false);
-        });
-
-        $form.submit(function(e) {
-
-            $inputs.each(function() { /* test each input */
-                if ($(this).is('.required') || $(this).hasClass('invalid')) {
-                    showError($(this));
-                }
-            });
-            $selects.each(function() { /* test each input */
-                if ($(this).is('.required') || $(this).hasClass('invalid')) {
-                    showError($(this));
-                }
-            });
-            $textAreas.each(function() { /* test each input */
-                if ($(this).is('.required') || $(this).hasClass('invalid')) {
-                    showError($(this));
-                }
-            });
-            if ($form.find('input.invalid').length) { /* form is not valid */
-                e.preventDefault();
-                $('#form-error').toggleClass('hide');
-            }
-        });
-        return this;
-    };
-
-
-
-    $('form').goValidate();
-
-});
+//$(document).ready(function() {
+//
+//    $.fn.goValidate = function() {
+//        var $form = this,
+//            $inputs = $form.find('input:text, input:password'),
+//            $selects = $form.find('select'),
+//            $textAreas = $form.find('textarea');
+//
+//        var validators = {
+//            name: {
+//                regex: /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+(?=\s*\S).*$/,
+//            },
+//            mssv: {
+//                regex: /^[A-Za-z0-9]{6,}$/
+//            },
+//            mota: {
+//               regex: /^(?=\s*\S).*$/,
+//            },
+//           
+//            ngay: {
+//                regex: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
+//            },
+//            dxuatkinhphi: {
+//                regex: /^[0-9]\d{0,6}$/
+//            },
+//            // password1: {
+//            //     regex: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+//            // },
+//            // password1_repeat: {
+//            //     regex: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+//            // },
+//            email: {
+//                regex: /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/
+//            },
+//            diem1: {
+//                regex: /^(1[0-0]|[0-9])$/
+//            },
+//            diem2: {
+//                regex: /^(1[0-5]|[0-9])$/
+//            },
+//            diem3: {
+//                regex: /^(3[0-5]|[0-9])$/
+//            },
+//            diem4: {
+//            	regex: /^(10[0-0]|[0-9])$/
+//            },
+//            // phone: {
+//            //     regex: /^[0-9]\d{7,12}$/
+//            // },
+//            // body: {
+//            //     regex: /^.{3,}$/
+//            // },
+//            // country: {
+//            //     regex: /^(?=\s*\S).*$/,
+//            // }
+//        };
+//        var validate = function(klass, value) {
+//            var isValid = true,
+//                error = '';
+//
+//            if (!value && /required/.test(klass)) {
+//                error = 'This field is required';
+//                isValid = false;
+//            } else {
+//                klass = klass.split(/\s/);
+//                $.each(klass, function(i, k) {
+//                    if (validators[k]) {
+//                        if (value && !validators[k].regex.test(value)) {
+//                            isValid = false;
+//                            error = validators[k].error;
+//                        }
+//                    }
+//                });
+//            }
+//            return {
+//                isValid: isValid,
+//                error: error
+//            }
+//        };
+//        var showError = function($e) {
+//            var klass = $e.attr('class'),
+//                value = $e.val(),
+//                test = validate(klass, value);
+//
+//            $e.removeClass('invalid');
+//            $('#form-error').addClass('hide');
+//
+//            if (!test.isValid) {
+//                $e.addClass('invalid');
+//
+//                if (typeof $e.data("shown") == "undefined" || $e.data("shown") == false) {
+//                    $e.popover('show');
+//                }
+//
+//            } else {
+//                $e.popover('hide');
+//            }
+//        };
+//
+//        $inputs.keyup(function() {
+//            showError($(this));
+//        });
+//        $selects.change(function() {
+//            showError($(this));
+//        });
+//        $textAreas.keyup(function() {
+//            showError($(this));
+//        });
+//
+//        $inputs.on('shown.bs.popover', function() {
+//            $(this).data("shown", true);
+//        });
+//
+//        $inputs.on('hidden.bs.popover', function() {
+//            $(this).data("shown", false);
+//        });
+//
+//        $form.submit(function(e) {
+//
+//            $inputs.each(function() { /* test each input */
+//                if ($(this).is('.required') || $(this).hasClass('invalid')) {
+//                    showError($(this));
+//                }
+//            });
+//            $selects.each(function() { /* test each input */
+//                if ($(this).is('.required') || $(this).hasClass('invalid')) {
+//                    showError($(this));
+//                }
+//            });
+//            $textAreas.each(function() { /* test each input */
+//                if ($(this).is('.required') || $(this).hasClass('invalid')) {
+//                    showError($(this));
+//                }
+//            });
+//            if ($form.find('input.invalid').length) { /* form is not valid */
+//                e.preventDefault();
+//                $('#form-error').toggleClass('hide');
+//            }
+//        });
+//        return this;
+//    };
+//
+//
+//
+//    $('form').goValidate();
+//
+//});
 
 
 

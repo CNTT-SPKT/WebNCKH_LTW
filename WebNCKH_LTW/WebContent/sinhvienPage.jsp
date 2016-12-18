@@ -328,21 +328,27 @@ $( document ).ready(function() {
 									<div class="row">
 										<div class="mota">
 											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-												<form action="DeTai_Servlet" method="POST" class="form-horizontal">
+												<form action="DeTai_Servlet" method="POST" class="form-horizontal" id="formDKDT">
 												<input type="hidden" name="command" value="dkDT" />
 												<input type="hidden" name="nguoidk" value="Student" />
 												
-													<div class="form-group">
-														<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
-														<div class="col-sm-10" style="margin-bottom:5px">
-															<input type="text" name="tenDT" class="form-control required mota" placeholder="Đề tài 1"  id="" required minlength="6" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
+													<div class="row">
+														<div class="form-group has-feedback">
+															<label class="col-sm-2 control-label" for="tendetai">Tên đề tài:</label>
+															<div class="col-sm-10" style="margin-bottom:5px">
+																<input type="text" name="tenDT" id="tenDT" class="form-control required mota" placeholder="Đề tài 1"  >
+																<span class="glyphicon form-control-feedback" id="tenDT1"></span>
+															</div>
 														</div>
-														<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
-														<div class="col-sm-10">
-															<textarea type="text" name="mota" class="form-control required mota" placeholder="tạo 1 website bán hàng"  id="" required  data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này" rows="2" required></textarea>
+														<div class="form-group has-feedback">
+															<label class="col-sm-2 control-label" for="mota">Mô tả:</label>
+															<div class="col-sm-10">
+																<textarea type="text" name="mota" class="form-control required mota" placeholder="tạo 1 website bán hàng"  id="mota"  rows="2" required></textarea>
+																<span class="glyphicon form-control-feedback" id="mota1"></span>
+															</div>
 														</div>
 														<br>
-														<br>
+								
 														<label class="col-sm-2 control-label" for="linhvucnghiencuu">Lĩnh vực:</label>
 														<div class="col-sm-10" id="linhvucnghiencuu">
 															<label class="radio-inline"><input type="radio" value="tunhien" name="linhvucnghiencuu" checked="checked"> Tự nhiên</label>
@@ -363,18 +369,24 @@ $( document ).ready(function() {
 														</div>
 														<br>
 														<br><br>
-														<div class="container" style="margin-top:35px; margin-left:20px;width:800px">
+														<div class="container" style="margin-top:10px; margin-left:20px;width:800px">
 															<div class="row">
 																<label class="col-sm-2 control-label" for="thoigianthuchien">Thời gian thực hiện:</label>
 																<div class="col-sm-10" id="thoigianthuchien">
-																	<div class="row">
-																		<label class="col-sm-1 control-label" for="thoigianbatdau">Từ:</label>
-																		<div class="col-sm-4" style="margin-bottom:5px;">
-																			<input type="text" type="text" name="ngaybatdau" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-top:10px;"required>
+																	<div class="form-group">
+																		<div class="form-inline has-feedback">
+																			<label class="col-sm-1 control-label" for="thoigianbatdau">Từ:</label>
+																			<div class="col-sm-4" style="margin-bottom:5px;">
+																				<input type="text"  name="ngaybatdau" class="form-control required ngay"  id="ngaybatdau"  placeholder="dd/mm/yy" style="float:left; margin-top:10px;"required>
+																				<span class="glyphicon form-control-feedback" id="ngaybatdau1"></span>
+																			</div>
 																		</div>
-																		<label class="col-sm-1 control-label" for="thoigianketthuc">Đến:</label>
-																		<div class="col-sm-4" style="margin-bottom:5px;">
-																			<input type="text" type="text" name="ngayketthuc" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng mm/dd/yy" placeholder="mm/dd/yy" style="float:left; margin-left:10px; margin-top:10px;"required>
+																		<div class="form-inline has-feedback">
+																			<label class="col-sm-1 col-lg-offset-1 control-label" for="thoigianketthuc">Đến:</label>
+																			<div class="col-sm-4" style="margin-bottom:5px;">
+																				<input type="text"  name="ngayketthuc" class="form-control required ngay"  id="ngayketthuc"  placeholder="mm/dd/yy" style="float:left; margin-left:10px; margin-top:10px;"required>
+																				<span class="glyphicon form-control-feedback" id="ngayketthuc1"></span>
+																			</div>
 																		</div>
 																	</div>
 																</div>
@@ -389,22 +401,25 @@ $( document ).ready(function() {
 															<div class="row">
 																<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																	<label style="margin-left:60px">Chủ nhiệm đề tài:</label><br>
-																	<div class="row" style="margin-bottom:5px">
+																	<div class="form-group has-feedback" style="margin-bottom:5px">
 																		<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																		<div class="col-sm-8">
-																			<input type="text" name="tenCN" class="form-control required name" placeholder="Lê Văn A"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
+																			<input type="text" name="tenCN" id="tenCN" class="form-control required name" placeholder="Lê Văn A"   required>
+																			<span class="glyphicon form-control-feedback" id="tenCN1"></span>
 																		</div>
 																	</div>
-																	<div class="row" style="margin-bottom:5px">
+																	<div class="form-group has-feedback" style="margin-bottom:5px">
 																		<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																		<div class="col-sm-8">
-																			<input type="text" name="mssv" class="form-control required mssv" placeholder="141101"  id="" required minlength="6" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 6 ký tự.">
+																			<input type="text" name="mssv" id="mssv" class="form-control required mssv" placeholder="141101"  required >
+																			<span class="glyphicon form-control-feedback" id="mssv1"></span>
 																		</div>
 																	</div>
-																	<div class="row" style="margin-bottom:5px">
+																	<div class="form-group has-feedback" style="margin-bottom:5px">
 																		<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																		<div class="col-sm-8">
-																			<input type="text" name="email" class="form-control required email" placeholder="LVA@gmail.com"  id="" required data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này">
+																			<input type="text" name="email" id="email" class="form-control required email" placeholder="LVA@gmail.com"  id="" required data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này">
+																			<span class="glyphicon form-control-feedback" id="email1"></span>
 																		</div>
 																	</div>
 																	<br>
@@ -424,18 +439,22 @@ $( document ).ready(function() {
 																</div>
 																<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 																	<label style="margin-left:60px">Giảng viên hướng dẫn:</label><br>
-																	<div class="row" style="margin-bottom:5px">
+																	<div class="form-group has-feedback" style="margin-bottom:5px">
 																		<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																		<div class="col-sm-8">
-																			<input type="text" name="tenGVHD" class="form-control required name" placeholder="Lê B"  id="" required minlength="3" data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này,ít nhất 3 ký tự.">
+																			<input type="text" name="tenGVHD" id="tenGVHD" class="form-control required name" placeholder="Lê Văn A"  >
+																			<span class="glyphicon form-control-feedback" id="tenGVHD1"></span>
 																		</div>
 																	</div>
 																	<div class="row" style="margin-bottom:5px">
-																		<label class="col-sm-4 control-label" for="mssv1">Email:</label>
-																		<div class="col-sm-8">
-																			<input type="text" name="email" class="form-control required email" placeholder="LVA@gmail.com"  id="" required data-placement="right" data-trigger="hover" data-content="Bạn cần phải nhập vào trường này">
+																		<div class="form-group has-feedback">
+																			<label class="col-sm-4 control-label" for="mssv1">Email:</label>
+																			<div class="col-sm-8">
+																				<input type="text" name="email" id="email_gv" class="form-control required email" placeholder="LVA@gmail.com"  >
+																				<span class="glyphicon form-control-feedback" id="email_gv1"></span>
+																			</div>
 																		</div>
-																		<br><br><br><br><br><br>
+																		<br><br><br>
 																		<label style="margin-left:60px">Sinh viên cùng thực hiện(2):</label><br>
 																		<div class="row" style="margin-bottom:5px">
 																			<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
@@ -642,7 +661,7 @@ $( document ).ready(function() {
 																							<input type="hidden" name="command" value="update">
 																							<input type="hidden" name="MaTK" value=<%=session.getAttribute("Email").toString()%>>
 																							<input type="hidden" name="Quyen" value="Student">
-																							<div class="form-group has-feedback" style="margin-left:20px;">
+																							<div class="form-group has-feedback"  style="margin-left:20px">
 																								<div class="col-xs-11">
 																									<label for="email">Mail<span>:</span></label> 
 																									<input class="form-control" name="email" id="email" type="email" required/>
