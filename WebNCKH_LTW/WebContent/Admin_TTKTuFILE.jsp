@@ -75,55 +75,57 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 				</div>
 				<div class="col-md-10">
 					<div class="tab-content">
-						<div class="tab-pane " id="QLTK">
-							<div class="row" style=";">
-								<div class="QLyTK" style="background:white;height:380px;margin-right:15px;border-radius:3px;overflow:auto;">
-									<h2 style="margin-top:0px;padding:5px;text-align:center;font-family:sans-serif">QUẢN LÝ TÀI KHOẢN</h2>
-									<a class="btn btn-default" href="Admin_ThemTK.jsp" role="button" style="float:right;
-									margin:0px 5px 5px 0px;">Thêm tài khoản</a>
+					<div class="tab-pane" id="QLTK">
+							<div class="row">
+								<div class="QLyTK"
+									style="background: white; height: 480px; margin-right: 15px; border-radius: 3px; overflow: auto;">
+									<h2
+										style="margin-top: 0px; padding: 5px; text-align: center; font-family: sans-serif;">QUẢN
+										LÝ TÀI KHOẢN</h2>
+									<h5 style="float:left;margin-left:30px" class="message_Error"><b><%=request.getAttribute("error") %></b></h5>
+									<a class="btn btn-default" href="Admin_ThemTK.jsp"
+										role="button" style="float: right; margin: 0px 5px 5px 0px;">Thêm
+										tài khoản</a>
 									<div class="ad_table_qltk">
-										<table class="table table-striped table-hover" style="margin:0px 5px 0px 0px;">
+										<table class="table table-striped table-hover"
+											style="margin: 0px 5px 0px 0px;">
 											<thead class="thead-default">
 												<tr class="success">
-													<th><input type="checkbox" name="" id="input" value=""></th>
+												
 													<th>Tên tài khoản</th>
 													<th>Mã số</th>
 													<th>Tài khoản</th>
 													<th>Quyền truy cập</th>
 													<th>Ngành</th>
 													<th>Chỉnh sửa</th>
-													
+													<th>Xóa</th>
 												</tr>
 											</thead>
 											<tbody>
 												<%
 												for(TaiKhoan a:tk.getListTaiKhoan()){
 											%>
-													<tr>
-														<th><input type="checkbox" name="" id="input"
-															value=""></th>
-														<td><%=a.getHoTen()%></td>
-														<td><%=a.getMaTK()%></td>
-														<td><%=a.getEmail()%></td>
-														<td><%=a.getQuyen()%></td>
-														<td><%=a.getNganh()%></td>
-														<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập nhập</a></td>
-
-													</tr>
+												<tr>
+													
+													<td><%=a.getHoTen()%></td>
+													<td><%=a.getMaTK()%></td>
+													<td><%=a.getEmail()%></td>
+													<td><%=a.getQuyen()%></td>
+													<td><%=a.getNganh()%></td>
+													<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập
+															nhập</a></td>
+ 													<td><a href="TaiKhoan_Servlet?command=XoaTK&MaTK=<%=a.getMaTK()%>"> Xóa</a></td>
+												</tr>
 												<%
 												}
 												%>
 											</tbody>
 										</table>
 									</div>
-
+									
 								</div>
-								<button type="button" class="btn btn-danger" id="btn_Xoa"
-									style="float: right; margin-right: 10px; margin-bottom: 10px;">
-									<span class="glyphicon glyphicon-trash"></span> Xóa tài khoản
-								</button>
+								
 							</div>
-
 						</div>
 						<div class="tab-pane active" id="ThemTKTF">
 							<div class="row">

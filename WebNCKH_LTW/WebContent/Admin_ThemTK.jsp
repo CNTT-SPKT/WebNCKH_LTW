@@ -88,10 +88,11 @@
 						<div class="tab-pane" id="QLTK">
 							<div class="row">
 								<div class="QLyTK"
-									style="background: white; height: 380px; margin-right: 15px; border-radius: 3px; overflow: auto;">
+									style="background: white; height: 480px; margin-right: 15px; border-radius: 3px; overflow: auto;">
 									<h2
-										style="margin-top: 0px; padding: 5px; text-align: center; font-family: sans-serif">QUẢN
+										style="margin-top: 0px; padding: 5px; text-align: center; font-family: sans-serif;">QUẢN
 										LÝ TÀI KHOẢN</h2>
+									<h5 style="float:left;margin-left:30px" class="message_Error"><b><%=request.getAttribute("error") %></b></h5>
 									<a class="btn btn-default" href="Admin_ThemTK.jsp"
 										role="button" style="float: right; margin: 0px 5px 5px 0px;">Thêm
 										tài khoản</a>
@@ -100,22 +101,22 @@
 											style="margin: 0px 5px 0px 0px;">
 											<thead class="thead-default">
 												<tr class="success">
-													<th><input type="checkbox" name="" id="input" value=""></th>
+												
 													<th>Tên tài khoản</th>
 													<th>Mã số</th>
 													<th>Tài khoản</th>
 													<th>Quyền truy cập</th>
 													<th>Ngành</th>
 													<th>Chỉnh sửa</th>
-
+													<th>Xóa</th>
 												</tr>
 											</thead>
 											<tbody>
 												<%
-													for (TaiKhoan a : tk.getListTaiKhoan()) {
-												%>
+												for(TaiKhoan a:tk.getListTaiKhoan()){
+											%>
 												<tr>
-													<th><input type="checkbox" name="" id="input" value=""></th>
+													
 													<td><%=a.getHoTen()%></td>
 													<td><%=a.getMaTK()%></td>
 													<td><%=a.getEmail()%></td>
@@ -123,19 +124,17 @@
 													<td><%=a.getNganh()%></td>
 													<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập
 															nhập</a></td>
-
+ 													<td><a href="TaiKhoan_Servlet?command=XoaTK&MaTK=<%=a.getMaTK()%>"> Xóa</a></td>
 												</tr>
 												<%
-													}
+												}
 												%>
 											</tbody>
 										</table>
 									</div>
+									
 								</div>
-								<button type="button" class="btn btn-danger" id="btn_Xoa"
-									style="float: right; margin-right: 10px; margin-bottom: 10px;">
-									<span class="glyphicon glyphicon-trash"></span> Xóa tài khoản
-								</button>
+								
 							</div>
 						</div>
 						<div class="tab-pane active" id="ThemTK">
@@ -143,8 +142,7 @@
 								<div class="ad_TTK"
 									style="background: white; height: 500px; margin-right: 15px; border-radius: 3px">
 									<h2
-										style="text-aline: center; padding: 5px; text-align: center; font-family: sans-serif">QUẢN
-										LÝ NGƯỜI DÙNG</h2>
+										style="text-aline: center; padding: 5px; text-align: center; font-family: sans-serif">QUẢN LÝ NGƯỜI DÙNG</h2>
 									</center>
 									<hr>
 									<div class="Ad_table_TTK">

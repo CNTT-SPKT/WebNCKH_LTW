@@ -73,6 +73,37 @@ public class TaiKhoan_Servlet extends HttpServlet {
 					
 				}
 				break;
+			case "updateADMIN":
+				System.out.println("Vào update TT");
+				
+				TaiKhoan tk5=new TaiKhoan();
+				String matk5 = request.getParameter("MaTK");
+				tk5=crt.getTaiKhoanByMaTK(matk5);
+				tk5.setQuyen(request.getParameter("quyen"));
+				tk5.setEmail(request.getParameter("email"));
+				tk5.setNganh(request.getParameter("nganh"));
+				tk5.setCNNH(request.getParameter("cnnganhang"));
+				tk5.setMSNH(request.getParameter("masoNH"));
+				System.out.println(tk5.getMaTK()+"______"+tk5.getEmail()+"_________"+tk5.getNganh()+"________"+tk5.getCNNH()+"_____"+tk5.getMSNH());
+				boolean ktra1=crt.updateTaiKhoanAdmin(tk5);
+				if(ktra1)
+				{
+					type = "cntt_1";
+					error="Thành công";
+					
+						url="Admin.jsp?type="+type;
+					
+				}
+				else
+				{
+					type = "cntt_0";
+					error="Thất bại";
+					
+						url="Admin.jsp?type="+type;
+					
+					
+				}
+				break;
 			case "doimk":
 				System.out.println("Vào đổi mk");
 				TaiKhoan tk1= new TaiKhoan();
@@ -96,6 +127,36 @@ public class TaiKhoan_Servlet extends HttpServlet {
 				}
 				url="sinhvienPage.jsp?type="+type;
 				System.out.println(error+"__________"+url);
+				break;
+			case "XoaTK":
+				
+				System.out.println("Vào đổi mk");
+				TaiKhoan xoatk=new TaiKhoan();
+				TaiKhoan_Controller tkctr=new TaiKhoan_Controller();
+				String tkx=request.getParameter("MaTK");
+				System.out.println("ma tk: "+tkx);
+				xoatk.setMaTK(tkx);
+				try{
+					boolean fx=tkctr.deleteTaiKhoan(xoatk);
+				if(fx)
+				{
+					type = "xoatk_1";
+					error="Thành công";
+				}
+				else
+				{
+					error="Thất bại";
+					type = "xoatk_0";
+				}
+				
+				System.out.println(error+"__________"+url);
+				}
+				catch(Exception e)
+				{
+					error="loi ngau nhien";
+					type = "xoatk_0";
+				}
+				url="Admin.jsp?type="+type;
 				break;
 			}
 		}
