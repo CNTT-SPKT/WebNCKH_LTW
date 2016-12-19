@@ -101,6 +101,36 @@ public class CTNghiemThu_Controller {
 	        }
 	        return list;
 	    }
+		public CTNghiemThu getCTNghiemThuMaTKQL(String maTK,String maDT) {
+	        Connection cons = DBConnect.getConnecttion();
+	        String sql = "SELECT distinct * FROM ctnghiemthu,hoidong,taikhoan as ct, taikhoan as pb,detai,taikhoan "
+	        		+ "where ctnghiemthu.mahd=hoidong.mahd and detai.madt=ctnghiemthu.madt and "
+	        		+ "hoidong.chutich=ct.matk and hoidong.phanbien=pb.matk "
+	        		+ "and ctnghiemthu.matk=taikhoan.matk and ctnghiemthu.madt='"+maDT+"'and ctnghiemthu.matk='"+maTK+"'";
+	        CTNghiemThu ct = new CTNghiemThu();
+	        try {
+	            PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+	            ResultSet rs = ps.executeQuery();
+	            while (rs.next()) {
+	            	
+	            	ct.setMaDT(rs.getString("ctnghiemthu.MaDT"));
+	            	ct.setTenDT(rs.getString("TenDT"));
+	            	ct.setMaHD(rs.getString("hoidong.mahd"));
+	            	ct.setNgayNT(rs.getString("NgayNT"));
+	            	ct.setMaPhanBien(rs.getString("PhanBien"));
+	            	ct.setTenPhanBien(rs.getString("pb.HoTen"));
+	            	ct.setMaChuTich(rs.getString("ChuTich"));
+	            	ct.setTenChuTich(rs.getString("ct.HoTen"));
+	            	ct.setMaTK(rs.getString("ctnghiemthu.matk"));
+	            	ct.setTenTK(rs.getString("taikhoan.HoTen"));
+	               
+	            }
+	            cons.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return ct;
+	    }
 		public CTNghiemThu getCTNghiemThuMaTK(String maTK) {
 	        Connection cons = DBConnect.getConnecttion();
 	        String sql = "SELECT distinct * FROM ctnghiemthu,hoidong,taikhoan as ct, taikhoan as pb,detai,taikhoan "

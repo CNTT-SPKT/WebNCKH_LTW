@@ -41,9 +41,12 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String command = request.getParameter("command");
+		String quyen = request.getParameter("Quyen");
 		String maDT= request.getParameter("MaDT");
 		String maTK=request.getParameter("MaTK");
+		int TongDiem = 0;
 		CTNghiemThu ctnt=new CTNghiemThu();
 		ctnt = crt.getListCTNghiemThu(maDT);
 		ctnt=crt.getCTNghiemThuMaTK(maTK);
@@ -54,54 +57,85 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 		ctnt.setDongGop(Integer.parseInt(request.getParameter("diemdonggop")));
 		ctnt.setHinhThuc(Integer.parseInt(request.getParameter("diemhinhthuc")));
 		ctnt.setDiemThuong(Integer.parseInt(request.getParameter("diemthuong")));
-		ctnt.setTongDiem(Integer.parseInt(request.getParameter("tongdiem")));
+		TongDiem = ctnt.getTongQuan() + ctnt.getDiemThuong() + ctnt.getDongGop() + ctnt.getHinhThuc()+
+				ctnt.getMucTieu()+ ctnt.getNoiDung()+ ctnt.getHinhThuc();
+		ctnt.setTongDiem(TongDiem);
 		ctnt.setYKien(request.getParameter("ykien"));
+		
 		
 		DeTai dt=new DeTai();
 		dt=ctrl.getDeTai(maDT);
-		dt.setMaTT("tt9");
-		
 		String url="", error="", type="";
 		try{
 			switch(command){			
 				case "updateql":
-					System.out.println("VÃ o update QL");
+					System.out.println(ctnt.getMaTK()+"____"+ctnt.getMaDT());
+					System.out.println("Vào update");
+					int TongDiemChung = 0;
+					if(crt.updateCTNT(ctnt) )
+					{
+						boolean f=true;
+						System.out.println(ctnt.getDiemThuong()+"____"+ctnt.getNoiDung());
+						for(CTNghiemThu ct:crt.getListCTNghiemThuMaDT(maDT))
+						{
+							TongDiemChung+=ct.getTongDiem();
+							System.out.println(ct.getTongQuan()+"____"+ct.getMaTK());
+							if((Integer.toString(ct.getTongQuan())=="0") || ct.getTongQuan() == 0 )
+							{
+								f=false;		
+							}
+						}
+						TongDiemChung = (int)TongDiemChung/2;
+						System.out.println(TongDiemChung);
+						if(f)
+						{	
+							dt.setMaTT("tt9");
+							if(ctrl.updateTrangThai_DeTai(dt))
+								System.out.println("Update trạng thái của đề tài thành công");
+						}	
+				
+						error = "Thành công";
+						type ="ntdt_1";
+						// Ä�Ã¡nh giÃ¡ thÃ nh cÃ´ng thÃ¬ gá»­i thÃ´ng bÃ¡o vá»� cho sinh viÃªn
+						String nguoigui = request.getParameter("nguoigui");
+						TB_TK tbtk = new TB_TK();
+						ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
+						
+						if(tb.getMaTB()==null)
+					    {
+							System.out.println("chua co hop thoai");
+					    	int n =thongbaoctrl.getListThongBao().size();
+						    tb.setMaTB("tb"+(n+1));
+						    tb.setNguoiGui(nguoigui);
+						    tb.setNguoiNhan(dt.getMaCN());
+						    if(thongbaoctrl.createThongBao(tb))
+						    	System.out.println("Tạo hộp thoại thành công");
+					    }
+						tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+						tbtk.setMaLTB("ltt1");
+						tbtk.setMaTB(tb.getMaTB());
+						
+						System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
+						tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
+						
+						if(tb_tkctrl.insertTB_TK(tbtk))
+							System.out.println(tbtk.getTinTB());
+						System.out.println("Gá»­i thÃ´ng bÃ¡o thÃ nh cÃ´ng!");
+						System.out.println("Quyen:" +quyen);
 					
-					if(crt.updateCTNT(ctnt) && ctrl.updateTrangThai_DeTai(dt))
-					{			
-							type ="ntdt_1";
-							String nguoigui = request.getParameter("nguoigui");
-							TB_TK tbtk = new TB_TK();
-							ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
-							
-							if(tb.getMaTB()==null)
-						    {
-								System.out.println("chua co hop thoai");
-						    	int n =thongbaoctrl.getListThongBao().size();
-							    tb.setMaTB("tb"+(n+1));
-							    tb.setNguoiGui(nguoigui);
-							    tb.setNguoiNhan(dt.getMaCN());
-							    if(thongbaoctrl.createThongBao(tb))
-							    	System.out.println("Tạo hộp thoại thành công");
-						    }
-							tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
-							tbtk.setMaLTB("ltt1");
-							tbtk.setMaTB(tb.getMaTB());
-							
-							System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
-							tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
-							
-							if(tb_tkctrl.insertTB_TK(tbtk))
-								System.out.println(tbtk.getTinTB());
-							System.out.println("Gửi thông báo thành côcng!");
-							url="quanlyPage.jsp?&type="+type;
+												
 					}
+					
 					else
 					{
-						error="Nghiá»‡m thu tháº¥t báº¡i";
-						type ="ntdt_0";
-							url="quanlyPage.jsp?type="+type;			
+						error="Nghiệm thu thất bại";
+						type = "ntdt_0";
+					
+					
+						
+					
 					}
+					url="quanlyPage.jsp?type="+type;	
 					break;
 			}
 			

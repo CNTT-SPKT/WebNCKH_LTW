@@ -136,9 +136,9 @@
 							<div class="gv_DanhGia" style="background:white;height:850px;margin-right:15px;border-radius:3px;overflow:auto;">
 								<h2 class="tieude_theh">NGHIỆM THU</h2><hr>
 									<div class="ad_table_qltk" style="margin:15px 5px 0px 5px;">
-										<form id="formNghiemThu" action="CTNghiemThu_Servlet" method="get">
-										<input type="hidden" name="command" value="update">
-										<input type="hidden" name="Quyen" value="Manager">
+										<form id="formNghiemThu" action="CTNghiemThuQL_Servlet" method="get">
+										<input type="hidden" name="command" value="updateql">
+										<input type="hidden" name="MaDT" value=<%=tk.getQuyen()%>>
 										<input type="hidden" name="MaDT" value=<%=maDT%>>
 										<input type="hidden" name="MaTK" value=<%=tk.getMaTK() %>>
 										<input type="hidden" name="nguoigui" value="<%=tk.getMaTK() %>">
