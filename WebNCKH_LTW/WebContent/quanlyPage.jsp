@@ -166,7 +166,7 @@
                                     <li><a href="quanlyPage.jsp">Trang chủ</a></li>
                                     <li><a href="#">Biểu Mẫu</a></li>
                                     <li><a href="#">Liên Hệ</a></li>
-                                    <li><a href="#">Hướng dẫn</a></li>
+                                    <li><a href="">Hướng dẫn</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"> <%=session.getAttribute("Email") %></span></a></li>
