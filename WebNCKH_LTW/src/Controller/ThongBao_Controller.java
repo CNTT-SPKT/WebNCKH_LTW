@@ -269,9 +269,9 @@ public class ThongBao_Controller {
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-            	tb.setMaTB(rs.getString("ThongBao.MaTB"));
-            	tb.setNguoiGui(rs.getString("ThongBao.NguoiGui"));
-            	tb.setNguoiNhan(rs.getString("ThongBao.NguoiNhan"));
+            	tb.setMaTB(rs.getString("thongbao.MaTB"));
+            	tb.setNguoiGui(rs.getString("thongbao.NguoiGui"));
+            	tb.setNguoiNhan(rs.getString("thongbao.NguoiNhan"));
             	
             }
             cons.close();
