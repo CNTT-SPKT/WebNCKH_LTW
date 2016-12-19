@@ -187,7 +187,7 @@ public class HoiDong_Controller {
     }
 	public HoiDong getCTPB(String MaHD) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM HoiDong where MaHD='"+MaHD+"'";
+        String sql = "SELECT * FROM hoidong where MaHD='"+MaHD+"'";
         HoiDong hd = new HoiDong();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
