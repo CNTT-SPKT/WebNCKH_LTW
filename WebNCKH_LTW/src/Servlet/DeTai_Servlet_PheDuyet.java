@@ -111,7 +111,7 @@ public class DeTai_Servlet_PheDuyet extends HttpServlet {
 							tbtk.setMaTB(tb.getMaTB());
 								
 							System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+nguoinhan);
-							tbtk.setTinTB("Thông báo đăng ký thành công đề tài "+MaDT+"");
+							tbtk.setTinTB("Thông báo quản lý đã duyệt đề tài "+MaDT+"");
 							
 							if(tb_tkctrl.insertTB_TK(tbtk))
 								System.out.println(tbtk.getTinTB());
