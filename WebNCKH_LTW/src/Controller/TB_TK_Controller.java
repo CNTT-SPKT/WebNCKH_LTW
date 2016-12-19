@@ -60,7 +60,7 @@ public class TB_TK_Controller {
     }
 	public TB_TK getTinTB(String maCTTB) {
         Connection cons = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM TB_TK where maCTTB='"+maCTTB+"'";
+        String sql = "SELECT * FROM tb_tk where maCTTB='"+maCTTB+"'";
         TB_TK tbtk = new TB_TK();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
