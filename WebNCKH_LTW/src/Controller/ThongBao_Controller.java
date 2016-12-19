@@ -262,7 +262,7 @@ public class ThongBao_Controller {
 	public ThongBao getThongBao(String nguoiGui,String nguoiNhan) {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT * FROM thongbao inner join taikhoan on thongbao.nguoigui=taikhoan.matk" +
-        " Where thongbao.nguoigui='"+nguoiGui+"' and nguoiGui='"+nguoiNhan+"'";
+        " Where thongbao.nguoigui='"+nguoiGui+"' and nguoinhan='"+nguoiNhan+"'";
         ThongBao tb = new ThongBao();
         try {
             PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
