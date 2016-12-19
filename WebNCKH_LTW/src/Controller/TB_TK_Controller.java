@@ -79,7 +79,7 @@ public class TB_TK_Controller {
         Connection cons = DBConnect.getConnecttion();
         String sql = "SELECT macttb, thongbao.matb, tintb,ngaygui,tk2.hoten as TenNguoiGui FROM tb_tk,thongbao,taikhoan,"+
         " taikhoan as tk2 where thongbao.matb=tb_tk.matb and "+ 
-        "thongbao.nguoinhan=taikhoan.matk and thongbao.nguoigui=tk2.matk and taikhoan.email='"+email+"'"
+        "thongbao.nguoinhan=taikhoan.matk and thongbao.nguoigui=tk2.matk and taikhoan.email='"+email+"' and MaLTB='ltt1'"
         		+ " order by ngaygui desc";
         ArrayList<TB_TK> list = new ArrayList<>();
         try {

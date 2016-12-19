@@ -26,7 +26,56 @@
 <body>
 <%
 TaiKhoan_Controller tk=new TaiKhoan_Controller();
+String type = request.getParameter("type");
+	String error ="";
+	if (request.getParameter("type") != null)
+	{
+		
+		if(type.equals("themtk_1"))
+			error = "Thêm tài khoản từ file thành công!";
+		if(type.equals("themtk_0"))
+			error = "Thêm tài khoản từ file thất bại!";
+		
+	}
 %>
+<body>
+<script type="text/javascript">
+   $(document).ready(function() {
+       var x = $('.Mssg').text();
+       var y = $('.TypeMssg').text();
+    	if(x != "null" && x != "")
+    	{
+    		if( y == "themtk_1" )
+    			$("#ModalSuccess").modal('show');
+    		if( y == "themtk_0")
+    			$("#ModalFail").modal('show');
+    	}
+    });
+</script>
+<div class="modal fade" id="ModalSuccess">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-success">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<div class="modal fade" id="ModalFail">
+   <div class="modal-dialog">
+        <div class="modal-content panel panel-danger">
+              <div class="modal-header panel-heading" style="text-align:center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3><%=error %></h3>
+                    <button class="btn btn-danger btn-md" data-dismiss="modal"></span>Cancel</button>
+               </div>
+         </div>
+     </div>
+</div>
+<h4 class="Mssg hidden" style="text-align:center"><%=error%></h4>
+<h4 class="TypeMssg hidden" style="text-align:center"><%=type%></h4>
 	<div class="page">
 		<div class="menu">
 			<div class="row">
@@ -132,9 +181,19 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 								<div class="QLyTK" style="background:white;height:380px;margin-right:15px;border-radius:3px;overflow:auto;">
 									<h2 style="margin-top:0px;padding:5px;text-align:center;font-family:sans-serif">QUẢN LÝ NGƯỜI DÙNG</h2>
 									<hr>
-									<form action='' method='POST' enctype='multipart/form-data'>
-										<input type='file' name='userFile' style="float:left;margin:0px 5px 5px 5px;">
-										
+									<div class="input-group">
+										<label class="input-group-btn"> <span
+											class="btn btn-primary"> Duyệt... <input type="file"
+												 name="xlfile" id="xlf"  style="display: none;"					
+												accept=".xls">
+										</span>
+										</label> <input id="thongtin" type="text" class="form-control" readonly >
+									</div>
+									<h3 id="soluong" style="color:yellow" ></h3>
+									<form action="TruyenDi" method="POST">
+									<input type="hidden" id="out" name="duong" >
+									<input type="submit" class="btn btn-success" id="upload-button"
+										value="Tải lên danh sách" />
 									</form>
 									<div class="ad_table_qltk" style="margin:0px 5px 0px 5px;">
 										<table class="table table-striped table-hover">
@@ -142,7 +201,9 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 												<tr class="success">
 													<th>Tên tài khoản</th>
 													<th>Mã số</th>
-													<th>Email</th>
+													<th>Tài khoản</th>
+													<th>Quyền truy cập</th>
+													<th>Ngành</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -150,9 +211,11 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 											for (TaiKhoan c:tk.getListTaiKhoan()){
 											%>
 												<tr>
-													<td><%=c.getHoTen() %></td>
-													<td><%=c.getMatKhau() %></td>
-													<td><%=c.getEmail() %></td>
+													<td><%=c.getHoTen()%></td>
+													<td><%=c.getMaTK()%></td>
+													<td><%=c.getEmail()%></td>
+													<td><%=c.getQuyen()%></td>
+													<td><%=c.getNganh()%></td>
 
 												</tr>
 												<%
@@ -162,9 +225,87 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 											</tbody>
 										</table>
 									</div>
-									<div>
-										<button type="submit" value="Submit" style="float:right;height:30px; width:150px;background:#E6F1D8; border: 2px solid #C8E2B1;border-radius:5px; margin-right:10px;">Tạo tài khoản</button>
-									</div>
+									<!-- <pre id="out"></pre> -->
+									<input type="hidden" name="command" value="themnhieusv">
+									
+									<script src="xls.min.js"></script>
+<script>
+
+</script>
+<script>
+var X = XLS;
+var XW = {
+	msg: 'xls',	
+};
+
+var rABS = typeof FileReader !== "undefined" && typeof FileReader.prototype !== "undefined" && typeof FileReader.prototype.readAsBinaryString !== "undefined";
+
+
+function fixdata(data) {
+	var o = "", l = 0, w = 10240;
+	for(; l<data.byteLength/w; ++l) o+=String.fromCharCode.apply(null,new Uint8Array(data.slice(l*w,l*w+w)));
+	o+=String.fromCharCode.apply(null, new Uint8Array(data.slice(l*w)));
+	return o;
+}
+
+function to_csv(workbook) {
+	var result = [];
+	workbook.SheetNames.forEach(function(sheetName) {
+		var csv = X.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+		if(csv.length > 0){
+			/*result.push("SHEET: " + sheetName);*/
+			 /* result.push(""); */			
+			result.push(csv);
+			
+		}
+	});
+	return result;
+}
+function countLine() {
+	  var text = $('#out').val();
+	  var lines = text.split("\n");
+	  var count = 0;
+	  for (var i = 0; i < lines.length-1; i++) {
+	    if (lines[i].trim()!="" && lines[i].trim()!=null) {
+	      count += 1;
+	    }
+	  }
+	 $('#soluong').html("Số tài khoản từ file: "+count);
+	}
+function process_wb(wb) {
+	if(use_worker) XLS.SSF.load_table(wb.SSF);
+	var output =to_csv(wb);
+	
+	if(out.value === undefined) out.textContent = output;
+	else out.value = output;
+	if(typeof console !== 'undefined') console.log("output", new Date());
+}
+
+var xlf = document.getElementById('xlf');
+function handleFile(e) {
+	rABS = 0;
+	use_worker = 0;
+	var files = e.target.files;
+	var f = files[0];
+	{
+		var reader = new FileReader();
+		var name = f.name;
+		reader.onload = function(e) {
+			if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+			var data = e.target.result;
+				var arr = fixdata(data);
+				var	wb = X.read(btoa(arr), {type: 'base64'});
+					process_wb(wb);
+					countLine();
+			
+		};
+		if(rABS) reader.readAsBinaryString(f);
+		else reader.readAsArrayBuffer(f);
+	}
+}
+
+if(xlf.addEventListener) xlf.addEventListener('change', handleFile, false);
+</script>
 								</div>
 
 							</div>

@@ -24,7 +24,7 @@ public class TaiKhoan {
 			super();
 		}
 		public TaiKhoan(String maTK, String matKhau, String quyen, String hoTen, String ngaySinh, String nganh,
-				String email, String mSNH, String cNNH, String hinhAnh) {
+				String email, String hinhAnh, String mSNH, String cNNH) {
 			super();
 			MaTK = maTK;
 			MatKhau = matKhau;

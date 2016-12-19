@@ -195,9 +195,9 @@ public class TaiKhoan_Controller {
 	}
 	public boolean insertTaiKhoan(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
-		String sql = "insert into taikhoan values (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into taikhoan values (?,?,?,?,?,?,?,?,?,?)";
 		try {
-			SimpleDateFormat format = new SimpleDateFormat( "MM/dd/yyyy" );  
+			SimpleDateFormat format = new SimpleDateFormat( "yyyy-mm-dd" );  
 			java.util.Date myDate = format.parse(tk.getNgaySinh());
 			java.sql.Date sqlDate = new java.sql.Date( myDate.getTime() );
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
