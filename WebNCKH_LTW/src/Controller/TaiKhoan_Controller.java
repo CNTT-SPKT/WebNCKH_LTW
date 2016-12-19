@@ -382,7 +382,7 @@ public class TaiKhoan_Controller {
 	public Boolean 	kiemTraTrungtk(String maTK)
 	{
 		Connection connection = DBConnect.getConnecttion();
-		String sql ="SELECT * FROM TaiKhoan WHERE TaiKhoan.maTk='"+maTK+"'";
+		String sql ="SELECT * FROM taikhoan WHERE taikhoan.matk='"+maTK+"'";
 		try {
 			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();

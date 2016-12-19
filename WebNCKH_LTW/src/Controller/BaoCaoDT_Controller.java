@@ -31,6 +31,7 @@ public class BaoCaoDT_Controller {
             	bc.setNgayBC(rs.getString("NgayBC"));
             	bc.setTenDT(rs.getString("TenDT"));
             	bc.setTenBC(rs.getString("TenBC"));
+            	bc.setFileBC(rs.getString("FileBC"));
             	
             }
             cons.close();
@@ -55,6 +56,7 @@ public class BaoCaoDT_Controller {
             	bc.setNgayBC(rs.getString("NgayBC"));
             	bc.setTenDT(rs.getString("TenDT"));
             	bc.setTenBC(rs.getString("TenBC"));
+            	bc.setFileBC(rs.getString("FileBC"));
             	list.add(bc);
             }
             cons.close();

@@ -72,7 +72,7 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="#">Trang chủ</a></li>
+                                    <li><a href="quanlyPage.jsp">Trang chủ</a></li>
                                     <li><a href="#">Biểu Mẫu</a></li>
                                     <li><a href="#">Liên Hệ</a></li>
                                     <li><a href="#">Hướng dẫn</a></li>

@@ -21,7 +21,7 @@ public class ThongBao_Controller {
 	//BAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TINBAT DAU TIN
 	public boolean insert_thongbao(ThongBao tb) {
 		Connection cons = DBConnect.getConnecttion();
-		 String sql = "INSERT INTO thongbao(matb,mguoigui,nguoinhan)"
+		 String sql = "INSERT INTO thongbao(matb,nguoigui,nguoinhan)"
 	        		+ " values (?,?,?)";
 		try {
 			 PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
