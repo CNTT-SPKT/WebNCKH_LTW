@@ -43,6 +43,10 @@ public class TaiKhoan_Controller {
 	        }
 	        return list;
 	    }
+		public String taoMaTD() throws ParseException{		
+			TaiKhoan_Controller tkctrl= new TaiKhoan_Controller();
+			return "tk"+Integer.toString(tkctrl.getListTaiKhoan().size()+1);
+		}
 		public ArrayList<TaiKhoan> getListSinhVien() {
 	        Connection cons = DBConnect.getConnecttion();
 	        String sql = "select matk,hoten "
@@ -193,6 +197,7 @@ public class TaiKhoan_Controller {
 		}
 		return tkh;
 	}
+	
 	public boolean insertTaiKhoan(TaiKhoan tk) throws ParseException {
 		Connection cons = DBConnect.getConnecttion();
 		String sql = "insert into taikhoan values (?,?,?,?,?,?,?,?,?,?)";
@@ -201,6 +206,8 @@ public class TaiKhoan_Controller {
 			java.util.Date myDate = format.parse(tk.getNgaySinh());
 			java.sql.Date sqlDate = new java.sql.Date( myDate.getTime() );
 			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+
+
 			ps.setString(1, tk.getMaTK());
 			ps.setString(2, tk.getMatKhau());
 			ps.setString(3, tk.getQuyen());

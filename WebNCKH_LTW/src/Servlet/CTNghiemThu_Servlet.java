@@ -43,6 +43,7 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String command = request.getParameter("command");
 		String quyen = request.getParameter("Quyen");
 		String maDT= request.getParameter("MaDT");

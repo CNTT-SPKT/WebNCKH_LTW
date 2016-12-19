@@ -20,13 +20,13 @@
 
 <c:if test="${not empty param.Email and not empty param.password}">
       <sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver"
-                       url="jdbc:mysql://localhost:3306/DB_WebNCKH"
-                       user="root" password="123456"/>
+                       url="jdbc:mysql://72.13.93.206:3307/nhom15"
+                       user="nhom15" password="123456"/>
  
       <sql:query dataSource="${ds}" var="loginTable">
-        select count(*) as kount from TaiKhoan
-        where Email='${param.Email}'
-        and MatKhau='${param.password}' and Quyen='${param.phanquyen}'
+        select count(*) as kount from taikhoan
+        where email='${param.Email}'
+        and matkhau='${param.password}' and quyen='${param.phanquyen}'
       </sql:query>
  
       <c:forEach items="${loginTable.rows}" var="row">
