@@ -124,6 +124,8 @@ public class DeTai_Servlet extends HttpServlet {
 					dkDT.setMaTT("tt1");
 					
 					TaiKhoan tk=new TaiKhoan();
+					TaiKhoan tkphu=new TaiKhoan();
+					tkphu = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenCN"));
 					tk = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenCN"));
 					dkDT.setMaCN(tk.getMaTK());
 					tk = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV1"));
@@ -162,8 +164,26 @@ public class DeTai_Servlet extends HttpServlet {
 							url="sinhvienPage.jsp";
 							// đăng ký thành công thì gởi thông báo có đề tài mới cho quản lý
 							TB_TK tbtk = new TB_TK();
-							ThongBao tb = thongbaoctrl.getListThongBao(dkDT.getMaCN());
-							tbtk.setMaCTTB("cttb"+Integer.toString(tb_tkctrl.getListTB_TK().size()+5));
+							ThongBao tb =new ThongBao();
+							int i=thongbaoctrl.getListThongBao().size()+1;
+							int j=tb_tkctrl.getListTB_TK().size()+1;
+							String maTb="tb"+Integer.toString(i);
+							String macttb="cttb"+Integer.toString(j);
+							while(thongbaoctrl.kiemTraKhoaChinhTB(maTb))
+							{
+								i=thongbaoctrl.getListThongBao().size()+1;
+								maTb="tb"+Integer.toString(i);
+							}
+							while(thongbaoctrl.kiemTraKhoaChinhTBTK(macttb))
+							{
+								j=tb_tkctrl.getListTB_TK().size()+1;
+								macttb="cttb"+Integer.toString(j);
+							}
+							tb.setMaTB(maTb);
+							tb.setNguoiGui(tkphu.getMaTK());
+							tb.setNguoiNhan("tk1");
+							thongbaoctrl.insert_thongbao(tb);
+							tbtk.setMaCTTB(macttb);
 							tbtk.setMaLTB("ltt2");
 							tbtk.setTinTB("Thông báo đăng ký đề tài mới từ tài khoản "+dkDT.getMaCN());
 							tbtk.setMaTB(tb.getMaTB());
