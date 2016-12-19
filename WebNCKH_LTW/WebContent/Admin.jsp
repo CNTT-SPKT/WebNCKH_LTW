@@ -59,6 +59,10 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 			error = "Xóa tài khoản thành công!";
 		if(type.equals("xoatk_0"))
 			error = "Xóa tài khoản thất bại!";
+		if(type.equals("ttk_1"))
+			error = "Thêm thành công!";
+		if(type.equals("ttk_0"))
+			error = "Thêm thất bại!";
 		
 	}
 %>
@@ -128,7 +132,7 @@ TaiKhoan_Controller tk=new TaiKhoan_Controller();
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span style="color: blue">Admin</span></a></li>
+									<li><a href="#"><span style="color: blue"><%=session.getAttribute("Email") %></span></a></li>
 									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div>

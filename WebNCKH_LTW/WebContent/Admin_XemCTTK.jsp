@@ -65,7 +65,7 @@ if (request.getParameter("MaTK") != null) {
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span style="color: blue">Admin</span></a></li>
+									<li><a href="#"><span style="color: blue"><%=session.getAttribute("Email") %>	</span></a></li>
 									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div>
@@ -91,11 +91,10 @@ if (request.getParameter("MaTK") != null) {
 						<div class="tab-pane" id="QLTK">
 							<div class="row" style="">
 								<div class="QLyTK"
-									style="background: white; height: 480px; margin-right: 15px; border-radius: 3px; overflow: auto;">
+									style="background: white; height: 380px; margin-right: 15px; border-radius: 3px; overflow: auto;">
 									<h2
-										style="margin-top: 0px; padding: 5px; text-align: center; font-family: sans-serif;">QUẢN
+										style="margin-top: 0px; padding: 5px; text-align: center; font-family: sans-serif">QUẢN
 										LÝ TÀI KHOẢN</h2>
-									<h5 style="float:left;margin-left:30px" class="message_Error"><b><%=request.getAttribute("error") %></b></h5>
 									<a class="btn btn-default" href="Admin_ThemTK.jsp"
 										role="button" style="float: right; margin: 0px 5px 5px 0px;">Thêm
 										tài khoản</a>
@@ -104,7 +103,6 @@ if (request.getParameter("MaTK") != null) {
 											style="margin: 0px 5px 0px 0px;">
 											<thead class="thead-default">
 												<tr class="success">
-												
 													<th>Tên tài khoản</th>
 													<th>Mã số</th>
 													<th>Tài khoản</th>
@@ -118,24 +116,23 @@ if (request.getParameter("MaTK") != null) {
 												<%
 												for(TaiKhoan a:tk.getListTaiKhoan()){
 											%>
-												<tr>
-													
-													<td><%=a.getHoTen()%></td>
-													<td><%=a.getMaTK()%></td>
-													<td><%=a.getEmail()%></td>
-													<td><%=a.getQuyen()%></td>
-													<td><%=a.getNganh()%></td>
-													<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập
+													<tr>
+														<td><%=a.getHoTen()%></td>
+														<td><%=a.getMaTK()%></td>
+														<td><%=a.getEmail()%></td>
+														<td><%=a.getQuyen()%></td>
+														<td><%=a.getNganh()%></td>
+														<td><a href="Admin_XemCTTK.jsp?MaTK=<%=a.getMaTK()%>">Cập
 															nhập</a></td>
  													<td><a href="TaiKhoan_Servlet?command=XoaTK&MaTK=<%=a.getMaTK()%>"> Xóa</a></td>
-												</tr>
+
+													</tr>
 												<%
 												}
 												%>
 											</tbody>
 										</table>
 									</div>
-									
 								</div>
 								
 							</div>
@@ -187,13 +184,12 @@ if (request.getParameter("MaTK") != null) {
 														thông tin</a>
 													<div class="modal fade" id="modal-id">
 														<div class="modal-dialog">
-															<div  class="modal-content">
+															<div class="modal-content">
 																<div class="modal-header">
 																	<button type="button" class="close"
 																		data-dismiss="modal" aria-hidden="true">&times;</button>
-															
 																</div>
-																<div  class="modal-body">
+																<div class="modal-body">
 																	<div class="row">
 																		<div class="title"
 																			style="text-align: center; margin-bottom: 15px;">
@@ -207,14 +203,14 @@ if (request.getParameter("MaTK") != null) {
 																			<input type="hidden" name="command" value="updateADMIN">
 																			<input type="hidden" name="MaTK" value=<%=c.getEmail() %>>
 																			<input type="hidden" name="Quyen" value="Admin">
-																			<div  class="form-group"
+																			<div class="form-group"
 																				style="margin-left: 5px; margin-left: 65px;">
 
 																				<div class="col-xs-10">
-																					<label for="mail">Mail<span>:</span></label> <input
-																						class="form-control" name="email" id="mail" type="text"
-																						required="required">
-																				</div>
+																									<label for="email">Mail<span>:</span></label> 
+																									<input class="form-control" name="email" id="email" type="email" required/>
+																									<span class="glyphicon form-control-feedback" id="email1"></span>
+																								</div>
 																				<br>
 																				<div class="col-xs-10">
 																					<label for="sdt">Ngành<span>:</span></label>
@@ -235,9 +231,9 @@ if (request.getParameter("MaTK") != null) {
 																				</div>
 																				<br>
 																				
-																				<div style="margin-top:10px;" class="col-xs-10 ">
+																				<div style="margin-top:10px;" class="col-xs-10">
 																					<label for="mail">Quyền<span>:</span></label> 
-																					<select class="" style="height:30px" name="quyen">
+																					<select style="height:30px" name="quyen">
 						                                                            <option value='<%=c.getQuyen() %>>' selected><%=c.getQuyen() %></option>
 						                                                            <%for(TaiKhoan tk1:tk.getListTKQuyen()){ %>
 						                                                            <option value='<%=tk1.getQuyen() %>'><%=tk1.getQuyen() %></option>

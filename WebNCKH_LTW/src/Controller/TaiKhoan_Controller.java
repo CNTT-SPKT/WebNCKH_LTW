@@ -357,6 +357,45 @@ public class TaiKhoan_Controller {
 	    }
 	    
 	}
+	public boolean insertTaiKhoan2(TaiKhoan tk) throws ParseException {
+		Connection cons = DBConnect.getConnecttion();
+		String sql = "insert into taikhoan (matk,matkhau,quyen,hoten,ngaysinh,nganh,email,cnnh)"
+				+ " values (?,?,?,?,?,?,?,?)";
+		try {
+	
+			PreparedStatement ps = (PreparedStatement) cons.prepareStatement(sql);
+			ps.setString(1, tk.getMaTK());
+			ps.setString(2, tk.getMatKhau());
+			ps.setString(3, tk.getQuyen());
+			ps.setString(4, tk.getHoTen());
+			ps.setString(5, tk.getNgaySinh());
+			ps.setString(6, tk.getNganh());
+			ps.setString(7, tk.getEmail());
+			ps.setString(8, tk.getCNNH());
+			return ps.executeUpdate()==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(TaiKhoan_Controller.class.getName(), null).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
+	public Boolean 	kiemTraTrungtk(String maTK)
+	{
+		Connection connection = DBConnect.getConnecttion();
+		String sql ="SELECT * FROM TaiKhoan WHERE TaiKhoan.maTk='"+maTK+"'";
+		try {
+			PreparedStatement ps = (PreparedStatement) connection.prepareCall(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	public static void main(String[] args) throws SQLException, Exception {
 		TaiKhoan_Controller ctrl = new TaiKhoan_Controller();
 		

@@ -72,7 +72,7 @@ public class DeTai_Servlet extends HttpServlet {
 					if(detaictrl.updateTrangThai_DeTai(dt))
 					{
 						type = "pddt_1";
-						String nguoigui = request.getParameter("nguoigui");
+						String nguoigui = dt.getGVHD();
 						TB_TK tbtk = new TB_TK();
 						ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
 						

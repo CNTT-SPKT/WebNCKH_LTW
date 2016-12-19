@@ -59,7 +59,7 @@
 									<li><a href="#">Hướng dẫn</a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#"><span style="color: blue">Admin</span></a></li>
+									<li><a href="#"><span style="color: blue"><%=session.getAttribute("Email") %></span></a></li>
 									<li><a href="mainPage.jsp">Đăng xuất</a></li>
 								</ul>
 							</div>
@@ -143,19 +143,20 @@
 									style="background: white; height: 500px; margin-right: 15px; border-radius: 3px">
 									<h2
 										style="text-aline: center; padding: 5px; text-align: center; font-family: sans-serif">QUẢN LÝ NGƯỜI DÙNG</h2>
-									</center>
+								
 									<hr>
 									<div class="Ad_table_TTK">
 										<div class="row">
-											<form onsubmit="">
+												<form action="ThemTaiKhoan_Servlet" id="formtb" method="post" class="form-horizontal">
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-													<div action="" style="margin: 15px 10px 30px 50px;">
+													<div style="margin: 15px 10px 30px 50px;">
 														<div class="col-xs-10">
-															<label for="name">Họ tên<span>:</span></label> <input
+															<label for="name">Họ tên<span>:</span></label> 
+															<input
 																type="text" name="hoten"
 																class="form-control required name"
-																placeholder="Lâm Xuân Triết" id="name" required
-																minlength="6" data-placement="right"
+																placeholder="Nhập tên người dùng" id="name" required
+																minlength="3" data-placement="right"
 																data-trigger="hover"
 																data-content="Bạn cần phải nhập vào trường này.">
 														</div>
@@ -164,9 +165,10 @@
 															<label for="email">Email<span>:</span></label> <input
 																type="text" name="email"
 																class="form-control required email"
-																placeholder="LVA@gmail.com" id="email" required
+																placeholder="...@gmail.com" id="email" required
 																data-placement="right" data-trigger="hover"
 																data-content="Bạn cần phải nhập vào trường này">
+																<span class="glyphicon form-control-feedback" id="email1"></span>	
 														</div>
 														<br>
 														<div class="col-xs-10">
@@ -184,12 +186,9 @@
 														</div>
 														<br>
 														<div class="col-xs-10">
-															<label for="mota">Tài khoản<span>:</span></label> <input
-																type="text" name="mota"
-																class="form-control required mota"
-																placeholder="Sinh viên" id="mota" required minlength="6"
-																data-placement="right" data-trigger="hover"
-																data-content="Bạn cần phải nhập vào trường này.">
+															<label for="mota">Ngày sinh<span>:</span>
+															</label>
+															<input type="text" type="date" name="nsinh" class="form-control required ngay"  id="" required data-placement="right" data-trigger="hover" data-content="Vui lòng nhập theo định dạng yyyy/mm/dd" placeholder="yyyy/mm/dd" style="float:left; margin-left:10px; margin-top:10px;"required>
 														</div>
 													</div>
 												</div>
@@ -200,25 +199,25 @@
 															<label for="password1">Mật khẩu<span>:</span></label> <input
 																type="password" name="password1"
 																class="form-control required password1" id="password1"
-																required minlength="6" data-placement="right"
+																required minlength="3" data-placement="right"
 																data-trigger="hover"
 																data-content="Bạn cần phải nhập vào trường này.">
 														</div>
 														<br>
 														<div class="col-xs-10">
-															<label for="mssv">Mã số<span>:</span></label> <input
-																type="text" name="mssv"
+															<label for="mssv">Chi nhánh ngân hàng<span>:</span></label> <input
+																type="text" name="cnnganhang"
 																class="form-control required mssv"
-																placeholder="14110208" id="mssv" required minlength="6"
+																placeholder="VCB" id="mssv" required minlength="3"
 																data-placement="right" data-trigger="hover"
 																data-content="Bạn cần phải nhập vào trường này.">
 														</div>
 														<br>
 														<div class="col-xs-10">
 															<label for="ngành">Ngành<span>:</span></label> <input
-																type="text" name="mota"
+																type="text" name="nganh"
 																class="form-control required mota" placeholder="CNTT"
-																id="ngành" required minlength="6" data-placement="right"
+																id="ngành" required minlength="3" data-placement="right"
 																data-trigger="hover"
 																data-content="Bạn cần phải nhập vào trường này.">
 														</div>
