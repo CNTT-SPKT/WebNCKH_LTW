@@ -70,10 +70,10 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="quanlyPage.jsp">Trang chủ</a></li>
+                                    <li><a href="#">Trang chủ</a></li>
                                     <li><a href="#">Biểu Mẫu</a></li>
                                     <li><a href="#">Liên Hệ</a></li>
-                                    <li><a href="">Hướng dẫn</a></li>
+                                    <li><a href="#">Hướng dẫn</a></li>
                                 </ul>
                                <ul class="nav navbar-nav navbar-right">
                                     <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"> <%=session.getAttribute("Email") %></span></a></li>
@@ -155,7 +155,8 @@ TB_TK_Controller cttb= new TB_TK_Controller();
                                                 <tr>
                                                     <td><%=ctn.getTenTK() %></td>
                                                    <td><%=ctn.getQuyen() %></td>
-                                                  <td><a href="quanly_XemDanhGia.jsp?MaTK=<%=ctn.getMaTK()%>">Xem kết quả</a></td>
+                                                  <td><a href="quanly_XemDanhGia.jsp?MaDT=<%=maDT%>&MaTK=<%=ctn.getMaTK() %>">Xem kết quả</a></td>
+                                                 
                                                 </tr>
                                                 <%} %>
                                             </tbody>

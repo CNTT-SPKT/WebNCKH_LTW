@@ -36,9 +36,12 @@
 	TaiKhoan_Controller taikhoanDAO=new TaiKhoan_Controller();
 	CTNghiemThu ctnghiemthu=new CTNghiemThu();
 	String MaTK = "";
-	if (request.getParameter("MaTK") != null) {
-		MaTK = request.getParameter("MaTK");
-		ctnghiemthu = ctnt.getListCTNghiemThuByMaTK(MaTK);
+	String MaDT="";
+	
+	if ((request.getParameter("MaDT") != null) && (request.getParameter("MaTK") != null) ) {
+		MaDT = request.getParameter("MaDT");
+		MaTK=request.getParameter("MaTK");
+	ctnghiemthu = ctnt.getCTNghiemThuByMaTK(MaDT,MaTK);
 	}
 	TaiKhoan tktb =new TaiKhoan();
 	tktb=taikhoanDAO.getTaiKhoanByMaTK(session.getAttribute("Email").toString());
@@ -66,10 +69,10 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse navbar-ex1-collapse" id="menuMain">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="quanlyPage.jsp">Trang chủ</a></li>
+                                    <li><a href="#">Trang chủ</a></li>
                                     <li><a href="#">Biểu Mẫu</a></li>
                                     <li><a href="#">Liên Hệ</a></li>
-                                   <li><a href="">Hướng dẫn</a></li>
+                                    <li><a href="#">Hướng dẫn</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a  href="#"> <span  id="username" value=""  type="text" style="color:blue"><%=session.getAttribute("Email") %> 	 </span></a></li>
