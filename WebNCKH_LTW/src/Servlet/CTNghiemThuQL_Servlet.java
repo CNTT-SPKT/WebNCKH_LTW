@@ -72,6 +72,12 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 					System.out.println(ctnt.getMaTK()+"____"+ctnt.getMaDT());
 					System.out.println("Vào update");
 					int TongDiemChung = 0;
+					error = "Thành công";
+					type ="ntdt_1";
+					// Ä�Ã¡nh giÃ¡ thÃ nh cÃ´ng thÃ¬ gá»­i thÃ´ng bÃ¡o vá»� cho sinh viÃªn
+					String nguoigui = request.getParameter("nguoigui");
+					TB_TK tbtk = new TB_TK();
+					ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
 					if(crt.updateCTNT(ctnt) )
 					{
 						boolean f=true;
@@ -92,14 +98,11 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 							dt.setMaTT("tt9");
 							if(ctrl.updateTrangThai_DeTai(dt))
 								System.out.println("Update trạng thái của đề tài thành công");
+							System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
+							tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
 						}	
 				
-						error = "Thành công";
-						type ="ntdt_1";
-						// Ä�Ã¡nh giÃ¡ thÃ nh cÃ´ng thÃ¬ gá»­i thÃ´ng bÃ¡o vá»� cho sinh viÃªn
-						String nguoigui = request.getParameter("nguoigui");
-						TB_TK tbtk = new TB_TK();
-						ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
+					
 						
 						if(tb.getMaTB()==null)
 					    {
@@ -115,8 +118,7 @@ public class CTNghiemThuQL_Servlet extends HttpServlet {
 						tbtk.setMaLTB("ltt1");
 						tbtk.setMaTB(tb.getMaTB());
 						
-						System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
-						tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
+					
 						
 						if(tb_tkctrl.insertTB_TK(tbtk))
 							System.out.println(tbtk.getTinTB());
