@@ -321,7 +321,7 @@ $( document ).ready(function() {
 									</div>
 						<div class="tab-pane" id="dkDeTai">
 						<div class="row" style="margin-right:0px;">
-							<div class="svdkDeTai" style="background:white;border-radius:3px">
+							<div class="svdkDeTai" style="background:white;border-radius:3px;height:1600px">
 								<h2 class="tieude_theh">ĐĂNG KÝ ĐỀ TÀI</h2>
 								<hr>
 								<div class="container" style="width:800px">

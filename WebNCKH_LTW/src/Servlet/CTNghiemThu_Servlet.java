@@ -43,15 +43,13 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		String command = request.getParameter("command");
 		String quyen = request.getParameter("Quyen");
 		String maDT= request.getParameter("MaDT");
 		String maTK=request.getParameter("MaTK");
 		int TongDiem = 0;
 		CTNghiemThu ctnt=new CTNghiemThu();
-		ctnt = crt.getListCTNghiemThu(maDT);
-		ctnt=crt.getCTNghiemThuMaTK(maTK);
+		ctnt = crt.getCTNghiemThuByMaTK(maDT,maTK);
 		ctnt.setTongQuan(Integer.parseInt(request.getParameter("diemtongquan")));
 		ctnt.setMucTieu(Integer.parseInt(request.getParameter("diemmuctieu")));
 		ctnt.setPhuongPhap(Integer.parseInt(request.getParameter("diemphuongphap")));
@@ -63,19 +61,17 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 				ctnt.getMucTieu()+ ctnt.getNoiDung()+ ctnt.getHinhThuc();
 		ctnt.setTongDiem(TongDiem);
 		ctnt.setYKien(request.getParameter("ykien"));
-		
+		System.out.println(TongDiem);
 		
 		DeTai dt=new DeTai();
 		dt=ctrl.getDeTai(maDT);
+		
 		String url="", error="", type="";
 		try{
 			switch(command){
 				case "update":
 					System.out.println(ctnt.getMaTK()+"____"+ctnt.getMaDT());
 					System.out.println("Vào update");
-					String nguoigui = request.getParameter("nguoigui");
-					TB_TK tbtk = new TB_TK();
-					ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
 					int TongDiemChung = 0;
 					if(crt.updateCTNT(ctnt) )
 					{
@@ -97,14 +93,14 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 							dt.setMaTT("tt9");
 							if(ctrl.updateTrangThai_DeTai(dt))
 								System.out.println("Update trạng thái của đề tài thành công");
-							System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
-							tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
 						}	
 				
 						error = "Thành công";
 						type ="ntdt_1";
 						// Ä�Ã¡nh giÃ¡ thÃ nh cÃ´ng thÃ¬ gá»­i thÃ´ng bÃ¡o vá»� cho sinh viÃªn
-					
+						String nguoigui = request.getParameter("nguoigui");
+						TB_TK tbtk = new TB_TK();
+						ThongBao tb = thongbaoctrl.getThongBao(nguoigui,dt.getMaCN());
 						
 						if(tb.getMaTB()==null)
 					    {
@@ -120,7 +116,8 @@ public class CTNghiemThu_Servlet extends HttpServlet {
 						tbtk.setMaLTB("ltt1");
 						tbtk.setMaTB(tb.getMaTB());
 						
-					
+						System.out.println(nguoigui+"_______"+tb.getMaTB()+"______"+dt.getMaCN());
+						tbtk.setTinTB("Thống báo đề tài "+maDT+" đã có kết quả thu");
 						
 						if(tb_tkctrl.insertTB_TK(tbtk))
 							System.out.println(tbtk.getTinTB());

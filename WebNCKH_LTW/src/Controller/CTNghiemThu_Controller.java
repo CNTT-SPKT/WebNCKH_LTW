@@ -318,16 +318,16 @@ public class CTNghiemThu_Controller {
 		
 		 public static void main(String[] args) throws SQLException, ParseException {
 		       CTNghiemThu_Controller ctrl= new CTNghiemThu_Controller();
-		       CTNghiemThu ctnt=ctrl.getCTNghiemThuByMaTK("dt4","tk7");
-		    	   //System.out.println(ctnt.getMaDT()+"_____"+ctnt.getTenDT()+"____"+ctnt.getNoiDung());
-		    	   for(CTNghiemThu ct : ctrl.getListCTNghiemThuMaDT("dt9"))
-		    		   System.out.println(ct.getTongQuan()+"___"+ct.getTongDiem()+"___"+ct.getMaTK());
+//		       CTNghiemThu ctnt=ctrl.getCTNghiemThuByMaTK("dt4","tk7");
+//		    	   //System.out.println(ctnt.getMaDT()+"_____"+ctnt.getTenDT()+"____"+ctnt.getNoiDung());
+//		    	   for(CTNghiemThu ct : ctrl.getListCTNghiemThuMaDT("dt9"))
+//		    		   System.out.println(ct.getTongQuan()+"___"+ct.getTongDiem()+"___"+ct.getMaTK());
 		    	   
-//		       CTNghiemThu ct= new CTNghiemThu();
-//		       ct = ctrl.getListCTNghiemThu("dt9");
-//		       ct.setDiemThuong(10);
-//		       ct.setYKien("nhu c");
-//		       if(ctrl.updateCTNT(ct))
-//		    	   System.out.println("TC");
+		       CTNghiemThu ct= new CTNghiemThu();
+		       ct = ctrl.getListCTNghiemThu("dt9");
+		       ct.setDiemThuong(10);
+		       ct.setYKien("nhu c");
+		       if(ctrl.updateCTNT(ct))
+		    	   System.out.println("TC");
 		    }
 }
