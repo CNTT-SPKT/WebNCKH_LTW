@@ -220,14 +220,15 @@ public class DeTai_Servlet extends HttpServlet {
 					gv_dkDT.setMaHienThi(null);
 					gv_dkDT.setMaTT("tt10");
 					TaiKhoan tk1=new TaiKhoan();
-					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenCN"));
-					gv_dkDT.setMaCN(tk1.getMaTK());
-					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV1"));
-					gv_dkDT.setSinhVien1(tk1.getMaTK());
-					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV2"));
-					gv_dkDT.setSinhVien2(tk1.getMaTK());
+//					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenCN"));
+//					gv_dkDT.setMaCN(tk1.getMaTK());
+//					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV1"));
+//					gv_dkDT.setSinhVien1(tk1.getMaTK());
+//					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenSV2"));
+//					gv_dkDT.setSinhVien2(tk1.getMaTK());
 					tk1 = taikhoanctrl.getTaiKhoanByTen(request.getParameter("tenGVHD"));
 					gv_dkDT.setGVHD(tk1.getMaTK());
+					System.out.println(gv_dkDT.getGVHD());
 					gv_dkDT.setTenDT(request.getParameter("tenDT"));
 					gv_dkDT.setMoTa(request.getParameter("mota"));
 					gv_dkDT.setLinhVuc("Tự nhiên");
@@ -500,11 +501,16 @@ public class DeTai_Servlet extends HttpServlet {
 						{
 							System.out.println("Trang thái "+dkDT2.getMaTT());
 							error="Thành công!";
+							type = "dkdtdx_1";
+							
+								url="sinhvienPage.jsp?type="+type;
+					
 						}
 						
 					
 					}
 					else
+					{
 						error="Thất bại";
 					type = "dkdtdx_0";
 					System.out.println(error);
@@ -517,6 +523,8 @@ public class DeTai_Servlet extends HttpServlet {
 						url="quanlyPage.jsp?type="+type;
 					
 					break;
+					}
+					System.out.println(""+type);
 			}
 			
 		}catch(Exception e){

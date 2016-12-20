@@ -689,11 +689,11 @@ $( document ).ready(function() {
 																				<div class="row">
 																					<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																					<div class="col-sm-4" style="margin-bottom:5px;">
-																						<input type="date" name="" id="thoigianbatdau" class="form-control" value="<%=detai.getNgayThucHien() %>" required="required" title="" style="padding:0px;" readonly>
+																						<input type="text" name="" id="thoigianbatdau" class="form-control" value="<%=detai.getNgayThucHien() %>" required="required" title="" style="padding:0px;" >
 																					</div>
 																					<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																					<div class="col-sm-4" style="margin-bottom:5px;">
-																						<input type="date" name="" id="thoigianketthuc" class="form-control" value="<%=detai.getNgayKetThuc() %>" required="required" title="" style="padding:0px;"readonly>
+																						<input type="text" name="" id="thoigianketthuc" class="form-control" value="<%=detai.getNgayKetThuc() %>" required="required" title="" style="padding:0px;">
 																					</div>
 																				</div>
 																			</div>

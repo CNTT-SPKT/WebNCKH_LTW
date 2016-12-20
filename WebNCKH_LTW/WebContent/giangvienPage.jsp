@@ -317,11 +317,11 @@
 																					<div class="row">
 																						<label class="col-sm-2 control-label" for="thoigianbatdau">Từ:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="ngaybatdau" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input type="text" name="ngaybatdau" id="thoigianbatdau" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																						<label class="col-sm-2 control-label" for="thoigianketthuc">Đến:</label>
 																						<div class="col-sm-4" style="margin-bottom:5px;">
-																							<input type="date" name="ngayketthuc" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
+																							<input type="text" name="ngayketthuc" id="thoigianketthuc" class="form-control" value="" required="required" title="" style="padding:0px;">
 																						</div>
 																					</div>
 																				</div>
@@ -339,19 +339,19 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text" required name="tenCN">
+																							<input class="form-control" id="hoten1" type="text" readonly name="tenCN">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mss1" type="text" required>
+																							<input class="form-control" id="mss1" type="text" readonly >
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mail1">Email:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mail1" type="text" required>
+																							<input class="form-control" id="mail1" type="text" readonly>
 																						</div>
 																					</div>
 																					<br>
@@ -359,13 +359,13 @@
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="hoten1" type="text" name="tenSV1">
+																							<input class="form-control" id="hoten1" type="text" readonly name="tenSV1">
 																						</div>
 																					</div>
 																					<div class="row" style="margin-bottom:5px">
 																						<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																						<div class="col-sm-8">
-																							<input class="form-control" id="mss1" type="text">
+																							<input class="form-control" id="mss1" readonly type="text">
 																						</div>
 																					</div>
 																				</div>
@@ -387,13 +387,13 @@
 																						<div class="row" style="margin-bottom:5px">
 																							<label class="col-sm-4 control-label" for="hoten1">Họ và tên:</label>
 																							<div class="col-sm-8">
-																								<input class="form-control" id="hoten1" type="text" name="tenSV2">
+																								<input class="form-control" id="hoten1" readonly type="text" name="tenSV2">
 																							</div>
 																						</div>
 																						<div class="row" style="margin-bottom:5px">
 																							<label class="col-sm-4 control-label" for="mssv1">MSSV:</label>
 																							<div class="col-sm-8">
-																								<input class="form-control" id="mss1" type="text">
+																								<input class="form-control" id="mss1" readonly type="text">
 																							</div>
 																						</div>
 																					</div>
