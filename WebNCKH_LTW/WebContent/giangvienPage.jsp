@@ -180,7 +180,7 @@
 				     							for (DeTai ct: dt.getListDeTaiPhanCongPhanBien(session.getAttribute("Email").toString())) {
 												%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getMaHienThi() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenGVHD() %></th>
@@ -217,7 +217,7 @@
 											for (DeTai ct: dt.getListDeTaiPhanCongPheDuyet(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getMaHienThi() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getLinhVuc() %></th>
 													<th><%=ct.getTenCN() %></th>
@@ -252,7 +252,7 @@
 											for (DeTai ct: dt.getListDeTaiHuongDan(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getMaHienThi() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><a href="giangvienPage_ChiTiet.jsp?MaDT=<%=ct.getMaDT() %>">Chi tiết</a></th>
@@ -519,7 +519,7 @@
 											for (DeTai ct: dt.getListDeTai_YC_Huy_GiaHan(session.getAttribute("Email").toString())) {
 											%>
 												<tr>
-													<th><%=ct.getMaDT() %></th>
+													<th><%=ct.getMaHienThi() %></th>
 													<th><%=ct.getTenDT() %></th>
 													<th><%=ct.getTenCN() %></th>
 													<th><%=ct.getTenTT() %></th>

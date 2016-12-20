@@ -303,7 +303,7 @@ $( document ).ready(function() {
 				     										for (DeTai detai: dt.getListDeTaiNT(session.getAttribute("Email").toString())) {
 															%>
 															<tr>
-																<td><%=detai.getMaDT() %></td>
+																<td><%=detai.getMaHienThi() %></td>
 																<td><%=detai.getTenDT() %></td>
 																<td><%=detai.getNgayThucHien() %></td>
 																<td><%=detai.getNgayNT() %></td>
